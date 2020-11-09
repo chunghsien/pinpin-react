@@ -8,9 +8,6 @@ use Chopin\Support\Registry;
 use Laminas\ServiceManager\ServiceManager;
 use Intervention\Image\ImageManagerStatic as Image;
 use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
-use Laminas\Validator\AbstractValidator;
-use Chopin\Validator\Translator;
-
 
 
 if (! function_exists('config') && is_file('config/config.php')) {
