@@ -1,13 +1,13 @@
 {
-    "name": "chunghsien/pinpin-web-rad",
+    "name": "chunghsien/pinpin_react",
     "description": "Pinpin is web application rapid development tool",
     "type": "project",
     "keywords": [
         "ecommerce",
         "cms",
-        "reactJS",
-        "laminas-mezzio",
+        "facebook/react",
         "laminas",
+        "laminas-mezzio",
         "webpack",
         "middleware",
         "psr",
@@ -16,7 +16,7 @@
         "psr-15",
         "php7"
     ],
-    "homepage": "https://github.com/chunghsien/pinpin",
+    "homepage": "https://github.com/chunghsien/pinpin_react",
     "config": {
         "sort-packages": true
     },

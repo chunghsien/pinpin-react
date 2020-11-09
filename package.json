@@ -1,7 +1,7 @@
 {
-    "name": "pinpin-react-admin",
+    "name": "pinpin-react",
     "version": "0.0.1",
-    "description": "網頁型態應用程式快速開發工具(前端)",
+    "description": "CMS & eCommerce 快速開發工具",
     "main": "webpack.config.js",
     "directories": {
         "test": "test"
@@ -15,14 +15,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git@github.com:chunghsin/pinpin-web-rdt.git"
+        "url": "git@github.com:chunghsin/pinpin-react.git"
     },
     "keywords": [
         "gatsby",
         "coreui-react"
     ],
-    "author": "",
-    "license": "ISC",
+    "author": "Cho chung hsien",
+    "license": "MIT",
     "devDependencies": {
         "@babel/core": "^7.12.3",
         "@babel/plugin-proposal-class-properties": "^7.12.1",

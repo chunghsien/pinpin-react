@@ -17,7 +17,9 @@ class Migrate_Alter_logistics_global_20201027104104 extends AbstractMigration
      * @var string
      */
     protected $table = 'logistics_global';
-
+    
+    protected $priority = 3;
+    
     public function up()
     {
         $tableGateway = new LogisticsGlobalTableGateway($this->adapter);

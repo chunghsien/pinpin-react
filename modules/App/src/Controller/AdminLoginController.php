@@ -20,6 +20,7 @@ use Chopin\Jwt\JwtTools;
 use Laminas\Diactoros\Response\JsonResponse;
 use Firebase\JWT\JWT;
 use Chopin\Support\Registry;
+use Laminas\Math\Rand;
 
 class AdminLoginController implements RequestHandlerInterface
 {

@@ -7,7 +7,7 @@
 > ** Mkdocs 需安裝 ** `python`
 
 ```
-    $ git clone https://github.com/chunghsien/pinpin_web_rad <project>
+    $ git clone https://github.com/chunghsien/pinpin_react <project>
 
     $ mkdocs new <project>
 

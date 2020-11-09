@@ -7,7 +7,7 @@ CMS & eCommrece 快速開發應用
  ** 安裝 `phthon` 及 `pip` ** <https://www.python.org/>
 
 ```
-$ git clone https://github.com/chunghsien/pinpin_web_rad <project>
+$ git clone https://github.com/chunghsien/pinpin_react <project>
 
 $ mkdocs new <project>
 

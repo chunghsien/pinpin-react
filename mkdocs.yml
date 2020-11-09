@@ -7,4 +7,4 @@ nav:
     - 後台操作手冊 : book/admin.md
     
 theme: readthedocs
-repo_url: https://github.com/chunghsien/pinpin_web_rad
+repo_url: https://github.com/chunghsien/pinpin_react

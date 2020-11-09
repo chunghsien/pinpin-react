@@ -18,6 +18,8 @@ class Migrate_Alter_system_settings_20201030064736 extends AbstractMigration
      */
     protected $table = 'system_settings';
 
+    protected $priority = 3;
+
     public function up()
     {
         $tablegateway = new SystemSettingsTableGateway($this->adapter);
@@ -50,7 +52,6 @@ class Migrate_Alter_system_settings_20201030064736 extends AbstractMigration
                 'key' => 'watermark',
                 'name' => '浮水印'
             ],
-            
         ];
         foreach ($sets as $set) {
             if ($tablegateway->select($set)->count() === 0) {
