@@ -1,0 +1,18 @@
+{
+    "name": "chunghsien/chopin-jwt",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\Jwt\\": "src/"
+        }
+    }
+}

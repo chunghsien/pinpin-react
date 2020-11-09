@@ -1,0 +1,22 @@
+{
+    "name": "chunghsien/chopin-elfinder",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-db": "^2.10",
+        "zendframework/zend-expressive-session": "^1.2.1",
+        "zendframework/zend-expressive-session-ext": "^1.6",
+        "zendframework/zend-config-aggregator": "^1.1.1",
+        "studio-42/elfinder": "^2.1.49"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\Elfinder\\": "src/"
+        }
+    }
+}

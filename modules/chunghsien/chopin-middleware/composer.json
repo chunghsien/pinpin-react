@@ -1,0 +1,25 @@
+{
+    "name": "chunghsien/chopin-middleware",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "container-interop/container-interop": "^1.2",
+        "zendframework/zend-expressive-template": "^2.0",
+        "zendframework/zend-diactoros": "^1.8.6",
+        "zendframework/zend-filter": "^2.9.1",
+        "zendframework/zend-expressive-csrf": "^1.0",
+        "zendframework/zend-expressive-session": "^1.2.1",
+        "zendframework/zend-expressive-session-ext": "^1.6",
+        "zendframework/zend-servicemanager": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\Middleware\\": "src/"
+        }
+    }
+}

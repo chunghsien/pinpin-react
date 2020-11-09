@@ -1,0 +1,21 @@
+{
+    "name": "chunghsien/chopin-view",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-expressive-template": "^2.0",
+        "zendframework/zend-expressive-twigrenderer": "^2.3",
+        "twig/twig": "^2.11.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\View\\": "src/"
+        }
+    }
+    
+}

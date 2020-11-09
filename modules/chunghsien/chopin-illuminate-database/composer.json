@@ -1,0 +1,19 @@
+{
+    "name": "chunghsien/chopin-illuminate-database",
+    "description": "chopin packages",
+    "require": {
+        "illuminate/database": "^5.8.20",
+        "illuminate/support": "^5.8.20",
+        "symfony/console": "^4.3",
+        "zendframework/zend-filter": "^2.9.1",
+        "zendframework/zend-code": "^3.3.1",
+        "zendframework/zend-db": "^2.10",
+        "zendframework/zend-config-aggregator": "^1.1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\IlluminateDatabase\\": "src/"
+        }
+    },
+    "suggest": {}
+}

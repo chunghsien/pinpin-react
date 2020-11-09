@@ -1,0 +1,20 @@
+{
+    "name": "chunghsien/chopin-composer",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/console": "^4.3",
+        "symfony/filesystem": "^4.3"
+    
+    },
+    "autoload": {
+        "psr-4":{
+            "Chopin\\Console\\": "src/"
+        }
+    }
+}

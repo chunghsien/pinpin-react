@@ -1,0 +1,28 @@
+{
+    "name": "chunghsien/chopin-users",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-db": "^2.10",
+        "zendframework/zend-config-aggregator": "^1.1.1",
+        "zendframework/zend-cache": "^2.8.2",
+        "zendframework/zend-expressive-authentication": "^1.1",
+        "zendframework/zend-expressive-helpers": "^5.3",
+        "zendframework/zend-expressive-router": "^3.1",
+        "zendframework/zend-expressive-session": "^1.2.1",
+        "zendframework/zend-diactoros": "^1.8.6",
+        "firebase/php-jwt": "^5.0",
+        "symfony/console": "^4.3",
+        "noprotocol/php-mysql-aes-crypt": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\Users\\": "src/"
+        }
+    }
+}

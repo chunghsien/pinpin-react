@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="{{ html_lang }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="csrf-token" content="{{ __csrf }}" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<title>{{ site_name }}- Create from PinPin</title>
+</head>
+<body>
+  <div id="loading-background" class="loading-background d-none"
+    style="background: rgba(99, 111, 131, 0.5) none repeat scroll 0% 0%;">
+    <div class="loading-bar">
+      <div class="loading-circle-1"
+        style="background: rgb(50, 31, 219) none repeat scroll 0% 0%;"></div>
+      <div class="loading-circle-2"
+        style="background: rgb(50, 31, 219) none repeat scroll 0% 0%;"></div>
+    </div>
+  </div>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+  {% if page_json_config is defined %}
+  {% autoescape false %}
+  <script type="text/javascript">var pageConfig = {{ page_json_config|json_encode(constant('JSON_UNESCAPED_SLASHES'))}};</script>
+  {% endautoescape %}
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,94 @@
+<?php
+
+#!/usr/bin/env php
+
+use Symfony\Component\Console\Application;
+use Laminas\Db\TableGateway\Feature\GlobalAdapterFeature;
+use Laminas\Db\Adapter\Adapter;
+use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
+use Chopin\Support\Registry;
+use Chopin\Support\ModulesLoader;
+use Symfony\Component\Console\Output\ConsoleOutput;
+
+if(strpos(__FILE__, 'dev'.DIRECTORY_SEPARATOR.'smith')!== false)
+{
+    chdir(dirname(__DIR__));
+}
+if(strpos(__FILE__, 'smith.dev.phtml') )
+{
+    $output = new ConsoleOutput();
+    $output->writeln("<error>請使用 smith腳本。<error>");
+    exit();
+    //throw new \ErrorException("請使用 smith腳本。\n");
+}
+/**
+ *
+ * @var \Composer\Autoload\ClassLoader $autoloader
+ */
+$autoloader = require 'vendor/autoload.php';
+if (! class_exists(ModulesLoader::class)) {
+    //開發階段通常都會不存在，需要自行引入
+    require 'modules/chunghsien/chopin-support/src/ModulesLoader.php';
+    if (is_dir('modules/chunghsien')) {
+        ModulesLoader::registerPsr4($autoloader, 'modules/chunghsien', 'Chopin');
+    }
+}
+$supportHelpersConfig = new \Chopin\Support\ConfigProvider();
+$helpersFilepath = $supportHelpersConfig()['chopin-support']['helpers'];
+if(is_file($helpersFilepath)) {
+    require $helpersFilepath;
+}
+ModulesLoader::registerPsr4($autoloader, 'modules');
+
+/**
+ * 
+ * @var \Laminas\ServiceManager\ServiceManager $container
+ */
+$container = require 'config/container.php';
+Registry::set(\Laminas\ServiceManager\ServiceManager::class, $container);
+$tablePrefix = config('db.adapters')[Adapter::class]['prefix'];
+
+if($tablePrefix)
+{
+    AbstractTableGateway::$prefixTable = $tablePrefix;
+}
+GlobalAdapterFeature::setStaticAdapter($container->get(Adapter::class));
+
+$application = new Application();
+
+$commands = $container->get('config')['console']['commands'];
+foreach ($commands as $namespace => $path) {
+    $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($path));
+    foreach ($iterator as $fileinfo) {
+        /**
+         *
+         * @var \SplFileInfo $fileinfo
+         */
+        if ($fileinfo->isFile()) {
+            $pathname = str_replace($path . '/', '', $fileinfo->getPathname());
+            $_namespace = preg_replace('/\\\\$/', '', $namespace);
+            $_namespaceArr = explode('\\', $_namespace);
+            $class = str_replace(DIRECTORY_SEPARATOR, '\\', $pathname);
+            $class = str_replace('.php', '', $class);
+            if( is_file($class.'.php') ) {
+                $classArr = explode('/src/', $class);
+                $class = end($classArr);
+                $_namespaceTail = end($_namespaceArr);
+                if(preg_match('/^'.$_namespaceTail.'/', $class)) {
+                    $class = preg_replace('/^'.$_namespaceTail.'\\\\/', '', $class);
+                }
+            }
+            $fullclass = $namespace . $class;
+            if (class_exists($fullclass)) {
+                
+                $reflection = new \ReflectionClass($fullclass);
+                if (! $reflection->isAbstract()) {
+                    
+                    $application->add($reflection->newInstance());
+                }
+            }
+        }
+    }
+}
+
+$application->run();

@@ -1,0 +1,6 @@
+{
+    "scripts": {
+        "elfinderCompile": "gulp elfinderCompile",
+        "elfinderInstall": "gulp elfinderInstall"
+    }
+}

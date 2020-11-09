@@ -1,0 +1,17 @@
+{
+    "name": "chunghsien/chopin-newsletter",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\Newsletter\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "name": "chunghsien/chopin-support",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-filter": "^2.7",
+        "illuminate/support": "^5.8.20"
+    },
+    "suggest":{
+        "zendframework/zend-config-aggregator": "^1.1.1"
+    
+    },    
+    "autoload":{
+        "files" : [
+            "src/helpers.php"
+        ],
+        "psr-4": {
+            "Chopin\\Support\\": "src/"
+        }
+    }
+}

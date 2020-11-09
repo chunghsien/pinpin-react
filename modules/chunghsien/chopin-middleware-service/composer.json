@@ -1,0 +1,20 @@
+{
+    "name": "chunghsien/chopin-middleware-service",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "container-interop/container-interop": "^1.2",
+        "zendframework/zend-config-aggregator": "^1.1.1",
+        "zendframework/zend-servicemanager": "^3.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\MiddlewareService\\": "src/"
+        }
+    }
+}

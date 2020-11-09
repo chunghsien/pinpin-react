@@ -1,0 +1,18 @@
+{
+    "name": "chunghsien/chopin-language-has-locale",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "sokil/php-isocodes": "^3.0.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\LanguageHasLocale\\": "src/"
+        }
+    }
+}

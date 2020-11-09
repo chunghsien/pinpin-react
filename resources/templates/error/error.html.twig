@@ -1,0 +1,9 @@
+{% extends '@error/layout.html.twig' %}
+{% block content %}
+<h1>Oops!</h1>
+<h2>This is awkward.</h2>
+<p>We encountered a {{ status }} {{ reason }} error.</p>
+{% if error is defined %}
+<pre>{{ error }}</pre>
+{% endif %}
+{% endblock %}

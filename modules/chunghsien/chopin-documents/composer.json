@@ -1,0 +1,11 @@
+{
+    "name": "chunghsien/chopin-documents",
+    "description": "chopin packages 頁面管理、SEO、輪播...",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {}
+}

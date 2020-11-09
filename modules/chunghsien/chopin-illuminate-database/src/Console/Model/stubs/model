@@ -1,0 +1,17 @@
+<?php
+
+namespace {namespace};
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+
+class {class}Model extends Model
+{
+    {use_softdeletes}
+    
+    protected $table = '{table}';
+    
+    protected $primaryKey = {primary};
+    
+    protected $fillable = {fillable};
+}

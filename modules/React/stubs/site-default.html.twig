@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ html_lang }}">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="csrf-token" content="{{ __csrf }}" />
+<title></title>
+</head>
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="fb-root"></div>
+  <div id="root"></div>
+  {% if page_json_config is defined %}
+  {% autoescape false %}
+  <script type="text/javascript">var pageConfig = {{ page_json_config|json_encode(constant('JSON_UNESCAPED_SLASHES'))}};</script>
+  {% endautoescape %}
+  {% endif %}
+</body>
+</html>

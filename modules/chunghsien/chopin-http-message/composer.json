@@ -1,0 +1,20 @@
+{
+    "name": "chunghsien/chopin-http-message",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "psr/http-message": "^1.0.1",
+        "zendframework/zend-diactoros": "^1.8.6",
+        "firebase/php-jwt": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Chopin\\HttpMessage\\": "src/"
+        }
+    }
+}

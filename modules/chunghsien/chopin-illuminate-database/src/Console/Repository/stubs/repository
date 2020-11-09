@@ -1,0 +1,26 @@
+<?php
+
+namespace {namespace};
+
+use Chopin\IlluminateDatabase\Repository\AbstractRepository;
+
+class {class}Repository extends AbstractRepository
+{
+    
+    /**
+     * 
+     * @var string
+     */
+    protected $table = '{table}';
+    
+    /**
+     *
+     * @var array
+     */
+    protected $queryScripts = [];
+    
+    public function __construct($attributes = [])
+    {
+        $this->model = new \{full_model_class}($attributes);
+    }
+}

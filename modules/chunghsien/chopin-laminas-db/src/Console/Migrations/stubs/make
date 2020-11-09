@@ -1,0 +1,32 @@
+<?php
+
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\Sql\Ddl\Constraint;
+use Chopin\LaminasDb\Console\Migrations\AbstractMigration;
+use Chopin\LaminasDb\Sql\Ddl\Column\MySQL\MySQLColumnFactory;
+
+class {classname} extends AbstractMigration
+{
+    /**
+     * @desc create|drop|alter
+     * @var string
+     */
+    protected $type = '{type}';
+    
+    
+    /**
+     * 
+     * @var string
+     */
+    protected $table = '{table}';
+    
+    public function up()
+    {
+        //
+    }
+    
+    public function down()
+    {
+        //
+    }
+}

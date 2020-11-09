@@ -1,0 +1,22 @@
+{
+    "name": "chunghsien/chopin-console",
+    "description": "chopin packages",
+    "authors": [
+        {
+            "name": "Jacky Cho",
+            "email": "wowowo.jacky@gmail.com"
+        }
+    ],
+    "require": {
+        "zendframework/zend-config-aggregator": "^1.1.1",
+        "zendframework/zend-filter": "2.9.1",
+        "symfony/console": "^4.3",
+        "symfony/filesystem": "^4.3"
+    
+    },
+    "autoload": {
+        "psr-4":{
+            "Chopin\\Console\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+site_name: Pinpin cms
+nav:
+    - 安裝 : index.md
+    - PHP套件: book/package.md
+    - 前端系統 : book/frontend.md
+    - 後端系統 : book/backend.md
+    - 後台操作手冊 : book/admin.md
+    
+theme: readthedocs
+repo_url: https://github.com/chunghsien/pinpin_web_rad

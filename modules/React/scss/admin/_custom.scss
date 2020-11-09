@@ -1,0 +1,101 @@
+// Here you can add other styles
+.app-login{display: flex;min-height: 100vh;}
+.ajs-message{color: $white;font-size:0.9rem;}
+.data-grid-sort{right:5px;}
+.allow-cell-edit{cursor:cell;}
+.tab-card{
+    border-top:0px !important;
+    border-top-left-radius:0 !important;
+    border-top-right-radius:0 !important; 
+}
+.custom-select{
+    -moz-appearance:none;
+    -webkit-appearance:none;
+}
+.table-md-parent-show::before{
+    display:none;
+}
+textarea.noresize{
+    resize: none; 
+}
+
+.input-group.is-invalid, .textarea-group.is-invalid {
+  ~ .invalid-feedback {
+    display: block;
+  }
+}
+.textarea-invild-feefback{
+    position: absolute !important;
+    display: inline !important;
+    bottom: 1rem;
+}
+
+input[readOnly], textarea[readOnly]{cursor: not-allowed;}
+img.form-thumbnail{height:15rem;width:auto;}
+img.form-thumbnail-5{height:5rem;width:auto;}
+img.form-thumbnail-10{height:10rem;width:auto;}
+.ajs-warning{
+    background: $warning!important;
+};
+.attributes-checkbox{margin-right: 0.25rem ;height:2.5rem}
+.date-filter-input{min-width:10rem;}
+.number-filter, .date-filter, .filter-label, .filter-label~label{
+    margin-top: 0.3rem;
+}
+.number-filter-comparator, .date-filter-comparator{width:3rem;}
+.date-filter-input{display: inline;}
+#select-filter-column-is_new, #select-filter-column-is_hot, #select-filter-column-is_show{width:5.25rem;}
+th.sixPfiveRem{width:6.5rem;}
+th.eightPTwoFiveRem{width:8.25rem;}
+th.table-action-th{
+    width:8rem;
+    vertical-align: top!important;
+}
+.editable-cursor-alias{cursor:alias;}
+img.table-image{height:35px !important;width:auto;}
+td{white-space:pre-wrap;}
+.system-part-item{
+    border-top: 1px solid $gray-200;
+    border-left: 1px solid $gray-200;
+    align-items: center;
+    flex-wrap: nowrap;
+    max-height:110px;
+}
+div.system-part-item:last-child{
+    border-bottom: 1px solid $gray-200;
+}
+.system-part-item > .col-md-8, .system-part-item > .col-md-2{
+    border-right: 1px solid $gray-200;
+}
+.form-thumbnail-75px{
+    height:75px;
+    width:auto;
+    max-width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .table-rwd{min-width: 100%;}
+  /*針對tr去做隱藏*/
+  tr.tr-only-hide {display: none !important;}
+  /*讓tr變成區塊主要讓他有個區塊*/
+  .table-rwd tr{
+    display: block;
+    border: 1px solid #ddd;
+    margin-top: 5px;
+  }
+  .table-rwd td {
+    text-align: left;
+    font-size: 15px;
+    overflow: hidden;
+    width: 100%;
+    display: block;
+    }
+    .table-rwd td:before {
+    /*最重要的就是這串*/
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  /*當RWD縮小的時候.table-bordered 會有兩條線，所以針對.table-bordered去做修正*/
+  .table-rwd.table-bordered td,.table-rwd.table-bordered th,.table-rwd.table-bordered{border:0;}
+}
