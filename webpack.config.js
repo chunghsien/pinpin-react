@@ -5,8 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const AfterDonePlugin = require('./modules/React/plugins/AfterDonePlugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const AfterDonePlugin = require('./modules/React/plugins/AfterDonePlugin');
+
 
 let config = {
     node: { fs: "empty" },
@@ -75,7 +77,7 @@ let config = {
             },
             {
                 test: /\.(scss|css)$/,
-                exclude: [/modules\/React\/admin\.scss/, /modules\/React\/site\.scss/],
+                //exclude: [/modules\/React\/admin\.scss/, /modules\/React\/site\.scss/],
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
@@ -142,6 +144,7 @@ module.exports = (env, argv) => {
             },
             minimize: true,
             minimizer: [
+                new CssMinimizerPlugin({test: /(\.bundle\.css)|(\.scss)$/i}),
                 new TerserPlugin({
                     cache: true,
                     parallel: true,
