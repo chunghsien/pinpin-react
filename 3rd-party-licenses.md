@@ -23,3 +23,7 @@ https://github.com/ckeditor/ckeditor4/blob/major/LICENSE.md
 ### ckeditor4-react
 Lincense: LGPL / GPLv2 / MPL 
 https://github.com/ckeditor/ckeditor4-react/blob/master/LICENSE.md
+
+### Next.js
+Lincense: MIT
+https://github.com/vercel/next.js/blob/canary/license.md
