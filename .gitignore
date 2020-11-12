@@ -21,3 +21,5 @@
 /public/dist
 /public/storage/uploads/*
 /.cache
+/.next
+/out
