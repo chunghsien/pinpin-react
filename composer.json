@@ -64,7 +64,6 @@
         "laminas/laminas-uri": "^2.7",
         "laminas/laminas-view": "^2.11",
         "laminas/laminas-zendframework-bridge": "^1.0",
-        "limenius/react-renderer": "^5.0",
         "mezzio/mezzio": "^3.2.1",
         "mezzio/mezzio-csrf": "^1.0",
         "mezzio/mezzio-fastroute": "^3.0.3",

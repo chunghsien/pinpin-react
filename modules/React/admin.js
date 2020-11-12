@@ -18,9 +18,7 @@ import reducers from './views/admin/reducers/reducers';
 const initialState = {
     sidebarShow: 'responsive'
 }
-
 let store = createStore(reducers, initialState, applyMiddleware(thunk));
-
 React.icons = icons
 ReactDOM.hydrate(
     <Provider store={store}>

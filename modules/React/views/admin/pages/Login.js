@@ -40,6 +40,8 @@ const LoginComponent = () => {
 
     const { register, handleSubmit, errors } = useForm();
     document.body.className = 'header-fixed sidebar-lg-show sidebar-fixed aside-menu-fixed aside-menu-off-canvas';
+    
+    const NO_CHANGE = 0;
     useEffect(() => {
         const CSRF = document.getElementsByName('csrf-token')[0].content;
         document.getElementById('__csrf').value = CSRF;
@@ -53,7 +55,7 @@ const LoginComponent = () => {
         const php_lang = document.documentElement.lang.replace('-', '_');
         setSiteName(pageConfig.system_settings.site_info[php_lang].children.name.value);
         //return () => {return;}
-    });
+    }, [NO_CHANGE]);
     
     const logined = Cookies.get('admin');
     if(logined) {

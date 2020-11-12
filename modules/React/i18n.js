@@ -18,6 +18,9 @@ i18n.use(BackendAdapter).use(LanguageDetector).use(initReactI18next).init({
         backendOption: {
             loadPath: '/locales/resources.json?lng={{lng}}&ns={{ns}}',
             allowMultiLoading: true,
+            customHeaders: {
+                "Content-Type": "application/json",
+            }
         }
     }
 });

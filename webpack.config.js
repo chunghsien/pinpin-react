@@ -2,16 +2,19 @@ require('dotenv').config();
 
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const AfterDonePlugin = require('./modules/React/plugins/AfterDonePlugin');
-
 
 let config = {
-    node: { fs: "empty" },
+    target: 'web',
+    /*node: {
+        global: true,
+        __filename: true,
+        __dirname: true,
+        
+    },*/
     entry: {
         site: path.resolve(__dirname, './modules/React/site.js'),
         admin: path.resolve(__dirname, './modules/React/admin.js'),
@@ -26,7 +29,7 @@ let config = {
         new HtmlWebpackPlugin({
             chunks: ['site'],
             template: path.resolve(__dirname, './modules/React/stubs/site-default.html.twig'),
-            filename: path.resolve(__dirname, './public/site-default.html.twig'),
+            filename: path.resolve(__dirname, './resources/templates/app/site-default.html.twig'),
             favicon: './resources/favicon.ico',
             minify: false,
             inject: 'body'
@@ -34,33 +37,22 @@ let config = {
         new HtmlWebpackPlugin({
             chunks: ['admin'],
             template: path.resolve(__dirname, './modules/React/stubs/admin-default.html.twig'),
-            filename: path.resolve(__dirname, './public/admin-default.html.twig'),
+            filename: path.resolve(__dirname, './resources/templates/app/admin-default.html.twig'),
             minify: false,
             inject: 'body',
         }),
-        new FaviconsWebpackPlugin({
-            logo: './resources/logo.png',
-            mode: 'webapp',
-            devMode: 'light',
-            cache: ".wwp-cache",
-            prefix: "../assets/icons",
-            inject: function(html) {
-                return html.options.filename === 'site-default.html.twig';
-            },
-            favicons: {}
-        }),
         new CleanWebpackPlugin({
+            dry: false,
             cleanOnceBeforeBuildPatterns: [
                 '**/*',
                 '!index.php',
                 '!.htaccess',
-                '!*.html.twig',
                 '!assets/**',
                 '!locales/**'
-            ]
-        }, { exclude: ['assets'] }),
+            ],
+            dangerouslyAllowCleanPatternsOutsideProject: true
+        }),
         new MiniCssExtractPlugin({ filename: '[name].[contenthash].bundle.css' }),
-        new AfterDonePlugin()
     ],
     module: {
         rules: [
@@ -137,22 +129,29 @@ let config = {
 };
 
 module.exports = (env, argv) => {
+    if (argv.mode == 'development') {
+        config.watch = true;
+        config.watchOptions = {
+            ignored: /node_modules/
+        }
+    }
     if (argv.mode == 'production') {
         config.optimization = {
-            splitChunks: {
-                chunks: 'all'
+            splitChunks:{
+                chunks: 'all',
+                maxSize: 350000,
+                maxAsyncRequests: 20,
+                maxInitialRequests: 20,
             },
             minimize: true,
             minimizer: [
                 new CssMinimizerPlugin({test: /(\.bundle\.css)|(\.scss)$/i}),
-                new TerserPlugin({
-                    cache: true,
-                    parallel: true,
-                    sourceMap: true,
-                    extractComments: true,
-                }),
+                new TerserPlugin(
+                    {test: /\.js?$/i}
+                )
             ]
         };
     }
+    config.mode = argv.mode
     return config;
 };
