@@ -11,7 +11,10 @@
         "watch": "webpack --mode=development",
         "dev-server": "webpack-dev-server --open --config webpack.dev.js",
         "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "next-dev": "next dev",
+        "next-build": "next build",
+        "next-start": "next start"
     },
     "repository": {
         "type": "git",
@@ -81,6 +84,7 @@
         "i18next-multiload-backend-adapter": "^1.0.0",
         "jquery": "^3.5.1",
         "js-cookie": "^2.2.1",
+        "next": "^10.0.1",
         "prop-types": "^15.7.2",
         "react": "^16.14.0",
         "react-app-polyfill": "^1.0.6",

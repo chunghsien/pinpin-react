@@ -16,8 +16,8 @@ let config = {
         
     },*/
     entry: {
-        site: path.resolve(__dirname, './modules/React/site.js'),
-        admin: path.resolve(__dirname, './modules/React/admin.js'),
+        site: path.resolve(__dirname, './src/React/site.js'),
+        admin: path.resolve(__dirname, './src/React/admin.js'),
     },
     output: {
         filename: '[name].[contenthash].bundle.js',
@@ -28,7 +28,7 @@ let config = {
     plugins: [
         new HtmlWebpackPlugin({
             chunks: ['site'],
-            template: path.resolve(__dirname, './modules/React/stubs/site-default.html.twig'),
+            template: path.resolve(__dirname, './src/React/stubs/site-default.html.twig'),
             filename: path.resolve(__dirname, './resources/templates/app/site-default.html.twig'),
             favicon: './resources/favicon.ico',
             minify: false,
@@ -36,7 +36,7 @@ let config = {
         }),
         new HtmlWebpackPlugin({
             chunks: ['admin'],
-            template: path.resolve(__dirname, './modules/React/stubs/admin-default.html.twig'),
+            template: path.resolve(__dirname, './src/React/stubs/admin-default.html.twig'),
             filename: path.resolve(__dirname, './resources/templates/app/admin-default.html.twig'),
             minify: false,
             inject: 'body',
@@ -58,7 +58,7 @@ let config = {
         rules: [
             {
                 test: /\.(jsx|js)$/,
-                exclude: [/node_modules/, /modules\/React\/admin\.js/, /modules\/React\/site\.js/],
+                exclude: [/node_modules/, /src\/React\/admin\.js/, /src\/React\/site\.js/],
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -69,7 +69,7 @@ let config = {
             },
             {
                 test: /\.(scss|css)$/,
-                //exclude: [/modules\/React\/admin\.scss/, /modules\/React\/site\.scss/],
+                //exclude: [/src\/React\/admin\.scss/, /src\/React\/site\.scss/],
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,

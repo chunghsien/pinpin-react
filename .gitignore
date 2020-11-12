@@ -16,7 +16,7 @@
 /public/assets
 /public/favicon.ico
 /.wwp-cache
-/modules/React/scss/*.scss
+/src/React/scss/*.scss
 /public/dist/*
 /public/dist
 /public/storage/uploads/*
