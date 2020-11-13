@@ -12,7 +12,6 @@
 /.php_cs.cache
 /public/*.css
 /public/*.js
-/public/*.js.*
 /public/assets
 /public/favicon.ico
 /.wwp-cache

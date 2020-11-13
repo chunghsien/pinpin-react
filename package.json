@@ -58,6 +58,7 @@
         "xml-loader": "^1.2.1"
     },
     "dependencies": {
+        "@babel/plugin-transform-runtime": "^7.12.1",
         "@coreui/chartjs": "^2.0.0",
         "@coreui/coreui": "^3.3.0",
         "@coreui/react": "^3.3.3",
