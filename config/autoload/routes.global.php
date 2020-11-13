@@ -1,4 +1,5 @@
 <?php
+
 use Fig\Http\Message\RequestMethodInterface;
 use App\Controller\SiteDefaultController;
 use App\Controller\AdminDefaultController;
