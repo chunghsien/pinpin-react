@@ -4,6 +4,10 @@ CMS & eCommrece 快速開發應用
 
 ![image](https://github.com/chunghsien/pinpin-react/blob/master/img1.png)
 
+![image](https://github.com/chunghsien/pinpin-react/blob/master/img2.png)
+
+![image](https://github.com/chunghsien/pinpin-react/blob/master/img3.png)
+
 ### 安裝說明
 ```
 # 安裝 `phthon` 及 `pip` ** <https://www.python.org/>
