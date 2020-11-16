@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 
 const path = require('path');
@@ -6,18 +7,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 let config = {
-    target: 'web',
-    /*node: {
-        global: true,
-        __filename: true,
-        __dirname: true,
-        
-    },*/
     entry: {
-        site: path.resolve(__dirname, './src/React/site.js'),
-        admin: path.resolve(__dirname, './src/React/admin.js'),
+        admin: path.resolve(__dirname, './modules/React/admin.js'),
     },
     output: {
         filename: '[name].[contenthash].bundle.js',
@@ -27,20 +21,21 @@ let config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            chunks: ['site'],
-            template: path.resolve(__dirname, './src/React/stubs/site-default.html.twig'),
-            filename: path.resolve(__dirname, './resources/templates/app/site-default.html.twig'),
-            favicon: './resources/favicon.ico',
-            minify: false,
-            inject: 'body'
-        }),
-        new HtmlWebpackPlugin({
             chunks: ['admin'],
-            template: path.resolve(__dirname, './src/React/stubs/admin-default.html.twig'),
+            template: path.resolve(__dirname, './modules/React/stubs/admin-default.html.twig'),
             filename: path.resolve(__dirname, './resources/templates/app/admin-default.html.twig'),
             minify: false,
             inject: 'body',
         }),
+        new FaviconsWebpackPlugin({
+            logo: './resources/logo.png',
+            mode: 'webapp',
+            devMode: 'light',
+            cache: ".wwp-cache",
+            prefix: "../assets/icons",
+            favicons: {}
+        }),
+        
         new CleanWebpackPlugin({
             dry: false,
             cleanOnceBeforeBuildPatterns: [
@@ -58,7 +53,7 @@ let config = {
         rules: [
             {
                 test: /\.(jsx|js)$/,
-                exclude: [/node_modules/, /src\/React\/admin\.js/, /src\/React\/site\.js/],
+                exclude: [/node_modules/, /modules\/React\/admin\.js/],
                 use: {
                     loader: 'babel-loader',
                     options: {
@@ -69,7 +64,7 @@ let config = {
             },
             {
                 test: /\.(scss|css)$/,
-                //exclude: [/src\/React\/admin\.scss/, /src\/React\/site\.scss/],
+                //exclude: [/modules\/React\/admin\.scss/],
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
@@ -137,7 +132,7 @@ module.exports = (env, argv) => {
     }
     if (argv.mode == 'production') {
         config.optimization = {
-            splitChunks:{
+            splitChunks: {
                 chunks: 'all',
                 maxSize: 350000,
                 maxAsyncRequests: 20,
@@ -145,9 +140,15 @@ module.exports = (env, argv) => {
             },
             minimize: true,
             minimizer: [
-                new CssMinimizerPlugin({test: /(\.bundle\.css)|(\.scss)$/i}),
+                new CssMinimizerPlugin({ test: /(\.bundle\.css)|(\.scss)$/i }),
                 new TerserPlugin(
-                    {test: /\.js?$/i}
+                    {
+                        test: /\.js?$/i,
+                        cache: true,
+                        parallel: true,
+                        sourceMap: true,
+                        extractComments: true,
+                    }
                 )
             ]
         };

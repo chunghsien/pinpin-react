@@ -19,7 +19,7 @@ return [
             ],'name' => 'root'
         ],
         'site.default' => [
-            'path' => '/site[/{lang}[/{page}[/{id}]]]',
+            'path' => '/site[/{page}[/{id}[/{lang}]]]',
             'middleware' => [
                 SiteDefaultController::class
             ],'allowed_methods' => [

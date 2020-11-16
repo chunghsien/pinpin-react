@@ -1,19 +1,17 @@
+{% if site_base %}
+{% include site_base %}
+{% else %}
 <!doctype html>
 <html lang="{{ html_lang }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="csrf-token" content="{{ __csrf }}" />
+<link rel="shortcut icon" href="/assets/icons/favicon.ico" />
 <title></title>
-<link rel="icon" href="/dist/favicon.ico"><link href="/dist/7797.d73bc4b05aab93fc3b64.bundle.css" rel="stylesheet"></head>
+</head>
 <body>
-  <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="fb-root"></div>
-  <div id="root"></div>
-  {% if page_json_config is defined %}
-  {% autoescape false %}
-  <script type="text/javascript">var pageConfig = {{ page_json_config|json_encode(constant('JSON_UNESCAPED_SLASHES'))}};</script>
-  {% endautoescape %}
-  {% endif %}
-<script src="/dist/3629.b68a2fcd70dd03c50fce.bundle.js"></script><script src="/dist/6822.f3bcd198ef94d0295151.bundle.js"></script><script src="/dist/site.5fff9bfc0a2aaadb8a9c.bundle.js"></script></body>
+    <h2>請繼續加油.....</h2>
+</body>
 </html>
+{% endif %}
