@@ -30,7 +30,7 @@ class FreeShippingAction extends AbstractAction
             $request = $request->withQueryParams($query);
             
             $apiQueryService = new ApiQueryService();
-            return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/freeshipping.php', 
+            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/freeshipping.php', 
                 // 欄位對應的資料表名稱
                 [
                     'name' => 'coupon',

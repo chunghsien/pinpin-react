@@ -24,7 +24,7 @@ let config = {
             chunks: ['admin'],
             template: path.resolve(__dirname, './modules/React/stubs/admin-default.html.twig'),
             filename: path.resolve(__dirname, './resources/templates/app/admin-default.html.twig'),
-            minify: false,
+            minify: true,
             inject: 'body',
         }),
         new FaviconsWebpackPlugin({

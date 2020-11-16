@@ -70,7 +70,7 @@ class ProductsAttrsAction extends AbstractAction
             return new ApiSuccessResponse(0, $vars);
         }else {
             $apiQueryService = new ApiQueryService();
-            return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/productsAttrs.php', [
+            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/productsAttrs.php', [
                 'name' => 'attributes',
                 'value' => 'attributes',
                 'sort' => 'attributes',

@@ -78,16 +78,18 @@ class AdminAuthMiddleware implements MiddlewareInterface
                 preg_match('/\/(?P<component>\w+)$/', $route['uri'], $matcher);
                 $component = $underscoreToCamelCase->filter($matcher['component']);
                 $component = $dashToCamelCase->filter($component);
-                $component_path = 'src/React/views/admin/pages/'.ucfirst($component).'.js';
+                $component_path = 'modules/React/views/admin/pages/'.ucfirst($component).'.js';
 
                 
                 if(is_file($component_path)) {
-                    $route['component'] = preg_replace('/^src\/React\//', './', $component_path);
+                    $route['component'] = preg_replace('/^modules\/React\//', './', $component_path);
                     $route['component'] = preg_replace('/\.js$/', '', $route['component']);
                 }else {
-                    $component_path = 'src/React/views/admin/pages/'.$matcher['component'].'/'.ucfirst($component).'.js';
+                    $component_path = 'modules/React/views/admin/pages/'.ucfirst($component).'.js';
+                    //$component_path = 'src/React/views/admin/pages/'.ucfirst($component).'.js';
+                    //debug($component_path);
                     if(is_file($component_path)) {
-                        $route['component'] = preg_replace('/^src\/React\//', './', $component_path);
+                        $route['component'] = preg_replace('/^modules\/React\//', './', $component_path);
                         $route['component'] = preg_replace('/\.js$/', '', $route['component']);
                     }else {
                         $route['component'] = null;

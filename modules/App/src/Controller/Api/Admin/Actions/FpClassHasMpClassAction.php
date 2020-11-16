@@ -23,7 +23,7 @@ class FpClassHasMpClassAction extends AbstractAction
         $mpClassRow = $mpClassTableGateway->select([
             'id' => $mp_class_id
         ])->current();
-        $fpClassHasMpClassScripts = require 'src/App/scripts/db/admin/fpClassHasMpClass.php';
+        $fpClassHasMpClassScripts = require 'modules/App/scripts/db/admin/fpClassHasMpClass.php';
         $options = DB::selectFactory($fpClassHasMpClassScripts['options'], [
             'language_id' => $mpClassRow->language_id,
             'locale_id' => $mpClassRow->locale_id

@@ -28,7 +28,7 @@ class FnClassAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/fnClass.php',
+                'modules/App/scripts/db/admin/fnClass.php',
                 [
                     'name' => 'fn_class',
                     'sort' => 'fn_class',

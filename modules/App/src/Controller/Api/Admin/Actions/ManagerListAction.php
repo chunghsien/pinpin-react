@@ -31,7 +31,7 @@ class ManagerListAction extends AbstractAction
             $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
             $admin = $session->get('admin');
             $id = $admin['id'];
-            return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/manager_list.php', [
+            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/manager_list.php', [
                 'account' => 'users',
                 'role_name' => 'roles',
                 'created_at' => 'users',

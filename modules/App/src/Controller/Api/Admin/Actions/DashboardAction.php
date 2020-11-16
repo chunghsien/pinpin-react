@@ -23,7 +23,7 @@ class DashboardAction extends AbstractAction
              */
             $resource = $adapter->getDriver()->getConnection()->getResource();
             
-            $dbScripts = require 'src/App/scripts/db/admin/dashboard.php';
+            $dbScripts = require 'modules/App/scripts/db/admin/dashboard.php';
             $server = $request->getServerParams();
             $data = [
                 'today_registed' => intval(DB::selectFactory($dbScripts['today_registed'])->current()['_count']),

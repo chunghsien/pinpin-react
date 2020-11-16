@@ -45,7 +45,7 @@ class SystemSettingAction extends AbstractAction
         $apiQueryService = new ApiQueryService();
         return $apiQueryService->processPaginator(
             $request,
-            'src/App/scripts/db/admin/systemSettingsOther1.php',
+            'modules/App/scripts/db/admin/systemSettingsOther1.php',
             [
                 'name' => 'system_settings',
                 'value' => 'system_settings',

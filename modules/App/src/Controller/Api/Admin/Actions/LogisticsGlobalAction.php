@@ -32,7 +32,7 @@ class LogisticsGlobalAction extends AbstractAction
         $request = $request->withQueryParams($query);
         return $apiQueryService->processPaginator(
             $request,
-            'src/App/scripts/db/admin/logisticsGlobal.php',
+            'modules/App/scripts/db/admin/logisticsGlobal.php',
             [
                 'manufacturer' => 'logistics_global',
                 'name' => 'logistics_global',

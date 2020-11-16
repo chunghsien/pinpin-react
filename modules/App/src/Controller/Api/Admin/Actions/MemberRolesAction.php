@@ -28,7 +28,7 @@ class MemberRolesAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/member_roles.php',
+                'modules/App/scripts/db/admin/member_roles.php',
                 //欄位對應的資料表名稱
                 [
                     'name' => 'member_roles',

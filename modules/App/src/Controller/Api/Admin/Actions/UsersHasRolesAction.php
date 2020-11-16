@@ -19,7 +19,7 @@ class UsersHasRolesAction extends AbstractAction
     {
         $params = array_merge($request->getQueryParams(), $request->getParsedBody());
         $users_id = $params['users_id'];
-        $usersHasRolesScript = require 'src/App/scripts/db/admin/usersHasRoles.php';
+        $usersHasRolesScript = require 'modules/App/scripts/db/admin/usersHasRoles.php';
         $options = DB::selectFactory($usersHasRolesScript['options'])->toArray();
         $values = DB::selectFactory($usersHasRolesScript['defaultValue'], ['users_id' => $users_id,])->toArray();
         

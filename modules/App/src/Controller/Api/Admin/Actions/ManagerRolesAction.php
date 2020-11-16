@@ -27,7 +27,7 @@ class ManagerRolesAction extends AbstractAction
             return $response;
         } else {
             $apiQueryService = new ApiQueryService();
-            return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/manager_roles.php', [
+            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/manager_roles.php', [
                 'name' => 'roles',
                 'created_at' => 'roles',
             ]);

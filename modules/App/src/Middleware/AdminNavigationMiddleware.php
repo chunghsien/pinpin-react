@@ -134,6 +134,7 @@ class AdminNavigationMiddleware implements MiddlewareInterface
                 $user['denies'] = $denies;
                 $session->set('admin', $user);
             }
+            //ebug($output, ['output_type' => 'export']);
             mergePageJsonConfig(['admin_permission_status' => $admin_permission_status]);
             mergePageJsonConfig(['admin_navigation' => $output]);
             

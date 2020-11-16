@@ -27,7 +27,7 @@ class CurrenciesAction extends AbstractAction
         $apiQueryService = new ApiQueryService();
         return $apiQueryService->processPaginator(
             $request,
-            'src/App/scripts/db/admin/currencies.php',
+            'modules/App/scripts/db/admin/currencies.php',
             [
                 'code' => 'currencies',
                 'name' => 'currencies',

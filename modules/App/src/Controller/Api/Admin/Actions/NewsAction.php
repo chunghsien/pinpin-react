@@ -28,7 +28,7 @@ class NewsAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/news.php',
+                'modules/App/scripts/db/admin/news.php',
                 //欄位對應的資料表名稱
                 [
                     'title' => 'news',

@@ -23,7 +23,7 @@ class MnClassHasNnClassAction extends AbstractAction
         $nnClassRow = $nnClassTableGateway->select([
             'id' => $nn_class_id
         ])->current();
-        $mnClassHasNnClassScripts = require 'src/App/scripts/db/admin/mnClassHasNnClass.php';
+        $mnClassHasNnClassScripts = require 'modules/App/scripts/db/admin/mnClassHasNnClass.php';
         $options = DB::selectFactory($mnClassHasNnClassScripts['options'], [
             'language_id' => $nnClassRow->language_id,
             'locale_id' => $nnClassRow->locale_id

@@ -28,7 +28,7 @@ class MnClassAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/mnClass.php',
+                'modules/App/scripts/db/admin/mnClass.php',
                 //欄位對應的資料表名稱
                 [
                     'name' => 'mn_class',

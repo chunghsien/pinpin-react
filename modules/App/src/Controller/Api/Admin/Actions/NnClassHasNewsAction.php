@@ -23,7 +23,7 @@ class NnClassHasNewsAction extends AbstractAction
         $newsRow = $newsTableGateway->select([
             'id' => $news_id
         ])->current();
-        $nnClassHasNewsScripts = require 'src/App/scripts/db/admin/nnClassHasNews.php';
+        $nnClassHasNewsScripts = require 'modules/App/scripts/db/admin/nnClassHasNews.php';
         $options = DB::selectFactory($nnClassHasNewsScripts['options'], [
             'language_id' => $newsRow->language_id,
             'locale_id' => $newsRow->locale_id

@@ -54,7 +54,7 @@ class SystemSettingsAction extends AbstractAction
         $query = $request->getQueryParams();
         $query['item_count_per_page'] = 100;
         $request = $request->withQueryParams($query);
-        return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/systemSettings.php', [
+        return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/systemSettings.php', [
             'name' => 'system_settings',
             'key' => 'system_settings',
             'value' => 'system_settings',

@@ -26,7 +26,7 @@ class NpClassHasProductsAction extends AbstractAction
         $productsRow = $productsTableGateway->select([
             'id' => $products_id
         ])->current();
-        $npClassHasProductsScripts = require 'src/App/scripts/db/admin/npClassHasProducts.php';
+        $npClassHasProductsScripts = require 'modules/App/scripts/db/admin/npClassHasProducts.php';
         $options = DB::selectFactory($npClassHasProductsScripts['options'], [
             'language_id' => $productsRow->language_id,
             'locale_id' => $productsRow->locale_id

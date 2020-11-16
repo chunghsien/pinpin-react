@@ -28,7 +28,7 @@ class CouponAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/coupon.php',
+                'modules/App/scripts/db/admin/coupon.php',
                 //欄位對應的資料表名稱
                 [
                     'fullname' => 'order_decrypt',

@@ -28,7 +28,7 @@ class NpClassAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/npClass.php',
+                'modules/App/scripts/db/admin/npClass.php',
                 //欄位對應的資料表名稱
                 [
                     'name' => 'np_class',

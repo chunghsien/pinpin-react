@@ -87,7 +87,7 @@ class ProductsAction extends AbstractAction
             return $response;
         } else {
             $apiQueryService = new ApiQueryService();
-            return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/products.php', [
+            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/products.php', [
                 'model' => 'products',
                 'display_name' => 'language_has_locale',
                 'is_new' => 'products',

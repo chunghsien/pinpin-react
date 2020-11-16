@@ -23,7 +23,7 @@ class FnClassHasMnClassAction extends AbstractAction
         $mnClassRow = $mnClassTableGateway->select([
             'id' => $mn_class_id
         ])->current();
-        $fnClassHasMnClassScripts = require 'src/App/scripts/db/admin/fnClassHasMnClass.php';
+        $fnClassHasMnClassScripts = require 'modules/App/scripts/db/admin/fnClassHasMnClass.php';
         $options = DB::selectFactory($fnClassHasMnClassScripts['options'], [
             'language_id' => $mnClassRow->language_id,
             'locale_id' => $mnClassRow->locale_id

@@ -30,7 +30,7 @@ class OrderAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/order.php',
+                'modules/App/scripts/db/admin/order.php',
                 //欄位對應的資料表名稱
                 [
                     'fullname' => 'order_decrypt',

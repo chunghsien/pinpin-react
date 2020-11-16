@@ -28,7 +28,7 @@ class NnClassAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/nnClass.php',
+                'modules/App/scripts/db/admin/nnClass.php',
                 //欄位對應的資料表名稱
                 [
                     'name' => 'nn_class',

@@ -21,7 +21,6 @@ const TheSidebar = () => {
     const dispatch = useDispatch()
     const show = useSelector(state => state.sidebarShow)
     const pageConfig = window.pageConfig;
-
     return (
         <CSidebar
             show={show}

@@ -59,7 +59,7 @@ class ManufacturesAction extends AbstractAction
                 $apiQueryService = new ApiQueryService();
                 return $apiQueryService->processPaginator(
                     $request,
-                    'src/App/scripts/db/admin/manufactures.php',
+                    'modules/App/scripts/db/admin/manufactures.php',
                     [
                         'name' => 'manufactures',
                         'sort' => 'manufactures',

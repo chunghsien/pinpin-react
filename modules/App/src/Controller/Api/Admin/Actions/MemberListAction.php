@@ -30,7 +30,7 @@ class MemberListAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request, 
-                'src/App/scripts/db/admin/member_list.php',
+                'modules/App/scripts/db/admin/member_list.php',
                 [
                     'full_name' => 'member_decrypt',
                     'cellphone' => 'member_decrypt',

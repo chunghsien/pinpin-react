@@ -192,7 +192,7 @@ class ProductsSpecAction extends AbstractAction
             return $response;
         } else {
             $apiQueryService = new ApiQueryService();
-            return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/productsSpec.php', 
+            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/productsSpec.php', 
                 // 欄位對應的資料表名稱
                 [
                     'name' => 'products_spec',

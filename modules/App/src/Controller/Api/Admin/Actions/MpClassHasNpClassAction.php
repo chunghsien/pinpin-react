@@ -23,7 +23,7 @@ class MpClassHasNpClassAction extends AbstractAction
         $mpClassRow = $npClassTableGateway->select([
             'id' => $np_class_id
         ])->current();
-        $mpClassHasNpClassScripts = require 'src/App/scripts/db/admin/mpClassHasNpClass.php';
+        $mpClassHasNpClassScripts = require 'modules/App/scripts/db/admin/mpClassHasNpClass.php';
         $options = DB::selectFactory($mpClassHasNpClassScripts['options'], [
             'language_id' => $mpClassRow->language_id,
             'locale_id' => $mpClassRow->locale_id

@@ -38,7 +38,7 @@ class LanguageAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/language.php',
+                'modules/App/scripts/db/admin/language.php',
                 [
                     'code' => 'language_has_locale',
                     'display_name' => 'language_has_locale',

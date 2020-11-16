@@ -28,7 +28,7 @@ class FpClassAction extends AbstractAction
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
-                'src/App/scripts/db/admin/fpClass.php',
+                'modules/App/scripts/db/admin/fpClass.php',
                 [
                     'name' => 'fp_class',
                     'sort' => 'fp_class',

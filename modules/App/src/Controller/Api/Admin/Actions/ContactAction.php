@@ -32,7 +32,7 @@ class ContactAction extends AbstractAction
         } else {
             $apiQueryService = new ApiQueryService($tablegateway);
             // $apiQueryService->setTableGateway($tablegateway);
-            return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/contact.php', [
+            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/contact.php', [
                 'display_name' => 'language_has_locale',
                 'full_name' => 'contact_decrypt',
                 'email' => 'contact_decrypt',

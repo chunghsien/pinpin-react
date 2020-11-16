@@ -21,7 +21,7 @@ class RolesHasPermissionAction extends AbstractAction
         $roles_id = $params['roles_id'];
         //$rolesTableGateway = new RolesTableGateway($this->adapter);
         //$rolesRow = $rolesTableGateway->select(['id' => $roles_id])->current();
-        $rolesHasPermissionScript = require 'src/App/scripts/db/admin/rolesHasPermission.php';
+        $rolesHasPermissionScript = require 'modules/App/scripts/db/admin/rolesHasPermission.php';
         $options = DB::selectFactory($rolesHasPermissionScript['options'])->toArray();
         $values = DB::selectFactory($rolesHasPermissionScript['defaultValue'], ['roles_id' => $roles_id,])->toArray();
         

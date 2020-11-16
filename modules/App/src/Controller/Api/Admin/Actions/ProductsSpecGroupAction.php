@@ -102,7 +102,7 @@ class ProductsSpecGroupAction extends AbstractAction
             return $this->getOptionsResponse($response, $productsTableGateway);
         } else {
             $apiQueryService = new ApiQueryService();
-            return $apiQueryService->processPaginator($request, 'src/App/scripts/db/admin/productsSpecGroup.php', [
+            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/productsSpecGroup.php', [
                 'name' => 'products_spec_group',
                 'sort' => 'products_spec_group',
                 'model' => 'products',
