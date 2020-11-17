@@ -111,7 +111,7 @@ class MemberTableGateway extends AbstractTableGateway
         $select = new Select();
         $pt = self::$prefixTable;
         $select = $select->from([$pt.'member_decrypt' => $subSelect])->where(['email' => $email]);
-        logger()->debug($this->sql->buildSqlString($select));
+        //logger()->debug($this->sql->buildSqlString($select));
         $dataSource = $this->sql->prepareStatementForSqlObject($select)->execute();
         $resultSet = new ResultSet();
         $resultSet->initialize($dataSource);

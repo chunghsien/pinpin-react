@@ -133,7 +133,7 @@ class DB
 
     protected static function processScripts(Select $select, array $scripts)
     {
-        logger()->debug(json_encode($scripts));
+        //logger()->debug(json_encode($scripts));
         foreach ($scripts as $method => $params) {
             switch ($method) {
                 case 'quantifier':

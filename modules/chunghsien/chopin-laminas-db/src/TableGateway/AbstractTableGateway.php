@@ -57,22 +57,22 @@ abstract class AbstractTableGateway extends LaminasTableGateway
 
     /**
      *
-     * @param string $clasOrTable
+     * @param string $classOrTable
      * @param \Laminas\Db\Adapter\Adapter $adapter
      * @return self
      */
-    public static function newInstance($clasOrTable, $adapter)
+    public static function newInstance($classOrTable, $adapter)
     {
-        if ( is_string($clasOrTable) && class_exists($clasOrTable)) {
-            $reflectionClass = new \ReflectionClass($clasOrTable);
+        
+        if ( is_string($classOrTable) && class_exists($classOrTable)) {
+            $reflectionClass = new \ReflectionClass($classOrTable);
             return $reflectionClass->newInstance($adapter);
         } else {
             $filter = new UnderscoreToCamelCase();
-            $classname = str_replace(self::$prefixTable, '', $clasOrTable);
-            $tailClassname = ucfirst($filter->filter($clasOrTable)) . 'TableGateway';
+            $classname = str_replace(self::$prefixTable, '', $classOrTable);
+            $tailClassname = ucfirst($filter->filter($classOrTable)) . 'TableGateway';
             $tailFilename = $tailClassname . '.php';
-
-            $globs = glob('src/**/**/src/TableGateway/' . $tailFilename);
+            $globs = glob('modules/**/**/src/TableGateway/' . $tailFilename);
             if ($globs && count($globs) == 1) {
                 $filename = $globs[0];
                 $fileGenerator = new FileReflection($filename, true);
@@ -81,7 +81,7 @@ abstract class AbstractTableGateway extends LaminasTableGateway
                     $reflectionClass = new \ReflectionClass($classname);
                     return $reflectionClass->newInstance($adapter);
                 }
-                // return self::newInstance($clasOrTable, $adapter);
+                // return self::newInstance($classOrTable, $adapter);
             }
             throw new \ErrorException($classname . ': 沒這個東西。');
         }
