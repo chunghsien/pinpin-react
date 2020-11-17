@@ -76,7 +76,7 @@ class TableGatewayMake extends Command
             $module = str_replace('\\', '-', $module);
         }
 
-        $baseDir = 'src/'.$module.'/src/TableGateway';
+        $baseDir = 'modules/'.$module.'/src/TableGateway';
         if ( ! is_dir($baseDir)) {
             mkdir($baseDir, 0755, true);
         }

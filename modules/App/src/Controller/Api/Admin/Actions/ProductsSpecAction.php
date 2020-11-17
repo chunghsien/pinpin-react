@@ -83,7 +83,7 @@ class ProductsSpecAction extends AbstractAction
     
     private function getStockStatus(ServerRequestInterface $request) {
         //將庫存狀態加入(前端select option資料使用)
-        $options = require 'src/App/config/store.php';
+        $options = require 'modules/App/config/store.php';
         return new ApiSuccessResponse(0, ['options' => $options]);
     }
     

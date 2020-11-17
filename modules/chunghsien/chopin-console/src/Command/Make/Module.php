@@ -36,9 +36,9 @@ class Module extends Command
         $folder = '';
         $separatorToDash = new SeparatorToDash('\\');
         if (preg_match('/^Chopin/', $prefix) && defined('IS_DEVELOPMENT')) {
-            $folder = 'src/chunghsien/';
+            $folder = 'modules/chunghsien/';
         } else {
-            $folder = 'src/';
+            $folder = 'modules/';
         }
 
         $tailFolder = strtolower($separatorToDash->filter($prefix));

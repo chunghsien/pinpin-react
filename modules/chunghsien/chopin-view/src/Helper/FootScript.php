@@ -5,6 +5,11 @@ namespace Chopin\View\Helper;
 //use Cbschuld\Browser;
 use Laminas\View\Helper\HeadScript;
 
+/**
+ *
+ * @deprecated
+ *
+ */
 class FootScript extends HeadScript
 {
     protected $regKey = 'Pinwin_View_Helper_FootScript';

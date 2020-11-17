@@ -72,7 +72,7 @@ abstract class AbstractTableGateway extends LaminasTableGateway
             $tailClassname = ucfirst($filter->filter($clasOrTable)) . 'TableGateway';
             $tailFilename = $tailClassname . '.php';
 
-            $globs = glob('src/**/**/src/TableGateway/' . $tailFilename);
+            $globs = glob('modules/**/**/src/TableGateway/' . $tailFilename);
             if ($globs && count($globs) == 1) {
                 $filename = $globs[0];
                 $fileGenerator = new FileReflection($filename, true);

@@ -7,13 +7,13 @@ use Laminas\Filter\Word\DashToCamelCase;
 
 abstract class ModulesLoader
 {
-    public static function buildConfigProvider($dir = 'src', $skeleton = 'Laminasframework', $prefix = '')
+    public static function buildConfigProvider($dir = 'modules', $skeleton = 'Laminasframework', $prefix = '')
     {
         $osDirIterator = new \DirectoryIterator($dir);
         $configProvider = [];
         $dashToCamelCase = new DashToCamelCase();
 
-        if (strtolower($skeleton) == 'laminasframework' && $dir == 'src') {
+        if (strtolower($skeleton) == 'laminasframework' && $dir == 'modules') {
             //預先append Chopin的 ConfigProvider
             $configProvider = self::chopinConfigProvider();
         } else {

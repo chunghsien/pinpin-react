@@ -4,6 +4,11 @@ namespace Chopin\View\Helper;
 
 use Psr\Container\ContainerInterface;
 
+/**
+ *
+ * @deprecated
+ *
+ */
 class FootScriptFactory
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)

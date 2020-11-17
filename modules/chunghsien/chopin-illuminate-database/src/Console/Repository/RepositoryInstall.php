@@ -70,7 +70,7 @@ class RepositoryInstall extends Command
                 $template = str_replace('{full_model_class}', $full_model_class, $template);
 
                 $savePathArr = explode('\\', $namespace);
-                $folder = 'src';
+                $folder = 'modules';
                 if ($type == 'module') {
                     $folder .= sprintf('/%s', strtolower($camelCaseToDash->filter($savePathArr[0])));
                     $folder .= sprintf('/%s', 'src');
