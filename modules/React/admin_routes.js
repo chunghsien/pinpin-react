@@ -7,7 +7,6 @@ let _routes = [/*{ path: '/admin/', exact: true, strict: true, name: 'Home' }*/]
 
 pageConfig.routes.map((item) => {
     let _component = null;
-   
     if (item.component) {
         _component = loadable(() => import(item.component + '.js'));
     } else {

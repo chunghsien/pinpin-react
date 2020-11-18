@@ -26,7 +26,6 @@ class ReactLocalesController implements RequestHandlerInterface
     {
         $header_host = $request->getHeader('host')[0];
         $server_host = $_SERVER['HTTP_HOST'];
-        
         if($header_host === $server_host)
         {
             $querys = $request->getQueryParams();
@@ -69,7 +68,8 @@ class ReactLocalesController implements RequestHandlerInterface
                     }
                 }
             }
-            return new JsonResponse($messages);
+            //header('Access-Control-Allow-Origin: http://localhost');
+            return new JsonResponse($messages, 200);
         }else {
             return new JsonResponse([]);
         }

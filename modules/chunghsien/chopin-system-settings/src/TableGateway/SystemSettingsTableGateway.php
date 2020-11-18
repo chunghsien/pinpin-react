@@ -213,7 +213,10 @@ class SystemSettingsTableGateway extends AbstractTableGateway
                 if (isset($c['value'])) {
                     $toConfig[$config_key] = $c['value'];
                 } else {
-                    $c['aes_value'] = $c['value'] =  $this->getAesCrypter()->decrypt($c['aes_value']);
+                    $c['value'] = '';
+                    if($c['aes_value']) {
+                        $c['aes_value'] = $c['value'] =  $this->getAesCrypter()->decrypt($c['aes_value']);
+                    }
                     $toConfig[$config_key] = $c['aes_value'];
                 }
             }
