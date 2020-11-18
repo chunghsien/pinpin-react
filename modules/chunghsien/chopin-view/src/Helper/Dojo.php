@@ -5,6 +5,11 @@ namespace Chopin\View\Helper;
 use Laminas\View\Helper\AbstractHelper;
 use Laminas\Escaper\Escaper;
 
+/**
+ * 
+ * @deprecated
+ *
+ */
 class Dojo extends AbstractHelper
 {
     protected $regKey = 'Pinwin_View_Helper_Dojo';

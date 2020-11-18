@@ -36,7 +36,7 @@ class Dev extends Command
             'autoload' => [
                 "psr-4" => [],
                 "files" => [
-                    "src/chunghsien/chopin-support/src/helpers.php",
+                    "modules/chunghsien/chopin-support/src/helpers.php",
                 ],
             ],
         ];
@@ -56,7 +56,7 @@ class Dev extends Command
                 $tailName = ucfirst($dashToCamelCase->filter($tailName));
 
                 $namespace = $namespace.'\\'.$tailName.'\\';
-                $path = "src/".$prefix.'/'.$name.'/src/';
+                $path = "modules/".$prefix.'/'.$name.'/src/';
                 $composerArr['autoload']['psr-4'][$namespace] = $path;
 
                 $packageComposer = json_decode(file_get_contents(dirname($path).'/composer.json'), true);

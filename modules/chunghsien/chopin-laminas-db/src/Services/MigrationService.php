@@ -183,7 +183,7 @@ class MigrationService
                         $tablegatewayClass = ucfirst(StaticFilter::execute($migration->tailTable, UnderscoreToCamelCase::class));
                         $tablegatewayClass.= 'TableGateway';
                         $tablegatewayTable = $migration->tailTable;
-                        $code = file_get_contents('src/chunghsien/chopin-Laminas-db/src/Console/TableGateway/stubs/make');
+                        $code = file_get_contents('modules/chunghsien/chopin-Laminas-db/src/Console/TableGateway/stubs/make');
                         $code = str_replace(
                             ['{namespace}', '{class}', '{table}'],
                             [$tablegatewayBaseNamespace, $tablegatewayClass, $tablegatewayTable],
