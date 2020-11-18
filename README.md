@@ -34,14 +34,3 @@ $ num next-dev #網頁前臺程式碼監控
 $ num next-dev #網頁前臺程式碼發佈編譯(有優化及壓縮)
 $ php smith next-js-dispatch #佈署靜態內容至後端(做SSR)
 ```
-<!--
-#### 中文多語政策 ####
-
-> PHP mezzio routes
-
-> > `/site[/{lang}[/{page}[/{id}]]]` ** zh_TW, zh_HK, zh_CN **
-
-> HTML and ReactJS
-
->> 會吃 `<html lang={lng}>` ** lng (zh-TW, zh-HK, zh-CN) **
--->

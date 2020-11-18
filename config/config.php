@@ -14,7 +14,7 @@ if ( ! defined('APP_ENV')) {
         }
     } else {
         $env = require __DIR__ . '/env.php';
-        $serverAddr = $_SERVER['SERVER_ADDR'];
+        $serverAddr = isset($_SERVER['SERVER_ADDR']) ? $_SERVER['SERVER_ADDR'] : '127.0.0.1' ;
         if (empty($env[$serverAddr])) {
             if ( ! defined('APP_ENV')) {
                 define('APP_ENV', 'production');
