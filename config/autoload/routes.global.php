@@ -9,14 +9,14 @@ use App\Middleware\ApiAdminAuthMiddleware;
 return [
     'routes' => [
         'root' => [
-            'path' => '/','middleware' => [
+            'path' => '/[{lang}[/]]','middleware' => [
                 Controller\HomeController::class
             ],'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET
             ],'name' => 'root'
         ],
         'home' => [
-            'path' => '/{lang}/index',
+            'path' => '/{lang}/index[/]',
             'middleware' => [
                 Controller\HomeController::class
             ],'allowed_methods' => [

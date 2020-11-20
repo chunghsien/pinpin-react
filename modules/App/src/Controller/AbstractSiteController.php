@@ -39,7 +39,7 @@ abstract class AbstractSiteController implements RequestHandlerInterface
         if(!$lang) {
             $tmp = $request->getHeaders()['accept-language'][0];
             $lang = explode(',', $tmp)[0];
-            return new RedirectResponse('/index/'.$lang);
+            return new RedirectResponse($lang.'/index/');
         }
         $page_config = Registry::get('page_json_config');
         $react_base = is_file('./resources/templates/app/site_base.html.twig') ? '@app/site_base.html.twig' : '';
