@@ -34,3 +34,6 @@ $ num next-dev #網頁前臺程式碼監控
 $ num next-dev #網頁前臺程式碼發佈編譯(有優化及壓縮)
 $ php smith next-js-dispatch #佈署靜態內容至後端(做SSR)
 ```
+<!--
+* 多語(CORS)先處理
+-->

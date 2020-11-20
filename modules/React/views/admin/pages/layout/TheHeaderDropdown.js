@@ -14,7 +14,7 @@ const TheHeaderDropdown = (props) => {
     
     const linkToProfile = (e) => {
         e.preventDefault();
-        history.push('/admin/manager_profile');
+        history.push('/'+SYS_LANG+'/admin/manager_profile');
     }
 
     return (
@@ -28,7 +28,7 @@ const TheHeaderDropdown = (props) => {
             </CDropdownToggle>
             <CDropdownMenu className="pt-0" placement="bottom-end">
                 <CDropdownItem onClick={linkToProfile}>{t('Manager profile')}</CDropdownItem>
-                <CDropdownItem href="/admin/logout">{t('Logout')}</CDropdownItem>
+                <CDropdownItem href={'/'+SYS_LANG+'/admin-logout'}>{t('Logout')}</CDropdownItem>
             </CDropdownMenu>
         </CDropdown>
     )

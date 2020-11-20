@@ -8,7 +8,7 @@ return [
     [
         'tag' => 'CSidebarNavItem',
         'name' => 'Dsahboard',
-        'uri' => '/admin/dashboard',
+        'uri' => '/zh-tw/admin/dashboard',
         //'component' => 'views/admin/pages/Dashboard',
         'font-icon' => 'fas fa-tachometer-alt',
     ],
@@ -28,17 +28,17 @@ return [
             /*[   //資源管理：圖片、影片.....
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Assets',
-                'uri' => '/admin/assets',
+                'uri' => '/zh-tw/admin/assets',
             ],
             [   //依附屬性或是可供搜尋的關鍵字(依附產品或新聞表)
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Attributes',
-                'uri' => '/admin/attributes',
+                'uri' => '/zh-tw/admin/attributes',
             ],*/
             [   //網頁管理
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Documents',
-                'uri' => '/admin/documents',
+                'uri' => '/zh-tw/admin/documents',
             ],
         ],
     ],
@@ -52,7 +52,7 @@ return [
     [   /** 製造商，品牌 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Manufactures',
-        'uri' => '/admin/manufactures',
+        'uri' => '/zh-tw/admin/manufactures',
         'font-icon' => 'fas fa-industry',
     ],
     [   /** 產品分類與屬性管理 **/
@@ -64,17 +64,17 @@ return [
             [
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Products category level1',
-                'uri' => '/admin/fp_class',
+                'uri' => '/zh-tw/admin/fp_class',
             ],
             [
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Products category level2',
-                'uri' => '/admin/mp_class',
+                'uri' => '/zh-tw/admin/mp_class',
             ],
             [
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Products category level3',
-                'uri' => '/admin/np_class',
+                'uri' => '/zh-tw/admin/np_class',
             ],
         ],
     ],
@@ -82,25 +82,25 @@ return [
         'font-icon' => 'fas fa-tasks',
         'tag' => 'CSidebarNavItem',
         'name' => 'Products attrs',
-        'uri' => '/admin/products_attrs',
+        'uri' => '/zh-tw/admin/products_attrs',
     ],
     [   /** 產品管理 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Products management',
-        'uri' => '/admin/products',
+        'uri' => '/zh-tw/admin/products',
         'font-icon' => 'fas fa-box',
     ],
     [   /** 產品規格群組 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Products Spec group',
-        'uri' => '/admin/products_spec_group',
+        'uri' => '/zh-tw/admin/products_spec_group',
         'font-icon' => 'fas fa-object-group',
     ],
     
     [   /** 產品規格管理 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Products Spec&#46',
-        'uri' => '/admin/products_spec',
+        'uri' => '/zh-tw/admin/products_spec',
         'font-icon' => 'fas fa-th',
     ],
 
@@ -113,13 +113,13 @@ return [
     [   /** 訂單管理 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Order',
-        'uri' => '/admin/order',
+        'uri' => '/zh-tw/admin/order',
         'font-icon' => 'fas fa-money-bill',
     ],
     [   /** 折價券管理 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Coupon',
-        'uri' => '/admin/coupon',
+        'uri' => '/zh-tw/admin/coupon',
         'font-icon' => 'fas fa-percent',
     ],
 
@@ -138,30 +138,30 @@ return [
             [
                 'tag' => 'CSidebarNavItem',
                 'name' => 'News category level1',
-                'uri' => '/admin/fn_class',
+                'uri' => '/zh-tw/admin/fn_class',
             ],
             [
                 'tag' => 'CSidebarNavItem',
                 'name' => 'News category level2',
-                'uri' => '/admin/mn_class',
+                'uri' => '/zh-tw/admin/mn_class',
             ],
             [
                 'tag' => 'CSidebarNavItem',
                 'name' => 'News category level3',
-                'uri' => '/admin/nn_class',
+                'uri' => '/zh-tw/admin/nn_class',
             ],
         ],
     ],
     [   /** 最新消息 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'News',
-        'uri' => '/admin/news',
+        'uri' => '/zh-tw/admin/news',
         'font-icon' => 'fas fa-newspaper',
     ],
     [   /** 聯絡我們 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Contact',
-        'uri' => '/admin/contact',
+        'uri' => '/zh-tw/admin/contact',
         'font-icon' => 'fas fa-envelope-square',
     ],
     /** 會員與網站管理者 **/
@@ -179,12 +179,12 @@ return [
             [   /** 會員群組 **/
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Member role',
-                'uri' => '/admin/member_roles',
+                'uri' => '/zh-tw/admin/member_roles',
             ],
             [   /** 會員 **/
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Member list',
-                'uri' => '/admin/member_list',
+                'uri' => '/zh-tw/admin/member_list',
             ],
         ],
     ],
@@ -197,17 +197,17 @@ return [
             [   /** 管理者群組 **/
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Manager role',
-                'uri' => '/admin/manager_roles',
+                'uri' => '/zh-tw/admin/manager_roles',
             ],
             [   /** 管理者列表 **/
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Manager list',
-                'uri' => '/admin/manager_list',
+                'uri' => '/zh-tw/admin/manager_list',
             ],
             [   /** 管理者 **/
                 'tag' => 'CSidebarNavItem',
                 'name' => 'Manager profile',
-                'uri' => '/admin/manager_profile',
+                'uri' => '/zh-tw/admin/manager_profile',
             ],
         ],
     ],
@@ -222,14 +222,14 @@ return [
         /** 全域物流設定 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Global logistics',
-        'uri' => '/admin/logistics_global',
+        'uri' => '/zh-tw/admin/logistics_global',
         'font-icon' => 'fas fa-truck-moving',
     ],[
         /** 語言 **/
         'tag' => 'CSidebarNavItem',
         'name' => 'Language',
         'font-icon' => 'fas fa-language',
-        'uri' => '/admin/language',
+        'uri' => '/zh-tw/admin/language',
         //'component' => 'views/admin/pages/language',
     ],
     [
@@ -237,12 +237,12 @@ return [
         'tag' => 'CSidebarNavItem',
         'name' => 'Currency',
         'font-icon' => 'fas fa-dollar-sign',
-        'uri' => '/admin/currencies',
+        'uri' => '/zh-tw/admin/currencies',
     ],
     [
         'tag' => 'CSidebarNavItem',
         'name' => 'System setting',
-        'uri' => '/admin/system_setting',
+        'uri' => '/zh-tw/admin/system_setting',
         'font-icon' => 'fas fa-cogs',
     ],
 ];

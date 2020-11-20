@@ -35,7 +35,7 @@ const TheContent = () => {
                                     )} />
                             )
                         })}
-                        <Redirect from="/" to="/admin/dashboard" />
+                        <Redirect from="/" to={'/'+SYS_LANG+'/admin/dashboard'} />
                     </Switch>
                 </Suspense>
             </CContainer>

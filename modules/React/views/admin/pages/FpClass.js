@@ -7,7 +7,7 @@ const FpClass = () => {
     const classColumns = fpClassColumns;
     
     return (
-        <ClassPart table="fp_class" href="/admin/fp_class" paginateUrl="/api/admin/fp_class" {...{classColumns, paginationOptions, clickClearFilter}}  />
+        <ClassPart table="fp_class" href="/admin/fp_class" paginateUrl={'/'+SYS_LANG+'/api/admin/fp_class'} {...{classColumns, paginationOptions, clickClearFilter}}  />
     );
 };
 

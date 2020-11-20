@@ -35,6 +35,7 @@ class Migrate_Create_banner_20200202221541 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 64, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('content', 'varchar', ['length' => 255, 'nullable' => true]));
 
         $ddl->addColumn(MySQLColumnFactory::buildColumn('main_photo', 'varchar', ['length' => 255]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sub_photo', 'varchar', ['nullable' => true, 'length' => 255]));

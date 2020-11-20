@@ -114,7 +114,7 @@ const ProductsForm = (props) => {
         } else {
             _setInterlockingValues_ = setInterlockingValues;
         }
-        const uri = '/api/admin/manufactures?options=1&language_id=' + data.language_id + '&locale_id=' + data.locale_id;
+        const uri = '/'+SYS_LANG+'/api/admin/manufactures?options=1&language_id=' + data.language_id + '&locale_id=' + data.locale_id;
         axios.get(uri).then((response) => {
             _setInterlockingValues_((interlockingValues) => {
                 return {
@@ -132,7 +132,7 @@ const ProductsForm = (props) => {
     const formRef = useRef();
     //https://noembed.com/embed?url={url}
     const ckeditorConfig = {
-        filebrowserUploadUrl: '/api/admin/editor-upload',
+        filebrowserUploadUrl: '/'+SYS_LANG+'/api/admin/editor-upload',
         //contentsCss: 'http://eyeglad.localhost/assets/css/main.css',
         extraPlugins: ['autogrow', 'embed'],
         autoGrow_maxHeight: 480,

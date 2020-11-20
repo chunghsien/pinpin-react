@@ -163,7 +163,7 @@ const ProductsAttrsChildForm = (props) => {
                 formData.set('id', id);
                 axios({
                     method: 'post',
-                    url: '/api/admin/products_attrs?put=1',
+                    url: '/'+SYS_LANG+'/api/admin/products_attrs?put=1',
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     },
@@ -253,7 +253,7 @@ const ProductsAttrsChildForm = (props) => {
         toConfirm(() => {
             axios({
                 method: 'delete',
-                url: '/api/admin/products_attrs/' + id,
+                url: '/'+SYS_LANG+'/api/admin/products_attrs/' + id,
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

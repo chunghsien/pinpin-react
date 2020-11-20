@@ -86,7 +86,7 @@ const NewsForm = (props) => {
     const formRef = useRef();
     //https://noembed.com/embed?url={url}
     const ckeditorConfig = {
-        filebrowserUploadUrl: '/api/admin/editor-upload',
+        filebrowserUploadUrl: '/'+SYS_LANG+'/api/admin/editor-upload',
         //contentsCss: 'http://eyeglad.localhost/assets/css/main.css',
         extraPlugins: ['autogrow', 'embed'],
         autoGrow_maxHeight: 480,

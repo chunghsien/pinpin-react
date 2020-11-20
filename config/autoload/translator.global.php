@@ -19,7 +19,12 @@ return [
                 'pattern' => '%s/currencies.php',
                 'text_domain' => 'currencies',
             ],
-            
+            [
+                'type' => 'phpArray',
+                'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',
+                'pattern' => '%s/site.php',
+                'text_domain' => 'site',
+            ],
             [
                 'type' => 'phpArray',
                 'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',

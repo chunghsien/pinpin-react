@@ -16,7 +16,7 @@ const Order = () => {
     const columns = orderColumns(t, 'name');
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const paginateUrl = '/api/admin/order';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/order';
 
     const [formRow, setFormRow] = useState({
         order: {}

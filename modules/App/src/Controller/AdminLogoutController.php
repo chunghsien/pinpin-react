@@ -10,9 +10,12 @@ use Mezzio\Helper\UrlHelper;
 use App\Middleware\AdminAuthMiddleware;
 use Mezzio\Session\SessionMiddleware;
 use Laminas\Diactoros\Response\RedirectResponse;
+use Mezzio\Router\RouteResult;
 
 class AdminLogoutController implements RequestHandlerInterface
 {
+    
+    use Traits\AdminTrait;
     
     const ROUTE_NAME = 'admin.logout';
     
@@ -29,16 +32,18 @@ class AdminLogoutController implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
+        
         /**
          *
          * @var \Mezzio\Session\LazySession $session
          */
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-        $uri = $this->urlHelper->generate(AdminAuthMiddleware::LOGIN_ROUTE_NAME);
+        $uri = $this->buildUri($this->urlHelper->getRouteResult(), '/admin-login');
         if($session->has('admin')) {
             $session->unset('admin');
             setrawcookie('admin', '', time()-1);
         }
+       
         return new RedirectResponse($uri);
     }
 }

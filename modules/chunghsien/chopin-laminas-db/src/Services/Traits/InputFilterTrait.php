@@ -4,9 +4,7 @@ namespace Chopin\LaminasDb\Services\Traits;
 
 use Laminas\InputFilter\Factory;
 use Laminas\I18n\Translator\Translator;
-use Laminas\Validator\AbstractValidator;
 use Laminas\InputFilter\BaseInputFilter;
-use Chopin\I18n\LaminasValitorTranslator;
 
 trait InputFilterTrait
 {
@@ -83,11 +81,12 @@ trait InputFilterTrait
         unset($messages);
         return $newMessage;
     }
-
+    /*
     protected function initTranslator($options = [])
     {
         $options = array_merge_recursive(config('translator'), $options);
         $this->validatorTranslator = LaminasValitorTranslator::factory($options);
         AbstractValidator::setDefaultTranslator($this->validatorTranslator);
     }
+    */
 }

@@ -11,8 +11,9 @@ const TabLink = loadable(() => import('./components/form/TabLink'));
 const SeoForm = loadable(() => import('./components/form/SeoForm'));
 const FacebookTagsForm = loadable(() => import('./components/form/FacebookTagsForm'));
 const FormBackGridFixed = loadable(() => import('./components/FormBackGridFixed'));
-const DocumentsForm = loadable(() => import('./components/form/DocumentsForm'));
-const DocumentsContentForm = loadable(() => import('./components/form/DocumentsContentForm'));
+const BannerForm = loadable(() => import('./components/form/BannerForm'));
+//const DocumentsForm = loadable(() => import('./components/form/DocumentsForm'));
+//const DocumentsContentForm = loadable(() => import('./components/form/DocumentsContentForm'));
 
 const Documents = (/*props*/) => {
 
@@ -20,7 +21,7 @@ const Documents = (/*props*/) => {
     const table = "documents";
     const useColumns = documentsColumns;
     const columns = useColumns(t, 'name');
-    const paginateUrl = '/api/admin/documents';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/documents';
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
 
@@ -32,21 +33,22 @@ const Documents = (/*props*/) => {
                     <FormBackGridFixed t={t} />
                     <CTabs id="tabs-root" activeTab="default-form">
                         <CNav variant="tabs">
-                            <TabLink tab="default-form" label="Default form" />
+                            <TabLink tab="default-form" label="Banner form" />
                             {
                                 location.pathname.match(/\/\d+$/) &&
                                 <>
-                                    <TabLink tab="documents-content-form" label="documents content form" />
+                                    {/*<TabLink tab="documents-content-form" label="documents content form" />*/}
                                     <TabLink tab="seo-form" label="SEO form" />
                                     <TabLink tab="facebook_tag-form" label="Facebook tags form" />
                                 </>
                             }
                         </CNav>
-                        <DocumentsForm href="/admin/documents" />
+                        {/*<DocumentsForm href="/admin/documents" />*/}
+                        <BannerForm href="/admin/banner" table={table} tab="default-form" />
                         {
                             location.pathname.match(/\/\d+$/) &&
                             <Suspense fallback={<div>Loading...</div>}>
-                                <DocumentsContentForm href="/admin/documents_content" table={table} />
+                                {/*<DocumentsContentForm href="/admin/documents_content" table={table} />*/}
                                 <SeoForm href="/admin/seo" table={table} />
                                 <FacebookTagsForm href="/admin/facebook_tags" table={table} />
                             </Suspense>

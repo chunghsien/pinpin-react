@@ -29,7 +29,7 @@ const SystemSetting = (/*props*/) => {
     
     useEffect(() => {
         loadingBackgroundDom.classList.remove('d-none');
-        axios.get('/api/admin/system_setting').then((response) => {
+        axios.get('/'+SYS_LANG+'/api/admin/system_setting').then((response) => {
             const data = response.data.data;
             setSystem(data.system);
             setMailService(data['mail-service']);
@@ -58,7 +58,7 @@ const SystemSetting = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={siteInfoClickClearFilter}
-                    paginateUrl="/api/admin/system_setting?pk=site_info"
+                    paginateUrl={'/'+SYS_LANG+'/api/admin/system_setting?pk=site_info'}
                     columns={siteinfo_columns}
                     translation={t}
                     noOnDelBtn={true}
@@ -69,7 +69,7 @@ const SystemSetting = (/*props*/) => {
                 {<AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={generalSeoClickClearFilter}
-                    paginateUrl="/api/admin/system_setting?pk=general_seo"
+                    paginateUrl={'/'+SYS_LANG+'/api/admin/system_setting?pk=general_seo'}
                     columns={general_seo_columns}
                     translation={t}
                     noOnDelBtn={true}

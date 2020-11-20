@@ -8,12 +8,12 @@ use Laminas\Http\PhpEnvironment;
 use Laminas\Filter\File\RenameUpload;
 use Chopin\HttpMessage\Response\AttributeTemplate\Error;
 use Chopin\HttpMessage\Response\AttributeTemplate\Success;
-use App\Service\ServiceTrait;
+//use App\Service\ServiceTrait;
 use Chopin\Inputfilter\Patterns\KeyValuePattern;
 
 class InputFilterService
 {
-    use ServiceTrait;
+    //use ServiceTrait;
 
     /**
      *

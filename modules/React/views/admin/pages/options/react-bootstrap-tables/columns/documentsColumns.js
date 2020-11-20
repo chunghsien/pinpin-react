@@ -65,7 +65,7 @@ const documentsColumns = (t, smColumn) => {
             dataField: 'name',
             text: t('columns-name'),
             sort: true,
-            editable: true,
+            editable: false,
             filter: textFilter({
                 className: 'form-control-sm',
                 placeholder: t('bootstrap-table-Enter name'),
@@ -78,7 +78,7 @@ const documentsColumns = (t, smColumn) => {
             dataField: 'route',
             text: t('columns-route'),
             sort: true,
-            editable: true,
+            editable: false,
             filter: textFilter({
                 className: 'form-control-sm',
                 placeholder: t('bootstrap-table-Enter name'),

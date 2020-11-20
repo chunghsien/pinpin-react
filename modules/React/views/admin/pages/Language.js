@@ -11,7 +11,7 @@ const Language = () => {
     const { t } = useTranslation(['translation', 'admin-language']);
     const columns = languageColumns(t, 'display_name');
     //Api位置
-    const paginateUrl = '/api/admin/language';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/language';
     const pagination = paginationOptions(t);
     return (
         <>

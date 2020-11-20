@@ -15,7 +15,7 @@ const FormBackGridFixed = loadable(() => import('./components/FormBackGridFixed'
 const Coupon = () => {
     const { t } = useTranslation(['translation']);
     const columns = couponColumns(t, 'name');
-    const paginateUrl = '/api/admin/coupon';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/coupon';
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
     return (

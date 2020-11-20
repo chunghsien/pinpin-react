@@ -110,7 +110,7 @@ const ProductsSpecGroupForm = (/*props*/) => {
             word: typeof inputValue == 'string' ? inputValue : '',
             isOptionsRequest: 1
         };
-        axios.get('/api/admin/products', { params: data }).then((response) => {
+        axios.get('/'+SYS_LANG+'/api/admin/products', { params: data }).then((response) => {
             setReactSelectOptions((reactSelectOptions) => {
                 return {
                     ...reactSelectOptions,

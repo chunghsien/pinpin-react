@@ -19,12 +19,12 @@ const News = (/*props*/) => {
     const useColumns = newsColumns;
     const columns = useColumns(t, 'name');
     const table = 'news';
-    const paginateUrl = '/api/admin/news';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/news';
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
 
     const classRelation = {
-        href: '/admin/nn_class_has_news',
+        href: '/'+SYS_LANG+'/admin/nn_class_has_news',
         self: 'news',
         parent: 'nn_class',
         bind: 'nn_class_has_news'

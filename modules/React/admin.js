@@ -15,6 +15,10 @@ import { icons } from './assets/icons'
 import './i18n';
 import reducers from './views/admin/reducers/reducers';
 
+if(typeof window.SYS_LANG == 'undefined') {
+    window.SYS_LANG = 'zh-TW';
+}
+
 const initialState = {
     sidebarShow: 'responsive'
 }

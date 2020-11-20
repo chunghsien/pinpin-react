@@ -5,6 +5,9 @@ namespace Chopin\Middleware;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\AbstractFactoryInterface;
 use Mezzio\Router\RouterInterface;
+use App\Middleware\NotFoundMiddleware;
+use Mezzio\Template\TemplateRendererInterface;
+use Laminas\Db\Adapter\Adapter;
 
 class MiddlewareAbstractServiceFactory implements AbstractFactoryInterface
 {
@@ -14,7 +17,9 @@ class MiddlewareAbstractServiceFactory implements AbstractFactoryInterface
      * @var \ReflectionClass
      */
     private $reflection;
-
+    
+    private $isRouteNotPath = false;
+    
     /**
      *
      * {@inheritdoc}
@@ -22,15 +27,20 @@ class MiddlewareAbstractServiceFactory implements AbstractFactoryInterface
      */
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
     {
+        if($this->isRouteNotPath) {
+            $template = $container->get(TemplateRendererInterface::class);
+            //$adapter = $container->get(Adapter::class);
+            return new NotFoundMiddleware($template/*, $adapter*/);
+        }
         $reflection = $this->reflection;
         $isConstruct = $reflection->hasMethod('__Construct');
-
         if ($isConstruct) {
             /**
              *
              * @var \ReflectionParameter[] $params
              */
             $params = $reflection->getMethod('__Construct')->getParameters();
+            
             $args = [];
             foreach ($params as $param) {
                 if (! $param->getClass()) {
@@ -48,6 +58,7 @@ class MiddlewareAbstractServiceFactory implements AbstractFactoryInterface
 
             $middleware = $reflection->newInstanceArgs($args);
         } else {
+
             $middleware = $reflection->newInstance();
         }
 
@@ -79,14 +90,13 @@ class MiddlewareAbstractServiceFactory implements AbstractFactoryInterface
              * @var \ReflectionParameter[] $params
              */
             $params = $reflection->getMethod('__Construct')->getParameters();
-
             foreach ($params as $param) {
                 if (! $param->getClass()) {
                     return false;
                 }
             }
         }
-
+        
         if ($container->has('Psr\Http\Message\ServerRequestInterface') && $container->has(RouterInterface::class)) {
             $router = $container->get(RouterInterface::class);
             $requestCallback = $container->get('Psr\Http\Message\ServerRequestInterface');
@@ -109,7 +119,8 @@ class MiddlewareAbstractServiceFactory implements AbstractFactoryInterface
                     }
                 }
             } else {
-                return false;
+                $this->isRouteNotPath = true;
+                return true;
             }
         }
 

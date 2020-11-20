@@ -155,7 +155,7 @@ const AssetsForm = (props) => {
                 formData.set('id', id);
                 axios({
                     method: 'post',
-                    url: '/api/admin/assets?put=1',
+                    url: '/'+SYS_LANG+'/api/admin/assets?put=1',
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     },
@@ -245,7 +245,7 @@ const AssetsForm = (props) => {
         toConfirm(() => {
             axios({
                 method: 'delete',
-                url: '/api/admin/assets/' + id,
+                url: '/'+SYS_LANG+'/api/admin/assets/' + id,
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

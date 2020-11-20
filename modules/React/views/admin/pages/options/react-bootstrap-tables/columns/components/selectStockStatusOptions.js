@@ -1,6 +1,6 @@
 const selectStockStatusOptions = (t) => {
     var request = new XMLHttpRequest();
-    request.open('GET', '/api/admin/products_spec/getStockStatus', false);
+    request.open('GET', '/'+SYS_LANG+'/api/admin/products_spec/getStockStatus', false);
     request.send();
 
     return JSON.parse(request.responseText).data.options.stock_status.map((item, key) => {

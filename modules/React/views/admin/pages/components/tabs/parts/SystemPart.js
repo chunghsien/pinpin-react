@@ -49,7 +49,7 @@ const SystemPart = (props) => {
             loadingBackgroundDom.classList.remove('d-none');
             axios({
                 method: 'post',
-                url: '/api/admin/system_setting',
+                url: '/'+SYS_LANG+'/api/admin/system_setting',
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

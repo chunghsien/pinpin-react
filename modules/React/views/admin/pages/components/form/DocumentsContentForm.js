@@ -86,7 +86,7 @@ const DocumentsContentForm = (props) => {
     const formRef = useRef();
     //https://noembed.com/embed?url={url}
     const ckeditorConfig = {
-        filebrowserUploadUrl: '/api/admin/editor-upload',
+        filebrowserUploadUrl: '/'+SYS_LANG+'/api/admin/editor-upload',
         //contentsCss: 'http://eyeglad.localhost/assets/css/main.css',
         extraPlugins: ['autogrow', 'embed'],
         autoGrow_maxHeight: 480,
@@ -104,7 +104,7 @@ const DocumentsContentForm = (props) => {
     return (
         <>
             <CTabContent>
-                <CTabPane data-tab="default-form">
+                <CTabPane data-tab="documents-content-form">
                     <CCard className="tab-card">
                         <Form
                             innerRef={formRef}

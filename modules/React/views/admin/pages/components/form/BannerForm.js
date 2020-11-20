@@ -7,12 +7,13 @@ import {
     CInput, CSwitch, CSelect, CInputFile,
     CInputGroup, CInputGroupAppend, CInputGroupText,
     CInvalidFeedback,
-    CTabContent, CTabPane
+    CTabContent, CTabPane, CTextarea
 } from '@coreui/react'
 
 import { useForm } from "react-hook-form";
 import Form from '../Form';
-
+import CKEditor from 'ckeditor4-react';
+CKEditor.editorUrl = 'https://cdn.ckeditor.com/4.15.0/full-all/ckeditor.js';
 const BannerForm = (props) => {
 
     const { t } = useTranslation(['translation']);
@@ -87,10 +88,33 @@ const BannerForm = (props) => {
     }, [count]);
 
     const formRef = useRef();
+    const ckeditorConfig = {
+        toolbar: [
+            { name: 'document', items: [ 'Source'] },
+        ],
+        enterMode:/*CKEDITOR.ENTER_BR*/ 2,
+        extraPlugins: ['autogrow'],
+        autoGrow_maxHeight: 480,
+        autoGrow_bottomSpace: 50,
+        resize_enabled: false,
+        extraAllowedContent: 'span',
+        removeButtons: "Save,NewPage,Preview,Print,ExportPdf,Templates,Form,Radio,Checkbox,TextField,Textarea,Select,Button,ImageButton,HiddenField,Flash",
+        removeDialogTabs: 'image:advanced;image:Link'
+    };
+    const onEditorSetData = (data, elmName) => {
+        let dom = window.document.getElementsByName(elmName)[0];
+        dom.value = data;
+        remainderChange(dom);
+    }
+    
+    const contentRef = useRef();
+    //content 編輯器初始化內容
+    let contentHTML = ``;
+
 
     return (
         <CTabContent>
-            <CTabPane data-tab="banner-form">
+            <CTabPane data-tab={props.tab ? props.tab : 'banner-form'}>
                 <CCard className="tab-card">
                     <Form innerRef={formRef} href={href} griduse {...methods} {...props} remainderChange={remainderChange} setFileRequire={setFileRequire} setMediaState={setMediaState}>
                         <input type="hidden" name="id" ref={register()} />
@@ -99,7 +123,7 @@ const BannerForm = (props) => {
                         <input type="hidden" name="language_id" ref={register()} />
                         <input type="hidden" name="locale_id" ref={register()} />
                         <CRow className="mt-2">
-                            <CCol md="6" sm="12">
+                            <CCol>
                                 <CFormGroup>
                                     <CLabel>{t('columns-name')}</CLabel>
                                     <CInputGroup className={errors.name && 'is-invalid'}>
@@ -118,6 +142,37 @@ const BannerForm = (props) => {
                                 </CFormGroup>
                             </CCol>
                         </CRow>
+                            <CRow className="mt-2">
+                                <CCol>
+                                    <div className="textarea-group">
+                                        <CLabel>
+                                            {t('columns-content')}
+                                        </CLabel>
+                                        <div className="textarea-group">
+                                            <CKEditor
+                                                ref={contentRef}
+                                                config={ckeditorConfig}
+                                                data={contentHTML}
+                                                onChange={(evt) => (onEditorSetData(evt.editor.getData(), 'content'))}
+                                                onAfterSetData={(e) => (onEditorSetData(e.data.dataValue, 'content'))}
+                                                onFileUploadResponse={(e) => (onEditorFileUploadResponse(e))}
+                                            />
+                                            <CTextarea
+                                                className="d-none ckeditor-content"
+                                                invalid={errors.detail ? true : false}
+                                                name="content"
+                                                maxLength="255"
+                                                onChange={remainderChange}
+                                                rows="10"
+                                                innerRef={register({ required: true })}
+                                            />
+                                            <p className="text-right text-muted">{remaining.content ? remaining.content : 0}/{maxLength.content}</p>
+                                            <CInvalidFeedback className="textarea-invild-feefback">{(errors.content && errors.content.type == 'required') && t('The input is an empty string')}</CInvalidFeedback>
+                                        </div>
+                                    </div>
+                                </CCol>
+                            </CRow>
+                        
                         <CRow className="mt-2">
                             <CCol md="6" sm="12">
                                 <CFormGroup>

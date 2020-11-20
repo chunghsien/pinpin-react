@@ -19,12 +19,12 @@ const ManagerList = (/*props*/) => {
     const { t } = useTranslation(['translation']);
     const useColumns = managerListColumns;
     const columns = useColumns(t, 'name');
-    const paginateUrl = '/api/admin/manager_list';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/manager_list';
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
 
     const classRelation = {
-        href: '/admin/manager_list',
+        href: '/'+SYS_LANG+'/admin/manager_list',
         self: 'users',
         parent: 'roles',
         bind: 'user_has_roles'

@@ -23,7 +23,7 @@ const Currencies = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={clickClearFilter}
-                    paginateUrl="/api/admin/currencies"
+                    paginateUrl={'/'+SYS_LANG+'/api/admin/currencies'}
                     columns={currencies_columns}
                     translation={t}
                     noOnDelBtn={true}

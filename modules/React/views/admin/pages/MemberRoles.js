@@ -20,7 +20,7 @@ const MemberRoles = () => {
     
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const paginateUrl = '/api/admin/member_roles';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/member_roles';
     //const table = 'manufactures';
     const count = 0;
     useEffect(() => {

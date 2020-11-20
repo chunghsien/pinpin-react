@@ -22,7 +22,18 @@ class DocumentsAction extends AbstractAction
     protected function get(ServerRequestInterface $request): ResponseInterface
     {
         $ajaxFormService = new AjaxFormService();
-        $response = $ajaxFormService->getProcess($request, new NewsTableGateway($this->adapter));
+        $query = $request->getQueryParams();
+        if(isset($query['table']) && isset($query['table_id'])) {
+            if($query['table'] == 'undefined') {
+                $id = intval($query['table_id']);
+                $query['method_or_id'] = $id;
+                unset($query['table']);
+                unset($query['table_id']);
+                $request = $request->withAttribute('method_or_id', $id);
+                //$response = $ajaxFormService->getProcess($request, new DocumentsTableGateway($this->adapter));
+            }
+        }
+        $response = $ajaxFormService->getProcess($request, new DocumentsTableGateway($this->adapter));
         if($response->getStatusCode() == 200) {
             return $response;
         }else {

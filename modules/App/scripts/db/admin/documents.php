@@ -12,7 +12,7 @@ return [
                 "{$PT}language_has_locale",
                 "{$PT}documents.locale_id={$PT}language_has_locale.locale_id",
                 [
-                    'code',
+                    'code', 'display_name'
                 ]
             ],
             [

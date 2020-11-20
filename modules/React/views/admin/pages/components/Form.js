@@ -39,9 +39,9 @@ const Form = (props) => {
             method = 'post'
         }
         if (method == 'put') {
-            href = '/api' + href;
+            href = '/'+SYS_LANG+'/api' + href;
         } else {
-            href = '/api' + href;
+            href = '/'+SYS_LANG+'/api' + href;
         }
         let formData = new FormData();
         const dataKeys = Object.keys(data);
@@ -200,7 +200,7 @@ const Form = (props) => {
         const cFormElement = cformRef.current;
         //沒有id element的狀態下(資料表沒有主鍵，通常是多對多的關聯表)，使用
         if (cFormElement && typeof cFormElement.elements.id === 'undefined') {
-            //const url = '/api' + props.href;
+            //const url = '/'+SYS_LANG+'/api' + props.href;
             if (props.classRelation) {
                 const parent = props.classRelation.parent;
                 const parent_id_name = props.classRelation.parent + '_id';
@@ -413,7 +413,7 @@ const Form = (props) => {
             url = url.replace(/\/\d+/, '');
         } else {
             if (tableCheck == MAIN_TABLE && !localStorage.getItem('copyId')) {
-                url = '/api' + location.pathname;
+                url = '/'+SYS_LANG+'/api' + location.pathname;
             } else {
                 params.table_id = method_or_id;
             }
@@ -647,12 +647,12 @@ const Form = (props) => {
     useEffect(() => {
         formBreadItemRename(t);
         if (/^\d+$/.test(method_or_id)) {
-            const url = '/api' + props.href;
+            const url = '/'+SYS_LANG+'/api' + props.href;
             getUseRow(url);
         } else {
             if (localStorage.getItem('copyId')) {
                 const copyId = localStorage.getItem('copyId');
-                const url = '/api' + location.pathname.replace(/\/add$/, '/' + copyId);
+                const url = '/'+SYS_LANG+'/api' + location.pathname.replace(/\/add$/, '/' + copyId);
                 getUseRow(url);
             }
         }

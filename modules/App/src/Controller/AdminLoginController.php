@@ -15,16 +15,16 @@ use Mezzio\Session\SessionMiddleware;
 use Mezzio\Csrf\CsrfMiddleware;
 use Chopin\Users\TableGateway\UsersTableGateway;
 use Laminas\Diactoros\Response\HtmlResponse;
-use App\Middleware\AdminAuthMiddleware;
 use Chopin\Jwt\JwtTools;
 use Laminas\Diactoros\Response\JsonResponse;
 use Firebase\JWT\JWT;
 use Chopin\Support\Registry;
-use Laminas\Math\Rand;
 
 class AdminLoginController implements RequestHandlerInterface
 {
 
+    use Traits\AdminTrait;
+    
     /** @var null|LaminasViewRenderer */
     private $template;
 
@@ -78,7 +78,7 @@ class AdminLoginController implements RequestHandlerInterface
             }
         }
         $token = $body['__csrf'];
-        $error_uri = $this->urlHelper->generate(AdminAuthMiddleware::LOGIN_ROUTE_NAME);
+        $error_uri = $this->buildUri($routeResult, '/admin-login') ;
         if($guard->validateToken($token)) {
             $set = $this->usersTableGateway->buildData($body);
             $resultSet = $this->usersTableGateway->select(['account' => $set['account']]);
@@ -91,7 +91,7 @@ class AdminLoginController implements RequestHandlerInterface
                 $hash = $row->password;
                 $salt = $row->salt;
                 if(password_verify(isset($set['password']) ? trim($set['password']).$salt : ''.$salt, $hash)) {
-                    $success_uri = $this->urlHelper->generate(AdminAuthMiddleware::ROOT_ROUTE_NAME);
+                    $success_uri = $this->buildUri($routeResult, '/dashboard');
                     $user_data = $row->toArray();
                     if($request->hasHeader('content-type')) {
                         $content_type = implode('', $request->getHeader('content-type'));

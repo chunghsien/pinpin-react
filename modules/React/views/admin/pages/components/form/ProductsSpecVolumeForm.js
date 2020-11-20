@@ -36,7 +36,7 @@ const ProductsSpecVolumeForm = (props) => {
             }
         });
         var request = new XMLHttpRequest();
-        request.open('GET', '/api/admin/products_spec_volume/getUnit', false);
+        request.open('GET', '/'+SYS_LANG+'/api/admin/products_spec_volume/getUnit', false);
         request.send();
         const unitContainer = JSON.parse(request.responseText).data/*.options.stock_status*/;
         setUnits(unitContainer);

@@ -18,7 +18,6 @@ use App\Middleware\AdminAuthMiddleware;
 use App\Middleware\AdminNavigationMiddleware;
 use App\Middleware\ApiAdminAuthMiddleware;
 
-
 return [
     'middleware_pipeline' => [
         [
@@ -36,6 +35,7 @@ return [
             ],
             'priority' => 99,
         ],
+        /*
         [
             'path' => '/admin',
             'middleware' => [
@@ -44,6 +44,7 @@ return [
             ],
             'priority' => 98,
         ],
+        */
         [
             'path' => '/api/admin',
             'middleware' => [
@@ -51,6 +52,7 @@ return [
             ],
             'priority' => 98,
         ],
+        
         
         [
             'middleware' => [

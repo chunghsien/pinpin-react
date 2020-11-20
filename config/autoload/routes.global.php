@@ -1,43 +1,150 @@
 <?php
 
 use Fig\Http\Message\RequestMethodInterface;
-use App\Controller\SiteDefaultController;
-use App\Controller\AdminDefaultController;
-use App\Controller\AdminLoginController;
+use App\Controller;
 use App\Middleware\AdminAuthMiddleware;
-use App\Controller\AdminLogoutController;
-use App\Controller\ReactLocalesController;
-use App\Controller\Api\Admin;
+use App\Middleware\AdminNavigationMiddleware;
+use App\Middleware\ApiAdminAuthMiddleware;
 
 return [
     'routes' => [
         'root' => [
             'path' => '/','middleware' => [
-                SiteDefaultController::class
+                Controller\HomeController::class
             ],'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET
             ],'name' => 'root'
         ],
-        'site.default' => [
-            'path' => '/site[/{page}[/{id}[/{lang}]]]',
+        'home' => [
+            'path' => '/{lang}/index',
             'middleware' => [
-                SiteDefaultController::class
+                Controller\HomeController::class
             ],'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET
-            ],'name' => 'site.default'
+            ],'name' => 'home'
         ],
-        'admin.root' => [
-            'path' => '/admin/',
+        'static' => [
+            'path' => '/{lang}/static/{page}',
             'middleware' => [
-                AdminDefaultController::class
+                Controller\StaticController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'static'
+        ],
+        'countdown-timers' => [
+            'path' => '/{lang}/countdown-timers/{page}',
+            'middleware' => [
+                Controller\CountdownTimesController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'static'
+        ],
+        'blog-category' => [
+            'path' => '/{lang}/blog-category[/{part1_id}[/{part2_id}[/{part3_id}]]]',
+            'middleware' => [
+                Controller\BlogCategoryController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'category'
+        ],
+        
+        'category' => [
+            'path' => '/{lang}/category[/{part1_id}[/{part2_id}[/{part3_id}]]]',
+            'middleware' => [
+                Controller\CategoryController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'category'
+        ],
+        'product' => [
+            'path' => '/{lang}/product/{model_or_id}',
+            'middleware' => [
+                Controller\ProductsController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'product'
+        ],
+        'cart' => [
+            'path' => '/{lang}/cart',
+            'middleware' => [
+                Controller\CartController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'cart'
+        ],
+        'wish' => [
+            'path' => '/{lang}/wish',
+            'middleware' => [
+                Controller\WishController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'wish'
+        ],
+        'testimonials' => [
+            'path' => '/{lang}/testimonials',
+            'middleware' => [
+                Controller\TestimonialsController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'testimonials'
+        ],
+        'flash-sale' => [
+            'path' => '/{lang}/flash-sale',
+            'middleware' => [
+                Controller\FlashSaleController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'flash-sale'
+        ],
+        'checkout' => [
+            'path' => '/{lang}/checkout',
+            'middleware' => [
+                Controller\CheckoutController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'checkout'
+        ],
+        'my-account' => [
+            'path' => '/{lang}/my-account',
+            'middleware' => [
+                Controller\MyAccountController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'my-account'
+        ],
+        'login-register' => [
+            'path' => '/{lang}/login-register',
+            'middleware' => [
+                Controller\LoginRegisterController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'login-register'
+        ],
+        'compare' => [
+            'path' => '/{lang}/compare',
+            'middleware' => [
+                Controller\CompareController::class
+            ],'allowed_methods' => [
+                RequestMethodInterface::METHOD_GET
+            ],'name' => 'compare'
+        ],
+        
+        'admin.root' => [
+            'path' => '/{lang}/admin/',
+            'middleware' => [
+                AdminAuthMiddleware::class,
+                AdminNavigationMiddleware::class,
+                Controller\AdminDefaultController::class
             ],'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET
             ],'name' => 'admin.root'
         ],
         'admin.login' => [
-            'path' => '/admin/login',
+            'path' => '/{lang}/admin-login',
             'middleware' => [
-                AdminLoginController::class
+                AdminAuthMiddleware::class,
+                AdminNavigationMiddleware::class,
+                Controller\AdminLoginController::class
             ],'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET,
                 RequestMethodInterface::METHOD_POST
@@ -45,16 +152,20 @@ return [
             'name' => AdminAuthMiddleware::LOGIN_ROUTE_NAME,
         ],
         'admin.logout' => [
-            'path' => '/admin/logout','middleware' => [
-                AdminLogoutController::class
+            'path' => '/{lang}/admin-logout','middleware' => [
+                AdminAuthMiddleware::class,
+                AdminNavigationMiddleware::class,
+                Controller\AdminLogoutController::class
             ],'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET
-            ],'name' => AdminLogoutController::ROUTE_NAME,
+            ],'name' => Controller\AdminLogoutController::ROUTE_NAME,
         ],
         'admin.default' => [
-            'path' => '/admin[/{page}[/{method_or_id}]]',
+            'path' => '/{lang}/admin[/{page}[/{method_or_id}]]',
             'middleware' => [
-                AdminDefaultController::class
+                AdminAuthMiddleware::class,
+                AdminNavigationMiddleware::class,
+                Controller\AdminDefaultController::class
             ],
             'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET
@@ -65,7 +176,7 @@ return [
         'locales' => [
             'path' => '/locales/resources.json',
             'middleware' => [
-                ReactLocalesController::class
+                Controller\ReactLocalesController::class
             ],
             'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET
@@ -74,9 +185,9 @@ return [
         ],
         /** 以下定義 API routes **/
         'api.admin' => [
-            'path' => '/api/admin/{action}[/{method_or_id}]',
+            'path' => '/{lang}/api/admin/{action}[/{method_or_id}]',
             'middleware' => [
-                Admin\ApiController::class
+                Controller\Api\Admin\ApiController::class
             ],
             'allowed_methods' => [
                 RequestMethodInterface::METHOD_GET,

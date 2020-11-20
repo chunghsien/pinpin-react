@@ -29,7 +29,7 @@ const ClassPart = (props) => {
     
     const columns = classColumns(t, 'name');
     //Api位置
-    //const paginateUrl = '/api/admin/fp_class';
+    //const paginateUrl = '/'+SYS_LANG+'/api/admin/fp_class';
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
     return (

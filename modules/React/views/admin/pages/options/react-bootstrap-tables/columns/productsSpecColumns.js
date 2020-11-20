@@ -134,7 +134,7 @@ const productsSpecColumns = (t, smColumn) => {
             formatter: (cell, row, rowIndex) => {
                 if (typeof pageConfig.stock_status_container == 'undefined') {
                     const request = new XMLHttpRequest();
-                    request.open('GET', '/api/admin/products_spec/getStockStatus', false);
+                    request.open('GET', '/'+SYS_LANG+'/api/admin/products_spec/getStockStatus', false);
                     request.send();
                     pageConfig.stock_status_container = JSON.parse(request.responseText).data.options.stock_status;
                 }

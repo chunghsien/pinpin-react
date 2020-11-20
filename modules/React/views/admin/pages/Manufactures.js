@@ -23,7 +23,7 @@ const Manufactures = () => {
     
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const paginateUrl = '/api/admin/manufactures';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/manufactures';
     const table = 'manufactures';
     
     return (

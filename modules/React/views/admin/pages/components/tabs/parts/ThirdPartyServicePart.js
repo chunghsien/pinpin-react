@@ -20,7 +20,7 @@ const ThirdPartyServicePart = (props) => {
         formData.set('sort', sort);
         axios({
             method: 'post',
-            url: '/api/admin/system_setting',
+            url: '/'+SYS_LANG+'/api/admin/system_setting',
             headers: {
                 'Content-Type': 'multipart/form-data'
             },

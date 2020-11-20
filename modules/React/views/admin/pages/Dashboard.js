@@ -13,7 +13,7 @@ const Dashboard = () => {
     const count = 0;
     useEffect(() => {
         function getApi() {
-            axios.get('/api/admin/dashboard').then(function(response) {
+            axios.get('/'+SYS_LANG+'/api/admin/dashboard').then(function(response) {
                 const data = response.data.data;
                 document.getElementById('php_os').innerText = data.PHP_OS;
                 document.getElementById('server_software').innerText = data.SERVER_SOFTWARE;

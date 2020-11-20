@@ -70,7 +70,7 @@ class Delete extends LaminasDbDelete
         $this->runDbProfiling();
         if (isset($back)) {
             //debug($back, ['save' => true]);
-            $allowRemoveFileColumns = ['path', 'file', 'photo', 'image', 'avater', 'banner', 'main_photo', 'sub_photo', 'third_photo'];
+            $allowRemoveFileColumns = ['path', 'file', 'photo', 'image', 'avater', 'banner', 'main_photo', 'sub_photo', 'third_photo', 'main_image', 'sub_image', 'third_image'];
             $keys = array_keys($back);
             $intersect = array_intersect($allowRemoveFileColumns, $keys);
             if ($intersect) {

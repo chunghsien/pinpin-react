@@ -19,7 +19,7 @@ const ProductsSpec = () => {
 
     const { t } = useTranslation(['translation']);
     //Api位置
-    const paginateUrl = '/api/admin/products_spec';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/products_spec';
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
     const columns = productsSpecColumns(t, 'name');

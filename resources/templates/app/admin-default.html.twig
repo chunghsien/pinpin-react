@@ -21,8 +21,11 @@
   <div id="root"></div>
   {% if page_json_config is defined %}
   {% autoescape false %}
-  <script type="text/javascript">var pageConfig = {{ page_json_config|json_encode(constant('JSON_UNESCAPED_SLASHES'))}};</script>
+  <script type="text/javascript">
+      var SYS_LANG = '{{html_lang}}';
+      var pageConfig = {{ page_json_config|json_encode(constant('JSON_UNESCAPED_SLASHES'))}};
+  </script>
   {% endautoescape %}
   {% endif %}
-<script src="/dist/vendors~admin~253ae210.e0a97a7d4526a38a9e3d.42.js"></script><script src="/dist/vendors~admin~0f485567.6c3c43ecf4a921219454.39.js"></script><script src="/dist/vendors~admin~e4173fa2.01b92b6abc14c08ae126.46.js"></script><script src="/dist/vendors~admin~41983590.e588ee197ac13d5165cb.44.js"></script><script src="/dist/vendors~admin~11bb84b7.16f1e56234e2dfeffb52.40.js"></script><script src="/dist/vendors~admin~1f20a385.05b519b35fa21c58901a.41.js"></script><script src="/dist/vendors~admin~678f84af.1f18841c09bd671c0065.45.js"></script><script src="/dist/vendors~admin~3f764be9.ce6abed86208732edf8c.43.js"></script><script src="/dist/admin~2a0283f8.7e5a29b2f7773d7c3eb4.bundle.js"></script></body>
+<script src="/dist/vendors~admin~253ae210.7f17473d7c461628ec05.40.js"></script><script src="/dist/vendors~admin~0f485567.85989848c4f9499cac3b.37.js"></script><script src="/dist/vendors~admin~e4173fa2.8d63ec2eb1ca3be3f956.44.js"></script><script src="/dist/vendors~admin~41983590.c662bbe311e65254285d.42.js"></script><script src="/dist/vendors~admin~11bb84b7.c358d869358a45f41393.38.js"></script><script src="/dist/vendors~admin~1f20a385.0d49cb0156013e72a0e9.39.js"></script><script src="/dist/vendors~admin~678f84af.3a2e7637921be599ada6.43.js"></script><script src="/dist/vendors~admin~3f764be9.f98086ef2962f8f7d2d3.41.js"></script><script src="/dist/admin~2a0283f8.4fa077356449087784c9.bundle.js"></script></body>
 </html>

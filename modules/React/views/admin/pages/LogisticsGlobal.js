@@ -42,7 +42,7 @@ const LogisticsGlobal = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={logisticsGlobalClickClearFilter}
-                    paginateUrl="/api/admin/system_settings/logistics"
+                    paginateUrl={'/'+SYS_LANG+'/api/admin/system_settings/logistics'}
                     columns={logistics_global_columns}
                     isFilterReset
                     translation={t}
@@ -53,7 +53,7 @@ const LogisticsGlobal = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={shippingClickClearFilter}
-                    paginateUrl="/api/admin/shipping"
+                    paginateUrl={'/'+SYS_LANG+'/api/admin/shipping'}
                     columns={shipping_columns}
                     translation={t}
                     noOnDelBtn={true}
@@ -63,7 +63,7 @@ const LogisticsGlobal = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={paymentClickClearFilter}
-                    paginateUrl="/api/admin/payment"
+                    paginateUrl={'/'+SYS_LANG+'/api/admin/payment'}
                     columns={payment_columns}
                     translation={t}
                     noOnDelBtn={true}
@@ -73,7 +73,7 @@ const LogisticsGlobal = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={otherLogisticsClickClearFilter}
-                    paginateUrl="/api/admin/other_logistics"
+                    paginateUrl={'/'+SYS_LANG+'/api/admin/other_logistics'}
                     columns={other_logistics_columns}
                     translation={t}
                     noOnDelBtn={true}
@@ -81,7 +81,7 @@ const LogisticsGlobal = (/*props*/) => {
             </OtherLogisticsContent>
             <FreeShippingContent>
                 <AdminBootstrapTable
-                    paginateUrl="/api/admin/free_shipping"
+                    paginateUrl={'/'+SYS_LANG+'/api/admin/free_shipping'}
                     columns={free_shipping_columns}
                     translation={t}
                     noOnDelBtn={true}

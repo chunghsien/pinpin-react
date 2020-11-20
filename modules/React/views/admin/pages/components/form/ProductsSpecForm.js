@@ -50,7 +50,7 @@ const ProductsSpecForm = (/*props*/) => {
             isOptionsRequest: 1
         };
         //let params = JSON.parse(e.currentTarget.value);
-        axios.get('/api/admin/products', { params: params }).then((response) => {
+        axios.get('/'+SYS_LANG+'/api/admin/products', { params: params }).then((response) => {
             if (response.data.data.options.length) {
                 setReactSelectOptions((reactSelectOptions) => {
                     return {
@@ -121,7 +121,7 @@ const ProductsSpecForm = (/*props*/) => {
         });
         if (method_or_id == 'add' || /\d+/.test(method_or_id)) {
             var request = new XMLHttpRequest();
-            request.open('GET', '/api/admin/products_spec/getStockStatus', false);
+            request.open('GET', '/'+SYS_LANG+'/api/admin/products_spec/getStockStatus', false);
             request.send();
             const stockStatusOptions = JSON.parse(request.responseText).data.options.stock_status;
             setReactSelectOptions((reactSelectOptions) => {
@@ -186,7 +186,7 @@ const ProductsSpecForm = (/*props*/) => {
                 isOptionsRequest: 1,
                 products_id: option.value
             };
-            axios.get('/api/admin/products_spec_group', { params: params }).then((response) => {
+            axios.get('/'+SYS_LANG+'/api/admin/products_spec_group', { params: params }).then((response) => {
                 setReactSelectOptions((reactSelectOptions) => {
                     return {
                         ...reactSelectOptions,

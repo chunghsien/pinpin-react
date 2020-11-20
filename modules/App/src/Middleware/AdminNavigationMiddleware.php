@@ -12,11 +12,13 @@ use Chopin\Users\Service\UsersService;
 use Laminas\Diactoros\Response\RedirectResponse;
 use Chopin\Users\TableGateway\PermissionTableGateway;
 use Laminas\Db\Adapter\Adapter;
+use Mezzio\Router\RouteResult;
 
 class AdminNavigationMiddleware implements MiddlewareInterface
 {
 
     use \App\Traits\I18nTranslatorTrait;
+    use \App\Controller\Traits\AdminTrait;
     
     /**
      * 
@@ -37,14 +39,20 @@ class AdminNavigationMiddleware implements MiddlewareInterface
     
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $config = require dirname(dirname(__DIR__)).'/config/admin.navigation.php';
+        $lang = $request->getAttribute('lang');
+        $config = require dirname(dirname(__DIR__)).'/config/'.strtolower($lang).'_admin.navigation.php';
         $container = new Navigation($config);
         /**
          *
          * @var \Mezzio\Session\LazySession $session
          */
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-
+        /**
+         *
+         * @var RouteResult $routeResult
+         */
+        $routeResult = $request->getAttribute(RouteResult::class);
+        
         if($session->has('admin')) {
             $user = $session->get('admin');
             $denies = $this->usersService->getDenyPermission($user['id']);
@@ -115,7 +123,7 @@ class AdminNavigationMiddleware implements MiddlewareInterface
                     }
                     if(isset($level1['pages']) && $level1['pages'] && count($level1['pages']) > 0) {
                         $i = [];
-                        foreach ($level1['pages'] as $l2key => $level2) {
+                        foreach ($level1['pages'] as $level2) {
                             $i[] = [
                                 'to' => $level2['uri'],
                                 '_tag' => $level2['tag'],
@@ -137,13 +145,17 @@ class AdminNavigationMiddleware implements MiddlewareInterface
             mergePageJsonConfig(['admin_permission_status' => $admin_permission_status]);
             mergePageJsonConfig(['admin_navigation' => $output]);
             
-            $request_uri = $request->getServerParams()['REQUEST_URI'];
-            $request_uri = preg_replace('/\/\w+$/', '', $request_uri);
-            $request_uri = preg_replace('/\/\d+$/', '', $request_uri);
+            $tmp = $request->getServerParams()['REQUEST_URI'];
+            $tmp = explode('/', $tmp);
+            $tmp = array_slice($tmp, 0, 4);
+            $request_uri = strtolower(implode('/', $tmp));
             if(!$container->findOneBy('uri', $request_uri)) {
-                //缺少瀏覽權限
-                if(!preg_match('/^\/admin(\/{0,1})$/', $request_uri) && !preg_match('/^\/admin\/(logout|404|500)$/', $request_uri)) {
-                    return new RedirectResponse('/admin/404');
+                $routePath = $routeResult->getMatchedRoute()->getPath();
+                //debug(preg_match('/(admin)(\/{0,1})$/', $routePath));
+                if(!preg_match('/admin\-(logout|404|500|login)$/', $routePath) && !preg_match('/(admin)(\/{0,1})$/', $routePath)) {
+                    $lang = $request->getAttribute('lang', 'zh-TW');
+                    $uri = '/'.$lang.'/admin-404';
+                    return new RedirectResponse($uri);
                 }
             }
         }

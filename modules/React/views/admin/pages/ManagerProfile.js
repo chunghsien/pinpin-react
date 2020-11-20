@@ -50,7 +50,7 @@ const ManagerProfile = (/*props*/) => {
             }
         });
 
-        axios.get('/api/admin/manager_profile')
+        axios.get('/'+SYS_LANG+'/api/admin/manager_profile')
             .then((response) => {
                 setAccount(response.data.data.account);
             });
@@ -70,7 +70,7 @@ const ManagerProfile = (/*props*/) => {
     const onupdateSubmit = (data) => {
         let params = data;
         //param.password_confirm;
-        axios.post('/api/admin/manager_profile?put=1', params)
+        axios.post('/'+SYS_LANG+'/api/admin/manager_profile?put=1', params)
             .then((response) => {
                 if (response.data.code == 0) {
                     const NOTIFY = response.data.notify.join("");

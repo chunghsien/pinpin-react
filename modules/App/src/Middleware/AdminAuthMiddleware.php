@@ -15,11 +15,13 @@ use Laminas\Filter\Word\UnderscoreToCamelCase;
 use Laminas\Filter\Word\DashToCamelCase;
 use Laminas\Cache\Storage\StorageInterface;
 use Laminas\I18n\Translator\Translator;
+use App\Controller\Traits\AdminTrait;
 
 class AdminAuthMiddleware implements MiddlewareInterface
 {
     
     use \App\Traits\I18nTranslatorTrait;
+    use AdminTrait;
     
     const LOGIN_ROUTE_NAME = 'admin.login';
     const ROOT_ROUTE_NAME = 'admin.root';
@@ -46,6 +48,7 @@ class AdminAuthMiddleware implements MiddlewareInterface
     
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        
         /**
          *
          * @var RouteResult $routeResult
@@ -58,7 +61,9 @@ class AdminAuthMiddleware implements MiddlewareInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
         $request = $request->withAttribute(Translator::class, $this->translator);
         if($session->has('admin')) {
-            setrawcookie('admin', $this->urlHelper->generate(self::ROOT_ROUTE_NAME));
+            
+            $useRouteResult = $this->urlHelper->getRouteResult(self::ROOT_ROUTE_NAME);
+            setrawcookie('admin', $this->buildUri($useRouteResult));
             $user = $session->get('admin');
             $routes = isset($user['routes']) ? $user['routes'] : [];
             $lng = $request->getAttribute('php_lang');
@@ -100,14 +105,15 @@ class AdminAuthMiddleware implements MiddlewareInterface
             array_unshift($routes, ['uri' => '/admin/', 'exact' => true, 'name' => $this->translator->translate('Home', $domain, $lng)]);
             mergePageJsonConfig(['routes' => $routes]);
             if($routeResult->getMatchedRouteName() == self::LOGIN_ROUTE_NAME) {
-                $uri = $this->urlHelper->generate(self::ROOT_ROUTE_NAME);
+                $uri = $this->buildUri($routeResult, '/');
                 return new RedirectResponse($uri);
             }
             $request = $request->withAttribute(Translator::class, $this->translator);
         }else {
             setrawcookie('admin', null, time()-1);
             if($routeResult->getMatchedRouteName() != self::LOGIN_ROUTE_NAME) {
-                $uri = $this->urlHelper->generate(self::LOGIN_ROUTE_NAME);
+                //$notMatchRouteResult = $this->urlHelper->getRouteResult(self::LOGIN_ROUTE_NAME);
+                $uri = $this->buildUri($routeResult, '/admin-login');
                 return new RedirectResponse($uri);
             }
            

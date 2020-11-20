@@ -4,11 +4,11 @@ module.exports = (phase, { defaultConfig }) => {
     var mergeConfig = {
         ...Object.assign({ defaultConfig }),
         ...{ env: { PUBLIC_URL: "/site/zh-TW", BASE_IMG_URL: "" } },
-        reactStrictMode: true,
-        i18n:{
-            locales:['zh-TW'],
-            defaultLocale: "zh-TW"
-        }
+        reactStrictMode: true/*,
+        i18n: {
+            locales: ['zh-TW'],
+            defaultLocale: 'zh-TW'
+        }*/
     };
     mergeConfig.env.LOCAL_API_URL = "";
     if (phase == PHASE_DEVELOPMENT_SERVER) {

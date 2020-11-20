@@ -4,13 +4,13 @@ const DefaultContainer = loadable(() => import('./views/admin/pages/defaults/Def
 const pageConfig = window.pageConfig;
 let _routes = [/*{ path: '/admin/', exact: true, strict: true, name: 'Home' }*/];
 
-
+const lang = document.getElementsByTagName('html')[0].lang;
 pageConfig.routes.map((item) => {
     let _component = null;
     if (item.component) {
         _component = loadable(() => import(item.component + '.js'));
     } else {
-        if (item.uri != '/admin/') {
+        if (item.uri != '/'+lang+'/admin/') {
             _component = DefaultContainer;
         }
     }
@@ -18,7 +18,7 @@ pageConfig.routes.map((item) => {
         path: item.uri.replace(/\/\:method_or_id$/, ''),
         name: item.name,
     };
-    if (item.uri != '/admin/') {
+    if (item.uri != '/'+lang+'/admin/') {
         _push.component = _component;
         //_push.strict = true;
     } else {

@@ -8,9 +8,9 @@ return [
             Adapter::class => [
                 'driver' => 'pdo_mysql',
                 'database' => 'laminas',
-                'username' => 'root',
-                'hostname' => 'localhost',
-                'password' => 'password',
+                'username' => 'homestead',
+                'hostname' => '192.168.10.10',
+                'password' => 'secret',
                 'options' => [
                     \PDO::ATTR_PERSISTENT => true,
                     \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true,

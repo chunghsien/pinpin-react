@@ -34,12 +34,14 @@ class FacebookTagsAction extends AbstractAction
             return $response;
         }
         $data = $response->getPayload()['data'];
+        /*
         $serialize = $request->getAttribute('system_settings');
         foreach ($serialize['facebook_dev']['children'] as $item){
             $key = $item['key'];
             $value = isset($item['value']) ? $item['value'] : $item['aes_value'];
             $data[$key] = $value;
         }
+        */
         return new ApiSuccessResponse(0, $data);
     }
     

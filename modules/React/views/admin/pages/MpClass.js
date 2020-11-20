@@ -7,13 +7,13 @@ const MpClass = () => {
     //統一命名
     const classColumns = mpClassColumns;
     const classRelation = {
-        href: '/admin/fp_class_has_mp_class',
+        href: '/'+SYS_LANG+'/admin/fp_class_has_mp_class',
         self: 'mp_class',
         parent: 'fp_class',
         bind: 'fp_class_has_mp_class'
     };
     return (
-        <ClassPart table="mp_class" classRelation={classRelation} href="/admin/mp_class" paginateUrl="/api/admin/mp_class" {...{classColumns, paginationOptions, clickClearFilter}}  />
+        <ClassPart table="mp_class" classRelation={classRelation} href="/admin/mp_class" paginateUrl={'/'+SYS_LANG+'/api/admin/mp_class'} {...{classColumns, paginationOptions, clickClearFilter}}  />
     );
 };
 

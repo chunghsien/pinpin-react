@@ -16,7 +16,7 @@ const Contact = () => {
     const columns = contactColumns(t, 'name');
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const paginateUrl = '/api/admin/contact';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/contact';
 
     const [formRow, setFormRow] = useState({
         contact: {

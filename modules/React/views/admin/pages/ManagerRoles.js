@@ -21,7 +21,7 @@ const ManagerRoles = () => {
     
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const paginateUrl = '/api/admin/manager_roles';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/manager_roles';
     //const table = 'manufactures';
     
     const classRelation = {

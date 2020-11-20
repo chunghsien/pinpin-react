@@ -17,6 +17,8 @@ use Mezzio\Session\SessionMiddleware;
 class AdminDefaultController implements RequestHandlerInterface
 {
 
+    use Traits\AdminTrait;
+    
     /** @var null|LaminasViewRenderer */
     private $template;
 

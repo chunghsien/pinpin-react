@@ -24,12 +24,12 @@ const Products = (/*props*/) => {
     const useColumns = productsColumns;
     const columns = useColumns(t, 'name');
     const table = 'products';
-    const paginateUrl = '/api/admin/products';
+    const paginateUrl = '/'+SYS_LANG+'/api/admin/products';
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
 
     const classRelation = {
-        href: '/admin/np_class_has_products',
+        href: '/'+SYS_LANG+'/admin/np_class_has_products',
         self: 'products',
         parent: 'np_class',
         bind: 'np_class_has_products'
