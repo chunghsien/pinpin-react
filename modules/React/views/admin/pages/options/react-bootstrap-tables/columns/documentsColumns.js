@@ -92,6 +92,7 @@ const documentsColumns = (t, smColumn) => {
             text: t('columns-created_at'),
             sort: true,
             editable: false,
+            headerStyle: { width: '10rem' },
             filter: dateFilter({
                 dateClassName: 'form-control-sm',
                 comparatorClassName: "form-control-sm",
@@ -103,22 +104,7 @@ const documentsColumns = (t, smColumn) => {
         },
         actions(t)
     ];
-    if (screen.width < 1201) {
-        let returnColumns = fullColumns.filter((item, key) => {
-            const lastKey = (fullColumns.length - 1);
-            if (key === lastKey) {
-                return item;
-            } else if (smColumn && item.dataField == smColumn) {
-                return item;
-            }
-            return false;
-        });
-
-        return returnColumns;
-    } else {
-        return fullColumns;
-    }
-
+    return fullColumns;
 };
 
 

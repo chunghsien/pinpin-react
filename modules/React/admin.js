@@ -20,7 +20,10 @@ if(typeof window.SYS_LANG == 'undefined') {
 }
 
 const initialState = {
-    sidebarShow: 'responsive'
+    sidebarShow: 'responsive',
+    toForm: 0,
+    formType: "",
+    formRows:{},
 }
 let store = createStore(reducers, initialState, applyMiddleware(thunk));
 React.icons = icons

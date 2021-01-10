@@ -6,7 +6,7 @@ use Chopin\MiddlewareService\MiddlewareServiceAbstractServiceFactory;
 return [
     'dependencies' => [
         'abstract_factories' => [
-            MiddlewareAbstractServiceFactory::class,
+            //MiddlewareAbstractServiceFactory::class,
             MiddlewareServiceAbstractServiceFactory::class,
         ],
     ],

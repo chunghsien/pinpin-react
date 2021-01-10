@@ -2,10 +2,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-    CRow, CCol, CFormGroup, CLabel,
+    CRow, CCol, CLabel,
     CCard,
-    CSelect, CInput,
-    CInputGroup, CInputGroupAppend, CInputGroupText,
     CInvalidFeedback,
     CTabContent, CTabPane,
     CTextarea
@@ -25,7 +23,7 @@ const DocumentsContentForm = (props) => {
         href = href.replace(/\/$/, '') + matcher[0];
     } else {
         href += '/add';
-        href = href.replace(/\/\//, '/');
+        href = href.replace(/\/{2,}/, '/');
     }
     const [remaining, setRemaining] = useState({});
     const [maxLength, setMaxLength] = useState({});
@@ -49,7 +47,6 @@ const DocumentsContentForm = (props) => {
         setRemaining((remaining) => ({ ...remaining, ...tObj }));
         return remaining[name];
     }
-    const count = 0;
 
     const onEditorSetData = (data, elmName) => {
         let dom = window.document.getElementsByName(elmName)[0];
@@ -69,6 +66,7 @@ const DocumentsContentForm = (props) => {
 
     }
 
+    const count = 0;
     useEffect(() => {
         formRef.current.elements.forEach((dom) => {
             const name = dom.name;
@@ -100,7 +98,9 @@ const DocumentsContentForm = (props) => {
     };
 
     const contentRef = useRef();
-
+    
+    const document_id = location.pathname.match(/\d+$/)[0];
+    
     return (
         <>
             <CTabContent>
@@ -116,9 +116,10 @@ const DocumentsContentForm = (props) => {
                             defaultEditorContent={{
                                 content: contentHTML
                             }}
+                            {...props}
                         >
                             <input type="hidden" name="id" ref={register()} />
-                            <input type="hidden" name="documents_id" ref={register()} />
+                            <input type="hidden" name="documents_id" ref={register()} defaultValue={document_id} />
                             <CRow className="mt-2">
                                 <CCol>
                                     <div className="textarea-group">

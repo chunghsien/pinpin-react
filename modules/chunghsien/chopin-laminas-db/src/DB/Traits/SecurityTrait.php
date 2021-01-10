@@ -2,7 +2,6 @@
 
 namespace Chopin\LaminasDb\DB\Traits;
 
-use Chopin\LaminasDb\DB\Select;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select as LaminasSelect;
 use NoProtocol\Encryption\MySQL\AES\Crypter;
@@ -64,9 +63,6 @@ trait SecurityTrait
      */
     protected function buildAESDecryptFrom($table)
     {
-        if ($this instanceof Select == false) {
-            throw new \ErrorException('此物件型態不適用此方法');
-        }
 
         $encryptionColumns = $this->getTableGateway()->encryptionColumns;
         if ( ! $encryptionColumns) {
@@ -126,51 +122,6 @@ trait SecurityTrait
                 $set[$encrypt] = $this->aesCrypter->encrypt($set[$encrypt]);
             }
         }
-
-        $securities = array_merge($this->defaultEncryptionColumns, ['password']);
-        
-        //特殊情形加密判斷
-        if($this instanceof Select) {
-            /**
-             *
-             * @var \Laminas\Db\Sql\Where $where
-             */
-            $where = $this->getRawState('where');
-            
-            if ($where instanceof \Laminas\Db\Sql\Where && $where->count()) {
-                /**
-                 *
-                 * @var AbstractTableGateway $tablegateway
-                 */
-                $tablegateway = $this->tablegateway;
-                $resultSet = $tablegateway->select($where);
-                if ($resultSet->count() == 1) {
-                    $row = $resultSet->current();
-                    if (isset($row->key)) {
-                        if (false !== array_search($row->key, $securities) && $set['value']) {
-                            //(new Expression())->getExpression()
-                            if ($set['value'] instanceof Expression) {
-                                $aes_value = $set['value'];
-                            } else {
-                                $aes_value = $this->aesCrypter->encrypt($set['value']);
-                            }
-                            unset($set['value']);
-                            $set['aes_value'] = $aes_value;
-                        }
-                    }
-                }
-            } else {
-                if (isset($set['key'])) {
-                    $key = $set['key'];
-                    
-                    if (false !== array_search($key, $securities) && $set['value']) {
-                        $aes_value = $this->aesCrypter->encrypt($set['value']);
-                        unset($set['value']);
-                        $set['aes_value'] = $aes_value;
-                    }
-                }
-            }
-        }
         
 
         // password加密，不可逆
@@ -225,6 +176,4 @@ trait SecurityTrait
         }
         return (array)$data;
     }
-    
-    //abstract public function deCryptData($data);
 }

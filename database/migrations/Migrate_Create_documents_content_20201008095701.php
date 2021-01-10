@@ -36,8 +36,7 @@ class Migrate_Create_documents_content_20201008095701 extends AbstractMigration
         
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable.'_id_PRIMARY'));
         $fkprefix = 'fk_'.$this->tailTable;
-        $ddl->addConstraint(new Constraint\ForeignKey(
-            $fkprefix.'_documents1', 'documents_id', self::$prefixTable.'documents', 'id'));
+        $ddl->addConstraint(new Constraint\ForeignKey($fkprefix.'_documents1', 'documents_id', self::$prefixTable.'documents', 'id'));
     }
     
     public function down()

@@ -32,7 +32,7 @@ class Migrate_Create_manufactures_20190807043734 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true, 'default' =>0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' =>0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 128]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('image', 'varchar', ['length' => 255]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('image', 'varchar', ['length' => 384]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sort', 'mediumint', ['unsigned' => true, 'default' => '16777215']));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));

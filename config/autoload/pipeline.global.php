@@ -44,7 +44,7 @@ return [
             ],
             'priority' => 98,
         ],
-        */
+        
         [
             'path' => '/api/admin',
             'middleware' => [
@@ -52,7 +52,7 @@ return [
             ],
             'priority' => 98,
         ],
-        
+        */
         
         [
             'middleware' => [

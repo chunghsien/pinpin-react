@@ -10,6 +10,10 @@ use Laminas\Code\Reflection\FileReflection;
 use Chopin\LaminasDb\DB;
 use Chopin\LaminasDb\RowGateway\RowGateway;
 use Laminas\Db\Sql\Predicate\Predicate;
+use Laminas\Db\Sql\Where;
+use Laminas\Db\RowGateway\RowGatewayInterface;
+use Chopin\LaminasDb\ResultSet\ResultSet;
+use Chopin\LaminasDb\DB\Traits\CacheTrait;
 
 abstract class AbstractTableGateway extends LaminasTableGateway
 {
@@ -52,7 +56,7 @@ abstract class AbstractTableGateway extends LaminasTableGateway
     public function __construct(\Laminas\Db\Adapter\Adapter $adapter)
     {
         $this->table = self::$prefixTable . $this->table;
-        parent::__construct($this->table, $adapter);
+        parent::__construct($this->table, $adapter, null, new ResultSet());
     }
 
     /**
@@ -63,8 +67,7 @@ abstract class AbstractTableGateway extends LaminasTableGateway
      */
     public static function newInstance($classOrTable, $adapter)
     {
-        
-        if ( is_string($classOrTable) && class_exists($classOrTable)) {
+        if (is_string($classOrTable) && class_exists($classOrTable)) {
             $reflectionClass = new \ReflectionClass($classOrTable);
             return $reflectionClass->newInstance($adapter);
         } else {
@@ -170,13 +173,23 @@ abstract class AbstractTableGateway extends LaminasTableGateway
                 $id_index = array_search('id', $this->primary);
                 if (($id_index !== false) && static::$isRemoveRowGatewayFeature === false) {
                     $primaryKeyColumn = $this->primary[$id_index];
-                    $feature = new RowGatewayFeature(new RowGateway($primaryKeyColumn, $this->table));
+                    $sql = $this->sql;
+                    $tableGateClass = get_class($this);
+                    $rowGatewayClass = str_replace('Table', "Row", $tableGateClass);
+                    
+                    if(class_exists($rowGatewayClass)) {
+                        $reflection = new \ReflectionClass($rowGatewayClass);
+                        $rowGateway = $reflection->newInstance($this->adapter);
+                    }else {
+                        $rowGateway = new RowGateway($primaryKeyColumn, $this->table, $sql);
+                    }
+                    $feature = new RowGatewayFeature($rowGateway);
                     $feature->setTableGateway($this);
                     $feature->postInitialize();
                     $this->featureSet->addFeature($feature);
                 }
             }
-            if(method_exists($this, 'initCrypt')) {
+            if (method_exists($this, 'initCrypt')) {
                 $this->initCrypt();
             }
         }
@@ -325,7 +338,7 @@ abstract class AbstractTableGateway extends LaminasTableGateway
 
                 $append = [
                     'value' => $value,
-                    'label' => $row[$lableField],
+                    'label' => $row[$lableField]
                 ];
             } else {
                 $append = $value;
@@ -357,6 +370,8 @@ abstract class AbstractTableGateway extends LaminasTableGateway
      */
     public function getOptions($valueField = 'id', $lableField = 'name', $dataAttrs = [], $predicateParams = [], $limit = null)
     {
+        //
+
         // $this->sql->select()->where->isNull
         if (is_string($valueField)) {
             $columns = array_merge([
@@ -376,12 +391,15 @@ abstract class AbstractTableGateway extends LaminasTableGateway
             'columns' => [
                 $columns
             ],
-            'where' => $predicateParams,
+            'where' => $predicateParams
         ];
+
         if ($limit) {
             $scripts['limit'] = $limit;
         }
+
         $resultSet = DB::selectFactory($scripts);
+        // debug($resultSet->toArray(), ['isContinue' => true, 'output_type' => 'json']);
         return $this->buildOptionsData($valueField, $lableField, $resultSet, $dataAttrs);
     }
 
@@ -405,5 +423,80 @@ abstract class AbstractTableGateway extends LaminasTableGateway
             return $this->primary;
         }
         return parent::__get($property);
+    }
+
+    /**
+     *
+     * @param Where|\Closure|string|array|Predicate\PredicateInterface $where
+     * @param array $releation
+     * @return RowGatewayInterface|array
+     */
+    public function getRow($where, $releation = [])
+    {
+        $select = $this->sql->select();
+        $select->where($where);
+        $row = $this->selectWith($select)->current();
+        if (! $row) {
+            if (count($this->primary) == 1) {
+                $row = new RowGateway($this->primary[0], $this->table);
+                foreach ($this->columns as $col) {
+                    $row->{$col} = null;
+                }
+            } else {
+                $row = new \ArrayObject();
+                foreach ($this->columns as $col) {
+                    $row->{$col} = null;
+                }
+            }
+        }
+        if ($releation) {
+            if ($row instanceof \Laminas\Db\RowGateway\RowGateway && ! $row->id) {
+                $row->populate($releation);
+            } else {
+                foreach ($releation as $key => $value) {
+                    if (! $row->{$key}) {
+                        $row->{$key} = $value;
+                    }
+                }
+            }
+        }
+        $row = $this->injectLanguageHasLocaleJson($row);
+        return $row;
+    }
+
+    /**
+     *
+     * @param mixed $child
+     * @param int $selfId
+     * @return \Laminas\Db\RowGateway\AbstractRowGateway
+     */
+    public function injectReleationValues($child, $selfId)
+    {
+        if ($child instanceof RowGatewayInterface) {
+            $child = $child->toArray();
+        }
+        $table = $this->getTailTableName();
+        $releation_col = "{$table}_id";
+        if (array_key_exists($releation_col, $child)) {
+            $child[$releation_col] = $selfId;
+        } else {
+            $child['table'] = $table;
+            $child['table_id'] = $selfId;
+        }
+
+        return $child;
+    }
+
+    protected function injectLanguageHasLocaleJson(RowGatewayInterface $row, $sequence=['locale_id', 'language_id'])
+    {
+        if( isset($row->language_id) && isset($row->locale_id) )
+        {
+            $object = [];
+            foreach($sequence as $col) {
+                $object[$col] = $row->{$col};
+            }
+            $row->language_has_locale = json_encode($object, JSON_UNESCAPED_SLASHES);
+        }
+        return $row;
     }
 }

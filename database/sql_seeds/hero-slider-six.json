@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "subtitle": "NEW ARRIVALS",
+    "title": "Summer 2020",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-six/2.png",
+    "bgImage": "",
+    "bgColor": "#f5e8e5",
+    "target": "_self"
+  },
+  {
+    "id": "2",
+    "subtitle": "NEW ARRIVALS",
+    "title": "Summer 2020",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-six/3.png",
+    "bgImage": "",
+    "bgColor": "#f5e8e5",
+    "target": "_self"
+  },
+  {
+    "id": "3",
+    "subtitle": "New collection A-W ss17",
+    "title": "Chair <br/> Collection",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-six/1.jpg",
+    "bgImage": "",
+    "bgColor": "#dbe7ff",
+    "target": "_self"
+  }
+]

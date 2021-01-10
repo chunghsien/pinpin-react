@@ -40,8 +40,9 @@ class AdminLogoutController implements RequestHandlerInterface
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
         $uri = $this->buildUri($this->urlHelper->getRouteResult(), '/admin-login');
         if($session->has('admin')) {
+            $path = '/'.$request->getAttribute('html_lang');
             $session->unset('admin');
-            setrawcookie('admin', '', time()-1);
+            setrawcookie('admin', '', time()-1, $path);
         }
        
         return new RedirectResponse($uri);

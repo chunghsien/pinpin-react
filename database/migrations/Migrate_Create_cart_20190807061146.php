@@ -31,7 +31,10 @@ class Migrate_Create_cart_20190807061146 extends AbstractMigration
          */
         $ddl = $this->ddl;
         $ddl->addColumn(MySQLColumnFactory::buildColumn('guest_serial', 'varchar', ['length' => 128]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_id', 'int', ['unsigned' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_id', 'int', ['unsigned' => true, 'default' => 0]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_group_id', 'int', ['unsigned' => true, 'default' => 0]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_id', 'int', ['unsigned' => true, 'default' => 0]));
+        
         $ddl->addColumn(MySQLColumnFactory::buildColumn('quantity', 'mediumint', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('expire', 'bigint', ['unsigned' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', [
@@ -41,7 +44,13 @@ class Migrate_Create_cart_20190807061146 extends AbstractMigration
             'default' => new Expression('CURRENT_TIMESTAMP'),
             'on_update' => true,
         ]));
-        $ddl->addConstraint(new Constraint\PrimaryKey(['guest_serial', 'products_id'], $this->tailTable . '_id_PRIMARY'));
+        $ddl->addConstraint(new Constraint\PrimaryKey(
+            [
+                'guest_serial', 
+                'products_id', 'products_spec_group_id',
+                'products_spec_id'
+            ], $this->tailTable . '_id_PRIMARY')
+        );
     }
 
     public function down()

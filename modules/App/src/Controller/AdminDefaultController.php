@@ -13,6 +13,8 @@ use Chopin\Support\Registry;
 use Laminas\Db\Adapter\Adapter;
 use Chopin\LanguageHasLocale\TableGateway\LanguageHasLocaleTableGateway;
 use Mezzio\Session\SessionMiddleware;
+use Chopin\Store\RowGateway\CartRowGateway;
+use Chopin\Store\TableGateway\CartTableGateway;
 
 class AdminDefaultController implements RequestHandlerInterface
 {

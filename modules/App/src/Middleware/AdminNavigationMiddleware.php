@@ -13,6 +13,7 @@ use Laminas\Diactoros\Response\RedirectResponse;
 use Chopin\Users\TableGateway\PermissionTableGateway;
 use Laminas\Db\Adapter\Adapter;
 use Mezzio\Router\RouteResult;
+use Laminas\I18n\Translator\Translator;
 
 class AdminNavigationMiddleware implements MiddlewareInterface
 {
@@ -39,8 +40,14 @@ class AdminNavigationMiddleware implements MiddlewareInterface
     
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
+        if(!$request->getAttribute(Translator::class, null))
+        {
+            $this->initTranslator();
+        }
         $lang = $request->getAttribute('lang');
-        $config = require dirname(dirname(__DIR__)).'/config/'.strtolower($lang).'_admin.navigation.php';
+        $dir = dirname(dirname(__DIR__));
+        
+        $config = require "{$dir}/options/{$lang}_admin.navigation.php";
         $container = new Navigation($config);
         /**
          *
@@ -108,7 +115,6 @@ class AdminNavigationMiddleware implements MiddlewareInterface
                             $s['fontIcon'] = $level1['font-icon'];
                             $s['name'] = $this->translator->translate($level1['name'], $domain, $lng);
                         }
-                        
                         if(
                             empty($s['to']) &&
                             isset($level1['pages']) &&
@@ -148,7 +154,11 @@ class AdminNavigationMiddleware implements MiddlewareInterface
             $tmp = $request->getServerParams()['REQUEST_URI'];
             $tmp = explode('/', $tmp);
             $tmp = array_slice($tmp, 0, 4);
-            $request_uri = strtolower(implode('/', $tmp));
+            //$request_uri = strtolower(implode('/', $tmp));
+            $request_uri = implode('/', $tmp);
+            if(empty($routeResult->getMatchedParams()['page'])) {
+                $request_uri = $toArray[0]['uri'];
+            }
             if(!$container->findOneBy('uri', $request_uri)) {
                 $routePath = $routeResult->getMatchedRoute()->getPath();
                 //debug(preg_match('/(admin)(\/{0,1})$/', $routePath));
@@ -159,6 +169,7 @@ class AdminNavigationMiddleware implements MiddlewareInterface
                 }
             }
         }
+        
         return $handler->handle($request);
     }
 }

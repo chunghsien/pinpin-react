@@ -9,12 +9,12 @@ class ApiResponse extends JsonResponse
     /**
      *
      * @param int   $code
-     * @param array $data
+     * @param mixed $data
      * @param array $message
      * @param array $notify
      * @param number $status
      */
-    public function __construct(int $code, array $data, array $message, array $notify = [], int $status = 200)
+    public function __construct(int $code, $data, array $message, array $notify = [], int $status = 200)
     {
         $merge = [
             'code' => $code,
@@ -23,6 +23,6 @@ class ApiResponse extends JsonResponse
             'data' => $data,
         ];
 
-        parent::__construct($merge, $status);
+        parent::__construct($merge, $status, [],  JSON_NUMERIC_CHECK);
     }
 }

@@ -1,10 +1,16 @@
 <?php
-
 return [
+    "Case history" => "歷年案例",
+    "Case year" => "年度",
+    "Case history year" => "歷年案例(年)",
+    "Carousel" => "輪播",
     "Home" => "網站後台",
     "Dsahboard" => "儀錶板",
-    "Documents management" => "網頁文件管理",
-    "Documents & Resources" => "網頁文件資源",
+    "Documents management" => "網頁內容管理",
+    "Documents & Resources" => "網頁內容資源",
+    "Banners" => "輪播[橫幅]",
+    "Document Header" => "網頁共用頁頭",
+    "Document Footer" => "網頁共用頁腳",
     "Assets" => "檔案資源",
     "Attributes" => "依附屬性",
     "Documents" => "基礎網頁",
@@ -27,7 +33,7 @@ return [
     "News category level1" => "第一層分類",
     "News category level2" => "第二層分類",
     "News category level3" => "第三層分類",
-    "News" => "最新消息",
+    "News" => "歷年案例",
     "Contact" => "聯絡我們",
     "Members" => "網站會員",
     "Member & Admin" => "會員與網站管理員",

@@ -7,8 +7,8 @@ const ReactForm = (porps) => {
         meta: { isSubmitting, canSubmit }
     } = useForm({
         onSubmit: async (values, instance) => {
-            console.log(values);
-            console.log(instance);
+            //console.log(values);
+            //console.log(instance);
             // onSubmit (and everything else in React Form)
             // has async support out-of-the-box
             //await sendToFakeServer(values);

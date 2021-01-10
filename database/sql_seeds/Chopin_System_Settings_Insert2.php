@@ -63,11 +63,10 @@ class Chopin_System_Settings_Insert2 extends AbstractSeeds
                             'name',
                             [
                                 [
-                                    Operator::class,
+                                    'equalTo',
                                     'AND',
                                     [
                                         'is_use',
-                                        '=',
                                         1
                                     ],
                                 ],
@@ -92,11 +91,10 @@ class Chopin_System_Settings_Insert2 extends AbstractSeeds
                             'display_name',
                             [
                                 [
-                                    Operator::class,
+                                    'equalto',
                                     'AND',
                                     [
                                         'is_use',
-                                        '=',
                                         1
                                     ],
                                 ],
@@ -121,11 +119,10 @@ class Chopin_System_Settings_Insert2 extends AbstractSeeds
                             'name',
                             [
                                 [
-                                    Operator::class,
+                                    'equalTo',
                                     'AND',
                                     [
                                         'is_use',
-                                        '=',
                                         1
                                     ],
                                 ],
@@ -150,11 +147,10 @@ class Chopin_System_Settings_Insert2 extends AbstractSeeds
                             'name',
                             [
                                 [
-                                    Operator::class,
+                                    'equalTo',
                                     'AND',
                                     [
                                         'is_use',
-                                        '=',
                                         1
                                     ],
                                 ],

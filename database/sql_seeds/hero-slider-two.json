@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "subtitle": "MEN COLLECTION",
+    "title": "Feeling relax day, <br /> Enjoy weekend",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-two/1.png",
+    "bgColor": "#ebf4f2",
+    "target": "_self"
+  },
+  {
+    "id": "2",
+    "subtitle": "SPORT COLLECTION",
+    "title": "Feeling relax day, <br /> Enjoy weekend",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-two/2.png",
+    "bgColor": "#f4ede7",
+    "target": "_self"
+  },
+  {
+    "id": "3",
+    "subtitle": "WOMEN COLLECTION",
+    "title": "Feeling relax day, <br /> Enjoy weekend",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-two/3.png",
+    "bgColor": "#ebf4f2",
+    "target": "_self"
+  }
+]

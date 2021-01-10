@@ -27,7 +27,7 @@ class ProductsAttrsAction extends AbstractAction
         $select->order(['sort ASC', 'id DESC'])->where(['parent_id' => $parent_id]);
         $data = $tablegateway->selectWith($select)->toArray();
         $form = [
-            'table' => $parentRow->table,
+            'table' => $parentRow->tablename,
             'parent_id' => $parentRow->id,
             'language_id' => $parentRow->language_id,
             'locale_id' => $parentRow->locale_id,

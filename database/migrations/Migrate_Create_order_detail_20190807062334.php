@@ -33,7 +33,9 @@ class Migrate_Create_order_detail_20190807062334 extends AbstractMigration
         $ddl = $this->ddl;
         $ddl->addColumn(MySQLColumnFactory::buildColumn('id', 'int', ['unsigned' => true, 'auto_increment' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('order_id', 'int', ['unsigned' => true]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_id', 'int', ['unsigned' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_id', 'int', ['unsigned' => true, 'default' => 0]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_group_id', 'int', ['unsigned' => true, 'default' => 0]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('model', 'varchar', ['length' => 128]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('quantity', 'mediumint', ['unsigned' => true, 'default' => 0]));
 
@@ -53,6 +55,7 @@ class Migrate_Create_order_detail_20190807062334 extends AbstractMigration
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable . '_id_PRIMARY'));
         $ddl->addConstraint(new Constraint\ForeignKey('fk_order_detail_order1_idx', 'order_id', self::$prefixTable.'order', 'id'));
         $ddl->addConstraint(new Index('products_id'));
+        $ddl->addConstraint(new Index('products_spec_id'));
     }
 
     public function down()

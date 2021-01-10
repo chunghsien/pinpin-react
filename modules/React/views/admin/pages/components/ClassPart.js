@@ -80,7 +80,7 @@ const ClassPart = (props) => {
                 <CRow>
                     <CCol>
                         <CCard>
-                            <CCardHeader>{t('FpClass data grid')}</CCardHeader>
+                            <CCardHeader>{t(props.tableHeaderLabel)}</CCardHeader>
                             <CCardBody>
                                 <AdminBootstrapTable
                                     paginateUrl={paginateUrl}

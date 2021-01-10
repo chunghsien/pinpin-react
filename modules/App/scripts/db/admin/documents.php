@@ -31,5 +31,6 @@ return [
                 ]
             ],
         ],
+        'order' => ['type asc', 'id asc']
     ],
 ];

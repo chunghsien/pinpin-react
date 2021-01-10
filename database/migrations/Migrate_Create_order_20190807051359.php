@@ -46,7 +46,7 @@ class Migrate_Create_order_20190807051359 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('first_name', 'varbinary', ['length' => 64, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('last_name', 'varbinary', ['length' => 64, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('fullname', 'varbinary', ['length' => 127, 'nullable' => true]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('email', 'varbinary', ['length' => 255, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('email', 'varbinary', ['length' => 384, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('phone', 'varbinary', ['length' => 32, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('cellphone', 'varbinary', ['length' => 32, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('country', 'varchar', ['length' => 96, 'nullable' => true]));

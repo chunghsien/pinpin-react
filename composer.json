@@ -78,8 +78,7 @@
         "sokil/php-isocodes": "^3.0",
         "spatie/image-optimizer": "^1.2",
         "symfony/console": "^4.4",
-        "twig/twig": "^3.0",
-        "umpirsky/locale-list": "^1.0"
+        "twig/twig": "^3.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
@@ -87,7 +86,9 @@
         "mezzio/mezzio-tooling": "^1.3",
         "phpspec/prophecy": "^1.10.3",
         "phpunit/phpunit": "^7.5.20 || ^8.5.2 || ^9.0.1",
-        "roave/security-advisories": "dev-master"
+        "roave/security-advisories": "dev-master",
+        "umpirsky/locale-list": "^1.0"
+
     },
     "autoload": {
         "psr-4": {
@@ -112,7 +113,8 @@
             "Chopin\\I18n\\": "modules/chunghsien/chopin-i18n/src",
             "Chopin\\Ecpay\\": "modules/chunghsien/chopin-ecpay/src",
             "Chopin\\Newwebpay\\": "modules/chunghsien/chopin-newwebpay/src",
-            "Chopin\\Jwt\\" : "modules/chunghsien/chopin-jwt/src"
+            "Chopin\\Jwt\\" : "modules/chunghsien/chopin-jwt/src",
+            "Chopin\\View\\" : "modules/chunghsien/chopin-view/src"
         },
         "files": [
             "modules/chunghsien/chopin-support/src/helpers.php"

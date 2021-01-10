@@ -34,6 +34,9 @@ class Migrate_Create_products_spec_group_20200918070504 extends AbstractMigratio
         $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 64, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('extra_name', 'varchar', ['length' => 64, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('image', 'varchar', ['length' => 384, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('sale_count', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sort', 'mediumint', ['unsigned' => true, 'default' => '16777215']));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));

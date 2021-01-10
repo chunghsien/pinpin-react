@@ -50,7 +50,7 @@ const TheHeader = () => {
         {/*<CIcon name="logo" height="48" alt="Logo"/>*/}
         {
             pageConfig.system_settings.system.to_config.comp_logo ?
-            <img height="48" src={pageConfig.system_settings.system.to_config.comp_logo} /> :
+            <img id="head-brand-logo" src={pageConfig.system_settings.system.to_config.comp_logo} /> :
             <CIcon name="logo" height="48" alt="Logo"/>
         }
         

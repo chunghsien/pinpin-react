@@ -5,7 +5,7 @@ const TheFooter = () => {
   return (
     <CFooter fixed={false}>
       <div>
-        <span>Create from </span><a href="https://github.com/chunghsien/pinpin" target="_blank" rel="noopener noreferrer">PinPin</a>
+        <span>Create from </span><a href="https://github.com/chunghsien/pinpin-react" target="_blank" rel="noopener noreferrer">PinPin</a>
         {/*<span className="ml-1">&copy; 2020 creativeLabs.</span>*/}
       </div>
       <div className="mfs-auto">

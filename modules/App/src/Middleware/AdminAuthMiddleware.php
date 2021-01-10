@@ -48,7 +48,6 @@ class AdminAuthMiddleware implements MiddlewareInterface
     
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        
         /**
          *
          * @var RouteResult $routeResult
@@ -110,6 +109,7 @@ class AdminAuthMiddleware implements MiddlewareInterface
             }
             $request = $request->withAttribute(Translator::class, $this->translator);
         }else {
+            //$path = '/'.$request->getAttribute('html_lang');
             setrawcookie('admin', null, time()-1);
             if($routeResult->getMatchedRouteName() != self::LOGIN_ROUTE_NAME) {
                 //$notMatchRouteResult = $this->urlHelper->getRouteResult(self::LOGIN_ROUTE_NAME);

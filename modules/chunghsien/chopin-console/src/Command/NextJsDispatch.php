@@ -50,13 +50,48 @@ class NextJsDispatch extends Command
             }
             moveFolder('./storage/out/_next', './public/_next');
             copy('./public/assets/icons/favicon.ico', './public/favicon.ico');
-            if (is_file('./storage/out/404.html')) {
-                rename('./storage/out/404.html', './resources/templates/error/404.html.twig');
+            $level1Htmls = glob('./storage/out/*.html');
+            foreach ($level1Htmls as $oldname) {
+                $newname = str_replace('storage/out', 'resources/templates/app/site', $oldname);
+                $newname .= '.twig';
+                $folder = dirname($newname);
+                if(!is_dir($folder)) {
+                    mkdir($folder, 0755, true);
+                }
+                rename($oldname, $newname);
             }
-            if (is_file('./storage/out/site.html')) {
-                rename('./storage/out/site.html', './resources/templates/app/site_base.html.twig');
+            $level2Htmls = glob('./storage/out/**/*.html');
+            foreach ($level2Htmls as $oldname) {
+                $newname = str_replace('storage/out', 'resources/templates/app/site', $oldname);
+                $newname .= '.twig';
+                $folder = dirname($newname);
+                if(!is_dir($folder)) {
+                    mkdir($folder, 0755, true);
+                }
+                rename($oldname, $newname);
             }
-            moveFolder('./storage/out/site', './resources/templates/app/site');
+            $level3Htmls = glob('./storage/out/**/**/*.html');
+            foreach ($level3Htmls as $oldname) {
+                $newname = str_replace('storage/out', 'resources/templates/app/site', $oldname);
+                $newname .= '.twig';
+                $folder = dirname($newname);
+                if(!is_dir($folder)) {
+                    mkdir($folder, 0755, true);
+                }
+                rename($oldname, $newname);
+            }
+
+            $level4Htmls = glob('./storage/out/**/**/**/*.html');
+            foreach ($level4Htmls as $oldname) {
+                $newname = str_replace('storage/out', 'resources/templates/app/site', $oldname);
+                $newname .= '.twig';
+                $folder = dirname($newname);
+                if(!is_dir($folder)) {
+                    mkdir($folder, 0755, true);
+                }
+                rename($oldname, $newname);
+            }
+            //moveFolder('./storage/out/site', './resources/templates/app/site');
             $output->writeln("<info>Next.js 佈署成功</info>");
         } catch (\Exception $e) {
             $output->writeln("<error>{$e->getMessage()}</error>");

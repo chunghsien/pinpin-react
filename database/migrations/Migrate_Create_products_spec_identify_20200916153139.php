@@ -38,7 +38,7 @@ class Migrate_Create_products_spec_identify_20200916153139 extends AbstractMigra
         $ddl->addColumn(MySQLColumnFactory::buildColumn('jan', 'varchar', ['length' => 24, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('isbn', 'varchar', ['length' => 24, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('mpn', 'varchar', ['length' => 96, 'nullable' => true]));
-        
+
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('updated_at', 'timestamp', ['default' => new Expression('CURRENT_TIMESTAMP'), 'on_update' => true]));

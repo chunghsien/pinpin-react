@@ -25,7 +25,6 @@ const ClassRelationForm = (props) => {
     } else {
         href += 'add';
     }
-
     let self_id_value = '';
     if (matcher && matcher[0]) {
         self_id_value = matcher[0].replace(/^\//, '');
@@ -75,7 +74,6 @@ const ClassRelationForm = (props) => {
 
     const formRef = useRef();
     const { self, parent } = props.classRelation;
-
     const self_id_name = self + '_id';
     const parent_id_name = parent + '_id';
 
@@ -110,7 +108,6 @@ const ClassRelationForm = (props) => {
     }
     
     const isMulti = typeof props.isMulti != 'undefined' ? props.isMulti : true;
-    
     return (
         <CTabContent>
             <CTabPane data-tab="class-releation-form">

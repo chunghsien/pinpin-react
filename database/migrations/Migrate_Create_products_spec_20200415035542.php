@@ -47,7 +47,7 @@ class Migrate_Create_products_spec_20200415035542 extends AbstractMigration
 
         $ddl->addColumn(MySQLColumnFactory::buildColumn('stock_status', 'tinyint', ['default' => 0, 'unsigned' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sort', 'mediumint', ['unsigned' => true, 'default' => '16777215']));
-
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('sale_count', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('updated_at', 'timestamp', ['default' => new Expression('CURRENT_TIMESTAMP'), 'on_update' => true]));

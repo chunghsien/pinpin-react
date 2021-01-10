@@ -47,7 +47,6 @@ class AjaxFormService
                 $resultSet = $tablegateway->select($where);
                 
             } elseif (isset($colums[$releation_id])) {
-               
                 $resultSet = $tablegateway->select([
                     $releation_id => $queryParams['table_id']
                 ]);
@@ -58,6 +57,7 @@ class AjaxFormService
                 $resultSet = $tablegateway->select([
                     'id' => $id
                 ])/*->current()*/;
+                
             }
             if ($resultSet && $resultSet->count() > 1) {
                 $data = $resultSet->toArray();
@@ -345,7 +345,7 @@ class AjaxFormService
                     unset($row['language_id']);
                     unset($row['locale_id']);
                 }
-                if(isset($tablegateway->encryptionColumns)) {
+                if($tablegateway->encryptionColumns) {
                     $row = $tablegateway->deCryptData($row);
                 }
                 return new ApiSuccessResponse(0, $row, [

@@ -47,7 +47,7 @@ const Products = (/*props*/) => {
                                 location.pathname.match(/\/\d+$/) &&
                                 <>
                                     <TabLink tab="class-releation-form" label="class releation form" />
-                                    <TabLink tab="products-has-attributes-form" label="Products has attributes" />
+                                    {/*<TabLink tab="products-has-attributes-form" label="Products has attributes" />*/}
                                     <TabLink tab="assets-form" label="Products assets" />
                                     <TabLink tab="seo-form" label="SEO form" />
                                     <TabLink tab="facebook_tag-form" label="Facebook tags form" />
@@ -59,7 +59,7 @@ const Products = (/*props*/) => {
                             location.pathname.match(/\/\d+$/) &&
                             <Suspense fallback={<div>Loading...</div>}>
                                 <ClassRelationForm href="/admin/np_class_has_products" classRelation={classRelation} />
-                                <ProductsHasAttributesForm table={table} href="/admin/products_has_attributes" />
+                                {/*<ProductsHasAttributesForm table={table} href="/admin/products_has_attributes" />*/}
                                 <AssetsForm href="/admin/assets" table={table} />
                                 <SeoForm href="/admin/seo" table={table} />
                                 <FacebookTagsForm href="/admin/facebook_tags" table={table} />

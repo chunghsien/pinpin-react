@@ -22,8 +22,8 @@
   {% if page_json_config is defined %}
   {% autoescape false %}
   <script type="text/javascript">
-      var SYS_LANG = '{{html_lang}}';
-      var pageConfig = {{ page_json_config|json_encode(constant('JSON_UNESCAPED_SLASHES'))}};
+      var SYS_LANG = '{{ html_lang }}';
+      var pageConfig = {{ page_json_config|json_encode(constant('JSON_UNESCAPED_SLASHES')) }};
   </script>
   {% endautoescape %}
   {% endif %}

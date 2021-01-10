@@ -27,30 +27,8 @@ const TheSidebar = () => {
             onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
         >
             <CSidebarBrand className="d-md-down-none" to="/">
-                {
-                    pageConfig.system_settings.system.to_config.comp_logo
-                        ?
-                        <img className="c-sidebar-brand-full" height="35" src={pageConfig.system_settings.system.to_config.comp_logo} />
-                        :
-                        <CIcon
-                            className="c-sidebar-brand-full"
-                            name="logo-negative"
-                            height={35}
-                        />
-
-                }
-                {
-                    pageConfig.system_settings.system.to_config.comp_logo_responsive
-                        ?
-                        <img className="c-sidebar-brand-full" height="35" src={pageConfig.system_settings.system.to_config.pageConfig.system_settings.system.to_config.comp_logo_responsive} />
-                        :
-                        <CIcon
-                            className="c-sidebar-brand-minimized"
-                            name="sygnet"
-                            height={35}
-                        />
-
-                }
+                 <img className="c-sidebar-brand-full" src={pageConfig.system_settings.system.to_config.comp_logo} />
+                 <img className="c-sidebar-brand-minimized" src={pageConfig.system_settings.system.to_config.comp_logo} />
             </CSidebarBrand>
             <CSidebarNav>
 

@@ -1,9 +1,9 @@
 <?php
 
 use Laminas\Db\Adapter\AdapterAbstractServiceFactory;
-use Chopin\LaminasDb\Tablegateway\TablegatewayAbstractServiceFactory;
+use Chopin\LaminasDb\TableGateway\TableGatewayAbstractServiceFactory;
 use Chopin\LaminasDb\Services\DbServiceAbstractServiceFactory;
-use Chopin\Middleware\MiddlewareAbstractServiceFactory;
+//use Chopin\Middleware\MiddlewareAbstractServiceFactory;
 
 return [
     'dependencies' => [
@@ -11,9 +11,9 @@ return [
         'invokables' => [],
         'abstract_factories' => [
             AdapterAbstractServiceFactory::class,
-            TablegatewayAbstractServiceFactory::class,
+            TableGatewayAbstractServiceFactory::class,
             DbServiceAbstractServiceFactory::class,
-            MiddlewareAbstractServiceFactory::class,
+            //MiddlewareAbstractServiceFactory::class,
         ],
         'alias' => [],
         'factories' => [],

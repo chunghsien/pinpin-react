@@ -30,34 +30,39 @@ trait CacheTrait
     protected $env_cache_use = false;
 
     protected $env_cache_vars = false;
-
+    
+    protected $initAdapter = 0;
+    
     protected function initCacheAdapter()
     {
-        if ($this->cacheAdapter instanceof AbstractAdapter == false) {
-            $config = config('caches.' . StorageInterface::class);
-            if(isset($config['adapter']['options']['cache_dir'])) {
-                $cacheDir = $config['adapter']['options']['cache_dir'];
-                if(!is_dir($cacheDir)) {
-                    mkdir($cacheDir, 0755, true);
+        if($this->initAdapter == 0) {
+            if ($this->cacheAdapter instanceof AbstractAdapter == false) {
+                $config = config('caches.' . StorageInterface::class);
+                if(isset($config['adapter']['options']['cache_dir'])) {
+                    $cacheDir = $config['adapter']['options']['cache_dir'];
+                    if(!is_dir($cacheDir)) {
+                        mkdir($cacheDir, 0755, true);
+                    }
                 }
+                $cacheAdapter = StorageFactory::factory($config);
+                
+                /**
+                 * *先實作filecache就好，後面再來慢慢處理
+                 *
+                 * @var Filesystem $cacheAdapter
+                 */
+                $this->cacheAdapter = $cacheAdapter;
             }
-            $cacheAdapter = StorageFactory::factory($config);
-
-            /**
-             * *先實作filecache就好，後面再來慢慢處理
-             *
-             * @var Filesystem $cacheAdapter
-             */
-            $this->cacheAdapter = $cacheAdapter;
+            $env_cache_use = config('env_cache');
+            $this->env_cache_use = $env_cache_use['db'];
+            $this->env_cache_vars = $env_cache_use['vars'];
+            
+            if ($this->cacheAdapter instanceof AbstractAdapter == false) {
+                $this->env_cache_use = false;
+                $this->env_cache_vars = false;
+            }
         }
-        $env_cache_use = config('env_cache');
-        $this->env_cache_use = $env_cache_use['db'];
-        $this->env_cache_vars = $env_cache_use['vars'];
-
-        if ($this->cacheAdapter instanceof AbstractAdapter == false) {
-            $this->env_cache_use = false;
-            $this->env_cache_vars = false;
-        }
+        $this->initAdapter++;
     }
 
     public function getEnvCacheUse()
@@ -175,41 +180,13 @@ trait CacheTrait
         ]);
     }
 
-    /**
-     *
-     * @param string $key
-     * @param string $type
-     * @return mixed|void|boolean
-     */
-    protected function getCache($key, $type = 'env_cache_use')
+    
+
+    protected function getCache($key)
     {
         $this->initCacheAdapter();
-        $verify = $this->{$type};
-        if ($verify) {
-            if ($this->cacheAdapter->hasItem($key)) {
-                $resultSet = $this->cacheAdapter->getItem($key);
-                if ($resultSet instanceof ResultSet) {
-                    $resultSet->getDataSource()->rewind();
-                    if ($resultSet->getArrayObjectPrototype() instanceof RowGatewayInterface) {
-                        $rowgateway = $resultSet->getArrayObjectPrototype();
-                        if ($this instanceof \Chopin\LaminasDb\DB\Select && ! $rowgateway->table) {
-                            /**
-                             *
-                             * @var \Chopin\LaminasDb\TableGateway\AbstractTableGateway $tablegateway
-                             */
-                            $tablegateway = $this->tablegateway;
-                            $resultSet->setArrayObjectPrototype(new RowGateway($tablegateway->primary[0], $tablegateway->table, $tablegateway->getSql()));
-                        }
-                    }
-                }
-                return $resultSet;
-            } else {
-                return false;
-            }
-        }
-        return false;
+        return $this->cacheAdapter->getItem($key);
     }
-
     /**
      *
      * @param string $key

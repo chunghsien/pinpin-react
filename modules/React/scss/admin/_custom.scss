@@ -1,4 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Roboto&display=swap');
+body{
+    font-family: 'Noto Sans TC', 'Roboto', sans-serif;
+}
+#login-icon{
+  margin-bottom:0.5rem;
+  margin-left:auto;
+  margin-right:auto;
+  height:5rem;
+  display: block !important;
+}
+.c-sidebar-brand-minimized{max-width:35px;max-height:35px;}
+
 // Here you can add other styles
+.gray-bk{background-color: lightgray;}
 .app-login{display: flex;min-height: 100vh;}
 .ajs-message{color: $white;font-size:0.9rem;}
 .data-grid-sort{right:5px;}
@@ -38,7 +52,7 @@ img.form-thumbnail-10{height:10rem;width:auto;}
     background: $warning!important;
 };
 .attributes-checkbox{margin-right: 0.25rem ;height:2.5rem}
-.date-filter-input{min-width:10rem;}
+/*.date-filter-input{min-width:10rem;}*/
 .number-filter, .date-filter, .filter-label, .filter-label~label{
     margin-top: 0.3rem;
 }
@@ -68,27 +82,28 @@ div.system-part-item:last-child{
     border-right: 1px solid $gray-200;
 }
 .form-thumbnail-75px{
-    height:75px;
+    max-height:75px;
     width:auto;
     max-width: 100%;
 }
 
 @media (max-width: 1024px) {
   .table-rwd{min-width: 100%;}
+  .table-md-show{height:9rem;}
   /*針對tr去做隱藏*/
-  tr.tr-only-hide {display: none !important;}
+  .table-rwd thead,tr.tr-only-hide, .table-rwd tbody.filters-wrapper, button.reset-filter {display: none !important;}
   /*讓tr變成區塊主要讓他有個區塊*/
   .table-rwd tr{
     display: block;
     border: 1px solid #ddd;
-    margin-top: 5px;
+    /*margin-top: 5px;*/
   }
   .table-rwd td {
     text-align: left;
     font-size: 15px;
     overflow: hidden;
     width: 100%;
-    display: block;
+    display: block !important;
     }
     .table-rwd td:before {
     /*最重要的就是這串*/
@@ -99,3 +114,5 @@ div.system-part-item:last-child{
   /*當RWD縮小的時候.table-bordered 會有兩條線，所以針對.table-bordered去做修正*/
   .table-rwd.table-bordered td,.table-rwd.table-bordered th,.table-rwd.table-bordered{border:0;}
 }
+.c-sidebar .c-sidebar-brand{background-color: rgba(255, 255, 255, 0.9);}
+.c-sidebar-brand-full, #head-brand-logo{max-height:35px;}

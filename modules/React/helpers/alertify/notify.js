@@ -6,12 +6,15 @@ const notify = (type, message, wait, callback) => {
     if(typeof wait == 'undefined' || !wait) {
         wait = 3;
     }
+    /*
     const func = alertify[type];
     if(typeof callback == 'undefined' || !callback) {
         callback = () => {};
     }
     
     func(message, wait, callback);
+    */
+    alertify.notify(message, type, wait, callback);
 }
 
 export default notify;

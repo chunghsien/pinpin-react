@@ -41,7 +41,7 @@ class Migrate_Create_coupon_20200606220055 extends AbstractMigration
         $ddl->addColumn(new Decimal('target_value', 12, 2, false, -1));
         $ddl->addColumn(new Decimal('use_value', 12, 2, false, 0));
 
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('rule_object', 'varchar', ['length' => 255, 'nullable' => true, 'comments' => '使用php class達到功能']));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('rule_object', 'varchar', ['length' => 384, 'nullable' => true, 'comments' => '使用php class達到功能']));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('limit_type', 'varchar', ['length' => 32]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('is_notremove', 'tinyint', ['length' => 1, 'unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('is_use', 'tinyint', ['length' => 1, 'unsigned' => true, 'default' => 0]));

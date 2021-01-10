@@ -7,7 +7,7 @@ const FnClass = () => {
     const classColumns = fnClassColumns;
     
     return (
-        <ClassPart table="fn_class" href="/admin/fn_class" paginateUrl={'/'+SYS_LANG+'/api/admin/fn_class'} {...{classColumns, paginationOptions, clickClearFilter}}  />
+        <ClassPart tableHeaderLabel="clsss_level1_datagrid" table="fn_class" href="/admin/fn_class" paginateUrl={'/'+SYS_LANG+'/api/admin/fn_class'} {...{classColumns, paginationOptions, clickClearFilter}}  />
     );
 };
 

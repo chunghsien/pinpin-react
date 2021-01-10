@@ -165,10 +165,16 @@ trait UploadTrait
                         $watermarkPrefix = './public';
                     }
                 }
-                
+                $targetPath = preg_replace('/\/+/', '/', $targetPath);
                 //$imgOptimizer = config('system_settings.imageOptimizer');
                 $system_settings = config('system_settings');
                 $imgOptimizer = $system_settings['imageOptimizer'];
+                
+                //debug($targetPath);
+                $dirVerify = dirname($targetPath);
+                if(!is_dir($dirVerify)) {
+                    mkdir($dirVerify, 0644, true);
+                }
                 $uploadFile->moveTo($targetPath);
                 if ($isImage->isValid($targetPath)) {
                     $ext = strtolower($extMatcher['ext']);
@@ -180,13 +186,15 @@ trait UploadTrait
                         $systemSettingsTableGateway = new SystemSettingsTableGateway($adapter);
                         $watermarkRow = $systemSettingsTableGateway->select(['key' => 'watermark'])->current();
                         $watermakePath = $watermarkPrefix.$watermarkRow->value;
-                        $watermakeImage = $manager->make($watermakePath);
-                        $rate = $watermakeImage->getWidth() / $watermarkWidth;
-                        $watermarkHeight = $watermakeImage->getHeight() / $rate;
-                        $watermakeImage->resize($watermarkWidth, $watermarkHeight);
-                        $x = ($image->width() - $watermarkWidth) / 2;
-                        $y = ($image->getHeight() - $watermakeImage->getHeight()) / 2;
-                        $image->insert($watermakeImage, 'top-left', intval($x), intval($y));
+                        if(is_file($watermakePath)) {
+                            $watermakeImage = $manager->make($watermakePath);
+                            $rate = $watermakeImage->getWidth() / $watermarkWidth;
+                            $watermarkHeight = $watermakeImage->getHeight() / $rate;
+                            $watermakeImage->resize($watermarkWidth, $watermarkHeight);
+                            $x = ($image->width() - $watermarkWidth) / 2;
+                            $y = ($image->getHeight() - $watermakeImage->getHeight()) / 2;
+                            $image->insert($watermakeImage, 'top-left', intval($x), intval($y));
+                        }
                         $image->save();
                     }
                     if($imgOptimizer) {

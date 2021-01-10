@@ -41,7 +41,28 @@ class Migrate_Alter_system_settings_20201030064736 extends AbstractMigration
                     'required' => false,
                 ]),
                 'key' => 'comp_logo',
-                'name' => '公司標誌(logo)'
+                'name' => '公司標誌(logo)',
+                'value' => '/assets/images/logo.png',
+            ],
+            [
+                'parent_id' => $parentRow->id,
+                'input_type' => json_encode([
+                    'type' => 'file',
+                    'required' => false,
+                ]),
+                'key' => 'comp_logo_alt',
+                'name' => '公司標誌-對比',
+                'value' => '/assets/images/logo-alt.png',
+            ],
+            [
+                'parent_id' => $parentRow->id,
+                'input_type' => json_encode([
+                    'type' => 'file',
+                    'required' => false,
+                ]),
+                'key' => 'comp_logo_icon',
+                'name' => '公司標誌-圖示',
+                'value' => '/assets/images/logo-icon.png',
             ],
             [
                 'parent_id' => $parentRow->id,

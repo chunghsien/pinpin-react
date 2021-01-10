@@ -32,6 +32,8 @@ class Migrate_Create_np_class_20190807050644 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 128]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('viewed_count', 'int', ['unsigned' => true, 'default' => 0]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('image', 'varchar', ['length' => 384, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sort', 'mediumint', ['unsigned' => true, 'default' => '16777215']));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP'),
@@ -40,8 +42,17 @@ class Migrate_Create_np_class_20190807050644 extends AbstractMigration
 
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable . '_id_PRIMARY'));
         $ddl->addConstraint(new Index(['language_id'], $this->tailTable.'_idx_language_id'));
+        $this->runSeed();
     }
-
+    public function runSeed()
+    {
+        $smtpSettingPath = dirname(__DIR__).'/sql_seeds/Chopin_NpClass_Insert.php';
+        require $smtpSettingPath;
+        $seed = new \Chopin_NpClass_Insert($this->adapter);
+        $this->seed = $seed;
+        //$seed->run();
+    }
+    
     public function down()
     {
         $this->roolbackDdl = new \Laminas\Db\Sql\Ddl\DropTable($this->table);

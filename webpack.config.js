@@ -41,6 +41,7 @@ let config = {
             cleanOnceBeforeBuildPatterns: [
                 '**/*',
                 '!index.php',
+                '!admin-default.html.twig',
                 '!.htaccess',
                 '!assets/**',
                 '!locales/**'
@@ -124,10 +125,13 @@ let config = {
 };
 
 module.exports = (env, argv) => {
-    if (argv.mode == 'development') {
+    //console.log(argv);
+    if (argv.mode == 'development' && argv.watch == true) {
         config.watch = true;
         config.watchOptions = {
-            ignored: /node_modules/
+            ignored: /node_modules/,
+            aggregateTimeout: 500,
+            poll: 1000
         }
     }
     if (argv.mode == 'production') {

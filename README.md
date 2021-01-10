@@ -31,9 +31,11 @@ $ php smith users:administrator #建立最高管理員權限
 $ npm run watch #網頁後臺系統程式碼監控
 $ npm run build #網頁後臺系統發佈編譯(有優化及壓縮)
 $ num next-dev #網頁前臺程式碼監控
-$ num next-dev #網頁前臺程式碼發佈編譯(有優化及壓縮)
+$ num next-export #網頁前臺程式碼發佈編譯(有優化及壓縮)
 $ php smith next-js-dispatch #佈署靜態內容至後端(做SSR)
 ```
 <!--
-* 多語(CORS)先處理
+* 多語(CORS)先處理 (暫時OK)
+* 測試SSR export 到後端的情形
+* API
 -->

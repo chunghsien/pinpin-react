@@ -11,6 +11,20 @@ return [
         ],
     ],
     'twig' => [
+        /*
+        'lexer' => [
+            //'tag_comment' => ['{#', '#}'],
+            'tag_comment' => ['[#', '#]'],
+            //'tag_block' => ['{%', '%}'],
+            'tag_block' => ['[%', '%]'],
+            //'tag_variable' => ['{{', '}}'],
+            'tag_variable' => ['[?', '?]'],
+            //'whitespace_trim' => '-',
+            //'whitespace_line_trim' => '~',
+            //'whitespace_line_chars' => ' \t\0\x0B',
+            //'interpolation' => ['#{', '}'],
+        ],
+        */
         'autoescape' => 'html',
         'cache_dir' => APP_ENV === 'production' ? 'storage/cache/twig' : false,
         'debug' => APP_ENV != 'production',

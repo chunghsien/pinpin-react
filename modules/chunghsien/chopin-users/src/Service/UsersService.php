@@ -10,9 +10,7 @@ use Chopin\Users\TableGateway\UsersProfileTableGateway;
 use Chopin\Users\TableGateway\UsersHasRolesTableGateway;
 use Chopin\LaminasDb\DB;
 use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
-use Chopin\LaminasDb\DB\Select;
 use Chopin\Users\TableGateway\RolesHasPermissionTableGateway;
-use Laminas\Db\ResultSet\ResultSetInterface;
 
 class UsersService
 {
@@ -128,8 +126,6 @@ class UsersService
     public function getDenyPermission(int $usersId): array
     {
         $PT = AbstractTableGateway::$prefixTable;
-        $select = new Select();
-        $select->where;
         $allPermissionsResultset = DB::selectFactory([
             'from' => $PT.'permission',
             'columns' => [['uri']],

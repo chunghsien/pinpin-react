@@ -25,3 +25,5 @@
 /public/_next
 /resources/templates/app/site
 /resources/templates/app/site_base.html.twig
+/src/*.7z
+/*.7z

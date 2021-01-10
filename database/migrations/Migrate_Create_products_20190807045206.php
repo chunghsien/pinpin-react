@@ -39,7 +39,7 @@ class Migrate_Create_products_20190807045206 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('alias', 'varchar', ['length' => 64, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('introduction', 'varchar', ['length' => 1024, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('detail', 'text'));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('qunatity', 'mediumint', ['unsigned' => true, 'default' => 0]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('stock', 'mediumint', ['unsigned' => true, 'default' => 0]));
 
         $ddl->addColumn(new Decimal('price', 15, 4, false, '0.0000'));
         $ddl->addColumn(new Decimal('real_price', 15, 4, false, '0.0000'));
@@ -49,7 +49,7 @@ class Migrate_Create_products_20190807045206 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('is_hot', 'tinyint', ['unsigned' => true, 'default' => 0, 'length' => 1]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('is_show', 'tinyint', ['unsigned' => true, 'default' => 0, 'length' => 1]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('viewed_count', 'int', ['unsigned' => true, 'default' => 0]));
-
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('sale_count', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sort', 'mediumint', ['unsigned' => true, 'default' => '16777215']));
 
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));

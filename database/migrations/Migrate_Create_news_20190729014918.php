@@ -31,8 +31,8 @@ class Migrate_Create_news_20190729014918 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('id', 'int', ['unsigned' => true, 'auto_increment' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('photo', 'varchar', ['length' => 255, 'nullable' => true]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('video', 'varchar', ['length' => 255, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('photo', 'varchar', ['length' => 384, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('video', 'varchar', ['length' => 384, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('title', 'varchar', ['length' => 255]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('content', 'text'));
 

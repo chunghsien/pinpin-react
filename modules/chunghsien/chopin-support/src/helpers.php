@@ -8,10 +8,50 @@ use Chopin\Support\Registry;
 use Laminas\ServiceManager\ServiceManager;
 use Intervention\Image\ImageManagerStatic as Image;
 use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
+use Laminas\I18n\Translator\Translator;
 
 
 if (! function_exists('config') && is_file('config/config.php')) {
-
+    
+    function realFrontendUri($uri='')
+    {
+        if(!defined('FRONTEND_LOCALE')) {
+            define('FRONTEND_LOCALE', '');
+        }
+        $return = '/'.FRONTEND_LOCALE.'/'.$uri;
+        $return = preg_replace('/\/\//', '/', $return);
+        return $return;
+    }
+    
+    
+    function i18nStaticTranslator($text, $textDomain='default')
+    {
+        if(defined('BACKEND_LOCALE')) {
+            $locale = BACKEND_LOCALE;
+            if(!Registry::isRegistered(Translator::class)) {
+                $translator = Translator::factory([]);
+                Registry::set(Translator::class, $translator);
+            }else {
+                $translator = Registry::get(Translator::class);
+            }
+            $allMessages = $translator->getAllMessages($textDomain, $locale);
+            /**
+             * @var Translator $translator;
+             */
+            
+            if(!$allMessages) {
+                $file = PROJECT_DIR."/resources/languages/{$locale}/{$textDomain}.php";
+                if(is_file($file)) {
+                    $translator->addTranslationFile('phpArray', $file, $textDomain);
+                    $allMessages = $translator->getAllMessages($textDomain, $locale);
+                }
+            }
+            if(isset($allMessages[$text])) {
+                return $allMessages[$text];
+            }
+        }
+        return $text;
+    }
     function mergePageJsonConfig($pageJsonConfig)
     {
         $old = Registry::get('page_json_config');
@@ -349,30 +389,51 @@ if (! function_exists('config') && is_file('config/config.php')) {
             return;
         }
         if (empty($options['is_console_display']) || $options['is_console_display'] == false) {
-            echo '<pre>';
+            if($varOutputType != 'json') {
+                echo '<pre>';
+            }
         }
         switch ($varOutputType) {
             case 'export':
                 var_export($var);
                 break;
+            
             case 'json':
-                echo json_encode($var, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
+                //header('Content-Type: application/json; charset=utf-8');
+                //echo json_encode($var, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
                 break;
+            
             default: // var_dump
                 var_dump($var);
                 break;
         }
         if (isset($options['lineno'])) {
-            echo ('Line: ' . $options['lineno'] . PHP_EOL);
+            if($varOutputType != 'json') {
+                echo ('Line: ' . $options['lineno'] . PHP_EOL);
+            }else {
+                $var['Line'] = $options['lineno'];
+            }
         }
 
         if (isset($options['filename'])) {
-            echo ('File: ' . $options['filename'] . PHP_EOL);
+            if($varOutputType != 'json') {
+                echo ('File: ' . $options['filename'] . PHP_EOL);
+            }else {
+                $var['File'] = $options['filename'];
+            }
         }
         if (empty($options['is_console_display']) || $options['is_console_display'] == false) {
-            echo '</pre>';
+            if($varOutputType != 'json') {
+                echo '</pre>';
+            }
         }
-
+        
+        if($varOutputType == 'json') {
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode($var, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+            exit();
+        }
+        
         if (empty($options['isContinue'])) {
             exit();
         }

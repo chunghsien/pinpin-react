@@ -21,9 +21,9 @@ if(strpos(__FILE__, 'dev'.DIRECTORY_SEPARATOR.'smith')!== false)
 $autoloader = require 'vendor/autoload.php';
 if (! class_exists(ModulesLoader::class)) {
     //開發階段通常都會不存在，需要自行引入
-    require 'src/chunghsien/chopin-support/src/ModulesLoader.php';
+    require 'modules/chunghsien/chopin-support/src/ModulesLoader.php';
     if (is_dir('src/chunghsien')) {
-        ModulesLoader::registerPsr4($autoloader, 'src/chunghsien', 'Chopin');
+        ModulesLoader::registerPsr4($autoloader, 'modules/chunghsien', 'Chopin');
     }
 }
 $supportHelpersConfig = new \Chopin\Support\ConfigProvider();

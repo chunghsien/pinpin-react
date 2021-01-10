@@ -1,7 +1,7 @@
 <?php
 
 return [
-    "Admin system name"=> "管理系統", //"網站後台",
+    "Admin system name"=> "網站內容管理系統", //"網站後台",
     "Account" => "帳號",
     "Password" => "密碼",
     "Login" => "登入",

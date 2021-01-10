@@ -224,23 +224,6 @@ abstract class ThirdPartyPaymentService
     public function getPayMethodOptions($language_id=0, $locale_id = 0)
     {
         $payMethods = $this->payMethods->getPayMethodOptions($language_id, $locale_id);
-        /*
-        $subtotalArr = $this->cartTableGateway->subTotal();
-        $free_shipping_fee = $this->couponTableGateway->getGlobalFreeShippingFee($subtotalArr['data']['subtotal']);
-        $logistics = $this->buildLogistictOptions($free_shipping_fee === 0, $language_id, $locale_id);
-        foreach ($payMethods as &$pay) {
-            $mapperClone = json_decode($pay['mapper'], true);
-            $logisticsItems = [];
-            foreach ($mapperClone as $mapper) {
-                foreach ($logistics as $logistic) {
-                    if ($logistic['type'] == $mapper) {
-                        $logisticsItems[] = $logistic;
-                    }
-                }
-            }
-            $pay['mapper'] = json_encode($logisticsItems);
-        }
-        */
         return $payMethods;
     }
 
@@ -260,14 +243,9 @@ abstract class ThirdPartyPaymentService
             $where->equalTo('language_id', $language_id);
         }
         $where->equalTo('locale_id', $locale_id);
-        $select = $this->logisticsTableGateway->getSql()
-            ->select()
-            ->order('sort ASC')
-            ->where($where);
-        $dataSource = $this->logisticsTableGateway->getSql()
-            ->prepareStatementForSqlObject($select)
-            ->execute();
-        if ($dataSource->count() == 0) {
+        $select = $this->logisticsTableGateway->getSql()->select()->order('sort ASC')->where($where);
+        $resultSet = $this->logisticsTableGateway->selectWith($select);
+        if ($resultSet->count() == 0) {
             $where = new Where();
             $where->equalTo('language_id', 0);
             $where->equalTo('locale_id', 0);
@@ -275,12 +253,8 @@ abstract class ThirdPartyPaymentService
                 ->select()
                 ->order('sort ASC')
                 ->where($where);
-            $dataSource = $this->logisticsTableGateway->getSql()
-                ->prepareStatementForSqlObject($select)
-                ->execute();
+                $resultSet = $this->logisticsTableGateway->selectWith($select);
         }
-        $resultSet = new ResultSet();
-        $resultSet->initialize($dataSource);
         $logistics = [];
         foreach ($resultSet as $row) {
             $price = floatval($row->price);

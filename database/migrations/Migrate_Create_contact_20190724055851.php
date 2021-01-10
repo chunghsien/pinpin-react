@@ -34,6 +34,7 @@ class Migrate_Create_contact_20190724055851 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('full_name', 'varbinary', ['length' => 96, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('phone', 'varbinary', ['length' => 32, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('email', 'varbinary', ['length' => 512]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('subject', 'varchar', ['length' => 128, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('commet', 'varchar', ['length' => 1024]));

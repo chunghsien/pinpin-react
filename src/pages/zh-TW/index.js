@@ -1,8 +1,11 @@
-import React from 'react';
-//import ReactDOM from 'react-dom';
+import { Fragment } from 'react';
 
-function HomePage() {
-  return <div>Welcome to Next.js!</div>
-}
+const Home = (/*props*/) => {
+  return (
+    <Fragment>
+      <h3>穩穩的幸福</h3>
+    </Fragment>
+  );
+};
 
-export default HomePage
+export default Home;

@@ -1,11 +1,11 @@
 <?php
 
 use Mezzio\Template\TemplateRendererInterface;
-use Mezzio\Twig\TwigEnvironmentFactory;
 use Mezzio\Twig\TwigExtension;
 use Twig\Environment;
-use Chopin\View\ZendExpressive\Twig\TwigExtensionFactory;
-use Chopin\View\ZendExpressive\Twig\TwigRendererFactory;
+use Chopin\View\TwigRender\TwigEnvironmentFactory;
+use Mezzio\Twig\TwigRendererFactory;
+use Mezzio\Twig\TwigExtensionFactory;
 
 return [
     'dependencies' => [

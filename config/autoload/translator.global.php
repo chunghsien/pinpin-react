@@ -22,12 +22,6 @@ return [
             [
                 'type' => 'phpArray',
                 'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',
-                'pattern' => '%s/site.php',
-                'text_domain' => 'site',
-            ],
-            [
-                'type' => 'phpArray',
-                'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',
                 'pattern' => '%s/google.php',
                 'text_domain' => 'google',
             ],
@@ -72,6 +66,30 @@ return [
                 'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',
                 'pattern' => '%s/facebook.php',
                 'text_domain' => 'facebook',
+            ],
+            [
+                'type' => 'phpArray',
+                'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',
+                'pattern' => '%s/site-footer.php',
+                'text_domain' => 'site-footer',
+            ],
+            [
+                'type' => 'phpArray',
+                'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',
+                'pattern' => '%s/site-navigation.php',
+                'text_domain' => 'site-navigation',
+            ],
+            [
+                'type' => 'phpArray',
+                'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',
+                'pattern' => '%s/site-product-grid.php',
+                'text_domain' => 'site-product-grid',
+            ],
+            [
+                'type' => 'phpArray',
+                'base_dir' => dirname(dirname(__DIR__)).'/resources/languages',
+                'pattern' => '%s/site-product-tab.php',
+                'text_domain' => 'site-product-tab',
             ],
             [
                 'type' => 'phpArray',

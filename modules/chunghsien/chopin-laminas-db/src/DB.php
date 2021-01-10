@@ -245,7 +245,7 @@ class DB
         return $select;
     }
 
-    protected function buildResultset(Select $select, $scripts = [], $bindParams = [], $paginatorParams = null, $currentPageNumber = null)
+    protected function buildResultset(Select $select, $bindParams = [], $paginatorParams = null, $currentPageNumber = null)
     {
         $adapter = $this->adapter;
         $sql = new Sql($adapter);
@@ -329,7 +329,7 @@ class DB
         self::processScripts($select, $scripts);
         $bindParams = is_array($bindParams) ? $bindParams : [];
         $DB = self::init();
-        return $DB->buildResultset($select, $scripts, $bindParams);
+        return $DB->buildResultset($select, $bindParams);
     }
 
     public static function paginatorFactory($scripts = [], $bindParams = [], $paginatorParams = [], $currentPageNumber)
@@ -338,9 +338,11 @@ class DB
         self::processScripts($select, $scripts);
         $bindParams = is_array($bindParams) ? $bindParams : [];
         $DB = self::init();
-        return $DB->buildResultset($select, $scripts, $bindParams, $paginatorParams, $currentPageNumber);
+        return $DB->buildResultset($select, $bindParams, $paginatorParams, $currentPageNumber);
     }
-
+    
+    
+    
     public static function __callStatic($name, $arguments)
     {
         if ($name == 'connection') {

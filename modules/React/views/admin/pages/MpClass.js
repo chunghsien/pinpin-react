@@ -13,7 +13,7 @@ const MpClass = () => {
         bind: 'fp_class_has_mp_class'
     };
     return (
-        <ClassPart table="mp_class" classRelation={classRelation} href="/admin/mp_class" paginateUrl={'/'+SYS_LANG+'/api/admin/mp_class'} {...{classColumns, paginationOptions, clickClearFilter}}  />
+        <ClassPart table="mp_class" tableHeaderLabel="clsss_level2_datagrid" classRelation={classRelation} href="/admin/mp_class" paginateUrl={'/'+SYS_LANG+'/api/admin/mp_class'} {...{classColumns, paginationOptions, clickClearFilter}}  />
     );
 };
 

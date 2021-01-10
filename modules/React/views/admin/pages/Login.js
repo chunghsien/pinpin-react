@@ -17,6 +17,7 @@ const LoginComponent = () => {
     };
     
     const [siteName, setSiteName] = useState('');
+    const [lgooIcon, setLgooIcon] = useState('');
 
     function formSubmit(data) {
         if(data.password && data.account) {
@@ -40,26 +41,31 @@ const LoginComponent = () => {
 
     const { register, handleSubmit, errors } = useForm();
     document.body.className = 'header-fixed sidebar-lg-show sidebar-fixed aside-menu-fixed aside-menu-off-canvas';
-    
     const NO_CHANGE = 0;
     useEffect(() => {
         const CSRF = document.getElementsByName('csrf-token')[0].content;
         document.getElementById('__csrf').value = CSRF;
         const error = Cookies.get('error');
+        
         if(error) {
-            const admin_root = location.pathname.replace(/\/\w+$/, '');
+            const admin_root = location.pathname.replace(/(\/){1}[a-z|0-9|-]+$/, '');
             Cookies.remove('error',{path: admin_root})
             const alertify = require('alertifyjs/build/alertify');
             alertify.notify(t('laminas-validator:The input is not valid'), 'error', 5);
         }
         const php_lang = document.documentElement.lang.replace('-', '_');
         setSiteName(pageConfig.system_settings.site_info[php_lang].children.name.value);
+        setLgooIcon(pageConfig.system_settings.system.children.comp_logo_icon.value);
         //return () => {return;}
     }, [NO_CHANGE]);
     
+    //console.log(location);
+    
     const logined = Cookies.get('admin');
     if(logined) {
-        return (<Redirect from="/admin/login" to="/admin/dashboard" />);
+        const pathname = location.pathname;
+        const redirect = pathname.replace(/\-login$/, '/dashboard')
+        return (<Redirect from={pathname} to={redirect} />);
     }
     
     //
@@ -69,12 +75,13 @@ const LoginComponent = () => {
             <CContainer>
                 <CRow className="justify-content-center">
                     <CCol md="6">
+                        <img id="login-icon" src={lgooIcon} />
                         <CCard>
                             <CCardBody>
                                 <input id="error-info-provider" type="hidden" />
                                 <CForm id="registForm" method="post" onSubmit={handleSubmit(formSubmit)}>
                                     <h2>{/*t('admin-login:Admin system name')*/}{siteName + ' ' + t('admin-login:Admin system name')}</h2>
-                                    <p className="text-muted">{t('admin-login:Sign in to your account')}</p>
+                                    <p className="text-muted clearfix">{t('admin-login:Sign in to your account')}</p>
                                     <CInputGroup className="mb-3">
                                         <div className="input-group-prepend">
                                             <span className="input-group-text">

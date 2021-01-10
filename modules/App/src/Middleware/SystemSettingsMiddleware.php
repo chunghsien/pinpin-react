@@ -11,10 +11,12 @@ use Chopin\I18n\LangType;
 use Laminas\Cache\Storage\StorageInterface;
 use Chopin\I18n\Translator\Translator;
 use Chopin\LanguageHasLocale\TableGateway\LanguageHasLocaleTableGateway;
+use Chopin\LaminasDb\DB\Traits\CacheTrait;
 
 class SystemSettingsMiddleware implements MiddlewareInterface
 {
 
+    use CacheTrait;
     use \App\Traits\I18nTranslatorTrait;
     
     /**
@@ -54,15 +56,29 @@ class SystemSettingsMiddleware implements MiddlewareInterface
         }
         $php_lang = LangType::get($html_lang, LangType::PHP);
         $adapter = $this->languageTableGateway->adapter;
-
+        
         if ($this->systemSettingsTableGateway instanceof SystemSettingsTableGateway && $this->languageTableGateway instanceof LanguageTableGateway) {
-            $serialize = $this->systemSettingsTableGateway->toSerialize();
+            
+            $serialize = null;
+            if($this->getEnvCacheUse()) {
+                $systemSettingsCacheKey = crc32($php_lang.$html_lang.$this->systemSettingsTableGateway->table.'_toSerialize');
+                $serialize = $this->getCache($systemSettingsCacheKey);
+            }
+            if(!$serialize) {
+                $serialize = $this->systemSettingsTableGateway->toSerialize();
+                if($this->getEnvCacheUse()) {
+                    $this->setCache($systemSettingsCacheKey, $serialize);
+                }
+            }
+            //debug($serialize, ['output_type' => 'export']);
             mergePageJsonConfig(['system_settings' => $serialize]);
             //第三方支付
             $thirdPayServiceClass = config('third_party_service.logistics.service_class');
             $thirdPayServiceReflection = new \ReflectionClass($thirdPayServiceClass);
             $languageHasLocaleTableGateway = new LanguageHasLocaleTableGateway($adapter);
             $languageHasLocaleRow = $languageHasLocaleTableGateway->select(['code' => $php_lang])->current();
+            $request = $request->withAttribute('language_id', $languageHasLocaleRow->language_id);
+            $request = $request->withAttribute('locale_id', $languageHasLocaleRow->locale_id);
             $languageRow = $this->languageTableGateway->select(['id' => $languageHasLocaleRow->language_id])->current();
             /**
              *
@@ -74,9 +90,7 @@ class SystemSettingsMiddleware implements MiddlewareInterface
             mergePageJsonConfig(['pay_method_options' => $payMethodOptions]);
             mergePageJsonConfig(['third_party_service' => config('third_party_service')]);
             $request = $request->withAttribute('system_settings', $serialize);
-            
         }
-
 
         $request = $request->withAttribute('php_lang',  $php_lang);
         $request = $request->withAttribute('html_lang',  $html_lang);

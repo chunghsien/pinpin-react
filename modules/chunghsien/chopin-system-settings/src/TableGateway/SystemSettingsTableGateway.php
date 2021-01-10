@@ -92,16 +92,7 @@ class SystemSettingsTableGateway extends AbstractTableGateway
     public function verifyLanguageData()
     {
         $language_enabled_resultset = $this->getEnabledLanguagies();
-        /*
-        $used_languages = DB::selectFactory([
-            'from' => $this->table,
-            'where' => [
-                ['lessThan', 'and', ['language_id', 0]],
-                ['isNull', 'and',  ['deleted_at']],
-            ],
-            'columns' => ['language_id'],
-        ]);
-        */
+
         //表示沒有新增的
         if ($language_enabled_resultset->count() === 0) {
             return ;
@@ -185,22 +176,27 @@ class SystemSettingsTableGateway extends AbstractTableGateway
         if (isset($data['children'])) {
             $toConfig = [];
             foreach ($data['children'] as &$c) {
+                
                 $c['input_type'] = json_decode($c['input_type'], true);
-                if (isset($c['input_type'][0])) {
-                    $params = $c['input_type'][0];
-
+                
+                if (isset($c['input_type']['0'])) {
+                    $params = $c['input_type']['0'];
+                    
                     if (strtolower($params['method']) == 'getoptions') {
                         //方法參數有更動，這邊要做一些修正fix舊參數
                         $_params = $params['params'];
                         if (count($_params) == 3) {
                             $b_params = array_slice($_params, 0, 2);
-                            $a_params = array_slice($_params, 3);
+                            $a_params = array_slice($_params, 2, 1);
                             $b_params[] = [];
                             $_params = array_merge($b_params, $a_params);
+                            
                             $params['params'] = $_params;
                         }
+                       
                     }
                     $dataSourceTablegateway = parent::newInstance($params['class'], $this->adapter);
+                    
                     $dataSource = call_user_func_array(
                         [$dataSourceTablegateway, $params['method']],
                         $params['params']
@@ -222,6 +218,8 @@ class SystemSettingsTableGateway extends AbstractTableGateway
             }
             $data['to_config'] = $toConfig;
         }
+        
+        
         return $data;
     }
 
@@ -268,8 +266,13 @@ class SystemSettingsTableGateway extends AbstractTableGateway
             if (empty($result[$key])) {
                 $result[$key] = [];
             }
-            $parent->with($this->table);
-
+            $childSelect = $this->sql->select();
+            $childWhere = $childSelect->where;
+            $childWhere->isNull('deleted_at');
+            $childWhere->equalTo('parent_id', $parent->id);
+            $childSelect->where($childWhere);
+            $childResultSet = $this->selectWith($childSelect);
+            $parent->with('children', $childResultSet);
             if ($language_id || $parent->language_id == 0) {
                 $tmp = $parent->toArray('key');
                 $result[$key] = $this->inputTypeToArray($tmp);
@@ -293,22 +296,9 @@ class SystemSettingsTableGateway extends AbstractTableGateway
     
     public function deCryptData($data)
     {
-        //debug(array_search($data['key'], $this->defaultEncryptionColumns));
-        /*
-        $key = $data['key'];
-        $other_secrut_check = preg_match($this->regPattern, $key);
-        if(
-            false !== array_search($data['key'], array_merge($this->defaultEncryptionColumns, ['password', 'from'])) ||
-            $other_secrut_check
-        ) {
-            $data['value'] = $this->aesCrypter->decrypt($data['aes_value']);
-            $data['aes_value'] = '';
-        }
-        */
         if($data['aes_value']) {
             $data['value'] = $this->aesCrypter->decrypt($data['aes_value']);
             $data['aes_value'] = '';
-            
         }
         return $data;
     }

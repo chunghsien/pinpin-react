@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CRow, CCol, CButton, CInputFile } from '@coreui/react'
+import { CCol, CButton, CInputFile } from '@coreui/react'
 import { notify } from '../../alertify';
 import axios from 'axios';
 
@@ -73,7 +73,7 @@ const SystemPart = (props) => {
                     {
                         props.system.child && props.system.child.map((item, key) => {
                             return (
-                                <tr key={'system_' + key} >
+                                <tr key={'system_' + key} className="gray-bk">
                                     <td className="align-middle" width="250">
                                         <div className="p-1">
                                             <b>{item.name}</b>

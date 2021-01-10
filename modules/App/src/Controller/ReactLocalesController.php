@@ -24,37 +24,31 @@ class ReactLocalesController implements RequestHandlerInterface
 
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
-        $header_host = $request->getHeader('host')[0];
-        $server_host = $_SERVER['HTTP_HOST'];
-        if($header_host === $server_host)
-        {
-            $querys = $request->getQueryParams();
-            $lng = $querys['lng'];
-            $lng = LangType::get($lng, LangType::PHP);
-            $ns_arr = explode(' ', $querys['ns']);
-            $messages = [];
-            $filter = new UnderscoreToDash();
-            $html_lng = $filter->filter($lng);
-            foreach ($ns_arr as $ns) {
-                if($ns == 'translation') {
-                    $this->translator->addTranslationFilePattern('phpArray', Resources::getBasePath(), Resources::getPatternForValidator(), 'translation');
-                    //庫存狀態
-                    $this->translator->addTranslationFilePattern('phpArray', './modules/App/resources/languages', '%s/stock_status.php', 'translation');
-                }
-                $id = $this->translator->getCacheId($ns, $lng);
-                if ($this->translator->getCache()) {
-                    if (! $this->translator->getCache()->cache->hasItem($id)) {
-                        $this->translator->getCache()->setItem($id, $this->translator->getAllMessages($ns, $lng));
+        try {
+            $header_host = $request->getHeader('host')[0];
+            $server_host = $_SERVER['HTTP_HOST'];
+            if($header_host === $server_host)
+            {
+                $querys = $request->getQueryParams();
+                $lng = $querys['lng'];
+                $lng = LangType::get($lng, LangType::PHP);
+                $ns_arr = explode(' ', $querys['ns']);
+                $messages = [];
+                $filter = new UnderscoreToDash();
+                $html_lng = $filter->filter($lng);
+                foreach ($ns_arr as $ns) {
+                    if($ns == 'translation') {
+                        $this->translator->addTranslationFilePattern('phpArray', Resources::getBasePath(), Resources::getPatternForValidator(), 'translation');
+                        //庫存狀態
+                        $this->translator->addTranslationFilePattern('phpArray', './modules/App/resources/languages', '%s/stock_status.php', 'translation');
                     }
-                    $messages[$html_lng][$ns] = $this->translator->getCache()->getItem($id);
-                }else {
                     $messages[$html_lng][$ns] = $this->translator->getAllMessages($ns, $lng);
                     if(!$messages[$html_lng][$ns]) {
                         unset($messages[$html_lng]);
                         $messages[$html_lng][$ns] = $this->translator->getAllMessages($ns, 'zh_TW');
                     }
-                }
-                if($ns == 'translation') {
+                    
+                    //if($ns == 'translation') {
                     $translation = $messages[$html_lng][$ns];
                     foreach ($translation as &$msg) {
                         $matcher = [];
@@ -66,12 +60,17 @@ class ReactLocalesController implements RequestHandlerInterface
                             $msg = str_replace($old, $new, $msg);
                         }
                     }
+                    //}
                 }
+                //header('Access-Control-Allow-Origin: http://localhost');
+                return new JsonResponse($messages, 200);
+            }else {
+                return new JsonResponse([]);
             }
-            //header('Access-Control-Allow-Origin: http://localhost');
-            return new JsonResponse($messages, 200);
-        }else {
-            return new JsonResponse([]);
+            
+        } catch (\Exception $e) {
+            debug($e->getTrace());
+            exit();
         }
         
     }

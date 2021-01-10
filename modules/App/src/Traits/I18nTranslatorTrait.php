@@ -15,7 +15,7 @@ Trait I18nTranslatorTrait {
      */
     protected $translator;
     
-    protected function initTranslator(StorageInterface $cache)
+    protected function initTranslator(StorageInterface $cache = null, $isInjectConfig=true)
     {
         if($cache instanceof Filesystem) {
             $dir = './storage/cache/app/i18n';
@@ -24,7 +24,14 @@ Trait I18nTranslatorTrait {
             }
             $cache->setOptions(['cache_dir' => './storage/cache/app/i18n']);
         }
-        $this->translator = Translator::factory(config('translator'));
+        if($isInjectConfig === true) {
+            $this->translator = Translator::factory(config('translator'));
+        }
+
+        if(is_array($isInjectConfig)) {
+            $config = $isInjectConfig;
+            $this->translator = Translator::factory($config);
+        }
         if(APP_ENV === 'production') {
             $this->translator->setCache($cache);
         }else {
@@ -33,6 +40,9 @@ Trait I18nTranslatorTrait {
     }
     
     protected function getTranslator(ServerRequest  $request) {
+        if($this->translator instanceof Translator) {
+            return $this->translator;
+        }
         return $request->getAttribute(Translator::class);
     }
 }
