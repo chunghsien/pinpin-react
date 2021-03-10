@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Switch, Route } from "react-router";
 import { CRow, CCol, CCard, CCardBody, CCardHeader, CNav, CTabs } from '@coreui/react'
@@ -18,7 +18,8 @@ const Banner = (/*props*/) => {
   //const table = "banner";
   const useColumns = bannerColumns;
   const columns = useColumns(t, 'name');
-  const paginateUrl = '/' + SYS_LANG + '/api/admin/banner';
+  const basePath = window.pageConfig.basePath;
+  const paginateUrl = (basePath + '/' + SYS_LANG + '/api/admin/banner').replace(/^\/{2,}/, '/');
   const pagination = paginationOptions(t);
   const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
   const FormBackGridFixed = loadable(() => import('./components/FormBackGridFixed'));
@@ -34,10 +35,10 @@ const Banner = (/*props*/) => {
               <TabLink tab="default-form" label="Default form" />
               {
                 location.pathname.match(/\/\d+$/) &&
-                <TabLink tab="banner-form" label="Documents carousel apply" />
+                <TabLink tab="banner-form" label="Carousel documents apply" />
               }
             </CNav>
-            <CarouselForm href="/admin/banner" tab="default-form" />
+            <CarouselForm href="/admin/banner" tab="default-form" bannerType="carousel" />
             {
               location.pathname.match(/\/\d+$/) &&
               <BannerHasDocumentsForm
@@ -47,6 +48,7 @@ const Banner = (/*props*/) => {
                 }}
                 href="/admin/banner_has_documents"
                 tab="banner-form"
+                bannerType="carousel"
               />
             }
 
@@ -57,9 +59,10 @@ const Banner = (/*props*/) => {
         <CRow>
           <CCol>
             <CCard>
-              <CCardHeader>{t('Base page data grid')}</CCardHeader>
+              <CCardHeader>{t('Banners data grid')}</CCardHeader>
               <CCardBody>
                 <AdminBootstrapTable
+                  apiOther={{ "banner.type": 'carousel' }}
                   paginateUrl={paginateUrl}
                   isSelectRow
                   isInsertAction

@@ -47,7 +47,9 @@ class Migrate_Create_products_20190807045206 extends AbstractMigration
 
         $ddl->addColumn(MySQLColumnFactory::buildColumn('is_new', 'tinyint', ['unsigned' => true, 'default' => 0, 'length' => 1]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('is_hot', 'tinyint', ['unsigned' => true, 'default' => 0, 'length' => 1]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('is_recommend', 'tinyint', ['unsigned' => true, 'default' => 0, 'length' => 1]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('is_show', 'tinyint', ['unsigned' => true, 'default' => 0, 'length' => 1]));
+        
         $ddl->addColumn(MySQLColumnFactory::buildColumn('viewed_count', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sale_count', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sort', 'mediumint', ['unsigned' => true, 'default' => '16777215']));

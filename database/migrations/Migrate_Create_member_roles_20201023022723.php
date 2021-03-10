@@ -51,7 +51,7 @@ class Migrate_Create_member_roles_20201023022723 extends AbstractMigration
                 'comments' => '一般都設0，有階層狀態到時候再設計(直銷)',
             ]
         ));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 64]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 48]));
         
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));

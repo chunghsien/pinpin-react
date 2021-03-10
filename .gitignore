@@ -27,3 +27,6 @@
 /resources/templates/app/site_base.html.twig
 /src/*.7z
 /*.7z
+/public/storage
+/modules/App/options/*.php
+/config/autoload/security.local.php

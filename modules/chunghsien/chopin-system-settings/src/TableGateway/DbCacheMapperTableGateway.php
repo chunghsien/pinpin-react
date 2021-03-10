@@ -8,8 +8,8 @@ use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
 use Laminas\Db\Sql\Predicate\Predicate;
 use Laminas\Db\ResultSet\ResultSet;
 use Laminas\Db\Sql\Where;
-use Laminas\Cache\Storage\Adapter\Filesystem;
 use Laminas\Cache\StorageFactory;
+use Laminas\Cache\Storage\StorageInterface;
 
 abstract class DbCacheMapperTableGateway
 {
@@ -63,7 +63,7 @@ abstract class DbCacheMapperTableGateway
     {
         self::singleton();
         try {
-            $cfg = config('caches.'.Filesystem::class);
+            $cfg = config('caches.'.StorageInterface::class);
             if ($cfg) {
                 /**
                  *

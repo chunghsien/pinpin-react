@@ -31,6 +31,7 @@ class FpClassAction extends AbstractAction
                 'modules/App/scripts/db/admin/fpClass.php',
                 [
                     'name' => 'fp_class',
+                    'viewed_count' => 'fp_class',
                     'sort' => 'fp_class',
                     'display_name' => 'language_has_locale',
                     'created_at' => 'fp_class',

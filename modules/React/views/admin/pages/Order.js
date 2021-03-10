@@ -11,54 +11,55 @@ const ContactForm = loadable(() => import('./components/form/ContactForm'));
 const FormBackGridFixed = loadable(() => import('./components/FormBackGridFixed'));
 
 const Order = () => {
-    const logistics = pageConfig.third_party_service.logistics;
-    const { t } = useTranslation(['translation', logistics.manufacturer]);
-    const columns = orderColumns(t, 'name');
-    const pagination = paginationOptions(t);
-    const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const paginateUrl = '/'+SYS_LANG+'/api/admin/order';
+  const logistics = pageConfig.third_party_service.logistics;
+  const { t } = useTranslation(['translation', logistics.manufacturer]);
+  const columns = orderColumns(t, 'name');
+  const pagination = paginationOptions(t);
+  const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
+  const basePath = window.pageConfig.basePath;
+  const paginateUrl = (basePath + '/' + SYS_LANG + '/api/admin/order').replace(/^\/{2,}/, '/');
 
-    const [formRow, setFormRow] = useState({
-        order: {}
-    });
+  const [formRow, setFormRow] = useState({
+    order: {}
+  });
 
-    return (
-        <Switch>
-            {
-                typeof locationPathname != 'undefined' &&
-                <Route path={locationPathname + '/:method_or_id'}>
-                    <FormBackGridFixed t={t} />
-                    <CTabs id="tabs-root" activeTab="default-form">
-                        <CNav variant="tabs">
-                            <TabLink tab="default-form" label="Default form" />
-                        </CNav>
-                        <ContactForm href="/admin/order" formRow={formRow} setFormRow={setFormRow} />
-                    </CTabs>
-                </Route>
-            }
-            <Route path={locationPathname}>
-                <CRow>
-                    <CCol>
-                        <CCard>
-                            <CCardHeader>{t('Order data grid')}</CCardHeader>
-                            <CCardBody>
-                                <AdminBootstrapTable
-                                    paginateUrl={paginateUrl}
-                                    columns={columns}
-                                    isSelectRow
-                                    isFilterReset
-                                    paginationOptions={pagination}
-                                    translation={t}
-                                    clearFilterTrigger={clickClearFilter}
-                                />
-                            </CCardBody>
-                        </CCard>
-                    </CCol>
-                </CRow>
+  return (
+    <Switch>
+      {
+        typeof locationPathname != 'undefined' &&
+        <Route path={locationPathname + '/:method_or_id'}>
+          <FormBackGridFixed t={t} />
+          <CTabs id="tabs-root" activeTab="default-form">
+            <CNav variant="tabs">
+              <TabLink tab="default-form" label="Default form" />
+            </CNav>
+            <ContactForm href="/admin/order" formRow={formRow} setFormRow={setFormRow} />
+          </CTabs>
+        </Route>
+      }
+      <Route path={locationPathname}>
+        <CRow>
+          <CCol>
+            <CCard>
+              <CCardHeader>{t('Order data grid')}</CCardHeader>
+              <CCardBody>
+                <AdminBootstrapTable
+                  paginateUrl={paginateUrl}
+                  columns={columns}
+                  isSelectRow
+                  isFilterReset
+                  paginationOptions={pagination}
+                  translation={t}
+                  clearFilterTrigger={clickClearFilter}
+                />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
 
-            </Route>
-        </Switch>
-    );
+      </Route>
+    </Switch>
+  );
 };
 
 export default Order;

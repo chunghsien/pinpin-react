@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "subtitle": "#ACCESSORIES",
+    "title": "Feeling relax day, <br/> enjoy weekend",
+    "url": "/shop/left-sidebar",
+    "bgImage": "/assets/images/hero-slider/hero-slider-seven/1.jpg",
+    "target": "_self"
+  },
+  {
+    "id": "2",
+    "subtitle": "GIFTS FOR MEN",
+    "title": "Feeling relax day, <br/> enjoy weekend",
+    "url": "/shop/left-sidebar",
+    "bgImage": "/assets/images/hero-slider/hero-slider-seven/2.jpg",
+    "target": "_self"
+  }
+]

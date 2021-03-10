@@ -1,7 +1,5 @@
 <?php
 
-use Chopin\SystemSettings\Middleware;
-
 return
 [
     'dependencies' => [

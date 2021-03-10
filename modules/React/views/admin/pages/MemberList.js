@@ -22,7 +22,8 @@ const MemberList = () => {
 
     const { t } = useTranslation(['translation']);
     //Api位置
-    const paginateUrl = '/'+SYS_LANG+'/api/admin/member_list';
+    const basePath = window.pageConfig.basePath;
+    const paginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/member_list').replace(/^\/{2,}/, '/');
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
     const columns = memberListColumns(t, 'name');

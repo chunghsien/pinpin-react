@@ -7,10 +7,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Mezzio\Helper\UrlHelper;
-use App\Middleware\AdminAuthMiddleware;
 use Mezzio\Session\SessionMiddleware;
 use Laminas\Diactoros\Response\RedirectResponse;
-use Mezzio\Router\RouteResult;
 
 class AdminLogoutController implements RequestHandlerInterface
 {
@@ -38,7 +36,8 @@ class AdminLogoutController implements RequestHandlerInterface
          * @var \Mezzio\Session\LazySession $session
          */
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-        $uri = $this->buildUri($this->urlHelper->getRouteResult(), '/admin-login');
+        $basePath = $request->getAttribute('_base_path', '');
+        $uri = $this->buildUri($this->urlHelper->getRouteResult(), '/admin-login', $basePath);
         if($session->has('admin')) {
             $path = '/'.$request->getAttribute('html_lang');
             $session->unset('admin');

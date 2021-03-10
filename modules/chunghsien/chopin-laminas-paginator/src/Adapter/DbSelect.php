@@ -35,7 +35,6 @@ class DbSelect extends LaminasPaginatorAdapter
         }
 
         $select = $this->getSelectCount();
-
         $statement = $this->sql->prepareStatementForSqlObject($select);
 
         $result    = $statement->execute($this->bindParams);
@@ -57,13 +56,14 @@ class DbSelect extends LaminasPaginatorAdapter
         
         $serverRequest = ServerRequestFactory::fromGlobals();
         $queryParams = $serverRequest->getQueryParams();
-
+        /*
         $keys = $this->buildCacheKey($this->sql, $select, $queryParams);
         if ($keys) {
             if ($resultSet = $this->getCache($keys['key'])) {
                 return iterator_to_array($resultSet);
             }
         }
+        */
         $statement = $this->sql->prepareStatementForSqlObject($select);
         if ($this->bindParams) {
             $result    = $statement->execute($this->bindParams);
@@ -73,11 +73,12 @@ class DbSelect extends LaminasPaginatorAdapter
 
         $resultSet = clone $this->resultSetPrototype;
         $resultSet->initialize($result);
+        /*
         if ($keys) {
-            $this->setCache($keys['key'], $resultSet);
             $this->saveDbCacheMapper($keys['key'], $keys['table']);
+            $this->setCache($keys['key'], $resultSet);
         }
-
+        */
         return iterator_to_array($resultSet);
     }
 }

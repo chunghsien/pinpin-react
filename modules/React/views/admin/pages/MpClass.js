@@ -6,14 +6,24 @@ const MpClass = () => {
     
     //統一命名
     const classColumns = mpClassColumns;
+    const basePath = window.pageConfig.basePath;
+    const classRelationApi = (basePath+'/'+SYS_LANG+'/admin/fp_class_has_mp_class').replace(/^\/{2,}/, '/');
     const classRelation = {
-        href: '/'+SYS_LANG+'/admin/fp_class_has_mp_class',
+        href: classRelationApi,
         self: 'mp_class',
         parent: 'fp_class',
         bind: 'fp_class_has_mp_class'
     };
+    const paginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/mp_class').replace(/^\/{2,}/, '/');
     return (
-        <ClassPart table="mp_class" tableHeaderLabel="clsss_level2_datagrid" classRelation={classRelation} href="/admin/mp_class" paginateUrl={'/'+SYS_LANG+'/api/admin/mp_class'} {...{classColumns, paginationOptions, clickClearFilter}}  />
+        <ClassPart
+          table="mp_class"
+          tableHeaderLabel="clsss_level2_datagrid"
+          classRelation={classRelation}
+          href="/admin/mp_class"
+          paginateUrl={paginateUrl}
+          {...{classColumns, paginationOptions, clickClearFilter}}
+        />
     );
 };
 

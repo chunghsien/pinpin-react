@@ -46,7 +46,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
             'locale_id' => $localeResult->id,
             'parent_id' => 0,
             'key' => 'general_seo',
-            'name' => sprintf('基礎SEO (%s)', $languageResult->display_name),
+            'name' => '基礎 SEO',
         ]);
         $lastID = $systemSettingsTableGateway->lastInsertValue;
 
@@ -59,7 +59,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'title',
-            'name' => sprintf('網站標題 (%s)', $languageResult->display_name),
+            'name' => '網站標題',
         ]);
         $systemSettingsTableGateway->insert([
             'language_id' => $languageResult->id,
@@ -70,7 +70,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'meta_keyword',
-            'name' => sprintf('網站關鍵字 (%s)', $languageResult->display_name),
+            'name' => '網站關鍵字',
         ]);
 
         $systemSettingsTableGateway->insert([
@@ -82,7 +82,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'meta_description',
-            'name' => sprintf('網站描述 (%s)', $languageResult->display_name),
+            'name' => '網站描述',
         ]);
 
         $systemSettingsTableGateway->insert([
@@ -90,8 +90,9 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
             'locale_id' => $localeResult->id,
             'parent_id' => 0,
             'key' => 'site_info',
-            'name' => sprintf('網站資料 (%s)', $languageResult->display_name),
+            'name' => '網站資料',
         ]);
+        
         $lastID = $systemSettingsTableGateway->lastInsertValue;
 
         $systemSettingsTableGateway->insert([
@@ -103,7 +104,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'name',
-            'name' => sprintf('網站名稱 (%s)', $languageResult->display_name),
+            'name' => '網站名稱',
         ]);
         $systemSettingsTableGateway->insert([
             'language_id' => $languageResult->id,
@@ -114,7 +115,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'owner',
-            'name' => sprintf('擁有者 (%s)', $languageResult->display_name),
+            'name' => '擁有者',
         ]);
         $systemSettingsTableGateway->insert([
             'language_id' => $languageResult->id,
@@ -125,7 +126,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'email',
-            'name' => sprintf('網站信箱 (%s)', $languageResult->display_name),
+            'name' => '網站信箱',
         ]);
         $systemSettingsTableGateway->insert([
             'language_id' => $languageResult->id,
@@ -136,7 +137,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'email_service_from_name',
-            'name' => sprintf('信箱服務人員名稱 (%s)', $languageResult->display_name),
+            'name' => '信箱服務人員名稱',
         ]);
 
         $systemSettingsTableGateway->insert([
@@ -148,7 +149,7 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'address',
-            'name' => sprintf('住址 (%s)', $languageResult->display_name),
+            'name' => '住址',
         ]);
 
         $systemSettingsTableGateway->insert([
@@ -160,7 +161,18 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'telphone',
-            'name' => sprintf('聯絡電話 (%s)', $languageResult->display_name),
+            'name' => '聯絡電話',
+        ]);
+        $systemSettingsTableGateway->insert([
+            'language_id' => $languageResult->id,
+            'locale_id' => $localeResult->id,
+            'parent_id' => $lastID,
+            'input_type' => json_encode([
+                'type' => 'text',
+                'required' => false
+            ]),
+            'key' => 'mobile',
+            'name' => '手機',
         ]);
         $systemSettingsTableGateway->insert([
             'language_id' => $languageResult->id,
@@ -171,7 +183,19 @@ class Migrate_Alter_system_settings_20191203082541 extends AbstractMigration
                 'required' => false
             ]),
             'key' => 'fax',
-            'name' => sprintf('傳真 (%s)', $languageResult->display_name),
+            'name' => '傳真',
         ]);
+        $systemSettingsTableGateway->insert([
+            'language_id' => $languageResult->id,
+            'locale_id' => $localeResult->id,
+            'parent_id' => $lastID,
+            'input_type' => json_encode([
+                'type' => 'textarea',
+                'required' => false
+            ]),
+            'key' => 'operation',
+            'name' => '營業時間',
+        ]);
+        
     }
 }

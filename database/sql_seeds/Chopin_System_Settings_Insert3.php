@@ -42,7 +42,7 @@ class Chopin_System_Settings_Insert3 extends AbstractSeeds
             [
                 'parent_id' => $parant_id,
                 'key' => 'gsv_serial',
-                'name' => 'google site verification 序號',
+                'name' => 'Google site verification 序號',
                 'input_type' => json_encode([
                     'type' => 'text',
                     'required' => true,

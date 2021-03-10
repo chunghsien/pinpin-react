@@ -11,6 +11,7 @@ use Laminas\ServiceManager\ServiceManager;
 use Laminas\Db\Sql\Predicate\Expression;
 use Laminas\Db\ResultSet\ResultSet;
 use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
+use Chopin\SystemSettings\TableGateway\DbCacheMapperTableGateway;
 
 class Administrator extends Command
 {
@@ -80,6 +81,7 @@ class Administrator extends Command
                     $output->writeln('<comment>該權限關聯( roles.'.$administrator['id'].' , permission.'.$permission['id'].')已建立</comment>');
                 } else {
                     $insert = $this->sql->insert(AbstractTableGateway::$prefixTable.'roles_has_permission')->values($data);
+                    DbCacheMapperTableGateway::refreash('roles_has_permission');
                     $this->sql->prepareStatementForSqlObject($insert)->execute();
                     $output->writeln('<info>該權限關聯( roles.'.$administrator['id'].' , permission.'.$permission['id'].')建立成功</info>');
                 }

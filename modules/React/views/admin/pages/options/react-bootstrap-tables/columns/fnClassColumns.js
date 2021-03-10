@@ -87,7 +87,6 @@ const fnClassColumns = (t, smColumn) => {
       text: t('columns-viewed_count'),
       sort: true,
       editable: false,
-      formatter: sortFormatter,
       headerStyle: { width: '10rem' },
       filter: numberFilter({
         numberClassName: "form-control-sm",

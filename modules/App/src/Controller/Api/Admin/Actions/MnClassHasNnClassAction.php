@@ -18,7 +18,11 @@ class MnClassHasNnClassAction extends AbstractAction
     private function getOptions(ServerRequestInterface $request)
     {
         $params = array_merge($request->getQueryParams(), $request->getParsedBody());
-        $nn_class_id = $params['nn_class_id'];
+        $nn_class_id = isset($params['nn_class_id']) ? $params['nn_class_id'] : null;
+        if(!$nn_class_id) {
+            $nn_class_id = $params['self_id'];
+        }
+        
         $nnClassTableGateway = new NnClassTableGateway($this->adapter);
         $nnClassRow = $nnClassTableGateway->select([
             'id' => $nn_class_id
@@ -68,13 +72,15 @@ class MnClassHasNnClassAction extends AbstractAction
             if($mnClassHasNnClassTableGateway->select(['nn_class_id' => $nn_class_id])->count()) {
                 $mnClassHasNnClassTableGateway->delete(['nn_class_id' => $nn_class_id]);
             }
-            $mn_class_ids = explode(',', $post['mn_class_id']);
-            foreach ($mn_class_ids as $mn_class_id) {
-                $set = [
-                    'mn_class_id' => $mn_class_id,
-                    'nn_class_id' => $nn_class_id
-                ];
-                $mnClassHasNnClassTableGateway->insert($set);
+            if(isset($post['mn_class_id'])) {
+                $mn_class_ids = explode(',', $post['mn_class_id']);
+                foreach ($mn_class_ids as $mn_class_id) {
+                    $set = [
+                        'mn_class_id' => $mn_class_id,
+                        'nn_class_id' => $nn_class_id
+                    ];
+                    $mnClassHasNnClassTableGateway->insert($set);
+                }
             }
             $this->adapter->getDriver()->getConnection()->commit();
             $data = $this->getOptions($request);

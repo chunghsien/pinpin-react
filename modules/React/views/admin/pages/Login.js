@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import {Redirect} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import Cookies from 'js-cookie';
-import fullScreenBg from '../../../assets/images/yarenci-hdz-TmMWhXIeh_4-unsplash.jpg';
-
 import { useTranslation } from 'react-i18next';
 
 const LoginComponent = () => {
     const {CContainer, CRow, CCol, CCard, CCardBody, CForm, CInputGroup, CInput, CButton } = require('@coreui/react');
+    const basePath = window.pageConfig.basePath;
+    let fullScreenBg = (`${basePath}/assets/images/yarenci-hdz-TmMWhXIeh_4-unsplash.jpg`).replace(/^\/{2,}/, '/');
     const backundgroundFullScreenStyle = {
         backgroundImage: `url(${fullScreenBg})`,
         height: '100%',
@@ -17,7 +17,7 @@ const LoginComponent = () => {
     };
     
     const [siteName, setSiteName] = useState('');
-    const [lgooIcon, setLgooIcon] = useState('');
+    const lgooIcon = (`${basePath}${pageConfig.system_settings.system.children.comp_logo_icon.value}`).replace(/^\/{2,}/, '/');
 
     function formSubmit(data) {
         if(data.password && data.account) {
@@ -55,7 +55,7 @@ const LoginComponent = () => {
         }
         const php_lang = document.documentElement.lang.replace('-', '_');
         setSiteName(pageConfig.system_settings.site_info[php_lang].children.name.value);
-        setLgooIcon(pageConfig.system_settings.system.children.comp_logo_icon.value);
+        //setLgooIcon();
         //return () => {return;}
     }, [NO_CHANGE]);
     

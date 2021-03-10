@@ -66,6 +66,10 @@ class ApiQueryService {
                         $table = str_replace($PT, '', $columnMapper[$column]);
                         $field = $PT.$table.'.'.$column;
                         $value = $filters[$column]['filterVal'];
+                        if($column == 'created_at') {
+                            $value['date'] = date("Y-m-d", strtotime($value['date']));
+                        }
+                        
                         if(is_numeric($value)) {
                             $orWhere[] = ['equalTo', $logi, [$field, $value]];
                         }else {
@@ -103,6 +107,34 @@ class ApiQueryService {
                 }
                 $tmp = json_decode($queryParams['extra_where'], true);
                 $paginatorScript['where'] = array_merge( $paginatorScript['where'], $tmp);
+            }
+
+            //for main from
+            if(isset($queryParams['apiOther'])) {
+                $other = json_decode($queryParams['apiOther'], true);
+                //debug($other);
+                foreach ($other as $c => $v)
+                {
+                    if(preg_match('/\./', $c))
+                    {
+                        $tmp = explode('.', $c);
+                        $_table = $tmp[0];
+                        $_col = $tmp[1];
+                        if(strlen($PT) ) {
+                            if(false === strpos($_table, $PT))
+                            {
+                                $_table = $PT.$_table;
+                            }
+                        }
+                        $c = implode('.', [$_table, $_col]);
+                    }
+                    $paginatorScript['where'][] = [
+                        'equalTo',
+                        "AND",
+                        [$c, $v]
+                    ];
+                }
+                //$paginatorScript['where']
             }
             $paginatorConfig = [
                 'item_count_per_page' => isset($queryParams['item_count_per_page']) ? $queryParams['item_count_per_page'] : Constants::DEFAULT_ITEM_COUNT_PER_PAGE,

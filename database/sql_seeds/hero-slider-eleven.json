@@ -1,0 +1,18 @@
+[
+  {
+    "id": "1",
+    "subtitle": "#ACCESSORIES",
+    "title": "The Spring <br /> racing edition",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-eleven/1.png",
+    "bgColor": "#ebf4f2"
+  },
+  {
+    "id": "2",
+    "subtitle": "#DEMIM #T-SHIRT",
+    "title": "New Collection <br /> Made for Her",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-eleven/2.png",
+    "bgColor": "#f4ede7"
+  }
+]

@@ -9,6 +9,7 @@ use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
 use Chopin\Support\Registry;
 use Chopin\Support\ModulesLoader;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use Chopin\Support\SecurityVerify;
 
 if(strpos(__FILE__, 'dev'.DIRECTORY_SEPARATOR.'smith')!== false)
 {
@@ -52,7 +53,14 @@ if($tablePrefix)
 {
     AbstractTableGateway::$prefixTable = $tablePrefix;
 }
-GlobalAdapterFeature::setStaticAdapter($container->get(Adapter::class));
+$adapter = $container->get(Adapter::class);
+GlobalAdapterFeature::setStaticAdapter($adapter);
+
+if(APP_ENV == 'development' && !SecurityVerify::verify($adapter))
+{
+    SecurityVerify::generate();
+}
+
 
 $application = new Application();
 

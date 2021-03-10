@@ -1,92 +1,22 @@
 <?php
 declare(strict_types = 1);
-
 namespace App\Controller\Api\Admin\Actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Chopin\Middleware\AbstractAction;
-use App\Service\ApiQueryService;
 use App\Service\AjaxFormService;
 use Chopin\Store\TableGateway\ProductsSpecTableGateway;
-use Chopin\Store\TableGateway\ProductsTableGateway;
+use Chopin\HttpMessage\Response\ApiErrorResponse;
 use Chopin\HttpMessage\Response\ApiSuccessResponse;
-use Chopin\Store\TableGateway\ProductsSpecGroupTableGateway;
-
+use App\Service\ApiQueryService;
+use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
+use Laminas\Db\ResultSet\ResultSet;
+use Chopin\LanguageHasLocale\TableGateway\LanguageHasLocaleTableGateway;
 
 class ProductsSpecAction extends AbstractAction
 {
 
-    private function getRelationData($products_id, $products_spec_group_id) {
-        
-        $productsTableGateway = new ProductsTableGateway($this->adapter);
-        $productsDefaultOption = $productsTableGateway->getOptions('id', 'model', [], [
-            [
-                'equalTo',
-                'AND',
-                [
-                    'id',
-                    $products_id
-                ],
-            ],
-        ]);
-        //(new Select())->where->notEqualTo($left, $right);
-        $productsAppendOptions = $productsTableGateway->getOptions('id', 'model', [], [
-            [
-                'notEqualTo',
-                'AND',
-                [
-                    'id',
-                    $products_id
-                ],
-            ],
-        ], 100);
-        $productsOptions = array_merge($productsDefaultOption, $productsAppendOptions);
-
-        $productsSpecGroupDefaultOption = [];
-        $productsSpecGroupOptions = [];
-        if($products_spec_group_id > 0) {
-            $productsSpecGroupTableGateway = new ProductsSpecGroupTableGateway($this->adapter);
-            $productsSpecGroupDefaultOption = $productsSpecGroupTableGateway->getOptions('id', 'name', [], [
-                [
-                    'equalTo',
-                    'AND',
-                    [
-                        'id',
-                        $products_spec_group_id
-                    ],
-                ],
-            ]);
-            $productsSpecGroupAppendOptions = $productsSpecGroupTableGateway->getOptions('id', 'name', [], [
-                [
-                    'notEqualTo',
-                    'AND',
-                    [
-                        'id',
-                        $products_spec_group_id
-                    ],
-                ],
-            ], 100);
-            $productsSpecGroupOptions = array_merge($productsSpecGroupDefaultOption, $productsSpecGroupAppendOptions);
-        }
-        return [
-            'options' => [
-                'products_id' => $productsOptions,
-                'products_spec_group_id' => $productsSpecGroupOptions,
-            ],
-            'values' => [
-                'products_id' => $productsDefaultOption,
-                'products_spec_group_id' => $productsSpecGroupDefaultOption,
-            ],
-        ];
-    }
-    
-    private function getStockStatus(ServerRequestInterface $request) {
-        //將庫存狀態加入(前端select option資料使用)
-        $options = require 'modules/App/config/store.php';
-        return new ApiSuccessResponse(0, ['options' => $options]);
-    }
-    
     /**
      *
      * {@inheritdoc}
@@ -94,116 +24,69 @@ class ProductsSpecAction extends AbstractAction
      */
     protected function get(ServerRequestInterface $request): ResponseInterface
     {
-        $queryParams = $request->getQueryParams();
-        $attribute = $request->getAttribute('method_or_id', null);
-        
-        if($attribute && strtolower($attribute) == 'getrelationdata') {
-            return $this->getRelationData($request);
-        }
-        if($attribute && strtolower($attribute) == 'getstockstatus') {
-            return $this->getStockStatus($request);
-        }
-        
-        
-        if($attribute && strtolower($attribute) == 'getoption') {
-            if(isset($queryParams['language_id']) && isset($queryParams['locale_id'])) {
-                //對應產品
-                $productsTableGateway = new ProductsTableGateway($this->adapter);
-                $where = [
-                    [
-                        'equalTo',
-                        'AND',
-                        [
-                            'language_id',
-                            intval($queryParams['language_id'])
-                        ],
-                    ],
-                    [
-                        'equalTo',
-                        'AND',
-                        [
-                            'locale_id',
-                            intval($queryParams['locale_id'])
-                        ],
-                    ],
-                    [
-                        'isNull',
-                        'AND',
-                        [
-                            'deleted_at'
-                        ],
-                    ],
-                ];
-                if(isset($queryParams['model'])) {
-                    $where[] = [
-                        'like',
-                        'AND',
-                        ['model', '%'.$queryParams['model'].'%']
-                    ];
-                }
-                $options = $productsTableGateway->getOptions(
-                    'id', 
-                    'model', 
-                    [],
-                    $where,
-                    50
-                );
-                return new ApiSuccessResponse(0, ['options' => $options]);
-            }
-            
-            if(isset($queryParams['products_id'])) {
-                //規格群組
-                $productsSpecGroupTableGateway = new ProductsSpecGroupTableGateway($this->adapter);
-                $options = $productsSpecGroupTableGateway->getOptions(
-                    'id', 
-                    'name', 
-                    [],
-                    [
-                        [
-                            'equalTo',
-                            'AND',
-                            [
-                                'products_id',
-                                intval($queryParams['products_id'])
-                            ],
-                        ],
-                        [
-                            'isNull',
-                            'AND',
-                            [
-                                'deleted_at'
-                            ],
-                        ],
-                ],100);
-                return new ApiSuccessResponse(0, ['options' => $options]);
-            }
-            return new ApiSuccessResponse(0, ['options' => []]);
-        }
-        
-        $ajaxFormService = new AjaxFormService();
-        $response = $ajaxFormService->getProcess($request, new ProductsSpecTableGateway($this->adapter));
-        if ($response->getStatusCode() == 200) {
-            $data = $response->getPayload()['data'];
-            $products_id = intval($data['products_id']);
-            $products_spec_group_id = intval($data['products_spec_group_id']);
-            $options = $this->getRelationData($products_id, $products_spec_group_id);
-            $responseData = array_merge($data, $options);
-            $response = $response->withPayload(['data' => $responseData]);
-            return $response;
+        $methodOrId = $request->getAttribute('method_or_id', null);
+        if ($methodOrId) {
+            $PT = AbstractTableGateway::$prefixTable;
+            $productsSpecTableGateway = new ProductsSpecTableGateway($this->adapter);
+            $productsSpecTableFullName = $productsSpecTableGateway->table;
+            $select = $productsSpecTableGateway->getSql()->select();
+            $where = $select->where;
+            $productsTableFullName = "{$PT}products";
+            $select->join(
+                $productsTableFullName,
+                "{$productsSpecTableFullName}.products_id={$productsTableFullName}.id",
+                ["model"]
+            );
+            $where->isNull("{$productsTableFullName}.deleted_at");
+            $productsSpecGroupTableFullName = "{$PT}products_spec_group";
+            $productsSpecGroupAttrsTableFullName = "{$PT}products_spec_group_attrs";
+            $select->join(
+                $productsSpecGroupTableFullName,
+                "{$productsSpecTableFullName}.products_spec_group_id={$productsSpecGroupTableFullName}.id",
+                []
+            );
+            $where->isNull("{$productsSpecGroupTableFullName}.deleted_at");
+            $select->join(
+                $productsSpecGroupAttrsTableFullName,
+                "{$productsSpecGroupTableFullName}.products_spec_group_attrs_id={$productsSpecGroupAttrsTableFullName}.id",
+                ["group_name" => "name", "group_extra_name" => "extra_name"]
+            );
+            $where->isNull("{$productsSpecGroupAttrsTableFullName}.deleted_at");
+            $productsSpecAttrsTableFullName = "{$PT}products_spec_attrs";
+            $select->join(
+                $productsSpecAttrsTableFullName,
+                "{$productsSpecTableFullName}.products_spec_attrs_id={$productsSpecAttrsTableFullName}.id",
+                ["language_id", "locale_id", "name", "extra_name", "triple_name"]
+             );
+            $where->isNull("{$productsSpecAttrsTableFullName}.deleted_at");
+            $where->equalTo("{$productsSpecTableFullName}.id", $methodOrId);
+            $select->where($where);
+            $dataSource = $productsSpecTableGateway->getSql()->prepareStatementForSqlObject($select)->execute();
+            $resultSet = new ResultSet();
+            $resultSet->initialize($dataSource);
+            $data = $resultSet->current();
+            //LanguageHasLocaleTableGateway::$isRemoveRowGatewayFeature = true;
+            $languageHasLocaleTableGateway = new LanguageHasLocaleTableGateway($this->adapter);
+            $languageHasLocaleItem = $languageHasLocaleTableGateway->select([
+                "language_id" => $data->language_id,
+                "locale_id" => $data->locale_id,
+            ])->current();
+            $data->language_has_locale = $languageHasLocaleItem->code;
+            return new ApiSuccessResponse(0, $data);
         } else {
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/productsSpec.php', 
                 // 欄位對應的資料表名稱
                 [
-                    'name' => 'products_spec',
+                    'model' => 'products',
+                    'name' => 'products_spec_attrs',
+                    'group_name' => "products_spec_group_attrs",
                     'stock' => 'products_spec',
+                    'stock_status' => 'products_spec',
                     'price' => 'products_spec',
                     'real_price' => 'products_spec',
-                    'stock_status' => 'products_spec',
                     'sort' => 'products_spec',
-                    'created_at' => 'products_spec',
-                    'model' => 'products',
-                    'group_name' => 'products_spec_group'
+                    'created_at' => 'products_spec'
                 ]);
         }
     }
@@ -222,13 +105,47 @@ class ProductsSpecAction extends AbstractAction
     /**
      *
      * {@inheritdoc}
-     * @see \Chopin\Middleware\AbstractAction::put()
+     * @see \Chopin\Middleware\AbstractAction::post()
      */
     protected function put(ServerRequestInterface $request): ResponseInterface
     {
-        $ajaxFormService = new AjaxFormService();
-        $tablegateway = new ProductsSpecTableGateway($this->adapter);
-        return $ajaxFormService->putProcess($request, $tablegateway);
+        $id = $request->getAttribute('method_or_id', null);
+        $productsSpecTableGateway = new ProductsSpecTableGateway($this->adapter);
+        if ($id) {
+            $set = json_decode($request->getBody()->getContents(), true);
+            $updatedCount = $productsSpecTableGateway->update($set, [
+                "id" => $id
+            ]);
+            if ($updatedCount == 0) {
+                // no data updated
+                ApiErrorResponse::$status = 200;
+                return new ApiErrorResponse(- 1, [], [
+                    'no data updated'
+                ]);
+            }
+            return new ApiSuccessResponse(0, [], [
+                'update success'
+            ]);
+        }else{
+            $set = $request->getParsedBody();
+            $id = $set["id"];
+            unset($set["id"]);
+            $where = ["id" => $id];
+            $updatedCount = $productsSpecTableGateway->update($set, $where);
+            $request = $request->withAttribute("method_or_id", $id);
+            $response = $this->get($request);
+            $message = ["update success"];
+            $responseData = json_decode($response->getBody()->getContents(), true);
+            if($updatedCount == 0) {
+                ApiErrorResponse::$status = 200;
+                return new ApiErrorResponse(1, $responseData['data'], ["no data updated"]);
+            }else {
+                return new ApiSuccessResponse(0, $responseData['data'], $message);
+            }
+            
+            //return $ajaxFormService->putProcess($request, $productsSpecTableGateway);
+        }
+        return parent::put($request);
     }
 
     /**
@@ -238,13 +155,18 @@ class ProductsSpecAction extends AbstractAction
      */
     protected function post(ServerRequestInterface $request): ResponseInterface
     {
-        $queryParams = $request->getQueryParams();
-        if (isset($queryParams['put'])) {
+        $query = $request->getQueryParams();
+        if(isset($query['put'])) {
             return $this->put($request);
         }
-        $ajaxFormService = new AjaxFormService();
         $tablegateway = new ProductsSpecTableGateway($this->adapter);
-        return $ajaxFormService->postProcess($request, $tablegateway);
+        $set = json_decode($request->getBody()->getContents(), true);
+        if ($tablegateway->select($set)->count() == 0) {
+            $ajaxFormService = new AjaxFormService();
+            return $ajaxFormService->postProcess($request, $tablegateway);
+        }
+        ApiErrorResponse::$status = 200;
+        return new ApiErrorResponse(-1, [], ["products-spec-exists"]);
     }
     
     

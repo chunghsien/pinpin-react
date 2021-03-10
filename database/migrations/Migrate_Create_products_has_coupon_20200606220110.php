@@ -31,7 +31,11 @@ class Migrate_Create_products_has_coupon_20200606220110 extends AbstractMigratio
          */
         $ddl = $this->ddl;
         $ddl->addColumn(MySQLColumnFactory::buildColumn('products_id', 'int', ['unsigned' => true, ]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_identity_id', 'int', ['unsigned' => true, 'defualt' => 0]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_group_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_id', 'int', ['unsigned' => true, ]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_identity_id', 'int', ['unsigned' => true, 'default' => 0]));
+        
         $ddl->addColumn(MySQLColumnFactory::buildColumn('coupon_id', 'int', ['unsigned' => true, ]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true, ]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));

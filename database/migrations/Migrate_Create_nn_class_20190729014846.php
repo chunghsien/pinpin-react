@@ -40,7 +40,7 @@ class Migrate_Create_nn_class_20190729014846 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('updated_at', 'timestamp', ['default' => new Expression('CURRENT_TIMESTAMP'), 'on_update' => true]));
 
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable.'_id_PRIMARY'));
-        $ddl->addConstraint(new Constraint\UniqueKey('name', $this->tailTable.'_name_UNIQUE'));
+        //$ddl->addConstraint(new Constraint\UniqueKey('name', $this->tailTable.'_name_UNIQUE'));
         $ddl->addConstraint(new Index(['language_id'], $this->tailTable.'_idx_1'));
         $ddl->addConstraint(new Index(['language_id', 'locale_id'], $this->tailTable.'_idx_2'));
     }

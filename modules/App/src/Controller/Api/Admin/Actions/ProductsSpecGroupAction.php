@@ -1,68 +1,134 @@
 <?php
 declare(strict_types = 1);
-
 namespace App\Controller\Api\Admin\Actions;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Chopin\Middleware\AbstractAction;
-use App\Service\ApiQueryService;
 use App\Service\AjaxFormService;
 use Chopin\Store\TableGateway\ProductsSpecGroupTableGateway;
 use Chopin\Store\TableGateway\ProductsTableGateway;
+use Chopin\Store\TableGateway\ProductsSpecGroupAttrsTableGateway;
 use Chopin\HttpMessage\Response\ApiSuccessResponse;
-use Laminas\Diactoros\Response;
+use Laminas\Db\ResultSet\ResultSet;
+use Chopin\Store\TableGateway\ProductsSpecTableGateway;
+use Chopin\Store\TableGateway\ProductsSpecAttrsTableGateway;
+use Chopin\HttpMessage\Response\ApiErrorResponse;
 
 class ProductsSpecGroupAction extends AbstractAction
 {
 
-    private function getOptionsResponse(Response $response, ProductsTableGateway $productsTableGateway)
+    protected function getOptions(ServerRequestInterface $request, ProductsSpecGroupTableGateway $productsSpecGroupTableGateway)
     {
-        $payload = $response->getPayload();
-        $data = $payload['data'];
+        $query = $request->getQueryParams();
+        $products_id = intval($query['products_id']);
+        $productsTableGateway = new ProductsTableGateway($this->adapter);
+        $productsSpecGroupAttrsTableGateway = new ProductsSpecGroupAttrsTableGateway($this->adapter);
+        $productsSpecTableGateway = new ProductsSpecTableGateway($this->adapter);
+        $productsSpecAttrsTableGateway = new ProductsSpecAttrsTableGateway($this->adapter);
 
-        // $pt = ProductsTableGateway::$prefixTable;
-        $id = intval($data['products_id']);
+        $specAttrsSelect = $productsSpecAttrsTableGateway->getSql()->select();
+        $specAttrsWhere = $productsSpecAttrsTableGateway->getSql()->select()->where;
+        $specAttrsWhere->isNull("deleted_at");
+        $specAttrsSelect->where($specAttrsWhere);
+        $specAttrsSelect->order("id ASC");
+        $specAttrsDataSource = $productsSpecAttrsTableGateway->getSql()
+            ->prepareStatementForSqlObject($specAttrsSelect)
+            ->execute();
+        $specAttrsResultSet = new ResultSet();
+        $specAttrsResultSet->initialize($specAttrsDataSource);
+        $specAttrsOptions = [];
+        foreach ($specAttrsResultSet as $item) {
+            $specAttrsOptions[] = [
+                "value" => $item["id"],
+                "label" => $item["name"],
+                "extra_name" => $item["extra_name"],
+                "triple_name" => $item["triple_name"],
+            ];
+        }
+        
+        
+        $productWhere = $productsTableGateway->getSql()->select()->where;
+        $productWhere->isNull('deleted_at');
+        $productWhere->equalTo('id', $products_id);
+        $productResultSet = $productsTableGateway->select($productWhere);
+        if ($productResultSet->count()) {
 
-        $options = [];
-        $values = [];
-        $defaultvalues = [];
+            $productRow = $productResultSet->current();
+            $options = [];
+            $lists = [];
 
-        $where = [
-            'id' => $id
-        ];
-        $productsSelected = $productsTableGateway->select($where)->current();
-        $values = [
-            'value' => $productsSelected->id,
-            'label' => $productsSelected->model,
-        ];
-        $options = [
-            $values
-        ];
-        $options = array_merge($options, $productsTableGateway->getOptions('id', 'model', [], [
-            [
-                'notEqualTo',
-                'AND',
-                [
-                    'id',
-                    $id
-                ]
-            ],
-            [
-                'isNull',
-                'AND',
-                [
-                    'deleted_at'
+            $mainSelect = $productsSpecGroupTableGateway->getSql()->select();
+            $where = $mainSelect->where;
+            $where->equalTo("{$productsSpecGroupTableGateway->table}.products_id", $products_id);
+            $where->isNull($productsTableGateway->table . ".deleted_at");
+            $where->isNull($productsSpecGroupAttrsTableGateway->table . ".deleted_at");
+            $where->isNull($productsSpecGroupTableGateway->table . ".deleted_at");
+            $mainSelect->order([
+                $productsSpecGroupTableGateway->table . ".sort ASC",
+                $productsSpecGroupAttrsTableGateway->table . ".id ASC"
+            ]);
+            $mainSelect->join($productsTableGateway->table, "{$productsTableGateway->table}.id={$productsSpecGroupTableGateway->table}.products_id", []);
+            $mainSelect->join($productsSpecGroupAttrsTableGateway->table, "{$productsSpecGroupTableGateway->table}.products_spec_group_attrs_id={$productsSpecGroupAttrsTableGateway->table}.id", [
+                "name",
+                "extra_name",
+                "image"
+            ]);
+            $mainSelect->where($where);
+            $dataSource = $productsSpecGroupTableGateway->getSql()
+                ->prepareStatementForSqlObject($mainSelect)
+                ->execute();
+            $resultSet = new ResultSet();
+            $resultSet->initialize($dataSource);
+            $lists = $resultSet->toArray();
+
+            foreach ($lists as &$list) {
+                $specsSlect = $productsSpecTableGateway->getSql()->select();
+                $specsSlect->join($productsSpecAttrsTableGateway->table, "{$productsSpecTableGateway->table}.products_spec_attrs_id={$productsSpecAttrsTableGateway->table}.id", [
+                    "name",
+                    "extra_name",
+                    "triple_name"
+                ]);
+                $specsWhere = $specsSlect->where;
+                $specsWhere->equalTo("{$productsSpecTableGateway->table}.products_spec_group_id", $list['id']);
+                $specsWhere->isNull("{$productsSpecTableGateway->table}.deleted_at");
+                $specsWhere->isNull("{$productsSpecAttrsTableGateway->table}.deleted_at");
+                $specsSlect->where($specsWhere);
+                $specsSlect->order("{$productsSpecAttrsTableGateway->table}.id ASC");
+                $dataSource = $productsSpecTableGateway->getSql()
+                    ->prepareStatementForSqlObject($specsSlect)
+                    ->execute();
+                $resultSet = new ResultSet();
+                $resultSet->initialize($dataSource);
+
+                $list['specs'] = $resultSet->toArray();
+            }
+            $productsSpecGroupAttrsWhere = $productsSpecGroupAttrsTableGateway->getSql()->select()->where;
+            $productsSpecGroupAttrsWhere->isNull('deleted_at');
+            $productsSpecGroupAttrsResult = $productsSpecGroupAttrsTableGateway->select($productsSpecGroupAttrsWhere);
+            foreach ($productsSpecGroupAttrsResult as $row) {
+                $options[] = [
+                    "value" => $row->id,
+                    "label" => $row->name,
+                    "extra_name" => $row->extra_name
+                ];
+            }
+            return [
+                "language_id" => $productRow->language_id,
+                "locale_id" => $productRow->locale_id,
+                "options" => [
+                    "products_spec_group" => $options,
+                    "products_spec" => $specAttrsOptions,
                 ],
-            ],
-        ], 100));
-        $defaultvalues = $values;
-        $data['options']['products_id'] = $options;
-        $data['values']['products_id'] = $values;
-        $data['defaultvalues']['products_id'] = $defaultvalues;
-        $payload['data'] = $data;
-        $response = $response->withPayload($payload);
-        return $response;
+                "lists" => $lists,
+            ];
+        }
+        return [
+            "options" => [],
+            "lists" => [],
+            "language_id" => "",
+            "locale_id" => "",
+        ];
     }
 
     /**
@@ -72,43 +138,14 @@ class ProductsSpecGroupAction extends AbstractAction
      */
     protected function get(ServerRequestInterface $request): ResponseInterface
     {
-        $queryParams = $request->getQueryParams();
+        $query = $request->getQueryParams();
         $productsSpecGroupTableGateway = new ProductsSpecGroupTableGateway($this->adapter);
-        if (isset($queryParams['products_id'])) {
-            $products_id = intval($queryParams['products_id']);
-            $options = $productsSpecGroupTableGateway->getOptions('id', 'name', [], [
-                [
-                    'equalTo',
-                    'AND',
-                    [
-                        'products_id',
-                        $products_id
-                    ]
-                ],
-                [
-                    'isNull',
-                    'AND',
-                    [
-                        'deleted_at'
-                    ],
-                ],
-            ]);
-            return new ApiSuccessResponse(0, ['options' => $options]);
+        $query = $request->getQueryParams();
+        if (isset($query['products_id'])) {
+            $data = $this->getOptions($request, $productsSpecGroupTableGateway);
+            return new ApiSuccessResponse(0, $data);
         }
-        $ajaxFormService = new AjaxFormService();
-        $response = $ajaxFormService->getProcess($request, $productsSpecGroupTableGateway);
-        if ($response->getStatusCode() == 200) {
-            $productsTableGateway = new ProductsTableGateway($this->adapter);
-            return $this->getOptionsResponse($response, $productsTableGateway);
-        } else {
-            $apiQueryService = new ApiQueryService();
-            return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/productsSpecGroup.php', [
-                'name' => 'products_spec_group',
-                'sort' => 'products_spec_group',
-                'model' => 'products',
-                'display_name' => 'language_has_locale',
-            ]);
-        }
+        parent::get($request);
     }
 
     /**
@@ -143,13 +180,18 @@ class ProductsSpecGroupAction extends AbstractAction
     protected function post(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
-        if(isset($queryParams['put'])) {
+        if (isset($queryParams['put'])) {
             return $this->put($request);
         }
         $ajaxFormService = new AjaxFormService();
         $tablegateway = new ProductsSpecGroupTableGateway($this->adapter);
+        $where = json_decode($request->getBody()->getContents(), true);
+        if($tablegateway->select($where)->count() > 0) {
+            ApiErrorResponse::$status = 200;
+            return new ApiErrorResponse(-1, [], ["products-spec-group-exists"]);
+        }
+        
+        //$tablegateway->select([]);
         return $ajaxFormService->postProcess($request, $tablegateway);
     }
-    
-    
 }

@@ -1,8 +1,8 @@
-import { INIT_LANGUAGE } from "../actions/languageActions";
+import { LANGUAGE_TYPE } from "../actions/languageActions";
 
-const initState = [INIT_LANGUAGE];
+const initState = "zh-TW";
 const languageReducer = (state= initState, action) => {
-  if (action.type === INIT_LANGUAGE) {
+  if (action.type === LANGUAGE_TYPE) {
     state = action.payload;
     return state;
   }

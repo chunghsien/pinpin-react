@@ -19,8 +19,8 @@ class ConfigProvider
     {
         $configAffregator = new ConfigAggregator([
             new PhpFileProvider(dirname(__DIR__) . '/config/*.php'),
-            new PhpFileProvider(dirname(__DIR__) . '/config/**/*.php'),
-            new PhpFileProvider(dirname(__DIR__) . '/config/**/**/*.php'),
+            //new PhpFileProvider(dirname(__DIR__) . '/config/**/*.php'),
+            //new PhpFileProvider(dirname(__DIR__) . '/config/**/**/*.php'),
         ]);
         return $configAffregator->getMergedConfig();
     }

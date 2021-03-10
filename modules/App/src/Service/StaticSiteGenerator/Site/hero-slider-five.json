@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "subtitle": "Free delivery from $30",
+    "title": "Innovative design",
+    "url": "/shop/left-sidebar",
+    "bgImage": "/assets/images/hero-slider/hero-slider-five/bg1.png",
+    "target": "_self"
+  },
+  {
+    "id": "2",
+    "subtitle": "Free delivery from $30",
+    "title": "Beautiful interior",
+    "url": "/shop/left-sidebar",
+    "bgImage": "/assets/images/hero-slider/hero-slider-five/bg2.png",
+    "target": "_self"
+  },
+  {
+    "id": "3",
+    "subtitle": "Summer sale up to 30%",
+    "title": "Beautiful interior",
+    "url": "/shop/left-sidebar",
+    "bgImage": "/assets/images/hero-slider/hero-slider-five/bg3.png",
+    "target": "_self"
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "image": "/assets/images/image-slider/1.jpg",
+    "url": "/zh-TW",
+    "type": "s_carousel"
+  },
+  {
+    "id": "2",
+    "image": "/assets/images/image-slider/2.jpg",
+    "url": "/zh-TW",
+    "type": "s_carousel"
+  },
+  {
+    "id": "3",
+    "image": "/assets/images/image-slider/3.jpg",
+    "url": "/zh-TW",
+    "type": "s_carousel"
+  },
+  {
+    "id": "4",
+    "image": "/assets/images/image-slider/4.jpg",
+    "url": "/zh-TW",
+    "type": "s_carousel"
+  },
+  {
+    "id": "5",
+    "image": "/assets/images/image-slider/5.jpg",
+    "url": "/zh-TW",
+    "type": "s_carousel"
+  },
+  {
+    "id": "6",
+    "image": "/assets/images/image-slider/6.jpg",
+    "url": "/zh-TW",
+    "type": "s_carousel"
+  }
+]

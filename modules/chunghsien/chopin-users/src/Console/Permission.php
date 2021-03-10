@@ -20,13 +20,13 @@ class Permission extends Command
      * @var Sql
      */
     protected $sql;
-    
+
     /**
-     * 
+     *
      * @var PermissionTableGateway
      */
     private $tablegateway;
-    
+
     // protected $table = 'permission';
     public function __construct($name = null)
     {
@@ -46,27 +46,33 @@ class Permission extends Command
         $source = $input->getOption('source');
         if (is_file($source)) {
             $configs = require $source;
+            
             $navigation = new Navigation($configs);
             $recursiveIteratorIterator = new \RecursiveIteratorIterator($navigation, \RecursiveIteratorIterator::SELF_FIRST);
             try {
                 foreach ($recursiveIteratorIterator as $page) {
-                    if($page->uri != '#') {
-                        if($this->tablegateway->select(['uri' => $page->uri])->count() == 0) {
-                            $method = isset($page->http_method) ? $page->http_method : ['GET'];
+                    if ($page->uri != '#') {
+                        if ($this->tablegateway->select([
+                            'uri' => $page->uri
+                        ])->count() == 0) {
+                            $method = isset($page->http_method) ? $page->http_method : [
+                                'GET'
+                            ];
                             $this->tablegateway->insert([
-                                'name' => $page->name ? $page->name: $page->uri,
+                                'name' => $page->name ? $page->name : $page->uri,
                                 'uri' => $page->uri,
                                 'http_method' => json_encode($method),
                             ]);
-                            $output->writeln('<info>權限: '.$page->name.' 建立成功</info>');
-                        }else {
-                            $output->writeln('<comment>權限: '.$page->name.' 已建立</comment>');
+                            $output->writeln('<info>權限: ' . $page->name . ' 建立成功</info>');
+                        } else {
+                            $output->writeln('<comment>權限: ' . $page->name . ' 已建立</comment>');
                         }
                     }
                 }
             } catch (\Exception $e) {
+                loggerException($e);
                 throw $e;
             }
-            }
+        }
     }
 }

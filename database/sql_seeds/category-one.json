@@ -1,56 +1,56 @@
 [
   {
-    "image": "/assets/images/category/men.jpg",
+    "image": "/assets/images/category/category-men.jpg",
     "name": "Men",
     "viewed_count": 12
   },
   {
-    "image": "/assets/images/category/shoes.jpg",
+    "image": "/assets/images/category/category-shoes.jpg",
     "name": "Shoes",
     "viewed_count": 23
   },
   {
-    "image": "/assets/images/category/sunglasses.jpg",
+    "image": "/assets/images/category/category-sunglasses.jpg",
     "name": "Sunglasses",
     "viewed_count": 13
   },
   {
-    "image": "/assets/images/category/cat-look-book.jpg",
+    "image": "/assets/images/category/category-lookbook.jpg",
     "name": "Look book",
     "viewed_count": 40
   },
   {
-    "image": "/assets/images/category/women.jpg",
+    "image": "/assets/images/category/category-women.jpg",
     "name": "Women",
     "viewed_count": 10
   },
   {
-    "image": "/assets/images/category/women.jpg",
+    "image": "/assets/images/category/category-concept-1.jpg",
     "name": "Decor",
     "viewed_count": 27
   },
   {
-    "image": "/assets/images/category/women.jpg",
+    "image": "/assets/images/category/category-concept-2.jpg",
     "name": "Fashion",
     "viewed_count": 41
   },
   {
-    "image": "/assets/images/category/women.jpg",
+    "image": "/assets/images/category/category-concept-3.jpg",
     "name": "Cosmetics",
     "viewed_count": 19
   },
   {
-    "image": "/assets/images/category/women.jpg",
+    "image": "/assets/images/category/category-concept-4.jpg",
     "name": "Furniture",
     "viewed_count": 18
   },
   {
-    "image": "/assets/images/category/women.jpg",
+    "image": "/assets/images/category/category-cosmetics-1.jpg",
     "name": "Perfumes",
     "viewed_count": 23
   },
   {
-    "image": "/assets/images/category/women.jpg",
+    "image": "/assets/images/category/category-cosmetics-2.jpg",
     "name": "Wearables",
     "viewed_count": 23
   }

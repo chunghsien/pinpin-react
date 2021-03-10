@@ -22,7 +22,7 @@ class Dojo extends AbstractHelper
 
     /**
      *
-     * @var \LaminasEscaper\Escaper
+     * @var \Laminas\Escaper\Escaper
      */
     protected $escaper;
 

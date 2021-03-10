@@ -188,14 +188,6 @@ class NewwebpayService extends ThirdPartyPaymentService
         $tradSource[$pay_method] = 1;
         $hashKey = $config['hash_key'];
         $hashIV = $config['hash_iv'];
-        /*
-        logger()->debug(json_encode($config, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
-        logger()->debug(json_encode([
-            'tradeSource' => $tradSource,
-            'hashKey' => $hashKey,
-            'hashIV' => $hashIV,
-        ], JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE));
-        */
         $tradInfo = $this->createMpgAesEncrypt($tradSource, $hashKey, $hashIV);
         $matcher = [];
         preg_match('/^production/i', APP_ENV, $matcher);

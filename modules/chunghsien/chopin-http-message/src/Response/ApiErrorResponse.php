@@ -7,6 +7,9 @@ use Laminas\Db\ResultSet\ResultSet;
 
 class ApiErrorResponse extends JsonResponse
 {
+    
+    public static $status = 417;
+    
     /**
      *
      * @param int   $code
@@ -24,6 +27,6 @@ class ApiErrorResponse extends JsonResponse
             'notify' => $notify ? $notify : $message,
             'data' => $data,
         ];
-        parent::__construct($merge, 417);
+        parent::__construct($merge, self::$status);
     }
 }

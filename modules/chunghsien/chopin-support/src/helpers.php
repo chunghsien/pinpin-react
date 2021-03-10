@@ -9,7 +9,7 @@ use Laminas\ServiceManager\ServiceManager;
 use Intervention\Image\ImageManagerStatic as Image;
 use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
 use Laminas\I18n\Translator\Translator;
-
+use Laminas\Cache\StorageFactory;
 
 if (! function_exists('config') && is_file('config/config.php')) {
     
@@ -35,10 +35,27 @@ if (! function_exists('config') && is_file('config/config.php')) {
                 $translator = Registry::get(Translator::class);
             }
             $allMessages = $translator->getAllMessages($textDomain, $locale);
+
+            if(APP_ENV === 'production') {
+                $cache = StorageFactory::factory([
+                    'adapter' => [
+                        'name' => 'filesystem',
+                        'options' => [
+                            'dir_level' => 1,
+                            'cache_dir' => './storage/cache/app/i18n',
+                            'ttl' => 86400 * 7, //one week
+                        ],
+                    ],
+                    'plugins' => [
+                        'Serializer',
+                    ],
+                ]);
+                $translator->setCache($cache);
+            }
+            
             /**
              * @var Translator $translator;
              */
-            
             if(!$allMessages) {
                 $file = PROJECT_DIR."/resources/languages/{$locale}/{$textDomain}.php";
                 if(is_file($file)) {
@@ -269,7 +286,6 @@ if (! function_exists('config') && is_file('config/config.php')) {
             }
             return $tmp;
         }
-        
         $result = null;
         foreach ($keyArr as $k) {
             if (! is_null($result)) {
@@ -506,7 +522,21 @@ if (! function_exists('config') && is_file('config/config.php')) {
         $pattern = sprintf('storage/cache/zfcache-*/zfcache-%s*.dat', $search);
         return glob($pattern, GLOB_NOSORT);
     }
-
+    
+    function traceVarsProgress($var)
+    {
+        if(preg_match('/^(192|128)\./', $_SERVER['SERVER_ADDR']))
+        {
+            //REQUEST_TIME_FLOAT
+            $folder = "./storage/log/vars/".REQUEST_TIME_FLOAT;
+            if(!is_dir($folder)) {
+                mkdir($folder, 0644, true);
+            }
+            $filename = microtime(true).'.log';
+            $path = "{$folder}/$filename";
+            file_put_contents($path, var_export($var, true));
+        }
+    }
     /**
      *
      * @param \Throwable $e

@@ -32,9 +32,10 @@ class NpClassAction extends AbstractAction
                 //欄位對應的資料表名稱
                 [
                     'name' => 'np_class',
+                    'viewed_count' => 'np_class',
                     'sort' => 'np_class',
                     'display_name' => 'language_has_locale',
-                    'created_at' => 'nn_class',
+                    'created_at' => 'np_class',
                 ]
             );
         }

@@ -33,11 +33,12 @@ class Migrate_Create_products_spec_20200415035542 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('id', 'int', ['unsigned' => true, 'auto_increment' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('products_id', 'int', ['unsigned' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_group_id', 'int', ['unsigned' => true, 'deafult' => 0]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true, 'default' => 0]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 128, 'nullable' => true]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('extra_name', 'varchar', ['length' => 128, 'nullable' => true]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('triple_name', 'varchar', ['length' => 128, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('products_spec_attrs_id', 'int', ['unsigned' => true]));
+        //$ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true, 'default' => 0]));
+        //$ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));
+        //$ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 384, 'nullable' => true]));
+        //$ddl->addColumn(MySQLColumnFactory::buildColumn('extra_name', 'varchar', ['length' => 384, 'nullable' => true]));
+        //$ddl->addColumn(MySQLColumnFactory::buildColumn('triple_name', 'varchar', ['length' => 384, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('main_photo', 'varchar', ['length' => 192, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sub_photo', 'varchar', ['length' => 192, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('stock', 'mediumint', ['unsigned' => true, 'default' => 0]));
@@ -51,16 +52,17 @@ class Migrate_Create_products_spec_20200415035542 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('updated_at', 'timestamp', ['default' => new Expression('CURRENT_TIMESTAMP'), 'on_update' => true]));
-
+        
+        $prefixTable = self::$prefixTable;
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable . '_id_PRIMARY'));
         $ddl->addConstraint(new Constraint\ForeignKey(
-            'fk1_'.$this->tailTable,
+            "fk1_{$this->tailTable}",
             'products_id',
-            self::$prefixTable.'products',
+            "{$prefixTable}products",
             'id'
         ));
-
         $ddl->addConstraint(new Index(['products_spec_group_id'], $this->table.'_idx_products_spec_group'));
+        $ddl->addConstraint(new Index(['products_spec_attrs_id'], $this->table.'_idx_products_spec_attrs'));
         $ddl->addConstraint(new Index(['sort'], $this->table.'_idx_sort'));
     }
 

@@ -6,6 +6,9 @@ use Laminas\Diactoros\Response\JsonResponse;
 
 class ApiSuccessResponse extends JsonResponse
 {
+    
+    static public $is_json_numeric_check = true;
+    
     /**
      * @paream int $code
      * @param mixed $data
@@ -21,6 +24,11 @@ class ApiSuccessResponse extends JsonResponse
             'notify' => $notify ? $notify : $message,
             'data' => $data,
         ];
-        parent::__construct($merge, 200, [], JSON_NUMERIC_CHECK);
+        if(self::$is_json_numeric_check === true) {
+            parent::__construct($merge, 200, [], JSON_NUMERIC_CHECK);
+        }else {
+            parent::__construct($merge, 200, []);
+        }
+        
     }
 }

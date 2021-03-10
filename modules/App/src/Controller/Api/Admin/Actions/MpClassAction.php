@@ -32,6 +32,7 @@ class MpClassAction extends AbstractAction
                 //欄位對應的資料表名稱
                 [
                     'name' => 'mp_class',
+                    'viewed_count' => 'mp_class',
                     'sort' => 'mp_class',
                     'display_name' => 'language_has_locale',
                     'created_at' => 'mp_class',

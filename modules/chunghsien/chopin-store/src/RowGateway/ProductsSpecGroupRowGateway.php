@@ -13,14 +13,19 @@ class ProductsSpecGroupRowGateway extends RowGateway
         "id"
     ];
     
-    public function withSize()
+    public function withSpecs()
     {
         $productsSpecTableGateway = new ProductsSpecTableGateway($this->sql->getAdapter());
         $productsSpecSelect = $productsSpecTableGateway->getSql()->select();
-        $productsSpecSelect->columns(["id", "name", "stock"]);
+        $productsSpecSelect->columns(["id", "name", "extra_name", "triple_name"]);
         $products_spec_gorup_id = $this->data['id'];
         $productsSpecSelect->where(['products_spec_group_id' => $products_spec_gorup_id]);
         $resultSet = $productsSpecTableGateway->selectWith($productsSpecSelect);
-        $this->with['size'] = $resultSet;
+        if($resultSet->count()) {
+            $this->with['specs'] = $resultSet->toArray();
+        }else{
+            $this->with['specs'] = [];
+        }
+        
     }
 }

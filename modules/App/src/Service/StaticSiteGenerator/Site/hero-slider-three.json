@@ -1,0 +1,29 @@
+[
+  {
+    "id": "1",
+    "subtitle": "STOP & WEAR",
+    "title": "Summer Flowers",
+    "url": "/shop/left-sidebar",
+    "image": "",
+    "bgImage": "/assets/images/hero-slider/hero-slider-three/bg1.png",
+    "target": "_self"
+  },
+  {
+    "id": "2",
+    "subtitle": "NEW ARRIVALS",
+    "title": "Summer 2020",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-three/1.png",
+    "bgImage": "/assets/images/hero-slider/hero-slider-three/bg2.png",
+    "target": "_self"
+  },
+  {
+    "id": "3",
+    "subtitle": "NEW ARRIVALS",
+    "title": "Summer 2020",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-three/2.png",
+    "bgImage": "/assets/images/hero-slider/hero-slider-three/bg3.png",
+    "target": "_self"
+  }
+]

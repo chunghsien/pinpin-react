@@ -10,8 +10,6 @@ use Chopin\HttpMessage\Response\ApiErrorResponse;
 use Chopin\Middleware\AbstractAction;
 use Chopin\SystemSettings\TableGateway\SystemSettingsTableGateway;
 use App\Service\AjaxFormService;
-use Laminas\Paginator\Adapter\DbSelect;
-use Laminas\Paginator\Paginator;
 use App\Service\ApiQueryService;
 
 class SystemSettingAction extends AbstractAction
@@ -58,6 +56,7 @@ class SystemSettingAction extends AbstractAction
     }
     protected function get(ServerRequestInterface $request): ResponseInterface
     {
+        ApiSuccessResponse::$is_json_numeric_check = false;
         $query = $request->getQueryParams();
         if(isset($query['pk'])) {
             //$method = $query['pk'];

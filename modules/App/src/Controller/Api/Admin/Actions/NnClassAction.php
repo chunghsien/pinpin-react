@@ -32,6 +32,7 @@ class NnClassAction extends AbstractAction
                 //欄位對應的資料表名稱
                 [
                     'name' => 'nn_class',
+                    'viewed_count' => 'nn_class',
                     'sort' => 'nn_class',
                     'display_name' => 'language_has_locale',
                     'created_at' => 'nn_class',

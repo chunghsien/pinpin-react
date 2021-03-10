@@ -7,11 +7,13 @@ const currentLocale = () => {
 }
 
 class BackendTranslator {
-  constructor(allMessages) {
+  constructor(allMessages, locale) {
+    this.locale=locale
     this.allMessages = allMessages;
   }
   t(ns, text, plurs) {
     const allMessages = this.allMessages;
+    //console.log(allMessages);
     if(typeof allMessages[ns] == 'undefined') {
       return text;
     }

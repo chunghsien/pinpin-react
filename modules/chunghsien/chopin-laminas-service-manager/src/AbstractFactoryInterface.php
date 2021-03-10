@@ -8,5 +8,5 @@ interface AbstractFactoryInterface
 {
     protected function buildService(ContainerInterface $container, $requestedName, array $options = null);
 
-    protected function buildCacheKey($requestName);
+    //protected function buildCacheKey($requestName);
 }

@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @deprecated
+ */
 use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
 use Laminas\Db\Sql\Expression;
 use Laminas\Db\Sql\Select;
@@ -15,9 +17,9 @@ $select->from($PT.'order')->columns([
     'language_id',
     'locale_id',
     'serial',
-    'fullname' => new Expression("CAST(AES_DECRYPT(`{$PT}order`.`fullname`, '{$aes_key}') AS CHAR)"),
-    'email' => new Expression("CAST(AES_DECRYPT(`{$PT}order`.`email`, '{$aes_key}') AS CHAR)"),
-    'cellphone' => new Expression("CAST(AES_DECRYPT(`{$PT}order`.`cellphone`, '{$aes_key}') AS CHAR)"),
+    'fullname' => new Expression("CAST(AES_DECRYPT(`{$PT}order`.`fullname`, ?) AS CHAR)", [$aes_key]),
+    'email' => new Expression("CAST(AES_DECRYPT(`{$PT}order`.`email`, ?) AS CHAR)", [$aes_key]),
+    'cellphone' => new Expression("CAST(AES_DECRYPT(`{$PT}order`.`cellphone`, ?) AS CHAR)", [$aes_key]),
     'pay_method',
     'status',
     'deleted_at',
@@ -35,17 +37,17 @@ $select->join(
     "order2.locale_id={$PT}language_has_locale.locale_id",
     []
 );
-$memberSelect = new Select();
-$memberSelect->from("{$PT}member");
-$memberSelect->columns([
+$memberDecryptSelect = new Select();
+$memberDecryptSelect->from("{$PT}member");
+$memberDecryptSelect->columns([
     'id',
-    'member_full_name' => new Expression("CAST(AES_DECRYPT(`{$PT}member`.`full_name`, '{$aes_key}') AS CHAR)"),
+    'member_full_name' => new Expression("CAST(AES_DECRYPT(`{$PT}member`.`full_name`, ?) AS CHAR)", [$aes_key]),
 ]);
-$memberWhere = $memberSelect->where;
-$memberWhere->isNull('deleted_at');
-$memberSelect->where($memberWhere);
+$memberDecryptWhere = $memberDecryptSelect->where;
+$memberDecryptWhere->isNull('deleted_at');
+$memberDecryptSelect->where($memberDecryptWhere);
 $select->join(
-    ["{$PT}member_decrypt" => $memberSelect],
+    ["{$PT}member_decrypt" => $memberDecryptSelect],
     "{$PT}order.member_id=member_decrypt.id",
     ["member_full_name"]
 );

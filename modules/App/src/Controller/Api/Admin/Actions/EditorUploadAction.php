@@ -5,11 +5,9 @@ namespace App\Controller\Api\Admin\Actions;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Chopin\Middleware\AbstractAction;
-use Chopin\Documents\TableGateway\BannerTableGateway;
 use App\Service\AjaxFormService;
 use Laminas\Diactoros\Response\JsonResponse;
 use Chopin\HttpMessage\Response\ApiErrorResponse;
-use Laminas\I18n\Translator\Translator;
 use Laminas\Validator\File\IsImage;
 
 class EditorUploadAction extends AbstractAction
@@ -55,10 +53,13 @@ class EditorUploadAction extends AbstractAction
                     
                 }
             }else {
+                $basePath = $request->getAttribute('_base_path', '');
+                $imageUrl = $basePath.$uploaded['upload'];
+                $imageUrl = preg_replace('/^\/{2,}/', '/', $imageUrl);
                 $data = [
                     'fileName' => $upload['upload']->getClientFilename(),
                     'uploaded' => 1,
-                    'url' => $uploaded['upload'],
+                    'url' => $imageUrl,
                     
                 ];
             }

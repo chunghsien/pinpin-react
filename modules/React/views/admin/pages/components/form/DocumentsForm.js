@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import {
   CRow, CCol, CFormGroup, CLabel,
@@ -43,7 +44,9 @@ const DocumentsForm = (props) => {
     return remaining[name];
   }
   const count = 0;
-
+  const [formSelected, setFormSelected] = useState({});
+  const { formRows } = props;
+  const documents = formRows && formRows.documents ? formRows.documents : null; 
   useEffect(() => {
     formRef.current.elements.forEach((dom) => {
       const name = dom.name;
@@ -55,8 +58,21 @@ const DocumentsForm = (props) => {
         remainderChange(dom);
         setMaxLength((maxLength) => ({ ...maxLength, ...obj }));
       }
+      if (documents) {
+        setFormSelected({
+          language_has_locale: documents.language_has_locale,
+        });
+      }
+      
     });
-  }, [count]);
+  }, [documents, count]);
+  const selectOnChange = (e) => {
+    let document = {
+      language_has_locale: e.target.value,
+    };
+    setFormSelected(document);
+  }
+  
   const formRef = useRef();
   return (
     <>
@@ -69,8 +85,9 @@ const DocumentsForm = (props) => {
               griduse {...methods}
               remainderChange={remainderChange}
               setMaxLength={setMaxLength}
+              setFormSelected={setFormSelected}
             >
-              <input type="hidden" name="id" ref={register()} />
+              <input type="hidden" name="id" ref={register()} defaultValue={documents ? documents.id : ''} />
               <CRow>
                 <CCol md="4" sm="12" className="mt-2">
                   <CFormGroup>
@@ -79,6 +96,8 @@ const DocumentsForm = (props) => {
                       name="language_has_locale"
                       custom
                       innerRef={register({ required: true })}
+                      value={formSelected.language_has_locale}
+                      onChange={selectOnChange}
                     >
                       {
                         window.pageConfig.languageOptions.map((item, index) => {
@@ -98,6 +117,7 @@ const DocumentsForm = (props) => {
                         maxLength="128"
                         onChange={remainderChange}
                         innerRef={register({ required: true })}
+                        defaultValue={documents ? documents.name : ''}
                       />
                       <CInputGroupAppend>
                         <CInputGroupText className="bg-light text-muted">{remaining.name ? remaining.name : 0}/{maxLength.name}</CInputGroupText>
@@ -108,7 +128,7 @@ const DocumentsForm = (props) => {
                 </CCol>
                 <CCol md="4" sm="12" className="mt-2">
                   <CFormGroup>
-                    <CLabel>{t('columns-route')}</CLabel>
+                    <CLabel>{t('suffix uri')}</CLabel>
                     <CInputGroup className={errors.route && 'is-invalid'}>
                       <CInput
                         invalid={errors.route ? true : false}
@@ -116,7 +136,8 @@ const DocumentsForm = (props) => {
                         readOnly
                         maxLength="255"
                         onChange={remainderChange}
-                        innerRef={register({ required: true })}
+                        innerRef={register()}
+                        defaultValue={documents ? documents.route : ''}
                       />
                       <CInputGroupAppend>
                         <CInputGroupText className="bg-light text-muted">{remaining.route ? remaining.route : 0}/{maxLength.route}</CInputGroupText>
@@ -134,4 +155,12 @@ const DocumentsForm = (props) => {
   );
 }
 
-export default DocumentsForm;
+//export default DocumentsForm;
+const mapStateToProps = (state) => {
+  return {
+    dispatch: state.dispatch,
+    formRows: state.formRows,
+  };
+};
+
+export default connect(mapStateToProps)(DocumentsForm);

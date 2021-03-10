@@ -1,5 +1,5 @@
-
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import {
     CRow, CCol, CFormGroup, CLabel,
@@ -26,7 +26,6 @@ const ManagerListForm = (props) => {
     }
     const [remaining, setRemaining] = useState({});
     const [maxLength, setMaxLength] = useState({});
-    const [passwordRequire, setPasswordRequire] = useState(true);
     
     //欄位剩餘字數
     const remainderChange = (e) => {
@@ -45,7 +44,8 @@ const ManagerListForm = (props) => {
         return remaining[name];
     }
     const count = 0;
-
+    const {formRows} = props;
+    const manager_list = formRows ? formRows.manager_list : undefined;
     useEffect(() => {
         formRef.current.elements.forEach((dom) => {
             const name = dom.name;
@@ -58,7 +58,7 @@ const ManagerListForm = (props) => {
                 setMaxLength((maxLength) => ({ ...maxLength, ...obj }));
             }
         });
-    }, [count]);
+    }, [manager_list, count]);
 
     const formRef = useRef();
     //https://noembed.com/embed?url={url}
@@ -74,10 +74,10 @@ const ManagerListForm = (props) => {
                             griduse {...methods}
                             remainderChange={remainderChange}
                             setMaxLength={setMaxLength}
-                            setPasswordRequire={setPasswordRequire}
                         >
-                            <input type="hidden" name="id" ref={register()} />
-                            <input type="hidden" name="language_has_locale" value='{"locale_id":"229","language_id":"119"}' ref={register()} />
+                            <input type="hidden" name="id" ref={register()} defaultValue={manager_list && manager_list.id} />
+                            <input type="hidden" name="language_id" defaultValue={0} ref={register()} />
+                            <input type="hidden" name="locale_id" defaultValue={0} ref={register()} />
                             <CRow className="mt-2">
                                 <CCol>
                                     <CFormGroup>
@@ -89,6 +89,7 @@ const ManagerListForm = (props) => {
                                                 maxLength="64"
                                                 onChange={remainderChange}
                                                 innerRef={register({ required: true })}
+                                                defaultValue={manager_list && manager_list.account}
                                             />
                                             <CInputGroupAppend>
                                                 <CInputGroupText className="bg-light text-muted">{remaining.account ? remaining.account : 0}/{maxLength.account}</CInputGroupText>
@@ -108,7 +109,7 @@ const ManagerListForm = (props) => {
                                                 name="password"
                                                 maxLength="32"
                                                 onChange={remainderChange}
-                                                innerRef={register({ required: passwordRequire })}
+                                                innerRef={register({ required: typeof manager_list == 'undefined' ? true : false })}
                                             />
                                             <CInputGroupAppend>
                                                 <CInputGroupText className="bg-light text-muted">{remaining.password ? remaining.password : 0}/{maxLength.password}</CInputGroupText>
@@ -144,5 +145,10 @@ const ManagerListForm = (props) => {
         </>
     );
 }
+const mapStateToProps = (state) => {
+  return {
+    formRows: state.formRows
+  };
+};
 
-export default ManagerListForm;
+export default connect(mapStateToProps)(ManagerListForm);

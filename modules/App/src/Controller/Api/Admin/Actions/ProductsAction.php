@@ -11,6 +11,7 @@ use App\Service\AjaxFormService;
 use Laminas\Diactoros\Response\EmptyResponse;
 use Chopin\Store\TableGateway\ProductsTableGateway;
 use Chopin\HttpMessage\Response\ApiSuccessResponse;
+use Chopin\Store\TableGateway\ManufacturesTableGateway;
 
 class ProductsAction extends AbstractAction
 {
@@ -20,7 +21,18 @@ class ProductsAction extends AbstractAction
         $method = strtolower($request->getMethod());
         return $this->{$method}($request);
     }
-
+    
+    protected function getManufacturesOptions(ApiSuccessResponse $response)
+    {
+        $contents = json_decode($response->getBody()->getContents(), true);
+        $data = $contents['data'];
+        $manufacturesTableGateway = new ManufacturesTableGateway($this->adapter);
+        $manufacturesOptions = $manufacturesTableGateway->getOptions();
+        $data['manufactures_options'] = $manufacturesOptions;
+        return $data;
+        //return new ApiSuccessResponse(0, $data);
+        
+    }
     /**
      *
      * {@inheritdoc}
@@ -82,9 +94,9 @@ class ProductsAction extends AbstractAction
 
         $ajaxFormService = new AjaxFormService();
         $response = $ajaxFormService->getProcess($request, $productsTableGateway);
-
         if (! ($response instanceof EmptyResponse)) {
-            return $response;
+            $data = $this->getManufacturesOptions($response);
+            return new ApiSuccessResponse(0, $data);
         } else {
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/products.php', [
@@ -109,7 +121,10 @@ class ProductsAction extends AbstractAction
     {
         $ajaxFormService = new AjaxFormService();
         $tablegateway = new ProductsTableGateway($this->adapter);
-        return $ajaxFormService->putProcess($request, $tablegateway);
+        $response = $ajaxFormService->putProcess($request, $tablegateway);
+        $data = $this->getManufacturesOptions($response);
+        return new ApiSuccessResponse(0, $data, ['update success']);
+        
     }
 
     /**
@@ -125,7 +140,9 @@ class ProductsAction extends AbstractAction
         }
         $ajaxFormService = new AjaxFormService();
         $tablegateway = new ProductsTableGateway($this->adapter);
-        return $ajaxFormService->postProcess($request, $tablegateway);
+        $response = $ajaxFormService->postProcess($request, $tablegateway);
+        $data = $this->getManufacturesOptions($response);
+        return new ApiSuccessResponse(0, $data, ['add success']);
     }
 
     /**

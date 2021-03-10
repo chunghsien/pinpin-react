@@ -57,7 +57,7 @@ const ClassPart = (props) => {
                             }
 
                         </CNav>
-                        <MainClassForm href={href} />
+                        <MainClassForm href={href} table={props.table} />
                         {
                             (classRelation && location.pathname.match(/\/\d+$/)) && 
                                 <>

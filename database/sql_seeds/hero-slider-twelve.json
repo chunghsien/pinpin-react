@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "subtitle": "01/",
+    "title": "Simplicity <br /> freedom <br /> comfort",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-twelve/1.png"
+  },
+  {
+    "id": "2",
+    "subtitle": "02/",
+    "title": "The Spring <br /> racing <br /> edition",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-twelve/2.png"
+  },
+  {
+    "id": "3",
+    "subtitle": "03/",
+    "title": "New <br /> arrivals <br /> ss-2020",
+    "url": "/shop/left-sidebar",
+    "image": "/assets/images/hero-slider/hero-slider-twelve/3.png"
+  }
+]

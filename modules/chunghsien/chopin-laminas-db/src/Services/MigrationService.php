@@ -209,6 +209,7 @@ class MigrationService
                     $data = [
                         'migration' => $migrationClass,
                         'batch' => $batch,
+                        'created_at' => date("Y-m-d H:i:s")
                     ];
                     //$this->migrationRepository->save($data);
                     $this->migrationTableGateway->insert($data);

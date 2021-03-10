@@ -162,6 +162,9 @@ const siteInfoColumns = (t, smColumn) => {
       text: t('columns-value'),
       sort: false,
       editable: true,
+      editor: {
+        type: 'textarea'
+      }
     },
 
   ];

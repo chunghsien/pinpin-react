@@ -6,10 +6,15 @@ use Chopin\LaminasDb\TableGateway\AbstractTableGateway;
 use Laminas\Db\Sql\Where;
 use Laminas\Validator\AbstractValidator;
 use Chopin\LaminasDb\DB;
+use Psr\Http\Message\ServerRequestInterface;
+use Chopin\LaminasDb\DB\Traits\SecurityTrait;
+use Laminas\Db\Sql\Expression;
 
 class OrderTableGateway extends AbstractTableGateway
 {
 
+    use SecurityTrait;
+    
     public static $isRemoveRowGatewayFeature = false;
 
     /**
@@ -28,13 +33,13 @@ class OrderTableGateway extends AbstractTableGateway
         "credit_account_paid", // 付款完成(信用卡或相關綁定支付)
         "transfer_account_paid", // 轉帳付款完成(ATM轉帳相關)
         "goods_sent_out", // 貨品已寄出
-        "goods_sent_out_and_unpaid", // 貨品已寄出(尚未付款)
+        "goods_sent_out_and_unpaid", // 貨品已寄出(尚未付款)，僅適用超商取貨付款
         "unexpected_situation", // 其他意外狀況
-        "delivered_to_store", // 已到店
+        "delivered_to_store", // 已到店，僅適用超商取貨或超商取貨付款
         "delivered_to_house", // 已到貨，交付管理室或轉至在地物流中心。
-        "received_and_paid", // 完成領收且完成付款(超商付款,貨到付款)
+        "received_and_paid", // 完成領收且完成付款(僅適用於超商取貨付款,貨到付款)
         "received", // 完成領收
-        "transaction_complete", // 交易完成
+        "transaction_complete", // 交易完成（網路鑑賞期7+3後轉換狀態）
     ];
 
     /**
@@ -55,19 +60,41 @@ class OrderTableGateway extends AbstractTableGateway
         'cancel_the_deal', // 取消交易
     ];
 
-    public function insert($values)
+    public function insert($set)
     {
-        $keys = array_keys($values);
-        if (is_int($keys[0])) {
-            foreach ($values as &$value) {
-                $value['created_at'] = date("Y-m-d H:i:s");
-            }
-        } else {
-            $values['created_at'] = date("Y-m-d H:i:s");
-        }
-        return parent::insert($values);
+        $set = $this->securty($set);
+        $set['created_at'] = date("Y-m-d H:i:s");
+        return parent::insert($set);
     }
-
+    
+    public function getAdminOrderPage(ServerRequestInterface $request)
+    {
+        $query = $request->getQueryParams();
+        $page = isset($query['page']) ? intval($query['page']) : 1;
+        $item_count_per_page = isset($query['item_count_per_page']) ? intval($query['item_count_per_page']) : 25;
+        $filters = isset($query['filters']) ? json_decode($query['filters'], true) : [];
+        $key = config('encryption.aes_key');
+        $pt = self::$prefixTable;
+        $subSelect = $this->getSql()->select();
+        $select->from("{$pt}order")->columns([
+            'id',
+            'member_id',
+            'logistics_global_id',
+            'language_id',
+            'locale_id',
+            'serial',
+            'fullname' => new Expression("CAST(AES_DECRYPT(`{$pt}order`.`fullname`, '{$key}') AS CHAR)"),
+            'email' => new Expression("CAST(AES_DECRYPT(`{$pt}order`.`email`, '{$key}') AS CHAR)"),
+            'cellphone' => new Expression("CAST(AES_DECRYPT(`{$pt}order`.`cellphone`, '{$key}') AS CHAR)"),
+            'pay_method',
+            'status',
+            'deleted_at',
+            'created_at',
+            'updated_at',
+            ]);
+        
+    }
+    
     public function getStatusOptions()
     {
         $translator = AbstractValidator::getDefaultTranslator();

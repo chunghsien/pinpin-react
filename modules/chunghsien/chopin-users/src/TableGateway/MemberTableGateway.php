@@ -8,10 +8,13 @@ use Laminas\Db\Sql\Expression;
 use Laminas\Db\ResultSet\ResultSet;
 use NoProtocol\Encryption\MySQL\AES\Crypter;
 use Laminas\Math\Rand;
+use Chopin\LaminasDb\DB\Traits\SecurityTrait;
 
 class MemberTableGateway extends AbstractTableGateway
 {
 
+    use SecurityTrait;
+    
     public static $isRemoveRowGatewayFeature = false;
     
     /**
@@ -111,7 +114,6 @@ class MemberTableGateway extends AbstractTableGateway
         $select = new Select();
         $pt = self::$prefixTable;
         $select = $select->from([$pt.'member_decrypt' => $subSelect])->where(['email' => $email]);
-        //logger()->debug($this->sql->buildSqlString($select));
         $dataSource = $this->sql->prepareStatementForSqlObject($select)->execute();
         $resultSet = new ResultSet();
         $resultSet->initialize($dataSource);

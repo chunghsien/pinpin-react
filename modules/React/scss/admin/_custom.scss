@@ -87,6 +87,13 @@ div.system-part-item:last-child{
     max-width: 100%;
 }
 
+.c-sidebar .c-sidebar-brand{background-color: rgba(255, 255, 255, 0.9);}
+.c-sidebar-brand-full, #head-brand-logo{max-height:35px;}
+table.table-rwd{
+  margin-bottom: 0;
+}
+.react-bootstrap-table-pagination{margin-top:1rem;}
+div.react-bootstrap-table{overflow-x:scroll;}
 @media (max-width: 1024px) {
   .table-rwd{min-width: 100%;}
   .table-md-show{height:9rem;}
@@ -114,5 +121,3 @@ div.system-part-item:last-child{
   /*當RWD縮小的時候.table-bordered 會有兩條線，所以針對.table-bordered去做修正*/
   .table-rwd.table-bordered td,.table-rwd.table-bordered th,.table-rwd.table-bordered{border:0;}
 }
-.c-sidebar .c-sidebar-brand{background-color: rgba(255, 255, 255, 0.9);}
-.c-sidebar-brand-full, #head-brand-logo{max-height:35px;}

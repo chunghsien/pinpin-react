@@ -80,14 +80,30 @@ class RowGateway extends LaminasRowGateway implements \Serializable, \JsonSerial
 
     /**
      * 
-     * @param string $table
+     * @param string $name
      * @param \Iterator $resultSet
      */
-    public function with($table, $resultSet)
+    public function with($name, $resultSet)
     {
-        $this->with[$table] = $resultSet;
+        $this->with[$name] = $resultSet;
     }
-
+    
+    /**
+     * @return bool
+     */
+    public function rowExistsInDatabase()
+    {
+        if(empty($this->primaryKeyData)) {
+            return false;
+        }
+        if($this->primaryKeyData) {
+            $select = $this->sql->select()->where($this->primaryKeyData);
+            $result = $this->sql->prepareStatementForSqlObject($select)->execute();
+            return $result->count() >= 1;
+        }
+        return ($this->primaryKeyData !== null);
+    }
+    
     /**
      *
      * @param string $withDataKey,
@@ -102,7 +118,16 @@ class RowGateway extends LaminasRowGateway implements \Serializable, \JsonSerial
         $with = [];
         foreach ($this->with as $name => $j) {
             if ($j) {
-                $tmp = is_array($j) ? $j : $j->toArray();
+                $isToArrayMethodExists = false;
+                if($j instanceof \Iterator) {
+                    $jClass = get_class($j);
+                    $jClassMethods = get_class_methods($jClass);
+                    //debug($jClassMethods);
+                    if(false !== array_search('toArray', $jClassMethods)) {
+                        $isToArrayMethodExists = true;
+                    }
+                }
+                $tmp = is_array($j) ? $j : ($isToArrayMethodExists ? $j->toArray() : $j);
                 if ($withDataKey && isset($this->data[$withDataKey])) {
                     $with[$name] = [];
                     foreach ($tmp as $tv) {

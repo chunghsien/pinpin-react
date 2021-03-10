@@ -34,14 +34,6 @@ class FacebookTagsAction extends AbstractAction
             return $response;
         }
         $data = $response->getPayload()['data'];
-        /*
-        $serialize = $request->getAttribute('system_settings');
-        foreach ($serialize['facebook_dev']['children'] as $item){
-            $key = $item['key'];
-            $value = isset($item['value']) ? $item['value'] : $item['aes_value'];
-            $data[$key] = $value;
-        }
-        */
         return new ApiSuccessResponse(0, $data);
     }
     
@@ -49,7 +41,7 @@ class FacebookTagsAction extends AbstractAction
     {
         $data = $response->getPayload()['data'];
         $imagePath = './public'.$data['og_colon_image'];
-        $row = $tablegateway->select(['id', $data['id']])->current();
+        $row = $tablegateway->select(['id' => $data['id']])->current();
         $siteUrl = siteBaseUri();
         if(is_file($imagePath)) {
             $ogImageManager = ImageManagerStatic::make($imagePath);

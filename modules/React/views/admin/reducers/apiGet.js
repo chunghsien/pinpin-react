@@ -1,7 +1,8 @@
 
 import axios from 'axios';
 
-async function apiGet(state, actions) {
+async function apiGet(state={}, actions) {
+
   var requestParams = {
     method: 'get',
     url: actions.url,
@@ -11,20 +12,23 @@ async function apiGet(state, actions) {
       ...actions.params,
     };
   }
-  
-  return axios(requestParams).then(function(response) {
-    return {
-      type: 'apiGet',
-      payload: response.data
-    }
-  }).catch(error => {
-    return {
-      state, ...{
-        type: 'apiGet',
-        payload: error.response.data
+  if (actions.type == 'apiGet') {
+    return axios(requestParams).then(function(response) {
+      if (response.data.code == 0) {
+        let data = {
+          ...state
+        };
+        data.apiGet = response.data;
+        return data;
       }
-    }
-  });
+      return state;
+    }).catch(error => {
+      console.warn(error);
+      return state;
+    });
+  } else {
+    return state;
+  }
 }
 
 export default apiGet;

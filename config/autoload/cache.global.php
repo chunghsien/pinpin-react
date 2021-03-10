@@ -1,7 +1,7 @@
 <?php
 
-use Chopin\LaminasDb\RowGateway\RowGateway;
-use Laminas\Cache\Storage\Plugin\Serializer;
+//use Chopin\LaminasDb\RowGateway\RowGateway;
+//use Laminas\Cache\Storage\Plugin\Serializer;
 use Laminas\Cache\Storage\StorageInterface;
 
 return [
@@ -12,11 +12,12 @@ return [
                 'options' => [
                     'dir_level' => 1,
                     'cache_dir' => 'storage/cache/app',
-                    'ttl' => 31536000, //one years
+                    'ttl' => 86400 * 7, //one week
                 ],
             ],
             'plugins' => [
-                [
+                'Serializer',
+                /*[
                     'name' => Serializer::class,
                     'options' => [
                         'serializer_options' => [
@@ -27,6 +28,7 @@ return [
 
                     ],
                 ],
+                */
             ],
         ],
     ],

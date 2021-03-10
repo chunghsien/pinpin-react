@@ -13,7 +13,7 @@ use Laminas\Db\Sql\Predicate\Predicate;
 use Laminas\Db\Sql\Where;
 use Laminas\Db\RowGateway\RowGatewayInterface;
 use Chopin\LaminasDb\ResultSet\ResultSet;
-use Chopin\LaminasDb\DB\Traits\CacheTrait;
+use Chopin\LaminasDb\TableGateway\Feature\CacheTableFeature;
 
 abstract class AbstractTableGateway extends LaminasTableGateway
 {
@@ -23,7 +23,7 @@ abstract class AbstractTableGateway extends LaminasTableGateway
     const FOREIGN_KEY = 'FOREIGN KEY';
 
     const PRIMARY_KEY = 'PRIMARY KEY';
-
+    
     /**
      *
      * @var array
@@ -172,7 +172,7 @@ abstract class AbstractTableGateway extends LaminasTableGateway
             if (count($this->primary) == 1) {
                 $id_index = array_search('id', $this->primary);
                 if (($id_index !== false) && static::$isRemoveRowGatewayFeature === false) {
-                    $primaryKeyColumn = $this->primary[$id_index];
+                    $primaryKeyColumn = $this->primary/*[$id_index]*/;
                     $sql = $this->sql;
                     $tableGateClass = get_class($this);
                     $rowGatewayClass = str_replace('Table', "Row", $tableGateClass);
@@ -189,6 +189,8 @@ abstract class AbstractTableGateway extends LaminasTableGateway
                     $this->featureSet->addFeature($feature);
                 }
             }
+            $tableCacheFeature = new CacheTableFeature();
+            $this->featureSet->addFeature($tableCacheFeature);
             if (method_exists($this, 'initCrypt')) {
                 $this->initCrypt();
             }
@@ -385,6 +387,13 @@ abstract class AbstractTableGateway extends LaminasTableGateway
             $columns = array_values($columns);
         } else {
             throw new \ErrorException('$valueField 資料格式錯誤');
+        }
+        if(false !== array_search('deleted_at', $this->columns)) {
+            $predicateParams[] = [
+                'isNull',
+                'AND',
+                ['deleted_at']
+            ];
         }
         $scripts = [
             'from' => $this->table,

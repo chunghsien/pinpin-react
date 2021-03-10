@@ -13,8 +13,6 @@ use Chopin\Support\Registry;
 use Laminas\Db\Adapter\Adapter;
 use Chopin\LanguageHasLocale\TableGateway\LanguageHasLocaleTableGateway;
 use Mezzio\Session\SessionMiddleware;
-use Chopin\Store\RowGateway\CartRowGateway;
-use Chopin\Store\TableGateway\CartTableGateway;
 
 class AdminDefaultController implements RequestHandlerInterface
 {
@@ -62,7 +60,9 @@ class AdminDefaultController implements RequestHandlerInterface
                 ]
             ]
         ]);
+        //$page_config['adminSettings'] = config('admin_settings');
         $page_config['languageOptions'] = $languageOptions;
+        $page_config['basePath'] = $request->getAttribute('_base_path', '');
         if (is_array($page_config) && $page_config) {
             /**
              *

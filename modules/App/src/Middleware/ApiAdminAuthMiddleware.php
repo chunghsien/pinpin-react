@@ -41,7 +41,7 @@ class ApiAdminAuthMiddleware implements MiddlewareInterface
                     'message' => '403 forbidden',
                     'code' => -2,
                     'data' => [],
-                ], 403);
+                ]);
             }
         } catch (\Exception $e) {
             return new JsonResponse([

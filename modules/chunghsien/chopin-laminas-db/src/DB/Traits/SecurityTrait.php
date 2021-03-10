@@ -35,6 +35,7 @@ trait SecurityTrait
         'telphone',
         'address', //住址
         'full_address', //住址
+        'aes_value',
     ];
 
     /**
@@ -171,7 +172,9 @@ trait SecurityTrait
         $encryptionColumns = $this->defaultEncryptionColumns;
         foreach ($data as $key => &$value) {
             if(array_search($key, $encryptionColumns) !== false) {
-                $value = $this->aesCrypter->decrypt($value);
+                if($value) {
+                    $value = $this->aesCrypter->decrypt($value);
+                }
             }
         }
         return (array)$data;

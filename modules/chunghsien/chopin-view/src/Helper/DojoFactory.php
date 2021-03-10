@@ -17,13 +17,13 @@ class DojoFactory
 
         /**
          *
-         * @var \LaminasExpressive\Router\FastRouteRouter $router
+         * @var \Mezzio\Router\FastRouteRouter $router
          */
         $router = $container->get('LaminasExpressive\Router\RouterInterface');
 
         /**
          *
-         * @var \LaminasDiactoros\ServerRequest $request
+         * @var \Laminas\Diactoros\ServerRequest $request
          */
         $request = $container->get('Psr\Http\Message\ServerRequestInterface')();
         $routeName = explode('.', $router->match($request)->getMatchedRouteName())[0];

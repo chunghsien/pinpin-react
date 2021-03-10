@@ -18,16 +18,8 @@ class CallToActionTableGateway extends AbstractTableGateway
     {
         $documentsTableGateway = new DocumentsTableGateway($this->adapter);
         $row = $documentsTableGateway->select(["route" => $route])->current();
-        $results = $this->select([
-            "table" => "documents",
-            "table_id" => $row->id
-        ]);
-        $data = [];
-        foreach ($results as $row)
-        {
-            $row->tags = json_decode($row->tags, true);
-            $data[] = $row;
-        }
-        return $data;
+        $selfRow = $this->select(["table" => "documents","table_id" => $row->id])->current();
+        $selfRow->tags = json_decode($selfRow->tags, true);
+        return $selfRow;
     }
 }

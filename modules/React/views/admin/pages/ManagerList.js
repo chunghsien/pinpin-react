@@ -16,78 +16,80 @@ import simNavLinkClick from './components/simNavLinkClick';
 
 const ManagerList = (/*props*/) => {
 
-    const { t } = useTranslation(['translation']);
-    const useColumns = managerListColumns;
-    const columns = useColumns(t, 'name');
-    const paginateUrl = '/'+SYS_LANG+'/api/admin/manager_list';
-    const pagination = paginationOptions(t);
-    const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
+  const { t } = useTranslation(['translation']);
+  const useColumns = managerListColumns;
+  const columns = useColumns(t, 'name');
+  const basePath = window.pageConfig.basePath;
+  const paginateUrl = (basePath + '/' + SYS_LANG + '/api/admin/manager_list').replace(/^\/{2,}/, '/');
+  const pagination = paginationOptions(t);
+  const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
 
-    const classRelation = {
-        href: '/'+SYS_LANG+'/admin/manager_list',
-        self: 'users',
-        parent: 'roles',
-        bind: 'user_has_roles'
-    };
+  const classRelationApi = (basePath + '/' + SYS_LANG + '/admin/manager_list').replace(/^\/{2,}/, '');
+  const classRelation = {
+    href: classRelationApi,
+    self: 'users',
+    parent: 'roles',
+    bind: 'users_has_roles'
+  };
 
-    const count = 0;
-    useEffect(() => {
-        //修正階層下拉選單無法開啟的錯誤
-        simNavLinkClick();
-    }, [count]);
+  const count = 0;
+  useEffect(() => {
+    //修正階層下拉選單無法開啟的錯誤
+    simNavLinkClick();
+  }, [count]);
 
-    return (
-        <Switch>
+  return (
+    <Switch>
+      {
+        typeof locationPathname != 'undefined' &&
+        <Route path={locationPathname + '/:method_or_id'}>
+          <FormBackGridFixed t={t} />
+          <CTabs id="tabs-root" activeTab="default-form">
+            <CNav variant="tabs">
+              <TabLink tab="default-form" label="Default form" />
+              {
+                location.pathname.match(/\/\d+$/) &&
+                <>
+                  <TabLink tab="class-releation-form" label="manager group" />
+                </>
+              }
+
+            </CNav>
+            <ManagerListForm href="/admin/manager_list" />
             {
-                typeof locationPathname != 'undefined' &&
-                <Route path={locationPathname + '/:method_or_id'}>
-                    <FormBackGridFixed t={t} />
-                    <CTabs id="tabs-root" activeTab="default-form">
-                        <CNav variant="tabs">
-                            <TabLink tab="default-form" label="Default form" />
-                            {
-                                location.pathname.match(/\/\d+$/) &&
-                                <>
-                                    <TabLink tab="class-releation-form" label="manager" />
-                                </>
-                            }
-                            
-                        </CNav>
-                        <ManagerListForm href="/admin/manager_list" />
-                        {
-                            location.pathname.match(/\/\d+$/) &&
-                            <Suspense fallback={<div>Loading...</div>}>
-                                <ClassRelationForm isMulti={false} href="/admin/users_has_roles" classRelation={classRelation} />
-                            </Suspense>
-                        }
-                        
-                    </CTabs>
-                </Route>
+              location.pathname.match(/\/\d+$/) &&
+              <Suspense fallback={<div>Loading...</div>}>
+                <ClassRelationForm isMulti={false} href="/admin/users_has_roles" classRelation={classRelation} />
+              </Suspense>
             }
-            <Route path={locationPathname}>
-                <CRow>
-                    <CCol>
-                        <CCard>
-                            <CCardHeader>{t('manager list')}</CCardHeader>
-                            <CCardBody>
-                                <AdminBootstrapTable
-                                    paginateUrl={paginateUrl}
-                                    columns={columns}
-                                    isSelectRow
-                                    isFilterReset
-                                    isInsertAction
-                                    paginationOptions={pagination}
-                                    translation={t}
-                                    clearFilterTrigger={clickClearFilter}
-                                />
-                            </CCardBody>
-                        </CCard>
-                    </CCol>
-                </CRow>
-            </Route>
 
-        </Switch>
-    );
+          </CTabs>
+        </Route>
+      }
+      <Route path={locationPathname}>
+        <CRow>
+          <CCol>
+            <CCard>
+              <CCardHeader>{t('manager list')}</CCardHeader>
+              <CCardBody>
+                <AdminBootstrapTable
+                  paginateUrl={paginateUrl}
+                  columns={columns}
+                  isSelectRow
+                  isFilterReset
+                  isInsertAction
+                  paginationOptions={pagination}
+                  translation={t}
+                  clearFilterTrigger={clickClearFilter}
+                />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </Route>
+
+    </Switch>
+  );
 };
 
 export default ManagerList;

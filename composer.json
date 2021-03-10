@@ -93,6 +93,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "modules/App/src",
+            "Blast\\BaseUrl\\": "modules/mtymek/blast-base-url/src",
             "Chopin\\Console\\": "modules/chunghsien/chopin-console/src",
             "Chopin\\Support\\": "modules/chunghsien/chopin-support/src",
             "Chopin\\Middleware\\": "modules/chunghsien/chopin-middleware/src/",

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types = 1);
 namespace App\Controller\Api\Admin\Actions;
 
@@ -7,6 +8,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Chopin\Middleware\AbstractAction;
 use App\Service\AjaxFormService;
 use Chopin\Documents\TableGateway\DocumentsContentTableGateway;
+use Chopin\HttpMessage\Response\ApiSuccessResponse;
 
 class DocumentsContentAction extends AbstractAction
 {
@@ -19,10 +21,16 @@ class DocumentsContentAction extends AbstractAction
 
     protected function get(ServerRequestInterface $request): ResponseInterface
     {
-        $ajaxFormService = new AjaxFormService();
         $tablegateway = new DocumentsContentTableGateway($this->adapter);
-        $response = $ajaxFormService->getProcess($request, $tablegateway);
-        return $response;
+        $queryParams = $request->getQueryParams();        
+        $where = $tablegateway->getSql()->select()->where;
+        $where->equalTo('documents_id', $queryParams['table_id']);
+        $resultSet = $tablegateway->select($where);
+        $row = [];
+        if($resultSet->count() == 1) {
+            $row = $resultSet->current()->toArray();
+        }
+        return new ApiSuccessResponse(0, $row);
     }
 
     protected function put(ServerRequestInterface $request): ResponseInterface

@@ -33,7 +33,7 @@ class Migrate_Create_roles_20190606135005 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('module_id', 'int', ['unsigned' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('parent_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('depth', 'smallint', ['unsigned' => true, 'default' => 0]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 64]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', ['length' => 48]));
 
         $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));

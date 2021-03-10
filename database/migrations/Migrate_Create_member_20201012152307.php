@@ -33,9 +33,9 @@ class Migrate_Create_member_20201012152307 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('parent_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('depth', 'tinyint', ['unsigned' => true, 'default' => 0]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('account', 'varchar', ['length' => 64]));
+        //$ddl->addColumn(MySQLColumnFactory::buildColumn('account', 'varchar', ['length' => 48]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('full_name', 'varbinary', ['length' => 96, 'nullable' => true]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('cellphone', 'varbinary', ['length' => 96]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('cellphone', 'varbinary', ['length' => 24]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('email', 'varbinary', ['length' => 384]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('country', 'varchar', ['length' => 128, 'default' => 'Republic of China']));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('state', 'varchar', ['length' => 128, 'default' => 'Taiwan']));
@@ -56,7 +56,7 @@ class Migrate_Create_member_20201012152307 extends AbstractMigration
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable.'_id_PRIMARY'));
         $ddl->addConstraint(new UniqueKey(['account']));
         $ddl->addConstraint(new UniqueKey(['cellphone']));
-        $ddl->addConstraint(new UniqueKey(['email']));
+        //$ddl->addConstraint(new UniqueKey(['email']));
     }
     
     public function down()

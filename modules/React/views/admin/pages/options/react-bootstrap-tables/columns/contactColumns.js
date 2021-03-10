@@ -158,7 +158,7 @@ const contactColumns = (t, smColumn) => {
         },
       }),
     },
-    actions(t)
+    actions(t, true)
   ];
   return fullColumns;
 };

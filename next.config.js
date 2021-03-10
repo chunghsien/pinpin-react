@@ -7,7 +7,6 @@ module.exports = (phase, { defaultConfig }) => {
         reactStrictMode: true,
         generateEtags: false,
     };
-     mergeConfig.env.LOCAL_API_URL = "http://pinpin_lezada.vagrant";
-
+     mergeConfig.env.LOCAL_API_URI = "http://pinpin_lezada.vagrant";
     return mergeConfig;
 };

@@ -1,5 +1,6 @@
-
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from "react-redux";
+import { FORM_ROWS } from "../../../actions/formRowsAction";
 import { useTranslation } from 'react-i18next';
 import {
   CRow, CCol, CFormGroup, CLabel,
@@ -17,22 +18,22 @@ import axios from 'axios';
 import { notify, toConfirm } from '../alertify';
 
 const AssetsForm = (props) => {
-
+  const { dispatch } = props;
   const { t } = useTranslation(['translation']);
   const methods = useForm({ mode: 'all' });
   const { register, errors } = methods;
   let href = props.href;
   const matcher = location.pathname.match(/\/\d+$/);
+  const basePath = window.pageConfig.basePath;
   if (location.pathname.match(/\/\d+$/)) {
     href = href.replace(/\/$/, '') + matcher[0];
   } else {
     href += 'add';
   }
+
   const [maxLength, setMaxLength] = useState({});
   const [remaining, setRemaining] = useState({});
   const [mediaState, setMediaState] = useState({});
-  //const [fileRequire, setFileRequire] = useState(true);
-  const [formLists, setFormLists] = useState({ assets: [] });
 
   const { method_or_id } = useParams();
 
@@ -88,89 +89,97 @@ const AssetsForm = (props) => {
         setMaxLength((maxLength) => ({ ...maxLength, ...obj }));
       }
     });
-  }, [count/*, formLists*/]);
+  }, [count]);
 
   const formRef = useRef();
-
-  const [listsStore, setListsStore] = useState({});
 
   const onEleChange = (e) => {
     e.preventDefault();
     let store = {};
     const target = e.target;
     const id = target.dataset.id;
-    const name = target.name;
-    let value = target.value;
 
     store[id] = { id: id };
     if (target.type == 'file') {
-      value = target.files[0];
       let reader = new FileReader();
       const file = target.files[0];
       reader.readAsDataURL(file);
       reader.onload = () => {
         target.previousElementSibling.src = reader.result;
+        target.previousElementSibling.classList.remove('d-none');
       }
     }
-    setListsStore((listsStore) => {
-      if (typeof listsStore[id] === 'undefined') {
-        listsStore[id] = {};
-      }
-      listsStore[id][name] = value;
-      return listsStore;
-    });
   }
 
   const onListItemSave = (e) => {
     e.preventDefault();
-    //const key = e.currentTarget.dataset.key;
+    const saveBtnEle = e.currentTarget;
+
     const id = e.currentTarget.dataset.id;
-    if (listsStore[id]) {
-      const data = listsStore[id];
+    let row = null;
+    props.formRows.assets.forEach((item) => {
+      if (item.id == id) {
+        row = item;
+        return;
+      }
+    });
+    if (row) {
+      var data = {}
+      Array.from(saveBtnEle.parentElement.parentElement.parentElement.querySelectorAll('input')).forEach((ele) => {
+        let name = ele.name.replace(/\d+$/, '');
+        if (name == 'path' && ele.files.length) {
+          data[name] = ele.files[0];
+        } else {
+          let compare = row[name];
+          if (name == 'sort' && compare == 16777215) {
+            compare = '';
+          }
+          if (compare != ele.value && name != 'path') {
+            data[name] = ele.value;
+          }
+          if (name == 'sort' && compare < 16777215 && ele.value == '') {
+            data[name] = 16777215;
+          }
+        }
+
+      });
       let verify = 0;
       Object.keys(data).forEach((field) => {
         if (data[field]) {
           if (typeof data[field] === 'object') {
             verify += 1;
           } else {
-            verify += data[field].length;
+            verify += data[field].toString().length;
           }
         }
       });
-      const orginal = formLists.assets.filter((item) => {
-        if (id == item.id) {
-          return true;
-        }
-        return false;
-      });
-      if (orginal.sort != 16777215 && !verify) {
-        verify++
-      }
-      //if(verify == 0 && )
+
       if (verify > 0) {
         var formData = new FormData();
         Object.keys(data).forEach((field) => {
           formData.set(field, data[field]);
         });
         formData.set('id', id);
+        const loadingBackgroundDom = document.getElementById('loading-background');
+        loadingBackgroundDom.classList.remove('d-none');
+        const postApi = `${basePath}/${SYS_LANG}/api/admin/assets?put=1`.replace(/^\/{2,}/, '/');
         axios({
           method: 'post',
-          url: '/' + SYS_LANG + '/api/admin/assets?put=1',
+          url: postApi,
           headers: {
             'Content-Type': 'multipart/form-data'
           },
           data: formData,
         }).then((response) => {
+          loadingBackgroundDom.classList.add('d-none');
           const NOTIFY = response.data.notify.join("");
           if (response.data.code == 0) {
             notify('success', t(NOTIFY), 3, () => {
               if (response) {
                 //var listsData = {assets: response.data.data};
-                setFormLists(() => {
-                  return {
-                    assets: response.data.data
-                  }
-                });
+                if (response) {
+                  dispatch({ type: FORM_ROWS, data: { assets: response.data.data } });
+                }
                 var event = new MouseEvent('click', {
                   'view': window,
                   'bubbles': true,
@@ -186,6 +195,7 @@ const AssetsForm = (props) => {
           }
 
         }).catch((error) => {
+          loadingBackgroundDom.classList.add('d-none');
           if (error.response && typeof error.response.data.notify !== 'undefined') {
             var errotNotify = error.response.data.notify.join('');
             if (errotNotify.indexOf('To many files')) {
@@ -211,63 +221,65 @@ const AssetsForm = (props) => {
     e.preventDefault();
     const key = e.currentTarget.dataset.key;
     const id = e.currentTarget.dataset.id;
-    formLists.assets.filter((item, idx) => {
-      if (key != idx) {
-        return false;
-      }
-      Object.keys(item).forEach((name) => {
-        var eleId = name + id;
-        var ele = document.getElementById(eleId);
-        if (!ele) {
-          return;
+    if (props.formRows && props.formRows.assets) {
+      const assets = props.formRows.assets;
+      assets.filter((item, idx) => {
+        if (key != idx) {
+          return false;
         }
-        if (ele.type == 'file') {
-          ele.files = null;
-          ele.value = '';
-          ele.previousElementSibling.src = formLists.assets[key][name] + '?u=' + Date.now();
-        } else {
-          const data = formLists.assets[key][name];
-          ele.value = (data == 16777215 || !data) ? '' : data;
-        }
+        Object.keys(item).forEach((name) => {
+          var eleId = name + id;
+          var ele = document.getElementById(eleId);
+          if (!ele) {
+            return;
+          }
+          if (ele.type == 'file') {
+            ele.files = null;
+            ele.value = '';
+            const src = (basePath + assets[key][name] + '?u=' + Date.now()).replace(/^\/{2,}/, '/');
+            ele.previousElementSibling.src = src;
+            //console.log(item);
+            if (!item.path.length) {
+              ele.previousElementSibling.classList.add('d-none');
+            }
+          } else {
+            const data = assets[key][name];
+            ele.value = (data == 16777215 || !data) ? '' : data;
+          }
+        });
+        return true;
       });
-      setListsStore((listsStore) => {
-        listsStore[id] = {};
-        return listsStore;
-      });
-      return true;
-    });
+
+    }
   }
 
   const onListItemDel = (e) => {
     e.preventDefault();
     const id = e.currentTarget.dataset.id;
+    const loadingBackgroundDom = document.getElementById('loading-background');
     toConfirm(() => {
+      loadingBackgroundDom.classList.remove('d-none');
+      const deleteApi = `${basePath}/${SYS_LANG}/api/admin/assets/${id}`.replace(/^\/{2,}/, '/');
       axios({
         method: 'delete',
-        url: '/' + SYS_LANG + '/api/admin/assets/' + id,
+        url: deleteApi,
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       }).then((response) => {
+        loadingBackgroundDom.classList.add('d-none');
         const NOTIFY = response.data.notify.join("");
         if (response.data.code == 0) {
           notify('success', t(NOTIFY), 3, () => {
             if (response) {
-              //var listsData = {assets: response.data.data};
-              console
-              setFormLists(() => {
-                return {
-                  assets: response.data.data
-                }
-              });
+              dispatch({ type: FORM_ROWS, data: { assets: response.data.data } });
             }
           });
         } else {
           if (response.data.code == -2) {
             notify('error', t('admin-session-fail'), 3, () => {
-              //const pathname = location.pathname.replace('^\/', '');
-              //const pathnameSplit = pathname.split('/');
-              location.href = `/${SYS_LANG}/admin-login`;
+              const redirect = `${basePath}/${SYS_LANG}/admin-login`.replace(/^\/{2,}/, '/');
+              location.href = redirect;
             });
           }
           notify('error', t(NOTIFY), 5);
@@ -295,7 +307,9 @@ const AssetsForm = (props) => {
                   </thead>
                   <tbody>
                     {
-                      formLists.assets.map((item, key) => {
+                      (props.formRows && props.formRows.assets) &&
+                      props.formRows.assets.map((item, key) => {
+                        const itemPath = (basePath + item.path).replace(/^\/{2,}/, '/');
                         return (
                           <tr key={key}>
                             <td>
@@ -310,7 +324,7 @@ const AssetsForm = (props) => {
                               />
                             </td>
                             <td>
-                              <img src={item.path} className="form-thumbnail-10 assets-thumbnail" />
+                              <img src={itemPath} className={(item.path.length > 0) ? 'form-thumbnail-10 assets-thumbnail' : 'form-thumbnail-10 assets-thumbnail d-none'} />
                               <CInputFile
                                 id={'path' + item.id}
                                 key={'path' + key}
@@ -376,7 +390,7 @@ const AssetsForm = (props) => {
                       })
                     }
                     {
-                      formLists.assets.length === 0 &&
+                      !!(!props.formRows) &&
                       <tr><td colSpan="4" className="text-center">{t('No data.')}</td></tr>
                     }
                   </tbody>
@@ -384,7 +398,15 @@ const AssetsForm = (props) => {
               </CCol>
             </CRow>
           </CCardBody>
-          <Form innerRef={formRef} formLists={formLists} setFormLists={setFormLists} href={href} griduse {...methods} remainderChange={remainderChange} setMediaState={setMediaState} {...props}>
+          <Form
+            innerRef={formRef}
+            href={href}
+            griduse {...methods}
+            remainderChange={remainderChange}
+            setMediaState={setMediaState}
+            setRemaining={setRemaining}
+            {...props}
+          >
             <CRow className="mt-2">
               <CCol md="6" sm="12">
                 <CFormGroup>
@@ -429,4 +451,12 @@ const AssetsForm = (props) => {
   );
 }
 
-export default AssetsForm;
+const mapStateToProps = (state) => {
+  return {
+    dispatch: state.dispatch,
+    formRows: state.formRows
+  };
+};
+
+//export default Documents;
+export default connect(mapStateToProps)(AssetsForm);

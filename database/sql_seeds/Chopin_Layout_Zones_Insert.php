@@ -1,37 +1,36 @@
 <?php
 
 use Chopin\LaminasDb\Console\SqlExecute\AbstractSeeds;
-use Laminas\Db\Sql\Sql;
+use Chopin\Documents\TableGateway\LayoutZonesTableGateway;
 
 class Chopin_Layout_Zones_Insert extends AbstractSeeds
 {
+
     protected $table = 'layout_zones';
 
     public function run()
     {
-        $sql = new Sql($this->adapter);
-
-        $insert = $sql->insert($this->table);
-        $insert->values([
-            'language_id' => 119,
-            'locale_id' => 229,
-            'type' => 'footer',
-            'name'=> '頁腳(1)- 中文(臺灣)',
-        ]);
-        $sql->prepareStatementForSqlObject($insert)->execute();
-        $insert->values([
-            'language_id' => 119,
-            'locale_id' => 229,
-            'type' => 'footer',
-            'name'=> '頁腳(2)- 中文(臺灣)',
-        ]);
-        $sql->prepareStatementForSqlObject($insert)->execute();
-        $insert->values([
-            'language_id' => 119,
-            'locale_id' => 229,
-            'type' => 'footer',
-            'name'=> '頁腳(3)- 中文(臺灣)',
-        ]);
-        $sql->prepareStatementForSqlObject($insert)->execute();
+        $tableGateway = new LayoutZonesTableGateway($this->adapter);
+        $sets = [
+            [
+                'language_id' => 119,
+                'locale_id' => 229,
+                'type' => 'header_nav',
+                'name' => '頁首導覽',
+            ],
+            [
+                'language_id' => 119,
+                'locale_id' => 229,
+                'type' => 'footer_nav',
+                'name' => '頁尾導覽',
+            ],
+        ];
+        foreach ($sets as $set)
+        {
+            if($tableGateway->select($set)->count() == 0)
+            {
+                $tableGateway->insert($set);
+            }
+        }
     }
 }

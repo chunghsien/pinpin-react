@@ -31,6 +31,7 @@ class FnClassAction extends AbstractAction
                 'modules/App/scripts/db/admin/fnClass.php',
                 [
                     'name' => 'fn_class',
+                    'viewed_count' => 'fn_class',
                     'sort' => 'fn_class',
                     'display_name' => 'language_has_locale',
                     'created_at' => 'fn_class',

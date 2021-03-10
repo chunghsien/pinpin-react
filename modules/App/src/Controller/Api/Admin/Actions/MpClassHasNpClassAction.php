@@ -17,21 +17,31 @@ class MpClassHasNpClassAction extends AbstractAction
 
     private function getOptions(ServerRequestInterface $request)
     {
-        $params = array_merge($request->getQueryParams(), $request->getParsedBody());
-        $np_class_id = $params['np_class_id'];
-        $npClassTableGateway = new NpClassTableGateway($this->adapter);
-        $mpClassRow = $npClassTableGateway->select([
-            'id' => $np_class_id
-        ])->current();
-        $mpClassHasNpClassScripts = require 'modules/App/scripts/db/admin/mpClassHasNpClass.php';
-        $options = DB::selectFactory($mpClassHasNpClassScripts['options'], [
-            'language_id' => $mpClassRow->language_id,
-            'locale_id' => $mpClassRow->locale_id
-        ])->toArray();
-        
-        $values = DB::selectFactory($mpClassHasNpClassScripts['defaultValue'], [
-            'np_class_id' => $np_class_id,
-        ])->toArray();
+        try {
+            $params = array_merge($request->getQueryParams(), $request->getParsedBody());
+            $np_class_id = isset($params['np_class_id']) ? $params['np_class_id'] : null;
+            if(!$np_class_id) {
+                $np_class_id = $params['self_id'];
+            }
+            $npClassTableGateway = new NpClassTableGateway($this->adapter);
+            $npClassRow = $npClassTableGateway->select([
+                'id' => $np_class_id
+            ])->current();
+            $mpClassHasNpClassScripts = require 'modules/App/scripts/db/admin/mpClassHasNpClass.php';
+            
+            $options = DB::selectFactory($mpClassHasNpClassScripts['options'], [
+                'language_id' => $npClassRow->language_id,
+                'locale_id' => $npClassRow->locale_id
+            ])->toArray();
+            
+            $values = DB::selectFactory($mpClassHasNpClassScripts['defaultValue'], [
+                'np_class_id' => $np_class_id,
+            ])->toArray();
+            
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            exit();
+        }
         
         return [
             'values' => [
@@ -68,13 +78,15 @@ class MpClassHasNpClassAction extends AbstractAction
             if($mpClassHasNpClassTableGateway->select(['np_class_id' => $np_class_id])->count()) {
                 $mpClassHasNpClassTableGateway->delete(['np_class_id' => $np_class_id]);
             }
-            $mp_class_ids = explode(',', $post['mp_class_id']);
-            foreach ($mp_class_ids as $mp_class_id) {
-                $set = [
-                    'mp_class_id' => $mp_class_id,
-                    'np_class_id' => $np_class_id
-                ];
-                $mpClassHasNpClassTableGateway->insert($set);
+            if(isset($post['mp_class_id'])) {
+                $mp_class_ids = explode(',', $post['mp_class_id']);
+                foreach ($mp_class_ids as $mp_class_id) {
+                    $set = [
+                        'mp_class_id' => $mp_class_id,
+                        'np_class_id' => $np_class_id
+                    ];
+                    $mpClassHasNpClassTableGateway->insert($set);
+                }
             }
             $this->adapter->getDriver()->getConnection()->commit();
             $data = $this->getOptions($request);

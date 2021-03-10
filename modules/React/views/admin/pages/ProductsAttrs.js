@@ -19,7 +19,8 @@ const ProductsAttrs = (/*props*/) => {
     const useColumns = productsAttrsColumns;
     const columns = useColumns(t, 'name');
     //const table = 'attributes';
-    const paginateUrl = '/'+SYS_LANG+'/api/admin/products_attrs';
+    const basePath = window.pageConfig.basePath;
+    const paginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/products_attrs').replace(/^\/{2,}/, '/');
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
     return (

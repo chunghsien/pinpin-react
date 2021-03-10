@@ -30,20 +30,6 @@ const AdminBootstrapTable = (props) => {
   const paginateUrl = props.paginateUrl;
   useEffect(() => {
     getQuery();
-    Array.from(document.getElementsByClassName('c-active')).forEach((item) => {
-      const navUri = location.pathname.replace(/\/\d+$/, '').replace(/\/add$/, '');
-      var verfired = new RegExp(navUri + '$');
-      if (item.tagName.toLowerCase() == 'li') {
-        if (verfired.test(item.children[0].href) === false) {
-          item.classList.remove('c-active');
-          item.children[0].classList.remove('c-active');
-        }
-      } else {
-        if (verfired.test(item.href) === false) {
-          item.classList.remove('c-active');
-        }
-      }
-    });
 
     //載入表格時先把copy id清除
     if (localStorage.getItem('copyId')) {
@@ -122,11 +108,17 @@ const AdminBootstrapTable = (props) => {
 
   const getQuery = (type, params, success, error) => {
     document.getElementById('loading-background').classList.remove('d-none');
+    if (props.apiOther) {
+      if (!params) {
+        params = {};
+      }
+      params.apiOther = props.apiOther
+    }
     dispatch({ type: 'apiGet', url: paginateUrl, params: params });
-    store.getState().then(function(dispatch) {
-      const data = dispatch.payload.data;
-      const code = dispatch.payload.code;
-      if (code === 0) {
+    store.getState().then(function(dispatcher) {
+      const data = dispatcher.apiGet.data;
+      const code = dispatcher.apiGet.code;
+      if (code == 0) {
         const mergeOptions = {
           totalSize: data.pages.totalItemCount,
           sizePerPage: data.pages.itemCountPerPage,
@@ -134,7 +126,10 @@ const AdminBootstrapTable = (props) => {
         };
         setPaginationOptionsState((paginationOptionsState) => ({ ...paginationOptionsState, ...mergeOptions }));
 
-        setItems(() => (data.items));
+        setItems(() => {
+          const items = data.items;
+          return items;
+        });
         if (typeof success === 'function') {
           success();
         }
@@ -144,7 +139,8 @@ const AdminBootstrapTable = (props) => {
       } else {
         if (code == -2) {
           notify('error', t('admin-session-fail'), 3, () => {
-            location.href = `/${SYS_LANG }/admin-login`;
+            const redirectPath =  `/${pathnameSplit[0]}/${SYS_LANG}/admin-login`.replace(/\/{2,}/, '/');
+            location.href = redirectPath;
           });
         }
         //錯誤處理
@@ -163,8 +159,8 @@ const AdminBootstrapTable = (props) => {
   const putApi = (params, done) => {
     document.getElementById('loading-background').classList.remove('d-none');
     dispatch({ type: 'apiPut', url: paginateUrl, params: params.cellEdit });
-    store.getState().then(function(dispatch) {
-      const code = dispatch.payload.code;
+    store.getState().then(function(dispatcher) {
+      const code = dispatcher.apiPut.code;
       if (code === 0) {
         delete params.cellEdit;
         getQuery(null, params);
@@ -176,7 +172,7 @@ const AdminBootstrapTable = (props) => {
       } else {
         if (code == -2) {
           notify('error', t('admin-session-fail'), 3, () => {
-            location.href = `/${SYS_LANG }/admin-login`;
+            location.href = `/${SYS_LANG}/admin-login`;
           });
         }
         //const errorNotify = dispatch.payload.response.data.notify.join("");
@@ -310,8 +306,8 @@ const AdminBootstrapTable = (props) => {
   const deleteApi = (params) => {
     dispatch({ type: 'apiDelete', url: paginateUrl, params: params });
     document.getElementById('loading-background').classList.remove('d-none');
-    store.getState().then(function(dispatch) {
-      const code = dispatch.payload.code;
+    store.getState().then(function(dispatcher) {
+      const code = dispatcher.apiDelete.code;
       if (typeof code == 'number' && code === 0) {
         getQuery(null, tableLastState);
         onTableChange('delete', tableLastState);
@@ -325,9 +321,8 @@ const AdminBootstrapTable = (props) => {
             location.href = `${pathnameSplit[0]}/admin/login`;
           });
         }
-
         //錯誤訊息
-        const errorNotify = dispatch.payload.notify.join("");
+        const errorNotify = dispatcher.apiDelete.notify.join("");
         if (errorNotify) {
           notify('error', errorNotify, 3, () => {
             getQuery(null, tableLastState);
@@ -363,9 +358,11 @@ const AdminBootstrapTable = (props) => {
     striped: true,
     hover: true,
     data: items,
-    pagination: paginationFactory(paginationOptionsState)
+    //pagination: paginationFactory(paginationOptionsState)
   };
-
+  if(typeof props.noPagination == 'undefined') {
+    bootstrapTableProps.pagination = paginationFactory(paginationOptionsState);
+  }
   return (
     <Suspense fallback={preLoading}>
       <ControlsButton {...props} />
@@ -380,7 +377,7 @@ const AdminBootstrapTable = (props) => {
         cellEdit={cellEditFactory({
           mode: 'dbclick',
           blurToSave: true,
-          beforeSaveCell: (oldValue, newValue, row, column, done) => {
+          beforeSaveCell: (oldValue, newValue, row, column) => {
             if (newValue != oldValue) {
               const filed = column.dataField;
               row[filed] = newValue;

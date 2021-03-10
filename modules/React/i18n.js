@@ -16,7 +16,7 @@ i18n.use(BackendAdapter).use(LanguageDetector).use(initReactI18next).init({
     backend: {
         backend: HttpApi,
         backendOption: {
-            loadPath: '/locales/resources.json?lng={{lng}}&ns={{ns}}',
+            loadPath: `${window.pageConfig.basePath}/locales/resources.json?lng={{lng}}&ns={{ns}}`.replace(/^\/{2,}/, '/'),
             allowMultiLoading: true,
             customHeaders: {
                 "Content-Type": "application/json",
@@ -26,16 +26,3 @@ i18n.use(BackendAdapter).use(LanguageDetector).use(initReactI18next).init({
 });
 
 export default i18n;
-
-/**
-    backend: [HttpApi],
-    backendOption: {
-        loadPath: '/locales/{{lng}}/{{ns}}.json',
-        allowMultiLoading: true,
-        customHeaders: {
-            "content-type": "application/json",
-            //authorization: document.getElementsByName('csrf-token')[0].content,
-        },
-    },
-
- */

@@ -153,8 +153,19 @@ trait CacheTrait
                     $table
                 ];
                 foreach ($joins as $join) {
-                    $tmp[] = $join['name'];
+                    if(is_array($join['name']))
+                    {
+                        $joinKeys = array_keys($join['name']);
+                        foreach ($joinKeys as $jk)
+                        {
+                            $tmp[] = $join['name'][$jk];
+                        }
+                    }else {
+                        $tmp[] = $join['name'];
+                    }
+                    
                 }
+                $tmp = array_values($tmp);
                 $table = implode(',', $tmp);
                 $table = preg_replace('/^\,/', '', $table);
             }

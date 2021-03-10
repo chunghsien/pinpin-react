@@ -44,6 +44,7 @@ class Migrate_Create_documents_20191013095005 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sort', 'mediumint', ['unsigned' => true, 'default' => '16777215']));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('allowed_methods', 'varchar', ['length' => 128]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('visible', 'tinyint', ['default' => 1, 'length' => 1, 'unsigned' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('updated_at', 'timestamp', ['default' => new Expression('CURRENT_TIMESTAMP'), 'on_update' => true]));
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable.'_id_PRIMARY'));

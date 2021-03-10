@@ -73,6 +73,7 @@ const memberListColumns = (t, smColumn) => {
       text: t('columns-language_has_locale'),
       sort: true,
       editable: false,
+      headerStyle: { width: '9rem' },
       filter: textFilter({
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
@@ -87,8 +88,9 @@ const memberListColumns = (t, smColumn) => {
       text: t('Email (account)'),
       sort: true,
       editable: false,
+      headerStyle: { width: '20rem' },
       filter: textFilter({
-        style: { width: '280px' },
+        style: { width: '18rem' },
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
         placeholder: t('bootstrap-table-Enter email'),
@@ -102,6 +104,7 @@ const memberListColumns = (t, smColumn) => {
       text: t('columns-full_name'),
       sort: true,
       editable: false,
+      headerStyle: { width: '9rem' },
       filter: textFilter({
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
@@ -116,6 +119,7 @@ const memberListColumns = (t, smColumn) => {
       text: t('columns-cellphone'),
       sort: true,
       editable: false,
+      headerStyle: { width: '10rem' },
       filter: textFilter({
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
@@ -130,6 +134,7 @@ const memberListColumns = (t, smColumn) => {
       text: t('columns-zip'),
       sort: true,
       editable: false,
+      headerStyle: { width: '9rem' },
       filter: textFilter({
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
@@ -144,6 +149,7 @@ const memberListColumns = (t, smColumn) => {
       text: t('columns-county'),
       sort: true,
       editable: false,
+      headerStyle: { width: '7.5rem' },
       filter: textFilter({
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
@@ -158,6 +164,7 @@ const memberListColumns = (t, smColumn) => {
       text: t('columns-district'),
       sort: true,
       editable: false,
+      headerStyle: { width: '9rem' },
       filter: textFilter({
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
@@ -172,8 +179,9 @@ const memberListColumns = (t, smColumn) => {
       text: t('columns-address'),
       sort: true,
       editable: false,
+      headerStyle: { width: '25rem' },
       filter: textFilter({
-        style: { width: '280px' },
+        style: { width: '23rem' },
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
         placeholder: t('bootstrap-table-Enter address'),
@@ -188,7 +196,7 @@ const memberListColumns = (t, smColumn) => {
       text: t('columns-created_at'),
       sort: true,
       editable: false,
-      headerStyle: { width: '10rem' },
+      headerStyle: { width: '9rem' },
       filter: dateFilter({
         dateClassName: 'form-control-sm',
         comparatorClassName: "form-control-sm",

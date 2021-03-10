@@ -21,12 +21,14 @@ class BannerAction extends AbstractAction
         return $this->{$method}($request);
     }
     
-    private function getImage($ids, BannerTableGateway $tableGateway): ResponseInterface
+    private function getImage($ids, BannerTableGateway $tableGateway, $type='carousel'): ResponseInterface
     {
         $select = $tableGateway->getSql()->select();
-        
+        $where = $select->where;
+        $where->equalTo('type', $type);
         if($ids) {
-            $select->where(['id' => $ids]);
+            $where->in('id', $ids);
+            $select->where($where);
             $select->columns(['id', 'image', 'bg_image']);
             $resultSet = $tableGateway->selectWith($select)->toArray();
         }else {
@@ -44,9 +46,17 @@ class BannerAction extends AbstractAction
     {
         $tableGateway = new BannerTableGateway($this->adapter);
         $query = $request->getQueryParams();
-        if(isset($query['method']) && $query['method'] == 'image') {
+        if(isset($query['method']) && $query['method'] == 'carousel') {
             $ids = isset($query['ids']) ? $query['ids'] : [];
             return $this->getImage($ids, $tableGateway);
+        }
+        
+        if(isset($query['method']) && $query['method'] == 's_carousel') {
+            $ids = isset($query['ids']) ? $query['ids'] : [];
+            return $this->getImage($ids, $tableGateway, 's_carousel');
+        }
+        if(isset($query['table_id'])) {
+            $request = $request->withAttribute('method_or_id', $query['table_id']);
         }
         $ajaxFormService = new AjaxFormService();
         $response = $ajaxFormService->getProcess($request, $tableGateway);
@@ -63,6 +73,8 @@ class BannerAction extends AbstractAction
                     'url' => 'banner',
                     'target' => 'banner',
                     'is_show'=> 'banner',
+                    "sort" => "banner",
+                    "created_at" => "banner",
                     'display_name' => 'language_has_locale',
                 ]);
         }
@@ -72,10 +84,21 @@ class BannerAction extends AbstractAction
     {
         $ajaxFormService = new AjaxFormService();
         $tablegateway = new BannerTableGateway($this->adapter);
-        return $ajaxFormService->putProcess($request, $tablegateway);
-        
+        $response = $ajaxFormService->putProcess($request, $tablegateway);
+        return $response;
     }
-
+    
+    /**
+     *
+     * {@inheritdoc}
+     * @see \Chopin\Middleware\AbstractAction::delete()
+     */
+    protected function delete(ServerRequestInterface $request): ResponseInterface
+    {
+        $ajaxFormService = new AjaxFormService();
+        return $ajaxFormService->deleteProcess($request, new BannerTableGateway($this->adapter));
+    }
+    
     protected function post(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
@@ -86,6 +109,5 @@ class BannerAction extends AbstractAction
         $ajaxFormService = new AjaxFormService();
         $tablegateway = new BannerTableGateway($this->adapter);
         return $ajaxFormService->postProcess($request, $tablegateway);
-        
     }
 }

@@ -13,7 +13,6 @@ use Laminas\Diactoros\UploadedFile;
 use Laminas\Validator\File\MimeType;
 use Laminas\Validator\ValidatorInterface;
 use Spatie\ImageOptimizer\OptimizerChain;
-use Spatie\ImageOptimizer\OptimizerChainFactory;
 use Spatie\ImageOptimizer\Optimizers\Jpegoptim;
 use Spatie\ImageOptimizer\Optimizers\Gifsicle;
 use Spatie\ImageOptimizer\Optimizers\Svgo;
@@ -55,8 +54,11 @@ trait UploadTrait
 
     public function validator(UploadedFile $uploadFile, AbstractValidator $validator)
     {
-        $validator->isValid($uploadFile);
-        return $validator->getMessages();
+        if($uploadFile->getError() == 0)
+        {
+            $validator->isValid($uploadFile);
+            return $validator->getMessages();
+        }
     }
 
     /**
@@ -68,7 +70,14 @@ trait UploadTrait
     public function processUpload(ServerRequestInterface $request, AbstractTableGateway $tablegateway = null, $otherValidators = [])
     {
         if ($files = $request->getUploadedFiles()) {
-            $storefolder = './public/storage/uploads/' . date("Ymd");
+            $selfFile = PROJECT_DIR.'/public/index.php';
+            $selfFile = preg_replace('/\//', DIRECTORY_SEPARATOR, $selfFile);
+            if(is_file($selfFile)) {
+                $storefolder = './public/storage/uploads/' . date("Ymd");
+            }else {
+                $storefolder = './storage/uploads/' . date("Ymd");
+            }
+            
             if (! is_dir($storefolder)) {
                 mkdir($storefolder, 0644, true);
             }
@@ -88,7 +97,6 @@ trait UploadTrait
             $imagepattern = '/photo|image|path|banner|avater$/';
             $mediaPattern = '/video|audio$/';
             foreach ($files as $name => $uploadFile) {
-
                 /**
                  *
                  * @var \Laminas\Diactoros\UploadedFile $uploadFile
@@ -123,7 +131,6 @@ trait UploadTrait
                         return;
                     }
                 }
-
                 if (count($otherValidators)) {
                     foreach ($otherValidators as $validator) {
                         if ($validator instanceof ValidatorInterface) {
@@ -140,10 +147,15 @@ trait UploadTrait
                 preg_match('/\.(?P<ext>\w+)$/', $uploadFile->getClientFilename(), $extMatcher);
                 
                 $watermarkPrefix = '';
+                
                 if ($row && $row->{$name}) {
                     $filename = $row->{$name};
+                    $filename = preg_replace('/^\/public/', '', $filename);
                     if (is_file('./public/' . $filename)) {
                         unlink('./public/' . $filename);
+                    }
+                    if(!is_file($selfFile) && is_file('./'.$filename)) {
+                        unlink('./'.$filename);
                     }
                     $filename = preg_replace('/\.\w+$/', '.' . $extMatcher['ext'], $filename);
                 } else {
@@ -156,8 +168,13 @@ trait UploadTrait
                         $targetPath = $storefolder . '/' . $filename;
                         $watermarkPrefix = $storefolder . '/';
                     } else {
-                        $targetPath = './public' . $filename;
-                        $watermarkPrefix = './public';
+                        if(is_file($selfFile)) {
+                            $targetPath = './public' . $filename;
+                            $watermarkPrefix = './public';
+                        }else {
+                            $targetPath = './' . $filename;
+                            $watermarkPrefix = '.';
+                        }
                     }
                 } else {
                     $targetPath = $storefolder . '/' . $filename;
@@ -186,11 +203,14 @@ trait UploadTrait
                         $systemSettingsTableGateway = new SystemSettingsTableGateway($adapter);
                         $watermarkRow = $systemSettingsTableGateway->select(['key' => 'watermark'])->current();
                         $watermakePath = $watermarkPrefix.$watermarkRow->value;
-                        if(is_file($watermakePath)) {
+                        if(
+                            is_file($watermakePath) &&
+                            !preg_match('/system_settings$/', $tablegateway->table) ) {
                             $watermakeImage = $manager->make($watermakePath);
                             $rate = $watermakeImage->getWidth() / $watermarkWidth;
                             $watermarkHeight = $watermakeImage->getHeight() / $rate;
                             $watermakeImage->resize($watermarkWidth, $watermarkHeight);
+                            //$watermakeImage->opacity(33);
                             $x = ($image->width() - $watermarkWidth) / 2;
                             $y = ($image->getHeight() - $watermakeImage->getHeight()) / 2;
                             $image->insert($watermakeImage, 'top-left', intval($x), intval($y));
@@ -198,7 +218,6 @@ trait UploadTrait
                         $image->save();
                     }
                     if($imgOptimizer) {
-                        OptimizerChainFactory::create();
                         $imageOptimizer = new OptimizerChain();
                         switch ($ext) {
                             case 'jpg':
@@ -241,8 +260,13 @@ trait UploadTrait
                         $imageOptimizer->optimize($targetPath);
                     }
                     
-                } 
-                $this->uploaded[$name] = preg_replace('/^\.\/public/', '', $targetPath);
+                }
+                
+                if(is_file($selfFile)) {
+                    $this->uploaded[$name] = preg_replace('/^\.\/public/', '', $targetPath);
+                }else {
+                    $this->uploaded[$name] = preg_replace('/^\./', '', $targetPath);
+                }
             }
         }
     }
@@ -254,6 +278,19 @@ trait UploadTrait
      */
     protected function verifyUpload(ServerRequestInterface $request)
     {
-        return count($request->getUploadedFiles()) > 0;
+        $uploadFiles = $request->getUploadedFiles();
+        $count = 0;
+        foreach ($uploadFiles as $file)
+        {
+            /**
+             * @var \Laminas\Diactoros\UploadedFile $file
+             */
+            if($file->getError() == 0)
+            {
+                $count ++;
+            }
+            //$file->
+        }
+        return $count > 0;
     }
 }

@@ -7,7 +7,7 @@
     "alias": "lorem-ipsum-decor-one",
     "price": 17,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "decor"
     ],
@@ -79,11 +79,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/decor/1.jpg"},
-      { "path": "/assets/images/product/decor/2.jpg"},
-      { "path": "/assets/images/product/decor/3.jpg"},
-      { "path": "/assets/images/product/decor/4.jpg"},
-      { "path": "/assets/images/product/decor/5.jpg"}
+      {
+        "path": "/assets/images/product/decor/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/5.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -102,11 +112,21 @@
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/decor/2.jpg"},
-      { "path": "/assets/images/product/decor/3.jpg"},
-      { "path": "/assets/images/product/decor/4.jpg"},
-      { "path": "/assets/images/product/decor/5.jpg"},
-      { "path": "/assets/images/product/decor/6.jpg"}
+      {
+        "path": "/assets/images/product/decor/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/6.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -119,17 +139,27 @@
     "alias": "lorem-ipsum-decor-three",
     "price": 14,
     "discount": 0,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "decor"
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/decor/3.jpg"},
-      { "path": "/assets/images/product/decor/4.jpg"},
-      { "path": "/assets/images/product/decor/5.jpg"},
-      { "path": "/assets/images/product/decor/6.jpg"},
-      { "path": "/assets/images/product/decor/7.jpg"}
+      {
+        "path": "/assets/images/product/decor/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/7.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -148,11 +178,21 @@
     ],
     "stock": 12,
     "assets": [
-      { "path": "/assets/images/product/decor/4.jpg"},
-      { "path": "/assets/images/product/decor/5.jpg"},
-      { "path": "/assets/images/product/decor/6.jpg"},
-      { "path": "/assets/images/product/decor/7.jpg"},
-      { "path": "/assets/images/product/decor/8.jpg"}
+      {
+        "path": "/assets/images/product/decor/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/8.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -165,17 +205,27 @@
     "alias": "lorem-ipsum-decor-five",
     "price": 16,
     "discount": 0,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "decor"
     ],
     "stock": 14,
     "assets": [
-      { "path": "/assets/images/product/decor/5.jpg"},
-      { "path": "/assets/images/product/decor/6.jpg"},
-      { "path": "/assets/images/product/decor/7.jpg"},
-      { "path": "/assets/images/product/decor/8.jpg"},
-      { "path": "/assets/images/product/decor/9.jpg"}
+      {
+        "path": "/assets/images/product/decor/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/9.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -194,11 +244,21 @@
     ],
     "stock": 0,
     "assets": [
-      { "path": "/assets/images/product/decor/6.jpg"},
-      { "path": "/assets/images/product/decor/7.jpg"},
-      { "path": "/assets/images/product/decor/8.jpg"},
-      { "path": "/assets/images/product/decor/9.jpg"},
-      { "path": "/assets/images/product/decor/10.jpg"}
+      {
+        "path": "/assets/images/product/decor/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/10.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -211,17 +271,27 @@
     "alias": "lorem-ipsum-decor-seven",
     "price": 17,
     "discount": 12,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "decor"
     ],
     "stock": 18,
     "assets": [
-      { "path": "/assets/images/product/decor/7.jpg"},
-      { "path": "/assets/images/product/decor/8.jpg"},
-      { "path": "/assets/images/product/decor/9.jpg"},
-      { "path": "/assets/images/product/decor/10.jpg"},
-      { "path": "/assets/images/product/decor/1.jpg"}
+      {
+        "path": "/assets/images/product/decor/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/1.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -240,11 +310,21 @@
     ],
     "stock": 12,
     "assets": [
-      { "path": "/assets/images/product/decor/8.jpg"},
-      { "path": "/assets/images/product/decor/9.jpg"},
-      { "path": "/assets/images/product/decor/10.jpg"},
-      { "path": "/assets/images/product/decor/1.jpg"},
-      { "path": "/assets/images/product/decor/2.jpg"}
+      {
+        "path": "/assets/images/product/decor/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/2.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -257,17 +337,27 @@
     "alias": "lorem-ipsum-decor-nine",
     "price": 20,
     "discount": 12,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "decor"
     ],
     "stock": 16,
     "assets": [
-      { "path": "/assets/images/product/decor/9.jpg"},
-      { "path": "/assets/images/product/decor/10.jpg"},
-      { "path": "/assets/images/product/decor/1.jpg"},
-      { "path": "/assets/images/product/decor/2.jpg"},
-      { "path": "/assets/images/product/decor/3.jpg"}
+      {
+        "path": "/assets/images/product/decor/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/3.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -286,11 +376,21 @@
     ],
     "stock": 14,
     "assets": [
-      { "path": "/assets/images/product/decor/10.jpg"},
-      { "path": "/assets/images/product/decor/1.jpg"},
-      { "path": "/assets/images/product/decor/2.jpg"},
-      { "path": "/assets/images/product/decor/3.jpg"},
-      { "path": "/assets/images/product/decor/4.jpg"}
+      {
+        "path": "/assets/images/product/decor/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/decor/4.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -303,7 +403,7 @@
     "alias": "lorem-ipsum-fashion-one",
     "price": 17,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "fashion",
       "men"
@@ -376,11 +476,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/1.jpg"},
-      { "path": "/assets/images/product/fashion/2.jpg"},
-      { "path": "/assets/images/product/fashion/3.jpg"},
-      { "path": "/assets/images/product/fashion/4.jpg"},
-      { "path": "/assets/images/product/fashion/5.jpg"}
+      {
+        "path": "/assets/images/product/fashion/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -466,11 +576,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/2.jpg"},
-      { "path": "/assets/images/product/fashion/3.jpg"},
-      { "path": "/assets/images/product/fashion/4.jpg"},
-      { "path": "/assets/images/product/fashion/5.jpg"},
-      { "path": "/assets/images/product/fashion/6.jpg"}
+      {
+        "path": "/assets/images/product/fashion/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/6.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -555,11 +675,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/3.jpg"},
-      { "path": "/assets/images/product/fashion/4.jpg"},
-      { "path": "/assets/images/product/fashion/5.jpg"},
-      { "path": "/assets/images/product/fashion/6.jpg"},
-      { "path": "/assets/images/product/fashion/7.jpg"}
+      {
+        "path": "/assets/images/product/fashion/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/7.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -645,11 +775,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/4.jpg"},
-      { "path": "/assets/images/product/fashion/5.jpg"},
-      { "path": "/assets/images/product/fashion/6.jpg"},
-      { "path": "/assets/images/product/fashion/7.jpg"},
-      { "path": "/assets/images/product/fashion/8.jpg"}
+      {
+        "path": "/assets/images/product/fashion/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/8.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -662,7 +802,7 @@
     "alias": "lorem-ipsum-fashion-five",
     "price": 15,
     "discount": 5,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "fashion",
       "men"
@@ -735,11 +875,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/5.jpg"},
-      { "path": "/assets/images/product/fashion/6.jpg"},
-      { "path": "/assets/images/product/fashion/7.jpg"},
-      { "path": "/assets/images/product/fashion/8.jpg"},
-      { "path": "/assets/images/product/fashion/9.jpg"}
+      {
+        "path": "/assets/images/product/fashion/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/9.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -825,11 +975,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/6.jpg"},
-      { "path": "/assets/images/product/fashion/7.jpg"},
-      { "path": "/assets/images/product/fashion/8.jpg"},
-      { "path": "/assets/images/product/fashion/9.jpg"},
-      { "path": "/assets/images/product/fashion/10.jpg"}
+      {
+        "path": "/assets/images/product/fashion/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/10.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -842,7 +1002,7 @@
     "alias": "lorem-ipsum-fashion-seven",
     "price": 27,
     "discount": 20,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "fashion",
       "women"
@@ -915,11 +1075,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/7.jpg"},
-      { "path": "/assets/images/product/fashion/8.jpg"},
-      { "path": "/assets/images/product/fashion/9.jpg"},
-      { "path": "/assets/images/product/fashion/10.jpg"},
-      { "path": "/assets/images/product/fashion/1.jpg"}
+      {
+        "path": "/assets/images/product/fashion/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/1.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1005,11 +1175,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/8.jpg"},
-      { "path": "/assets/images/product/fashion/9.jpg"},
-      { "path": "/assets/images/product/fashion/10.jpg"},
-      { "path": "/assets/images/product/fashion/1.jpg"},
-      { "path": "/assets/images/product/fashion/2.jpg"}
+      {
+        "path": "/assets/images/product/fashion/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/2.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1022,7 +1202,7 @@
     "alias": "lorem-ipsum-fashion-nine",
     "price": 35,
     "discount": 20,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "fashion",
       "women"
@@ -1095,11 +1275,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/9.jpg"},
-      { "path": "/assets/images/product/fashion/10.jpg"},
-      { "path": "/assets/images/product/fashion/1.jpg"},
-      { "path": "/assets/images/product/fashion/2.jpg"},
-      { "path": "/assets/images/product/fashion/3.jpg"}
+      {
+        "path": "/assets/images/product/fashion/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/3.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1185,11 +1375,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/fashion/10.jpg"},
-      { "path": "/assets/images/product/fashion/6.jpg"},
-      { "path": "/assets/images/product/fashion/3.jpg"},
-      { "path": "/assets/images/product/fashion/4.jpg"},
-      { "path": "/assets/images/product/fashion/5.jpg"}
+      {
+        "path": "/assets/images/product/fashion/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1208,11 +1408,21 @@
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/1.jpg"},
-      { "path": "/assets/images/product/cosmetics/2.jpg"},
-      { "path": "/assets/images/product/cosmetics/3.jpg"},
-      { "path": "/assets/images/product/cosmetics/4.jpg"},
-      { "path": "/assets/images/product/cosmetics/5.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/5.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1225,17 +1435,27 @@
     "alias": "lorem-ipsum-cosmetics-two",
     "price": 28,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "cosmetics"
     ],
     "stock": 20,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/2.jpg"},
-      { "path": "/assets/images/product/cosmetics/3.jpg"},
-      { "path": "/assets/images/product/cosmetics/4.jpg"},
-      { "path": "/assets/images/product/cosmetics/5.jpg"},
-      { "path": "/assets/images/product/cosmetics/6.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/6.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1254,11 +1474,21 @@
     ],
     "stock": 40,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/3.jpg"},
-      { "path": "/assets/images/product/cosmetics/4.jpg"},
-      { "path": "/assets/images/product/cosmetics/5.jpg"},
-      { "path": "/assets/images/product/cosmetics/6.jpg"},
-      { "path": "/assets/images/product/cosmetics/7.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/7.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1271,17 +1501,27 @@
     "alias": "lorem-ipsum-cosmetics-four",
     "price": 30,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "cosmetics"
     ],
     "stock": 50,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/4.jpg"},
-      { "path": "/assets/images/product/cosmetics/5.jpg"},
-      { "path": "/assets/images/product/cosmetics/6.jpg"},
-      { "path": "/assets/images/product/cosmetics/7.jpg"},
-      { "path": "/assets/images/product/cosmetics/8.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/8.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1300,11 +1540,21 @@
     ],
     "stock": 40,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/5.jpg"},
-      { "path": "/assets/images/product/cosmetics/6.jpg"},
-      { "path": "/assets/images/product/cosmetics/7.jpg"},
-      { "path": "/assets/images/product/cosmetics/8.jpg"},
-      { "path": "/assets/images/product/cosmetics/9.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/9.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1317,17 +1567,27 @@
     "alias": "lorem-ipsum-cosmetics-six",
     "price": 30,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "cosmetics"
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/6.jpg"},
-      { "path": "/assets/images/product/cosmetics/7.jpg"},
-      { "path": "/assets/images/product/cosmetics/8.jpg"},
-      { "path": "/assets/images/product/cosmetics/9.jpg"},
-      { "path": "/assets/images/product/cosmetics/10.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/10.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1346,11 +1606,21 @@
     ],
     "stock": 20,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/7.jpg"},
-      { "path": "/assets/images/product/cosmetics/8.jpg"},
-      { "path": "/assets/images/product/cosmetics/9.jpg"},
-      { "path": "/assets/images/product/cosmetics/10.jpg"},
-      { "path": "/assets/images/product/cosmetics/1.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/1.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1363,17 +1633,27 @@
     "alias": "lorem-ipsum-cosmetics-eight",
     "price": 10,
     "discount": 15,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "cosmetics"
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/8.jpg"},
-      { "path": "/assets/images/product/cosmetics/9.jpg"},
-      { "path": "/assets/images/product/cosmetics/10.jpg"},
-      { "path": "/assets/images/product/cosmetics/1.jpg"},
-      { "path": "/assets/images/product/cosmetics/2.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/2.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1392,11 +1672,21 @@
     ],
     "stock": 20,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/9.jpg"},
-      { "path": "/assets/images/product/cosmetics/10.jpg"},
-      { "path": "/assets/images/product/cosmetics/1.jpg"},
-      { "path": "/assets/images/product/cosmetics/2.jpg"},
-      { "path": "/assets/images/product/cosmetics/3.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/3.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1409,17 +1699,27 @@
     "alias": "lorem-ipsum-cosmetics-ten",
     "price": 30,
     "discount": 15,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "cosmetics"
     ],
     "stock": 30,
     "assets": [
-      { "path": "/assets/images/product/cosmetics/10.jpg"},
-      { "path": "/assets/images/product/cosmetics/1.jpg"},
-      { "path": "/assets/images/product/cosmetics/2.jpg"},
-      { "path": "/assets/images/product/cosmetics/3.jpg"},
-      { "path": "/assets/images/product/cosmetics/4.jpg"}
+      {
+        "path": "/assets/images/product/cosmetics/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/cosmetics/4.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1432,7 +1732,7 @@
     "alias": "lorem-ipsum-furniture-one",
     "price": 17,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "furniture"
     ],
@@ -1504,11 +1804,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/furniture/1.jpg"},
-      { "path": "/assets/images/product/furniture/2.jpg"},
-      { "path": "/assets/images/product/furniture/3.jpg"},
-      { "path": "/assets/images/product/furniture/4.jpg"},
-      { "path": "/assets/images/product/furniture/5.jpg"}
+      {
+        "path": "/assets/images/product/furniture/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/5.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1527,11 +1837,21 @@
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/furniture/2.jpg"},
-      { "path": "/assets/images/product/furniture/3.jpg"},
-      { "path": "/assets/images/product/furniture/4.jpg"},
-      { "path": "/assets/images/product/furniture/5.jpg"},
-      { "path": "/assets/images/product/furniture/6.jpg"}
+      {
+        "path": "/assets/images/product/furniture/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/6.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1544,17 +1864,27 @@
     "alias": "lorem-ipsum-furniture-three",
     "price": 14,
     "discount": 0,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "furniture"
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/furniture/3.jpg"},
-      { "path": "/assets/images/product/furniture/4.jpg"},
-      { "path": "/assets/images/product/furniture/5.jpg"},
-      { "path": "/assets/images/product/furniture/6.jpg"},
-      { "path": "/assets/images/product/furniture/7.jpg"}
+      {
+        "path": "/assets/images/product/furniture/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/7.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1573,11 +1903,21 @@
     ],
     "stock": 12,
     "assets": [
-      { "path": "/assets/images/product/furniture/4.jpg"},
-      { "path": "/assets/images/product/furniture/5.jpg"},
-      { "path": "/assets/images/product/furniture/6.jpg"},
-      { "path": "/assets/images/product/furniture/7.jpg"},
-      { "path": "/assets/images/product/furniture/8.jpg"}
+      {
+        "path": "/assets/images/product/furniture/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/8.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1590,17 +1930,27 @@
     "alias": "lorem-ipsum-furniture-five",
     "price": 16,
     "discount": 0,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "furniture"
     ],
     "stock": 14,
     "assets": [
-      { "path": "/assets/images/product/furniture/5.jpg"},
-      { "path": "/assets/images/product/furniture/6.jpg"},
-      { "path": "/assets/images/product/furniture/7.jpg"},
-      { "path": "/assets/images/product/furniture/8.jpg"},
-      { "path": "/assets/images/product/furniture/9.jpg"}
+      {
+        "path": "/assets/images/product/furniture/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/9.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1619,11 +1969,21 @@
     ],
     "stock": 0,
     "assets": [
-      { "path": "/assets/images/product/furniture/6.jpg"},
-      { "path": "/assets/images/product/furniture/7.jpg"},
-      { "path": "/assets/images/product/furniture/8.jpg"},
-      { "path": "/assets/images/product/furniture/9.jpg"},
-      { "path": "/assets/images/product/furniture/10.jpg"}
+      {
+        "path": "/assets/images/product/furniture/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/10.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1636,17 +1996,27 @@
     "alias": "lorem-ipsum-furniture-seven",
     "price": 17,
     "discount": 12,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "furniture"
     ],
     "stock": 18,
     "assets": [
-      { "path": "/assets/images/product/furniture/7.jpg"},
-      { "path": "/assets/images/product/furniture/8.jpg"},
-      { "path": "/assets/images/product/furniture/9.jpg"},
-      { "path": "/assets/images/product/furniture/10.jpg"},
-      { "path": "/assets/images/product/furniture/1.jpg"}
+      {
+        "path": "/assets/images/product/furniture/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/1.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1665,11 +2035,21 @@
     ],
     "stock": 12,
     "assets": [
-      { "path": "/assets/images/product/furniture/8.jpg"},
-      { "path": "/assets/images/product/furniture/9.jpg"},
-      { "path": "/assets/images/product/furniture/10.jpg"},
-      { "path": "/assets/images/product/furniture/1.jpg"},
-      { "path": "/assets/images/product/furniture/2.jpg"}
+      {
+        "path": "/assets/images/product/furniture/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/2.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1682,17 +2062,27 @@
     "alias": "lorem-ipsum-furniture-nine",
     "price": 20,
     "discount": 12,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "furniture"
     ],
     "stock": 16,
     "assets": [
-      { "path": "/assets/images/product/furniture/9.jpg"},
-      { "path": "/assets/images/product/furniture/10.jpg"},
-      { "path": "/assets/images/product/furniture/1.jpg"},
-      { "path": "/assets/images/product/furniture/2.jpg"},
-      { "path": "/assets/images/product/furniture/3.jpg"}
+      {
+        "path": "/assets/images/product/furniture/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/3.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1711,11 +2101,21 @@
     ],
     "stock": 14,
     "assets": [
-      { "path": "/assets/images/product/furniture/10.jpg"},
-      { "path": "/assets/images/product/furniture/1.jpg"},
-      { "path": "/assets/images/product/furniture/2.jpg"},
-      { "path": "/assets/images/product/furniture/3.jpg"},
-      { "path": "/assets/images/product/furniture/4.jpg"}
+      {
+        "path": "/assets/images/product/furniture/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/furniture/4.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1734,11 +2134,21 @@
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/perfumes/1.jpg"},
-      { "path": "/assets/images/product/perfumes/2.jpg"},
-      { "path": "/assets/images/product/perfumes/3.jpg"},
-      { "path": "/assets/images/product/perfumes/4.jpg"},
-      { "path": "/assets/images/product/perfumes/5.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/5.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1751,17 +2161,27 @@
     "alias": "lorem-ipsum-perfumes-two",
     "price": 28,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "perfumes"
     ],
     "stock": 20,
     "assets": [
-      { "path": "/assets/images/product/perfumes/2.jpg"},
-      { "path": "/assets/images/product/perfumes/3.jpg"},
-      { "path": "/assets/images/product/perfumes/4.jpg"},
-      { "path": "/assets/images/product/perfumes/5.jpg"},
-      { "path": "/assets/images/product/perfumes/6.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/6.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1780,11 +2200,21 @@
     ],
     "stock": 40,
     "assets": [
-      { "path": "/assets/images/product/perfumes/3.jpg"},
-      { "path": "/assets/images/product/perfumes/4.jpg"},
-      { "path": "/assets/images/product/perfumes/5.jpg"},
-      { "path": "/assets/images/product/perfumes/6.jpg"},
-      { "path": "/assets/images/product/perfumes/7.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/7.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1797,17 +2227,27 @@
     "alias": "lorem-ipsum-perfumes-four",
     "price": 30,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "perfumes"
     ],
     "stock": 50,
     "assets": [
-      { "path": "/assets/images/product/perfumes/4.jpg"},
-      { "path": "/assets/images/product/perfumes/5.jpg"},
-      { "path": "/assets/images/product/perfumes/6.jpg"},
-      { "path": "/assets/images/product/perfumes/7.jpg"},
-      { "path": "/assets/images/product/perfumes/8.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/8.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1826,11 +2266,21 @@
     ],
     "stock": 40,
     "assets": [
-      { "path": "/assets/images/product/perfumes/5.jpg"},
-      { "path": "/assets/images/product/perfumes/6.jpg"},
-      { "path": "/assets/images/product/perfumes/7.jpg"},
-      { "path": "/assets/images/product/perfumes/8.jpg"},
-      { "path": "/assets/images/product/perfumes/9.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/9.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1843,17 +2293,27 @@
     "alias": "lorem-ipsum-perfumes-six",
     "price": 30,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "perfumes"
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/perfumes/6.jpg"},
-      { "path": "/assets/images/product/perfumes/7.jpg"},
-      { "path": "/assets/images/product/perfumes/8.jpg"},
-      { "path": "/assets/images/product/perfumes/9.jpg"},
-      { "path": "/assets/images/product/perfumes/10.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/10.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1872,11 +2332,21 @@
     ],
     "stock": 20,
     "assets": [
-      { "path": "/assets/images/product/perfumes/7.jpg"},
-      { "path": "/assets/images/product/perfumes/8.jpg"},
-      { "path": "/assets/images/product/perfumes/9.jpg"},
-      { "path": "/assets/images/product/perfumes/10.jpg"},
-      { "path": "/assets/images/product/perfumes/1.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/1.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1889,17 +2359,27 @@
     "alias": "lorem-ipsum-perfumes-eight",
     "price": 10,
     "discount": 15,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "perfumes"
     ],
     "stock": 10,
     "assets": [
-      { "path": "/assets/images/product/perfumes/8.jpg"},
-      { "path": "/assets/images/product/perfumes/9.jpg"},
-      { "path": "/assets/images/product/perfumes/10.jpg"},
-      { "path": "/assets/images/product/perfumes/1.jpg"},
-      { "path": "/assets/images/product/perfumes/2.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/2.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1918,11 +2398,21 @@
     ],
     "stock": 20,
     "assets": [
-      { "path": "/assets/images/product/perfumes/9.jpg"},
-      { "path": "/assets/images/product/perfumes/10.jpg"},
-      { "path": "/assets/images/product/perfumes/1.jpg"},
-      { "path": "/assets/images/product/perfumes/2.jpg"},
-      { "path": "/assets/images/product/perfumes/3.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/3.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1935,17 +2425,27 @@
     "alias": "lorem-ipsum-perfumes-ten",
     "price": 30,
     "discount": 15,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "perfumes"
     ],
     "stock": 30,
     "assets": [
-      { "path": "/assets/images/product/perfumes/10.jpg"},
-      { "path": "/assets/images/product/perfumes/1.jpg"},
-      { "path": "/assets/images/product/perfumes/2.jpg"},
-      { "path": "/assets/images/product/perfumes/3.jpg"},
-      { "path": "/assets/images/product/perfumes/4.jpg"}
+      {
+        "path": "/assets/images/product/perfumes/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/perfumes/4.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -1958,7 +2458,7 @@
     "alias": "lorem-ipsum-wearables-one",
     "price": 17,
     "discount": 10,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "wearables",
       "men"
@@ -2031,11 +2531,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/1.jpg"},
-      { "path": "/assets/images/product/wearables/2.jpg"},
-      { "path": "/assets/images/product/wearables/3.jpg"},
-      { "path": "/assets/images/product/wearables/4.jpg"},
-      { "path": "/assets/images/product/wearables/5.jpg"}
+      {
+        "path": "/assets/images/product/wearables/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/5.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2121,11 +2631,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/2.jpg"},
-      { "path": "/assets/images/product/wearables/3.jpg"},
-      { "path": "/assets/images/product/wearables/4.jpg"},
-      { "path": "/assets/images/product/wearables/5.jpg"},
-      { "path": "/assets/images/product/wearables/6.jpg"}
+      {
+        "path": "/assets/images/product/wearables/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/6.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2138,7 +2658,7 @@
     "alias": "lorem-ipsum-wearables-three",
     "price": 16,
     "discount": 20,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "wearables",
       "men"
@@ -2211,11 +2731,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/3.jpg"},
-      { "path": "/assets/images/product/wearables/4.jpg"},
-      { "path": "/assets/images/product/wearables/5.jpg"},
-      { "path": "/assets/images/product/wearables/6.jpg"},
-      { "path": "/assets/images/product/wearables/7.jpg"}
+      {
+        "path": "/assets/images/product/wearables/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/7.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2301,11 +2831,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/4.jpg"},
-      { "path": "/assets/images/product/wearables/5.jpg"},
-      { "path": "/assets/images/product/wearables/6.jpg"},
-      { "path": "/assets/images/product/wearables/7.jpg"},
-      { "path": "/assets/images/product/wearables/8.jpg"}
+      {
+        "path": "/assets/images/product/wearables/4.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/8.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2318,7 +2858,7 @@
     "alias": "lorem-ipsum-wearables-five",
     "price": 15,
     "discount": 5,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "wearables",
       "men"
@@ -2391,11 +2931,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/5.jpg"},
-      { "path": "/assets/images/product/wearables/6.jpg"},
-      { "path": "/assets/images/product/wearables/7.jpg"},
-      { "path": "/assets/images/product/wearables/8.jpg"},
-      { "path": "/assets/images/product/wearables/9.jpg"}
+      {
+        "path": "/assets/images/product/wearables/5.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/9.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2481,11 +3031,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/6.jpg"},
-      { "path": "/assets/images/product/wearables/7.jpg"},
-      { "path": "/assets/images/product/wearables/8.jpg"},
-      { "path": "/assets/images/product/wearables/9.jpg"},
-      { "path": "/assets/images/product/wearables/10.jpg"}
+      {
+        "path": "/assets/images/product/wearables/6.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/10.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2498,7 +3058,7 @@
     "alias": "lorem-ipsum-wearables-seven",
     "price": 27,
     "discount": 20,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "wearables",
       "women"
@@ -2571,11 +3131,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/7.jpg"},
-      { "path": "/assets/images/product/wearables/8.jpg"},
-      { "path": "/assets/images/product/wearables/9.jpg"},
-      { "path": "/assets/images/product/wearables/10.jpg"},
-      { "path": "/assets/images/product/wearables/1.jpg"}
+      {
+        "path": "/assets/images/product/wearables/7.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/1.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2661,11 +3231,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/8.jpg"},
-      { "path": "/assets/images/product/wearables/9.jpg"},
-      { "path": "/assets/images/product/wearables/10.jpg"},
-      { "path": "/assets/images/product/wearables/1.jpg"},
-      { "path": "/assets/images/product/wearables/2.jpg"}
+      {
+        "path": "/assets/images/product/wearables/8.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/2.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2678,7 +3258,7 @@
     "alias": "lorem-ipsum-wearables-nine",
     "price": 35,
     "discount": 20,
-    "is_new": 1,
+    "is_new": 0,
     "np_class": [
       "wearables",
       "women"
@@ -2751,11 +3331,21 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/9.jpg"},
-      { "path": "/assets/images/product/wearables/10.jpg"},
-      { "path": "/assets/images/product/wearables/1.jpg"},
-      { "path": "/assets/images/product/wearables/2.jpg"},
-      { "path": "/assets/images/product/wearables/3.jpg"}
+      {
+        "path": "/assets/images/product/wearables/9.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/3.jpg"
+      }
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
@@ -2841,11 +3431,1008 @@
       }
     ],
     "assets": [
-      { "path": "/assets/images/product/wearables/10.jpg"},
-      { "path": "/assets/images/product/wearables/1.jpg"},
-      { "path": "/assets/images/product/wearables/2.jpg"},
-      { "path": "/assets/images/product/wearables/3.jpg"},
-      { "path": "/assets/images/product/wearables/4.jpg"}
+      {
+        "path": "/assets/images/product/wearables/10.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/1.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/2.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/3.jpg"
+      },
+      {
+        "path": "/assets/images/product/wearables/4.jpg"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf161"
+    },
+    "model": "Lorem ipsum jewelry one",
+    "alias": "lorem-ipsum-jewelry-one",
+    "price": 10,
+    "discount": 10,
+    "is_new": 0,
+    "sale_count": 22,
+    "np_class": [
+      "jewelry"
+    ],
+    "stock": 50,
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/1.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/2.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/3.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/4.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf162"
+    },
+    "model": "Lorem ipsum jewelry two",
+    "alias": "lorem-ipsum-jewelry-two",
+    "price": 9,
+    "discount": 5,
+    "is_new": 0,
+    "sale_count": 20,
+    "np_class": [
+      "jewelry"
+    ],
+    "stock": 30,
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/2.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/3.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/4.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/1.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf163"
+    },
+    "model": "Lorem ipsum jewelry three",
+    "alias": "lorem-ipsum-jewelry-three",
+    "price": 8,
+    "discount": 6,
+    "is_new": 0,
+    "sale_count": 16,
+    "np_class": [
+      "jewelry"
+    ],
+    "stock": 28,
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/3.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/4.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/1.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/2.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf164"
+    },
+    "model": "Lorem ipsum jewelry four",
+    "alias": "lorem-ipsum-jewelry-four",
+    "price": 7,
+    "discount": 5,
+    "is_new": 0,
+    "sale_count": 6,
+    "np_class": [
+      "jewelry"
+    ],
+    "stock": 8,
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/4.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/5.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/1.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/2.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/3.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf165"
+    },
+    "model": "Lorem ipsum jewelry five",
+    "alias": "lorem-ipsum-jewelry-five",
+    "price": 9,
+    "discount": 9,
+    "is_new": 0,
+    "sale_count": 10,
+    "np_class": [
+      "jewelry"
+    ],
+    "stock": 19,
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/5.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/1.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/2.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/3.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/4.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf166"
+    },
+    "model": "Lorem ipsum swimsuit one",
+    "alias": "lorem-ipsum-swimsuit-one",
+    "price": 5,
+    "discount": 10,
+    "is_new": 0,
+    "sale_count": 10,
+    "np_class": [
+      "fashion",
+      "women",
+      "swimsuit"
+    ],
+    "products_spec_group": [
+      {
+        "name": "black",
+        "extra_name": "#333333",
+        "image": "/assets/images/product/fashion/11.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 3
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 5
+          }
+        ]
+      },
+      {
+        "name": "blue",
+        "extra_name": "#1e73be",
+        "image": "/assets/images/product/fashion/12.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 4
+          },
+          {
+            "name": "m",
+            "stock": 7
+          },
+          {
+            "name": "xl",
+            "stock": 9
+          },
+          {
+            "name": "xxl",
+            "stock": 1
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "extra_name": "#dd9933",
+        "image": "/assets/images/product/fashion/13.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 1
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 4
+          },
+          {
+            "name": "xxl",
+            "stock": 0
+          }
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/11.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/12.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/13.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/14.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/15.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf167"
+    },
+    "model": "Lorem ipsum swimsuit two",
+    "alias": "lorem-ipsum-swimsuit-two",
+    "price": 12,
+    "discount": 5,
+    "is_new": 0,
+    "sale_count": 15,
+    "np_class": [
+      "fashion",
+      "women",
+      "swimsuit"
+    ],
+    "products_spec_group": [
+      {
+        "name": "black",
+        "extra_name": "#333333",
+        "image": "/assets/images/product/fashion/12.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 3
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 5
+          }
+        ]
+      },
+      {
+        "name": "blue",
+        "extra_name": "#1e73be",
+        "image": "/assets/images/product/fashion/13.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 4
+          },
+          {
+            "name": "m",
+            "stock": 7
+          },
+          {
+            "name": "xl",
+            "stock": 9
+          },
+          {
+            "name": "xxl",
+            "stock": 1
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "extra_name": "#dd9933",
+        "image": "/assets/images/product/fashion/14.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 1
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 4
+          },
+          {
+            "name": "xxl",
+            "stock": 0
+          }
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/12.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/13.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/14.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/15.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/16.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf168"
+    },
+    "model": "Lorem ipsum swimsuit three",
+    "alias": "lorem-ipsum-swimsuit-three",
+    "price": 18,
+    "discount": 15,
+    "is_new": 0,
+    "sale_count": 10,
+    "np_class": [
+      "fashion",
+      "women",
+      "swimsuit"
+    ],
+    "products_spec_group": [
+      {
+        "name": "black",
+        "extra_name": "#333333",
+        "image": "/assets/images/product/fashion/13.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 3
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 5
+          }
+        ]
+      },
+      {
+        "name": "blue",
+        "extra_name": "#1e73be",
+        "image": "/assets/images/product/fashion/14.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 4
+          },
+          {
+            "name": "m",
+            "stock": 7
+          },
+          {
+            "name": "xl",
+            "stock": 9
+          },
+          {
+            "name": "xxl",
+            "stock": 1
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "extra_name": "#dd9933",
+        "image": "/assets/images/product/fashion/15.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 1
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 4
+          },
+          {
+            "name": "xxl",
+            "stock": 0
+          }
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/13.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/14.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/15.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/16.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/17.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf169"
+    },
+    "model": "Lorem ipsum swimsuit four",
+    "alias": "lorem-ipsum-swimsuit-four",
+    "price": 8,
+    "discount": 15,
+    "is_new": 0,
+    "sale_count": 10,
+    "np_class": [
+      "fashion",
+      "women",
+      "swimsuit"
+    ],
+    "products_spec_group": [
+      {
+        "name": "black",
+        "extra_name": "#333333",
+        "image": "/assets/images/product/fashion/14.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 3
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 5
+          }
+        ]
+      },
+      {
+        "name": "blue",
+        "extra_name": "#1e73be",
+        "image": "/assets/images/product/fashion/15.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 4
+          },
+          {
+            "name": "m",
+            "stock": 7
+          },
+          {
+            "name": "xl",
+            "stock": 9
+          },
+          {
+            "name": "xxl",
+            "stock": 1
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "extra_name": "#dd9933",
+        "image": "/assets/images/product/fashion/16.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 1
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 4
+          },
+          {
+            "name": "xxl",
+            "stock": 0
+          }
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/14.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/15.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/16.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/17.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/18.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf170"
+    },
+    "model": "Lorem ipsum swimsuit five",
+    "alias": "lorem-ipsum-swimsuit-five",
+    "price": 13,
+    "discount": 10,
+    "is_new": 0,
+    "sale_count": 19,
+    "np_class": [
+      "fashion",
+      "women",
+      "swimsuit"
+    ],
+    "products_spec_group": [
+      {
+        "name": "black",
+        "extra_name": "#333333",
+        "image": "/assets/images/product/fashion/15.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 3
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 5
+          }
+        ]
+      },
+      {
+        "name": "blue",
+        "extra_name": "#1e73be",
+        "image": "/assets/images/product/fashion/16.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 4
+          },
+          {
+            "name": "m",
+            "stock": 7
+          },
+          {
+            "name": "xl",
+            "stock": 9
+          },
+          {
+            "name": "xxl",
+            "stock": 1
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "extra_name": "#dd9933",
+        "image": "/assets/images/product/fashion/17.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 1
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 4
+          },
+          {
+            "name": "xxl",
+            "stock": 0
+          }
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/15.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/16.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/17.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/18.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/11.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf171"
+    },
+    "model": "Lorem ipsum swimsuit six",
+    "alias": "lorem-ipsum-swimsuit-six",
+    "price": 14,
+    "discount": 10,
+    "is_new": 0,
+    "sale_count": 19,
+    "np_class": [
+      "fashion",
+      "women",
+      "swimsuit"
+    ],
+    "products_spec_group": [
+      {
+        "name": "black",
+        "extra_name": "#333333",
+        "image": "/assets/images/product/fashion/16.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 3
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 5
+          }
+        ]
+      },
+      {
+        "name": "blue",
+        "extra_name": "#1e73be",
+        "image": "/assets/images/product/fashion/17.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 4
+          },
+          {
+            "name": "m",
+            "stock": 7
+          },
+          {
+            "name": "xl",
+            "stock": 9
+          },
+          {
+            "name": "xxl",
+            "stock": 1
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "extra_name": "#dd9933",
+        "image": "/assets/images/product/fashion/18.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 1
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 4
+          },
+          {
+            "name": "xxl",
+            "stock": 0
+          }
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/16.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/17.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/18.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/11.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/12.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf172"
+    },
+    "model": "Lorem ipsum swimsuit seven",
+    "alias": "lorem-ipsum-swimsuit-seven",
+    "price": 15,
+    "discount": 9,
+    "is_new": 0,
+    "sale_count": 20,
+    "np_class": [
+      "fashion",
+      "women",
+      "swimsuit"
+    ],
+    "products_spec_group": [
+      {
+        "name": "black",
+        "extra_name": "#333333",
+        "image": "/assets/images/product/fashion/17.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 3
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 5
+          }
+        ]
+      },
+      {
+        "name": "blue",
+        "extra_name": "#1e73be",
+        "image": "/assets/images/product/fashion/18.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 4
+          },
+          {
+            "name": "m",
+            "stock": 7
+          },
+          {
+            "name": "xl",
+            "stock": 9
+          },
+          {
+            "name": "xxl",
+            "stock": 1
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "extra_name": "#dd9933",
+        "image": "/assets/images/product/fashion/11.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 1
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 4
+          },
+          {
+            "name": "xxl",
+            "stock": 0
+          }
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/17.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/18.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/11.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/12.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/13.png"
+      }
+    ],
+    "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "products_identify": {
+      "sku": "asdf173"
+    },
+    "model": "Lorem ipsum swimsuit eight",
+    "alias": "lorem-ipsum-swimsuit-eight",
+    "price": 16,
+    "discount": 10,
+    "is_new": 0,
+    "sale_count": 23,
+    "np_class": [
+      "fashion",
+      "women",
+      "swimsuit"
+    ],
+    "products_spec_group": [
+      {
+        "name": "black",
+        "extra_name": "#333333",
+        "image": "/assets/images/product/fashion/18.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 3
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 5
+          }
+        ]
+      },
+      {
+        "name": "blue",
+        "extra_name": "#1e73be",
+        "image": "/assets/images/product/fashion/11.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 4
+          },
+          {
+            "name": "m",
+            "stock": 7
+          },
+          {
+            "name": "xl",
+            "stock": 9
+          },
+          {
+            "name": "xxl",
+            "stock": 1
+          }
+        ]
+      },
+      {
+        "name": "yellow",
+        "extra_name": "#dd9933",
+        "image": "/assets/images/product/fashion/12.png",
+        "products_spec": [
+          {
+            "name": "x",
+            "stock": 1
+          },
+          {
+            "name": "m",
+            "stock": 2
+          },
+          {
+            "name": "xl",
+            "stock": 4
+          },
+          {
+            "name": "xxl",
+            "stock": 0
+          }
+        ]
+      }
+    ],
+    "assets": [
+      {
+        "path": "/assets/images/product/fashion/18.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/11.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/12.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/13.png"
+      },
+      {
+        "path": "/assets/images/product/fashion/14.png"
+      }
+
     ],
     "introduction": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
     "detail": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."

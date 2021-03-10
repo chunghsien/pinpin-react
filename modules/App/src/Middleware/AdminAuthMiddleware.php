@@ -59,10 +59,11 @@ class AdminAuthMiddleware implements MiddlewareInterface
          */
         $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
         $request = $request->withAttribute(Translator::class, $this->translator);
+        $_basePath = $request->getAttribute('_base_path', '');
         if($session->has('admin')) {
             
             $useRouteResult = $this->urlHelper->getRouteResult(self::ROOT_ROUTE_NAME);
-            setrawcookie('admin', $this->buildUri($useRouteResult));
+            setrawcookie('admin', $this->buildUri($useRouteResult, '', $_basePath));
             $user = $session->get('admin');
             $routes = isset($user['routes']) ? $user['routes'] : [];
             $lng = $request->getAttribute('php_lang');
@@ -104,7 +105,7 @@ class AdminAuthMiddleware implements MiddlewareInterface
             array_unshift($routes, ['uri' => '/admin/', 'exact' => true, 'name' => $this->translator->translate('Home', $domain, $lng)]);
             mergePageJsonConfig(['routes' => $routes]);
             if($routeResult->getMatchedRouteName() == self::LOGIN_ROUTE_NAME) {
-                $uri = $this->buildUri($routeResult, '/');
+                $uri = $this->buildUri($routeResult, '/', $_basePath);
                 return new RedirectResponse($uri);
             }
             $request = $request->withAttribute(Translator::class, $this->translator);
@@ -113,11 +114,24 @@ class AdminAuthMiddleware implements MiddlewareInterface
             setrawcookie('admin', null, time()-1);
             if($routeResult->getMatchedRouteName() != self::LOGIN_ROUTE_NAME) {
                 //$notMatchRouteResult = $this->urlHelper->getRouteResult(self::LOGIN_ROUTE_NAME);
-                $uri = $this->buildUri($routeResult, '/admin-login');
+                $uri = $this->buildUri($routeResult, '/admin-login', $_basePath);
                 return new RedirectResponse($uri);
             }
            
         }
+        if($page = $request->getAttribute('page', null)) {
+            if(!$request->getAttribute('method_or_id', null)) {
+                if(preg_match('/\//', $page)) {
+                    $explode = explode('/', $page);
+                    if(count($explode) == 2) {
+                        $request = $request->withAttribute('page', $explode[0]);
+                        $request = $request->withAttribute('method_or_id', $explode[1]);
+                    }
+                }
+            }
+            
+        }
+        
         return $handler->handle($request);
     }
 }

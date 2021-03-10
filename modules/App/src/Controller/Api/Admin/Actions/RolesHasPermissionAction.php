@@ -18,11 +18,8 @@ class RolesHasPermissionAction extends AbstractAction
     private function getOptions(ServerRequestInterface $request)
     {
         $params = array_merge($request->getQueryParams(), $request->getParsedBody());
-        $roles_id = $params['roles_id'];
-        //$rolesTableGateway = new RolesTableGateway($this->adapter);
-        //$rolesRow = $rolesTableGateway->select(['id' => $roles_id])->current();
+        $roles_id = $params['self_id'];
         $rolesHasPermissionScript = require 'modules/App/scripts/db/admin/rolesHasPermission.php';
-        $options = DB::selectFactory($rolesHasPermissionScript['options'])->toArray();
         $values = DB::selectFactory($rolesHasPermissionScript['defaultValue'], ['roles_id' => $roles_id,])->toArray();
         
         $translator = new Translator();
@@ -30,33 +27,12 @@ class RolesHasPermissionAction extends AbstractAction
         $translator->setLocale('zh_TW');
         
         $switchValues = [];
-        foreach ($options as &$option) {
-            $option['label'] = $translator->translate($option['label'], 'default');
-            $id = $option['value'];
-            $switchValues[$id] = 0;
-        }
-        $switchValues = [];
-        foreach ($values as &$value) {
-            $value['label'] = $translator->translate($value['label']);
-            $id = $value['value'];
-            $switchValues[$id] = 1;
+        foreach ($values as $value) {
+            $switchValues[] = $value['value'];
         }
         //debug($switchValues);
         return [
-            'values' => [
-                'permission' => $values,
-            ],
-            'options' => [
-                'permission' => $options,
-            ],
-            'switch_values' =>[
-                'permission' => $switchValues,
-            ],
-            'switch_default_values' =>[
-                'permission' => $switchValues,
-            ]
-            
-            //'translateUse' => 1
+            'values' =>$switchValues,
         ];
     }
     /**
@@ -85,22 +61,25 @@ class RolesHasPermissionAction extends AbstractAction
             if($rolesHasPermissionTableGateway->select(['roles_id' => $roles_id])->count()) {
                 $rolesHasPermissionTableGateway->delete(['roles_id' => $roles_id]);
             }
-            $permission_ids = explode(',', $post['permission_id']);
-            foreach ($permission_ids as $permission_id) {
-                $set = [
-                    'permission_id' => $permission_id,
-                    'roles_id' => $roles_id
-                ];
-                $rolesHasPermissionTableGateway->insert($set);
+            if($post['permission_id']) {
+                $permission_ids = explode(',', $post['permission_id']);
+                foreach ($permission_ids as $permission_id) {
+                    $set = [
+                        'permission_id' => $permission_id,
+                        'roles_id' => $roles_id
+                    ];
+                    $rolesHasPermissionTableGateway->insert($set);
+                }
             }
             $this->adapter->getDriver()->getConnection()->commit();
+            $request = $request->withQueryParams(['self_id' =>$roles_id]);
             $data = $this->getOptions($request);
             return new ApiSuccessResponse(0, $data, [
                 'update success'
             ]);
         } catch (\Exception $e) {
-            $this->adapter->getDriver()->getConnection()->rollback();
             loggerException($e);
+            $this->adapter->getDriver()->getConnection()->rollback();
             return new ApiErrorResponse(417, [], [
                 'tract' => $e->getTrace(),
                 'message' => $e->getMessage()

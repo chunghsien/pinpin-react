@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types = 1);
 namespace App\Controller\Api\Admin\Actions;
 
@@ -17,33 +16,35 @@ class ManufacturesAction extends AbstractAction
 {
 
     /**
-     * 
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
      * @see \Chopin\Middleware\AbstractAction::get()
      */
     protected function get(ServerRequestInterface $request): ResponseInterface
     {
         $ajaxFormService = new AjaxFormService();
         $response = $ajaxFormService->getProcess($request, new ManufacturesTableGateway($this->adapter));
-        if($response->getStatusCode() == 200) {
+        if ($response->getStatusCode() == 200) {
             return $response;
-        }else {
+        } else {
             $queryParams = $request->getQueryParams();
-            if(isset($queryParams['options'])) {
+            if (isset($queryParams['options'])) {
                 $manufacturesTableGateway = new ManufacturesTableGateway($this->adapter);
                 $data = $manufacturesTableGateway->getOptions('id', 'name', [], [
                     [
                         'equalTo',
                         'AND',
                         [
-                            'language_id', $queryParams['language_id']
+                            'language_id',
+                            $queryParams['language_id']
                         ]
                     ],
                     [
                         'equalTo',
                         'AND',
                         [
-                            'locale_id', $queryParams['locale_id']
+                            'locale_id',
+                            $queryParams['locale_id']
                         ]
                     ],
                     [
@@ -52,28 +53,24 @@ class ManufacturesAction extends AbstractAction
                         [
                             'deleted_at'
                         ]
-                    ],
+                    ]
                 ]);
                 return new ApiSuccessResponse(0, $data);
-            }else {
+            } else {
                 $apiQueryService = new ApiQueryService();
-                return $apiQueryService->processPaginator(
-                    $request,
-                    'modules/App/scripts/db/admin/manufactures.php',
-                    [
-                        'name' => 'manufactures',
-                        'sort' => 'manufactures',
-                        'display_name' => 'language_has_locale',
-                        'created_at' => 'manufactures',
-                    ]
-                    );
+                return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/manufactures.php', [
+                    'name' => 'manufactures',
+                    'sort' => 'manufactures',
+                    'display_name' => 'language_has_locale',
+                    'created_at' => 'manufactures'
+                ]);
             }
         }
     }
-    
+
     /**
-     * 
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
      * @see \Chopin\Middleware\AbstractAction::delete()
      */
     protected function delete(ServerRequestInterface $request): ResponseInterface
@@ -81,10 +78,10 @@ class ManufacturesAction extends AbstractAction
         $ajaxFormService = new AjaxFormService();
         return $ajaxFormService->deleteProcess($request, new ManufacturesTableGateway($this->adapter));
     }
-    
+
     /**
-     * 
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
      * @see \Chopin\Middleware\AbstractAction::put()
      */
     protected function put(ServerRequestInterface $request): ResponseInterface
@@ -95,8 +92,8 @@ class ManufacturesAction extends AbstractAction
     }
 
     /**
-     * 
-     * {@inheritDoc}
+     *
+     * {@inheritdoc}
      * @see \Chopin\Middleware\AbstractAction::post()
      */
     protected function post(ServerRequestInterface $request): ResponseInterface

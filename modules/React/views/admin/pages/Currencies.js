@@ -14,6 +14,8 @@ const Currencies = (/*props*/) => {
 
     const { t } = useTranslation(['translation', 'admin-language', 'currencies']);
     const currencies_columns = currenciesColumns(t, 'name');
+    const basePath = window.pageConfig.basePath;
+    const paginateUrl = (basePath + '/' + SYS_LANG + '/api/admin/currencies').replace(/^\/{2,}/, '/');
     return (
         <CTabs id="tabs-root" activeTab="default-form">
             <CNav variant="tabs">
@@ -23,7 +25,7 @@ const Currencies = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={clickClearFilter}
-                    paginateUrl={'/'+SYS_LANG+'/api/admin/currencies'}
+                    paginateUrl={paginateUrl}
                     columns={currencies_columns}
                     translation={t}
                     noOnDelBtn={true}

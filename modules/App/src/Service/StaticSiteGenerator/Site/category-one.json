@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "image": "/assets/images/category/men.jpg",
+    "name": "Men",
+    "count": 12,
+    "url": "/shop/left-sidebar"
+  },
+  {
+    "id": "2",
+    "image": "/assets/images/category/shoes.jpg",
+    "name": "Shoes",
+    "count": 23,
+    "url": "/shop/left-sidebar"
+  },
+  {
+    "id": "3",
+    "image": "/assets/images/category/sunglasses.jpg",
+    "name": "Sunglasses",
+    "count": 13,
+    "url": "/shop/left-sidebar"
+  },
+  {
+    "id": "4",
+    "image": "/assets/images/category/cat-look-book.jpg",
+    "name": "Look book",
+    "count": 40,
+    "url": "/shop/left-sidebar"
+  },
+  {
+    "id": "5",
+    "image": "/assets/images/category/women.jpg",
+    "name": "Women",
+    "count": 10,
+    "url": "/shop/left-sidebar"
+  }
+]

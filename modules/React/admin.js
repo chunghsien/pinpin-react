@@ -23,7 +23,7 @@ const initialState = {
     sidebarShow: 'responsive',
     toForm: 0,
     formType: "",
-    formRows:{},
+    //formRows:{},
 }
 let store = createStore(reducers, initialState, applyMiddleware(thunk));
 React.icons = icons

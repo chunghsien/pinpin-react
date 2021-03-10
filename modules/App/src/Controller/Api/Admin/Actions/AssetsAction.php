@@ -79,9 +79,7 @@ class AssetsAction extends AbstractAction
             $tablegateway = new AssetsTableGateway($this->adapter);
             $row = $tablegateway->select([
                 'id' => $id
-            ])
-                ->current()
-                ->toArray();
+            ])->current()->toArray();
             $ajaxFormService = new AjaxFormService();
             $response = $ajaxFormService->putProcess($request, $tablegateway);
             if ($response instanceof ApiSuccessResponse) {

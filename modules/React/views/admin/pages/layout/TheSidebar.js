@@ -12,7 +12,7 @@ import {
     CSidebarNavItem,
 } from '@coreui/react'
 
-import CIcon from '@coreui/icons-react'
+//import CIcon from '@coreui/icons-react'
 
 // sidebar nav config
 //import navigation from './_nav'
@@ -20,20 +20,19 @@ import CIcon from '@coreui/icons-react'
 const TheSidebar = () => {
     const dispatch = useDispatch()
     const show = useSelector(state => state.sidebarShow)
-    const pageConfig = window.pageConfig;
+    let {system_settings, admin_navigation} = window.pageConfig;
     return (
         <CSidebar
             show={show}
             onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
         >
             <CSidebarBrand className="d-md-down-none" to="/">
-                 <img className="c-sidebar-brand-full" src={pageConfig.system_settings.system.to_config.comp_logo} />
-                 <img className="c-sidebar-brand-minimized" src={pageConfig.system_settings.system.to_config.comp_logo} />
+                 <img className="c-sidebar-brand-full" src={system_settings.system.to_config.comp_logo} />
+                 <img className="c-sidebar-brand-minimized" src={system_settings.system.to_config.comp_logo} />
             </CSidebarBrand>
             <CSidebarNav>
-
                 <CCreateElement
-                    items={pageConfig.admin_navigation}
+                    items={admin_navigation}
                     components={{
                         CSidebarNavDivider,
                         CSidebarNavDropdown,

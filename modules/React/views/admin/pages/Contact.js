@@ -16,21 +16,8 @@ const Contact = () => {
     const columns = contactColumns(t, 'name');
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const paginateUrl = '/'+SYS_LANG+'/api/admin/contact';
-
-    const [formRow, setFormRow] = useState({
-        contact: {
-            id: null,
-            language_id: 0,
-            locale_id: 0,
-            full_name: '',
-            email: '',
-            subject: '',
-            commet: '',
-            reply: '',
-            is_reply: 0,
-        }
-    });
+    const basePath = window.pageConfig.basePath;
+    const paginateUrl = (basePath + '/' + SYS_LANG + '/api/admin/contact').replace(/^\/{2,}/, '/');
 
     return (
         <Switch>
@@ -42,7 +29,7 @@ const Contact = () => {
                         <CNav variant="tabs">
                             <TabLink tab="default-form" label="Default form" />
                         </CNav>
-                        <ContactForm href="/admin/contact" formRow={formRow} setFormRow={setFormRow} />
+                        <ContactForm href="/admin/contact" />
                     </CTabs>
                 </Route>
             }

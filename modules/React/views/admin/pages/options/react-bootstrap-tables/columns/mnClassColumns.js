@@ -9,6 +9,7 @@ let name_filter;
 let display_name_filter;
 let sort_filter;
 let created_at_filter;
+let viewed_count_filter;
 
 const clickClearFilter = (e, state) => {
   e.preventDefault();
@@ -23,6 +24,10 @@ const clickClearFilter = (e, state) => {
       if (sort_filter && typeof state.filters.sort == 'object') {
         sort_filter({ comparator: "", number: "" });
       }
+      if (viewed_count_filter && typeof state.filters.view_count == 'object') {
+        viewed_count_filter('');
+      }
+      
       if (created_at_filter && typeof state.filters.created_at == 'object') {
         created_at_filter({ comparator: "", date: "" });
       }
@@ -73,6 +78,21 @@ const mnClassColumns = (t, smColumn) => {
         placeholder: t('bootstrap-table-Enter name'),
         getFilter: (filter) => {
           name_filter = filter;
+        },
+      }),
+    },
+    {
+      dataField: 'viewed_count',
+      text: t('columns-viewed_count'),
+      sort: true,
+      editable: false,
+      headerStyle: { width: '10rem' },
+      filter: numberFilter({
+        numberClassName: "form-control-sm",
+        placeholder: t('bootstrap-table-Enter viewed count'),
+        comparatorClassName: "form-control-sm",
+        getFilter: (filter) => {
+          viewed_count_filter = filter;
         },
       }),
     },

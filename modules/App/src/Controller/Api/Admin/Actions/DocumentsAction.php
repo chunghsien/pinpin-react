@@ -1,6 +1,5 @@
 <?php
 declare(strict_types = 1);
-
 namespace App\Controller\Api\Admin\Actions;
 
 use Psr\Http\Message\ResponseInterface;
@@ -20,7 +19,6 @@ use Chopin\Documents\TableGateway\FacebookTagsTableGateway;
 class DocumentsAction extends AbstractAction
 {
 
-
     /**
      *
      * {@inheritdoc}
@@ -30,14 +28,24 @@ class DocumentsAction extends AbstractAction
     {
         $tableGateway = new DocumentsTableGateway($this->adapter);
         $method_or_id = $request->getAttribute('method_or_id', null);
-        
-        if($method_or_id && is_int(intval($method_or_id))) {
+
+        if ($method_or_id && is_int(intval($method_or_id))) {
             $query = $request->getQueryParams();
-            if(isset($query['getType'])) {
+            if (isset($query['getType'])) {
                 $select = $tableGateway->getSql()->select();
-                $select->where(['id' => $method_or_id])->columns(['id', 'type']);
-                $resultSet = $tableGateway->selectWith($select)->current();
-                return new ApiSuccessResponse(0, $resultSet->toArray());
+                $html_lang = $request->getAttribute('html_lang');
+                $select->where([
+                    'id' => $method_or_id
+                ])->columns([
+                    'id',
+                    'type',
+                    'route'
+                ]);
+                $resultSet = $tableGateway->selectWith($select)
+                    ->current()
+                    ->toArray();
+                $resultSet['lang'] = $html_lang;
+                return new ApiSuccessResponse(0, $resultSet);
             }
         }
         $ajaxFormService = new AjaxFormService();
@@ -50,8 +58,8 @@ class DocumentsAction extends AbstractAction
                 // 欄位對應的資料表名稱
                 [
                     'name' => 'documents',
-                    'routes' => 'documents',
-                    'display_name' => 'language_has_locale',
+                    'route' => 'documents',
+                    'display_name' => 'language_has_locale'
                 ]);
         }
     }
@@ -71,7 +79,6 @@ class DocumentsAction extends AbstractAction
                 ]);
             }
         }
-        exit();
         $ajaxFormService = new AjaxFormService();
         return $ajaxFormService->deleteProcess($request, new DocumentsTableGateway($this->adapter));
     }
@@ -96,10 +103,16 @@ class DocumentsAction extends AbstractAction
             $languageHasLocaleTableGateway = new LanguageHasLocaleTableGateway($this->adapter);
             $languageHasLocaleItem = $languageHasLocaleTableGateway->select(json_decode($data['language_has_locale'], true))->current();
             $code = str_replace('_', '-', $languageHasLocaleItem->code);
-            $type="";
-            if($row->type == 2) {
-                $type="other";
-                $route = "/{$code}/{$type}/".$row->id;
+            $type = "";
+            if (isset($data['locale_id']) && isset($data['language_id'])) {
+                $data['language_has_locale'] = json_encode([
+                    "locale_id" => $data['locale_id'],
+                    "language_id" => $data['language_id']
+                ]);
+            }
+            if ($row->type == 2) {
+                $type = "other";
+                $route = "/{$code}/{$type}/" . $row->id;
                 $route = preg_replace('/\/+/', '/', $route);
                 $row->route = $route;
                 $row->save();
@@ -107,7 +120,6 @@ class DocumentsAction extends AbstractAction
                 $payload['data'] = $data;
                 $response = $response->withPayload($payload);
             }
-            
         }
         return $response;
     }
@@ -119,22 +131,37 @@ class DocumentsAction extends AbstractAction
      */
     protected function post(ServerRequestInterface $request): ResponseInterface
     {
+        ApiSuccessResponse::$is_json_numeric_check = false;
         $queryParams = $request->getQueryParams();
         if (isset($queryParams['put'])) {
             return $this->put($request);
         }
         $post = $request->getParsedBody();
-        if(empty($post['allowed_methods'])){
-            $post['allowed_methods'] = json_encode(["GET"]);
+        if (empty($post['allowed_methods'])) {
+            $post['allowed_methods'] = json_encode([
+                "GET"
+            ]);
         }
         $request = $request->withParsedBody($post);
-        
+
         $ajaxFormService = new AjaxFormService();
         $tablegateway = new DocumentsTableGateway($this->adapter);
         $response = $ajaxFormService->postProcess($request, $tablegateway);
         $id = $tablegateway->getLastInsertValue();
-        $row = $tablegateway->select(['id' => $id])->current();
-        if($row->type == 2) {
+        /**
+         *
+         * @var \Chopin\LaminasDb\RowGateway\RowGateway $row
+         */
+        $row = $tablegateway->select([
+            'id' => $id
+        ])->current();
+        if (isset($row->locale_id) && isset($row->language_id)) {
+            $row->with('language_has_locale', [
+                'locale_id' => $row->locale_id,
+                'language_id' => $row->language_id
+            ]);
+        }
+        if ($row->type == 2) {
             $languageHasLocaleTableGateway = new LanguageHasLocaleTableGateway($this->adapter);
             $languageHasLocaleRow = $languageHasLocaleTableGateway->select([
                 'language_id' => $row->language_id,
@@ -144,6 +171,7 @@ class DocumentsAction extends AbstractAction
             $route = "/{$locale}/other/${id}";
             $row->route = $route;
             $row->save();
+            return new ApiSuccessResponse(0, $row->toArray(), ["add success"]);
         }
         return $response;
     }

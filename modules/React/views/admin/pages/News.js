@@ -19,7 +19,8 @@ const News = (/*props*/) => {
     const useColumns = newsColumns;
     const columns = useColumns(t, 'name');
     const table = 'news';
-    const paginateUrl = '/'+SYS_LANG+'/api/admin/news';
+    const basePath = window.pageConfig.basePath;
+    const paginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/news').replace(/^\/{2,}/, '/');
     const pagination = paginationOptions(t);
     const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
 

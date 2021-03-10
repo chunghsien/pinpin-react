@@ -31,8 +31,8 @@ class Migrate_Create_language_has_locale_20190725044917 extends AbstractMigratio
         $ddl = $this->ddl;
         $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('code', 'varchar', ['length' => 20]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('display_name', 'varchar', ['length' => 255]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('code', 'varchar', ['length' => 16]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('display_name', 'varchar', ['length' => 32]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('is_use', 'tinyint', ['default' => 0]));
 
         $fkPrefix = 'fk_'.$this->tailTable;

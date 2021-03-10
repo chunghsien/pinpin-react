@@ -73,6 +73,7 @@ const bannerColumns = (t, smColumn) => {
       text: t('columns-language_has_locale'),
       sort: true,
       editable: false,
+      headerStyle: { width: '18rem' },
       filter: textFilter({
         className: 'form-control-sm',
         //&#46 = . 保留字改用編碼替代
@@ -125,6 +126,7 @@ const bannerColumns = (t, smColumn) => {
       dataField: 'target',
       text: t('columns-target'),
       sort: true,
+      editable: false,
       classes: 'allow-cell-edit',
       headerClasses: 'sixPfiveRem',
       filter: selectFilter({

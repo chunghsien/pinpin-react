@@ -30,6 +30,11 @@ return [
                     $PT . 'language_has_locale.is_use',1
                 ]
             ],
+            [
+                'isNull',
+                'AND',
+                ["{$PT}banner.deleted_at"]
+            ],
         ],
     ],
 ];

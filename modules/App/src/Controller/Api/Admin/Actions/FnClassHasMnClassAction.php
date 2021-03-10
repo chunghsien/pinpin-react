@@ -1,6 +1,5 @@
 <?php
 declare(strict_types = 1);
-
 namespace App\Controller\Api\Admin\Actions;
 
 use Psr\Http\Message\ResponseInterface;
@@ -18,7 +17,11 @@ class FnClassHasMnClassAction extends AbstractAction
     private function getOptions(ServerRequestInterface $request)
     {
         $params = array_merge($request->getQueryParams(), $request->getParsedBody());
-        $mn_class_id = $params['mn_class_id'];
+        $mn_class_id = isset($params['self_id']) ? $params['self_id'] : null;
+        if (! $mn_class_id && isset($params['mn_class_id'])) {
+            $mn_class_id = $params['mn_class_id'];
+        }
+
         $mnClassTableGateway = new MnClassTableGateway($this->adapter);
         $mnClassRow = $mnClassTableGateway->select([
             'id' => $mn_class_id
@@ -28,20 +31,21 @@ class FnClassHasMnClassAction extends AbstractAction
             'language_id' => $mnClassRow->language_id,
             'locale_id' => $mnClassRow->locale_id
         ])->toArray();
-        
+
         $values = DB::selectFactory($fnClassHasMnClassScripts['defaultValue'], [
-            'mn_class_id' => $mn_class_id,
+            'mn_class_id' => $mn_class_id
         ])->toArray();
-        
+
         return [
             'values' => [
-                'fn_class' => $values,
+                'fn_class' => $values
             ],
             'options' => [
-                'fn_class' => $options,
+                'fn_class' => $options
             ]
         ];
     }
+
     /**
      *
      * {@inheritdoc}
@@ -61,22 +65,32 @@ class FnClassHasMnClassAction extends AbstractAction
     protected function post(ServerRequestInterface $request): ResponseInterface
     {
         try {
-            $this->adapter->getDriver()->getConnection()->beginTransaction();
+            $this->adapter->getDriver()
+                ->getConnection()
+                ->beginTransaction();
             $post = $request->getParsedBody();
             $mn_class_id = $post['mn_class_id'];
             $fnClassHasMnClassTableGateway = new FnClassHasMnClassTableGateway($this->adapter);
-            if($fnClassHasMnClassTableGateway->select(['mn_class_id' => $mn_class_id])->count()) {
-                $fnClassHasMnClassTableGateway->delete(['mn_class_id' => $mn_class_id]);
-            }
-            $fn_class_ids = explode(',', $post['fn_class_id']);
-            foreach ($fn_class_ids as $fn_class_id) {
-                $set = [
-                    'fn_class_id' => $fn_class_id,
+            if ($fnClassHasMnClassTableGateway->select([
+                'mn_class_id' => $mn_class_id
+            ])->count()) {
+                $fnClassHasMnClassTableGateway->delete([
                     'mn_class_id' => $mn_class_id
-                ];
-                $fnClassHasMnClassTableGateway->insert($set);
+                ]);
             }
-            $this->adapter->getDriver()->getConnection()->commit();
+            if (isset($post['fn_class_id'])) {
+                $fn_class_ids = explode(',', $post['fn_class_id']);
+                foreach ($fn_class_ids as $fn_class_id) {
+                    $set = [
+                        'fn_class_id' => $fn_class_id,
+                        'mn_class_id' => $mn_class_id
+                    ];
+                    $fnClassHasMnClassTableGateway->insert($set);
+                }
+            }
+            $this->adapter->getDriver()
+                ->getConnection()
+                ->commit();
             $data = $this->getOptions($request);
             return new ApiSuccessResponse(0, $data, [
                 'update success'

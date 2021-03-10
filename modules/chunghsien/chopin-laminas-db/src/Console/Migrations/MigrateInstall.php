@@ -45,6 +45,7 @@ class MigrateInstall extends Command
         ]));
         $createTable->addColumn(new Ddl\Column\Varchar('migration', '255'));
         $createTable->addColumn(new Ddl\Column\Integer('batch'));
+        $createTable->addColumn(new Ddl\Column\Datetime('created_at'));
         $createTable->addConstraint(new Ddl\Constraint\PrimaryKey('id'));
         $metadata = Source\Factory::createSourceFromAdapter($this->sql->getAdapter());
         $tables = [];

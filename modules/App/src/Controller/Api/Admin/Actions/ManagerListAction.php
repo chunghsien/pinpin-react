@@ -11,6 +11,7 @@ use App\Service\AjaxFormService;
 use Mezzio\Session\SessionMiddleware;
 use Chopin\Users\TableGateway\UsersTableGateway;
 use Laminas\Math\Rand;
+use Chopin\HttpMessage\Response\ApiErrorResponse;
 
 class ManagerListAction extends AbstractAction
 {
@@ -28,9 +29,9 @@ class ManagerListAction extends AbstractAction
             return $response;
         } else {
             $apiQueryService = new ApiQueryService();
-            $session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
-            $admin = $session->get('admin');
-            $id = $admin['id'];
+            //$session = $request->getAttribute(SessionMiddleware::SESSION_ATTRIBUTE);
+            //$admin = $session->get('admin');
+            //$id = $admin['id'];
             return $apiQueryService->processPaginator($request, 'modules/App/scripts/db/admin/manager_list.php', [
                 'account' => 'users',
                 'role_name' => 'roles',
@@ -97,18 +98,25 @@ class ManagerListAction extends AbstractAction
         $admin = $session->get('admin');
         $parseBody['parent_id'] = $admin['id'];
         $parseBody['depth'] = intval($admin['depth'])+1;
-        if($parseBody['password'] == $parseBody['password_confirm']) {
-            unset($parseBody['password_confirm']);
-        }
-        $salt = Rand::getString(8);
-        $parseBody['salt'] = $salt;
-        $password = $parseBody['password'].$salt;
-        if(floatval(PHP_VERSION) < 7.2) {
-            $algo = PASSWORD_DEFAULT;
+        if(isset($parseBody['password']) && isset($parseBody['password_confirm'])) {
+            if($parseBody['password'] == $parseBody['password_confirm']) {
+                unset($parseBody['password_confirm']);
+                $salt = Rand::getString(8);
+                $parseBody['salt'] = $salt;
+                $password = $parseBody['password'].$salt;
+                if(floatval(PHP_VERSION) < 7.2) {
+                    $algo = PASSWORD_DEFAULT;
+                }else {
+                    $algo =  PASSWORD_ARGON2I;
+                }
+                $parseBody['password'] = password_hash($password, $algo);
+            }else {
+                ApiErrorResponse::$status = 200;
+                return new ApiErrorResponse(-1, [], []);
+            }
         }else {
-            $algo =  PASSWORD_ARGON2I;
+            
         }
-        $parseBody['password'] = password_hash($password, $algo);
         $request = $request->withParsedBody($parseBody);
         return $ajaxFormService->postProcess($request, $tablegateway);
     }

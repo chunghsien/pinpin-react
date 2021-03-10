@@ -44,9 +44,10 @@ class Migrate_Create_banner_20200202221541 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('target', 'varchar', ['length' => 10, 'default' => 'self']));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('url', 'varchar', ['length' => 384, 'nullable' => true]));
 
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('is_show', 'tinyint', ['unsigned' => true, 'length' => 1, 'default' => 0]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('is_show', 'tinyint', ['unsigned' => true, 'length' => 1, 'default' => 1]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('sort', 'mediumint', ['unsigned' => true, 'default' => '16777215']));
 
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('deleted_at', 'datetime', ['nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('created_at', 'datetime', ['default' => new Expression('CURRENT_TIMESTAMP')]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('updated_at', 'timestamp', ['default' => new Expression('CURRENT_TIMESTAMP'), 'on_update' => true]));
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable.'_id_PRIMARY'));

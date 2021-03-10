@@ -28,11 +28,11 @@ class Migrate_Create_module_20190706080751 extends AbstractMigration
         $ddl = $this->ddl;
         $ddl->addColumn(MySQLColumnFactory::buildColumn('id', 'int', [
             'unsigned' => true,
-            'auto_increment' => true,
+            'auto_increment' => true
         ]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('name', 'varchar', [
-            'length' => 64,
-            '',
+            'length' => 48,
+            ''
         ]));
 
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable . '_id_PRIMARY'));
@@ -42,11 +42,11 @@ class Migrate_Create_module_20190706080751 extends AbstractMigration
 
     public function runSeed()
     {
-        $filepath = dirname(__DIR__).'/sql_seeds/Module_Insert.php';
+        $filepath = dirname(__DIR__) . '/sql_seeds/Module_Insert.php';
         require $filepath;
         $seed = new \Module_Insert($this->adapter);
         $this->seed = $seed;
-        //$seed->run();
+        // $seed->run();
     }
 
 

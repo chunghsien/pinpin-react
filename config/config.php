@@ -59,6 +59,7 @@ $configData =    [
     \Mezzio\Flash\ConfigProvider::class,
     \Mezzio\Csrf\ConfigProvider::class,
     \Mezzio\Twig\ConfigProvider::class,
+    \Blast\BaseUrl\ConfigProvider::class,
     //\Chopin\View\ConfigProvider::class,
     \Chopin\LaminasDb\ConfigProvider::class,
     \Chopin\Documents\ConfigProvider::class,
@@ -74,9 +75,6 @@ $configData =    [
 
     // Swoole config to overwrite some services (if installed)
     //class_exists(\Mezzio\Swoole\ConfigProvider::class) ? \Mezzio\Swoole\ConfigProvider::class : function(){ return[]; },
-
-    // Default App module config
-    App\ConfigProvider::class,
 
     // Load application config in a pre-defined order in such a way that local settings
     // overwrite global settings. (Loaded as first to last):

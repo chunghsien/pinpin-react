@@ -1,10 +1,9 @@
-
 import React, { useState, useRef, useEffect } from 'react';
+import { connect } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import {
   CRow, CCol, CFormGroup, CLabel,
   CCard,
-  CInvalidFeedback,
   CTabContent, CTabPane
 } from '@coreui/react'
 
@@ -15,10 +14,10 @@ import Select from 'react-select';
 import axios from 'axios';
 
 const BannerHasDocumentsForm = (props) => {
-
+  const basePath = window.pageConfig.basePath;
   const { t } = useTranslation(['translation']);
   const methods = useForm({ mode: 'all' });
-  const { register, clearErrors, setError, errors } = methods;
+  const { register } = methods;
   const matcher = location.pathname.match(/\/\d+$/);
   let href = props.href;
   if (location.pathname.match(/\/\d+$/)) {
@@ -33,8 +32,7 @@ const BannerHasDocumentsForm = (props) => {
 
   const [reactSelectOptions, setReactSelectOptions] = useState({
     options: {},
-    values: {},
-    defaultvalues: {}
+    values: {}
   });
 
   const selectMenuStyles = {
@@ -55,30 +53,37 @@ const BannerHasDocumentsForm = (props) => {
   const formRef = useRef();
 
   const [bannerImages, setBannerImages] = useState();
-  
+
   const getBannerImage = (options) => {
     let uri = location.pathname.replace(/\d+/, '').replace(/\/$/, '').replace('admin/documents', 'api/admin/banner');
     let ids = [];
-    if (options) {
+    if (options && options.length && options.banner) {
       options.forEach((item) => {
         ids.push(item.value);
       });
-      axios.get(uri, { params: { ids: ids, method: 'image' } }).then((response) => {
+      axios.get(uri, { params: { ids: ids, method: props.bannerType } }).then((response) => {
         const data = response.data.data;
         setBannerImages(data);
       });
-    }else {
+    } else {
       setBannerImages([]);
     }
   }
 
   const NC = 0;
+  const { formRows } = props;
+  const bannerHasDocuments = (formRows && formRows.banner_has_documents) ? formRows.banner_has_documents : null;
   useEffect(() => {
-    if (reactSelectOptions.values.banner) {
-      getBannerImage(reactSelectOptions.values.banner);
+    //setReactSelectOptions
+    if (bannerHasDocuments) {
+      setReactSelectOptions({
+        options: bannerHasDocuments.options,
+        values: bannerHasDocuments.values
+      });
+      getBannerImage(bannerHasDocuments.values.banner);
     }
 
-  }, [reactSelectOptions.defaultvalues, NC]);
+  }, [bannerHasDocuments, NC]);
 
   const moreToMoreChange = (options) => {
     let value = [];
@@ -87,13 +92,8 @@ const BannerHasDocumentsForm = (props) => {
         value.push(item.value);
       });
       formRef.current.elements[parent_id_name].value = value.join(',');
-      clearErrors([parent_id_name]);
     } else {
       formRef.current.elements[parent_id_name].value = '';
-      setError(parent_id_name, {
-        type: "required",
-        message: ""
-      });
     }
     setReactSelectOptions((reactSelectOptions) => {
       let values = {};
@@ -103,7 +103,7 @@ const BannerHasDocumentsForm = (props) => {
         values: values
       }
     });
-    if (reactSelectOptions.options.banner) {
+    if (reactSelectOptions.options[parent]) {
       getBannerImage(options);
     }
   }
@@ -120,7 +120,7 @@ const BannerHasDocumentsForm = (props) => {
   }
   return (
     <CTabContent>
-      <CTabPane data-tab="banner-form">
+      <CTabPane data-tab={props.tab}>
         <CCard className="tab-card">
           <Form
             innerRef={formRef}
@@ -128,9 +128,9 @@ const BannerHasDocumentsForm = (props) => {
             griduse
             {...methods}
             {...props}
+            apiProps={{ type: props.bannerType }}
+            getBannerImage={getBannerImage}
             setReactSelectOptions={setReactSelectOptions}
-            reactSelectOptions={reactSelectOptions}
-            selectOnChanges={[moreToMoreChange]}
           >
             <input type="hidden" name={self_id_name} ref={register()} value={id_value} />
             <CRow className="mt-2">
@@ -144,35 +144,37 @@ const BannerHasDocumentsForm = (props) => {
                     isMulti={isMulti}
                     options={reactSelectOptions.options[parent]}
                     onChange={moreToMoreChange}
-                    {...selectOptionProps}
+                    value={reactSelectOptions.values[parent]}
                   />
-                  <input className={errors[parent_id_name] && 'is-invalid'} name={parent_id_name} type="hidden" ref={register()} />
-                  <CInvalidFeedback>{
-                    (
-                      errors[parent_id_name] &&
-                      errors[parent_id_name].type == 'required') && t('The input is an empty string')}</CInvalidFeedback>
+                  <input
+                    name={parent_id_name}
+                    type="hidden"
+                    ref={register()}
+                  />
                 </CFormGroup>
               </CCol>
             </CRow>
             {
               (bannerImages && bannerImages.map) &&
               bannerImages.map((item) => {
+                const itemImage = (basePath + item.image).replace(/^\/{2,}/, '/');
+                const itemBgImage = (basePath + item.bg_image).replace(/^\/{2,}/, '/');
                 return (
                   <CRow className="mt-2" key={item.id}>
                     {
                       (item.image && item.bg_image) &&
                       <>
-                        <CCol md="6" sm="12"><img src={item.image} /></CCol>
-                        <CCol md="6" sm="12"><img src={item.bg_image} /></CCol>
+                        <CCol md="6" sm="12"><img className="img-fluid" src={itemImage} /></CCol>
+                        <CCol md="6" sm="12"><img className="img-fluid" src={itemBgImage} /></CCol>
                       </>
                     }
                     {
                       (item.image && !item.bg_image) &&
-                      <CCol><img src={item.image} /></CCol>
+                      <CCol><img className="img-fluid" src={item.image} /></CCol>
                     }
                     {
                       (!item.image && item.bg_image) &&
-                      <CCol><img src={item.bg_image} /></CCol>
+                      <CCol><img className="img-fluid" src={item.bg_image} /></CCol>
                     }
                   </CRow>
                 );
@@ -184,5 +186,11 @@ const BannerHasDocumentsForm = (props) => {
     </CTabContent>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    dispatch: state.dispatch,
+    formRows: state.formRows,
+  };
+};
 
-export default BannerHasDocumentsForm;
+export default connect(mapStateToProps)(BannerHasDocumentsForm);

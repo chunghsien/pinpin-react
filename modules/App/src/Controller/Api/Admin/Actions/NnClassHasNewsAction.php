@@ -1,6 +1,5 @@
 <?php
 declare(strict_types = 1);
-
 namespace App\Controller\Api\Admin\Actions;
 
 use Psr\Http\Message\ResponseInterface;
@@ -18,7 +17,11 @@ class NnClassHasNewsAction extends AbstractAction
     private function getOptions(ServerRequestInterface $request)
     {
         $params = array_merge($request->getQueryParams(), $request->getParsedBody());
-        $news_id = $params['news_id'];
+        $news_id = isset($params['products_id']) ? $params['products_id'] : null;
+        if(!$news_id) {
+            $news_id = $params['news_id'];
+        }
+        
         $newsTableGateway = new NewsTableGateway($this->adapter);
         $newsRow = $newsTableGateway->select([
             'id' => $news_id
@@ -30,18 +33,19 @@ class NnClassHasNewsAction extends AbstractAction
         ])->toArray();
 
         $values = DB::selectFactory($nnClassHasNewsScripts['defaultValue'], [
-            'news_id' => $news_id,
+            'news_id' => $news_id
         ])->toArray();
-        
+
         return [
             'values' => [
-                'nn_class' => $values,
+                'nn_class' => $values
             ],
             'options' => [
-                'nn_class' => $options,
+                'nn_class' => $options
             ]
         ];
     }
+
     /**
      *
      * {@inheritdoc}
@@ -60,30 +64,37 @@ class NnClassHasNewsAction extends AbstractAction
      */
     protected function post(ServerRequestInterface $request): ResponseInterface
     {
+        $connection = $this->adapter->getDriver()->getConnection();
         try {
-            $this->adapter->getDriver()->getConnection()->beginTransaction();
+            $connection->beginTransaction();
             $post = $request->getParsedBody();
             $news_id = $post['news_id'];
             $nnClassHasNewsTableGateway = new NnClassHasNewsTableGateway($this->adapter);
-            if($nnClassHasNewsTableGateway->select(['news_id' => $news_id])->count()) {
-                $nnClassHasNewsTableGateway->delete(['news_id' => $news_id]);
-            }
-            $nn_class_ids = explode(',', $post['nn_class_id']);
-            foreach ($nn_class_ids as $nn_class_id) {
-                $set = [
-                    'nn_class_id' => $nn_class_id,
+            if ($nnClassHasNewsTableGateway->select([
+                'news_id' => $news_id
+            ])->count()) {
+                $nnClassHasNewsTableGateway->delete([
                     'news_id' => $news_id
-                ];
-                $nnClassHasNewsTableGateway->insert($set);
+                ]);
             }
-            $this->adapter->getDriver()->getConnection()->commit();
+            if (isset($post['nn_class_id'])) {
+                $nn_class_ids = explode(',', $post['nn_class_id']);
+                foreach ($nn_class_ids as $nn_class_id) {
+                    $set = [
+                        'nn_class_id' => $nn_class_id,
+                        'news_id' => $news_id
+                    ];
+                    $nnClassHasNewsTableGateway->insert($set);
+                }
+            }
+            $connection->commit();
             $data = $this->getOptions($request);
             return new ApiSuccessResponse(0, $data, [
                 'update success'
             ]);
         } catch (\Exception $e) {
-            $this->adapter->getDriver()->getConnection()->rollback();
             loggerException($e);
+            $connection->rollback();
             return new ApiErrorResponse(417, [], [
                 'tract' => $e->getTrace(),
                 'message' => $e->getMessage()

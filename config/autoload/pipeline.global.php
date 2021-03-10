@@ -14,14 +14,12 @@ use Mezzio\Router\Middleware\RouteMiddleware;
 use Mezzio\Session\SessionMiddleware;
 use App\Middleware\SystemSettingsMiddleware;
 use Mezzio\Csrf\CsrfMiddleware;
-use App\Middleware\AdminAuthMiddleware;
-use App\Middleware\AdminNavigationMiddleware;
-use App\Middleware\ApiAdminAuthMiddleware;
 
 return [
     'middleware_pipeline' => [
         [
             'middleware' => [
+                Blast\BaseUrl\BaseUrlMiddleware::class,
                 ErrorHandler::class,
                 ServerUrlMiddleware::class,
                 RouteMiddleware::class,

@@ -77,6 +77,13 @@ const productsSpecColumns = (t, smColumn) => {
       }),
     },
     {
+      dataField: 'group_name',
+      text: t('columns-group_name'),
+      sort: true,
+      editable: false,
+    },
+
+    {
       dataField: 'name',
       text: t('columns-name'),
       sort: true,
@@ -96,6 +103,7 @@ const productsSpecColumns = (t, smColumn) => {
       //classes: 'table-image',
       sort: false,
       editable: false,
+      hidden: true,
       formatter: (cell, row, rowIndex) => {
         return <img className="table-image" src={row.main_photo} />
       }
@@ -132,14 +140,7 @@ const productsSpecColumns = (t, smColumn) => {
         },
       }),
       formatter: (cell, row, rowIndex) => {
-        if (typeof pageConfig.stock_status_container == 'undefined') {
-          const request = new XMLHttpRequest();
-          request.open('GET', '/' + SYS_LANG + '/api/admin/products_spec/getStockStatus', false);
-          request.send();
-          pageConfig.stock_status_container = JSON.parse(request.responseText).data.options.stock_status;
-        }
-        const stockStatusOptions = pageConfig.stock_status_container;
-
+        const stockStatusOptions = pageConfig.stock_status;
         var selected = stockStatusOptions.filter((item) => {
           if (item.value == row.stock_status) {
             return true;
@@ -163,6 +164,7 @@ const productsSpecColumns = (t, smColumn) => {
       classes: 'editable-cursor-alias',
       sort: true,
       editable: true,
+      hidden: true,
       filter: numberFilter({
         numberClassName: "form-control-sm",
         placeholder: t('bootstrap-table-Enter price'),
@@ -179,6 +181,7 @@ const productsSpecColumns = (t, smColumn) => {
       classes: 'editable-cursor-alias',
       sort: true,
       editable: true,
+      hidden: true,
       filter: numberFilter({
         numberClassName: "form-control-sm",
         placeholder: t('bootstrap-table-Enter real_price'),
@@ -226,7 +229,7 @@ const productsSpecColumns = (t, smColumn) => {
         },
       }),
     },
-    actions(t)
+    actions(t, true)
   ];
   return fullColumns;
 

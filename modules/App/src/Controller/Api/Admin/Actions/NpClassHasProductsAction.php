@@ -7,12 +7,9 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Chopin\Middleware\AbstractAction;
 use Chopin\LaminasDb\DB;
-use Chopin\Store\TableGateway\MpClassTableGateway;
 use Chopin\HttpMessage\Response\ApiSuccessResponse;
-use Chopin\Store\TableGateway\FpClassHasMpClassTableGateway;
 use Chopin\HttpMessage\Response\ApiErrorResponse;
 use Chopin\Store\TableGateway\NpClassHasProductsTableGateway;
-use Chopin\Store\TableGateway\NpClassTableGateway;
 use Chopin\Store\TableGateway\ProductsTableGateway;
 
 class NpClassHasProductsAction extends AbstractAction
@@ -21,7 +18,11 @@ class NpClassHasProductsAction extends AbstractAction
     private function getOptions(ServerRequestInterface $request)
     {
         $params = array_merge($request->getQueryParams(), $request->getParsedBody());
-        $products_id = $params['products_id'];
+        $products_id = isset($params['products_id']) ? $params['products_id'] : null;
+        if(!$products_id) {
+            $products_id = $params['self_id'];
+        }
+        
         $productsTableGateway = new ProductsTableGateway($this->adapter);
         $productsRow = $productsTableGateway->select([
             'id' => $products_id
@@ -71,13 +72,15 @@ class NpClassHasProductsAction extends AbstractAction
             if($npClassHasProductsTableGateway->select(['products_id' => $products_id])->count()) {
                 $npClassHasProductsTableGateway->delete(['products_id' => $products_id]);
             }
-            $np_class_ids = explode(',', $post['np_class_id']);
-            foreach ($np_class_ids as $np_class_id) {
-                $set = [
-                    'np_class_id' => $np_class_id,
-                    'products_id' => $products_id
-                ];
-                $npClassHasProductsTableGateway->insert($set);
+            if(isset($post['np_class_id'])) {
+                $np_class_ids = explode(',', $post['np_class_id']);
+                foreach ($np_class_ids as $np_class_id) {
+                    $set = [
+                        'np_class_id' => $np_class_id,
+                        'products_id' => $products_id
+                    ];
+                    $npClassHasProductsTableGateway->insert($set);
+                }
             }
             $this->adapter->getDriver()->getConnection()->commit();
             $data = $this->getOptions($request);

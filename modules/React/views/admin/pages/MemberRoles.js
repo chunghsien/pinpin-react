@@ -14,58 +14,59 @@ const MemberRolesForm = loadable(() => import('./components/form/MemberRolesForm
 const FormBackGridFixed = loadable(() => import('./components/FormBackGridFixed'));
 
 const MemberRoles = () => {
-    const { t } = useTranslation(['translation']);
-    const useColumns = memberRolesColumns;
-    const columns = useColumns(t, 'name');
-    
-    const pagination = paginationOptions(t);
-    const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const paginateUrl = '/'+SYS_LANG+'/api/admin/member_roles';
-    //const table = 'manufactures';
-    const count = 0;
-    useEffect(() => {
-        //修正階層下拉選單無法開啟的錯誤
-        simNavLinkClick();
-    }, [count]);
+  const { t } = useTranslation(['translation']);
+  const useColumns = memberRolesColumns;
+  const columns = useColumns(t, 'name');
 
-    
-    return (
-        <Switch>
-            {
-                typeof locationPathname != 'undefined' &&
-                <Route path={locationPathname + '/:method_or_id'}>
-                    <FormBackGridFixed t={t} />
-                    <CTabs id="tabs-root" activeTab="default-form">
-                        <CNav variant="tabs">
-                            <TabLink tab="default-form" label="Default form" />
-                        </CNav>
-                        <MemberRolesForm href="/admin/member_roles" />
-                    </CTabs>
-                </Route>
-            }
-            <Route path={locationPathname}>
-                <CRow>
-                    <CCol>
-                        <CCard>
-                            <CCardHeader>{t('member roles list')}</CCardHeader>
-                            <CCardBody>
-                                <AdminBootstrapTable
-                                    paginateUrl={paginateUrl}
-                                    columns={columns}
-                                    isSelectRow
-                                    isFilterReset
-                                    isInsertAction
-                                    paginationOptions={pagination}
-                                    translation={t}
-                                    clearFilterTrigger={clickClearFilter}
-                                />
-                            </CCardBody>
-                        </CCard>
-                    </CCol>
-                </CRow>
-            </Route>
-        </Switch>
-    );
+  const pagination = paginationOptions(t);
+  const basePath = window.pageConfig.basePath;
+  const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
+  const paginateUrl = (basePath + '/' + SYS_LANG + '/api/admin/member_roles').replace(/^\/{2,}/, '/');
+  //const table = 'manufactures';
+  const count = 0;
+  useEffect(() => {
+    //修正階層下拉選單無法開啟的錯誤
+    simNavLinkClick();
+  }, [count]);
+
+
+  return (
+    <Switch>
+      {
+        typeof locationPathname != 'undefined' &&
+        <Route path={locationPathname + '/:method_or_id'}>
+          <FormBackGridFixed t={t} />
+          <CTabs id="tabs-root" activeTab="default-form">
+            <CNav variant="tabs">
+              <TabLink tab="default-form" label="Default form" />
+            </CNav>
+            <MemberRolesForm href="/admin/member_roles" />
+          </CTabs>
+        </Route>
+      }
+      <Route path={locationPathname}>
+        <CRow>
+          <CCol>
+            <CCard>
+              <CCardHeader>{t('member roles list')}</CCardHeader>
+              <CCardBody>
+                <AdminBootstrapTable
+                  paginateUrl={paginateUrl}
+                  columns={columns}
+                  isSelectRow
+                  isFilterReset
+                  isInsertAction
+                  paginationOptions={pagination}
+                  translation={t}
+                  clearFilterTrigger={clickClearFilter}
+                />
+              </CCardBody>
+            </CCard>
+          </CCol>
+        </CRow>
+      </Route>
+    </Switch>
+  );
 };
 
 export default MemberRoles;

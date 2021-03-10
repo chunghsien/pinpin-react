@@ -87,7 +87,10 @@ class LayoutZonesHasDocumentsAction extends AbstractAction
             }
         }
         $resultSet = array_values($resultSet);
-        return new ApiSuccessResponse(0, $resultSet);
+        return new ApiSuccessResponse(0, [
+            'layout_name' => $layoutZonesRow->name,
+            'layouts' => $resultSet
+        ]);
     }
 
     /**

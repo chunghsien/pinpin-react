@@ -7,9 +7,14 @@ use Chopin\Store\TableGateway\NpClassHasProductsTableGateway;
 use Chopin\Store\TableGateway\ProductsSpecTableGateway;
 use Chopin\Store\TableGateway\ProductsSpecGroupTableGateway;
 use Chopin\SystemSettings\TableGateway\AssetsTableGateway;
-use Chopin\Store\TableGateway\ProductsIdentifyTableGateway;
+use Chopin\Store\TableGateway\ProductsIdentityTableGateway;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Chopin\Store\TableGateway\ProductsDiscountTableGateway;
+use Chopin\Store\TableGateway\ProductsSpecGroupAttrsTableGateway;
+use Chopin\Store\TableGateway\ProductsSpecAttrsTableGateway;
+use Laminas\Db\TableGateway\AbstractTableGateway;
+use Laminas\Db\Sql\Expression;
+use Laminas\Db\RowGateway\AbstractRowGateway;
 
 class Migrate_Alter_products_20201218071140 extends AbstractMigration
 {
@@ -38,10 +43,29 @@ class Migrate_Alter_products_20201218071140 extends AbstractMigration
         $productsSpecTableGateway = new ProductsSpecTableGateway($this->adapter);
         $productsSpecGroupTableGateway = new ProductsSpecGroupTableGateway($this->adapter);
         $assetsTableGateway = new AssetsTableGateway($this->adapter);
-        $productsIdentifyTableGateway = new ProductsIdentifyTableGateway($this->adapter);
+        $productsIdentityTableGateway = new ProductsIdentityTableGateway($this->adapter);
         $productsDiscountTableGateway = new ProductsDiscountTableGateway($this->adapter);
+        $productsSpecGroupAttrsTableGateway = new ProductsSpecGroupAttrsTableGateway($this->adapter);
+        $productsSpecAttrsTableGateway = new ProductsSpecAttrsTableGateway($this->adapter);
         $connection = $this->adapter->driver->getConnection();
         $connection->beginTransaction();
+        
+        $products_spec_attrs_json = file_get_contents(dirname(__DIR__).'/sql_seeds/products_spec_attrs.json');
+        $products_spec_attrs_data = json_decode($products_spec_attrs_json, true);
+        $productsSpecAttrsTableGateway = new ProductsSpecAttrsTableGateway($this->adapter);
+        foreach ($products_spec_attrs_data as $set) {
+            $set['language_id'] = 119;
+            $set['locale_id'] = 229;
+            $productsSpecAttrsTableGateway->insert($set);
+        }
+        $products_spec_group_attrs_json = file_get_contents(dirname(__DIR__).'/sql_seeds/products_spec_group_attrs.json');
+        $products_spec_group_attrs_data = json_decode($products_spec_group_attrs_json, true);
+        $productsSpecGroupAttrsTableGateway = new ProductsSpecGroupAttrsTableGateway($this->adapter);
+        foreach ($products_spec_group_attrs_data as $set) {
+            $set['language_id'] = 119;
+            $set['locale_id'] = 229;
+            $productsSpecGroupAttrsTableGateway->insert($set);
+        }
         try {
             foreach ($products as $productsSet) {
                 $productsCloneSet = $productsSet;
@@ -53,7 +77,9 @@ class Migrate_Alter_products_20201218071140 extends AbstractMigration
                 unset($productsCloneSet['products_identify']);
                 $discount = $productsCloneSet['discount'];
                 unset($productsCloneSet['discount']);
-                $productsCloneSet['real_price'] = $productsCloneSet['price'];
+                $price = intval($productsCloneSet['price'])*30;
+                $productsCloneSet['price'] = $price;
+                $productsCloneSet['real_price'] = $price;
                 if ($productsTableGateway->select($productsCloneSet)->count() === 0) {
                     $productsTableGateway->insert($productsCloneSet);
                     $lastProductsId = $productsTableGateway->lastInsertValue;
@@ -69,8 +95,8 @@ class Migrate_Alter_products_20201218071140 extends AbstractMigration
                     if(isset($productsSet['products_identify'])) {
                         $productsIdentifySet = $productsSet['products_identify'];
                         $productsIdentifySet['products_id'] = $lastProductsId;
-                        if ($productsIdentifyTableGateway->select($productsIdentifySet)->count() == 0) {
-                            $productsIdentifyTableGateway->insert($productsIdentifySet);
+                        if ($productsIdentityTableGateway->select($productsIdentifySet)->count() == 0) {
+                            $productsIdentityTableGateway->insert($productsIdentifySet);
                         }
                     }
                     foreach ($productsSet['np_class'] as $npName) {
@@ -90,7 +116,6 @@ class Migrate_Alter_products_20201218071140 extends AbstractMigration
                     }
                     if (isset($productsSet['products_spec_group'])) {
                         foreach ($productsSet['products_spec_group'] as $psGroupSet) {
-                            
                             $psGroupSetClone = $psGroupSet;
                             $psGroupSetClone['products_id'] = $lastProductsId;
                             $psGroupSetClone['language_id'] = 119;
@@ -99,6 +124,8 @@ class Migrate_Alter_products_20201218071140 extends AbstractMigration
                                 unset($psGroupSetClone['products_spec']);
                             }
                             if ($productsSpecGroupTableGateway->select($psGroupSetClone)->count() === 0) {
+                                $productsSpecGroupAttrsRow = $productsSpecGroupAttrsTableGateway->select(['name' => $psGroupSetClone['name']])->current();
+                                $psGroupSetClone['products_spec_group_attrs_id'] = $productsSpecGroupAttrsRow->id;
                                 $productsSpecGroupTableGateway->insert($psGroupSetClone);
                                 $lastProductsSpecGroupId = $productsSpecGroupTableGateway->lastInsertValue;
                                 if (isset($psGroupSet['products_spec'])) {
@@ -107,6 +134,8 @@ class Migrate_Alter_products_20201218071140 extends AbstractMigration
                                         $specSet['locale_id'] = 229;
                                         $specSet['products_id'] = $lastProductsId;
                                         $specSet['products_spec_group_id'] = $lastProductsSpecGroupId;
+                                        $productsSpecAttrsRow = $productsSpecAttrsTableGateway->select(['name' => $specSet['name']])->current();
+                                        $specSet['products_spec_attrs_id'] = $productsSpecAttrsRow->id;
                                         $productsSpecTableGateway->insert($specSet);
                                     }
                                 }
@@ -128,6 +157,25 @@ class Migrate_Alter_products_20201218071140 extends AbstractMigration
                 }
             }
             $connection->commit();
+            for($i=0 ; $i < 3 ; $i++)
+            {
+                $rand = rand(32,41);
+                switch ($i) {
+                    case 0:
+                        //new
+                        $this->updateStatus($productsTableGateway, $rand, 'is_new');
+                        break;
+                    case 1:
+                        //hot
+                        $this->updateStatus($productsTableGateway, $rand, 'is_hot');
+                        break;
+                    case 2:
+                        //recommend
+                        $this->updateStatus($productsTableGateway, $rand, 'is_recommend');
+                        break;
+                }
+            }
+            
         } catch (\Exception $e) {
             $connection->rollback();
             $output = new ConsoleOutput();
@@ -135,6 +183,23 @@ class Migrate_Alter_products_20201218071140 extends AbstractMigration
         }
     }
     
+    protected function updateStatus(AbstractTableGateway $tableGateway, $rand, $column)
+    {
+        for ($j=0 ; $j < $rand ; $j++)
+        {
+            $select = $tableGateway->getSql()->select();
+            $where = $select->where;
+            $where->equalTo($column, 0);
+            $select->order(new Expression("RAND()"));
+            $select->limit(1);
+            $select->where($where);
+            $row = $tableGateway->selectWith($select)->current();
+            if($row instanceof AbstractRowGateway) {
+                $row->{$column} = 1;
+                $row->save();
+            }
+        }
+    }
     public function down()
     {
         //

@@ -1,80 +1,52 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { CRow } from '@coreui/react';
+import { FORM_ACTIVE_TAB } from "../../actions/formRowsAction";
 
 const FormBackGridFixed = (props) => {
-    const locationPathname = location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, '');
-    const t = props.t;
-    const backListUri = location.pathname.replace(/\/\w+$/, '').replace(/\/\d+$/, '');
-    const regexp = new RegExp(backListUri, 'i');
-    const navLinkElements = document.getElementsByClassName('c-sidebar-nav-link');
-    var toLink = 0;
-
-    const formNavLinkFixed = () => {
-        navLinkElements.forEach((element) => {
-            if (regexp.test(element.href)) {
-                let parentElement = element.parentElement;
-                let className = parentElement.className;
-                if (!element.className.match(/c-active/)) {
-                    var _class = element.className;
-                    _class += ' c-active';
-                    element.className = _class;
-                }
-                if (!className.match(/c-active/)) {
-                    className += ' c-active';
-                    parentElement.className = className;
-                    var grandElement = parentElement.parentElement;
-                    var parentUntilLastElement = grandElement.parentElement;
-                    var parentUntilLastClassname = parentUntilLastElement.className;
-                    parentUntilLastElement.className = parentUntilLastClassname += ' c-show';
-                }
-                return;
-            }
-        });
-
+  const [locationPathname, setLocationPathname] = useState(location.pathname.replace(/\/add$/, '').replace(/\/\d+$/, ''));
+  const [linkColor, setLinkColor] = useState("btn-info");
+  const { formActiveTab, dispatch } = props;
+  const t = props.t;
+  
+  const NC = 0;
+  useEffect(() => {
+    if (formActiveTab && formActiveTab.goal) {
+      if(location.pathname == formActiveTab.goal)
+      {
+        const clone = Object.assign({}, formActiveTab);
+        setLocationPathname(clone.uri);
+        dispatch({type: FORM_ACTIVE_TAB, data:{
+          uri: undefined,
+          goal:undefined,
+          tab: clone.tab
+        }});
+        setLinkColor("btn-secondary");
+      }
     }
-    const backGridFixed = () => {
-        navLinkElements.forEach((element) => {
-            if (regexp.test(element.href)) {
-                if (!toLink) {
-                    var _class = element.className.replace(/\s?c-active/, '');
-                    element.className = _class;
-                } else {
-                    var _class = element.className + ' c-active';
-                    element.className = _class;
-                }
-                return;
-            }
-        });
+  }, [formActiveTab, NC]);
 
-    }
+  return (
+    <>
+      <CRow className="mb-1">
+        <div className="col">
+          <Link className={`btn ${linkColor} btn-sm float-right`} to={locationPathname}>
+            <i className="fas fa-undo-alt mr-1" />
+            <span>{t('Return prev')}</span>
+          </Link>
+        </div>
+      </CRow>
 
-    useEffect(() => {
-        formNavLinkFixed(regexp, navLinkElements);
-        return () => {
-            backGridFixed();
-        }
-    });
-
-
-    //fix-bug: begin (修正下拉選單問題)
-    const onBackListClcik = () => {
-        ++toLink;
-    }
-    //fix-bug: end (修正下拉選單問題)
-    return (
-        <>
-            <CRow className="mb-1">
-                <div className="col">
-                    <Link className="btn btn-info btn-sm float-right" to={locationPathname} onClick={onBackListClcik}>
-                        <i className="fas fa-undo-alt mr-1" />
-                        <span>{t('Return grid list')}</span>
-                    </Link>
-                </div>
-            </CRow>
-
-        </>
-    );
+    </>
+  );
 }
+const mapStateToProps = (state) => {
+  return {
+    dispatch: state.dispatch,
+    formActiveTab: state.formActiveTab,
+  };
+};
 
-export default FormBackGridFixed;
+//export default Documents;
+export default connect(mapStateToProps)(FormBackGridFixed);

@@ -133,7 +133,6 @@ class DB
 
     protected static function processScripts(Select $select, array $scripts)
     {
-        //logger()->debug(json_encode($scripts));
         foreach ($scripts as $method => $params) {
             switch ($method) {
                 case 'quantifier':
@@ -252,18 +251,7 @@ class DB
         if (APP_ENV == 'test') {
             logger()->debug($sql->buildSqlString($select));
         }
-        
-        $keys = $this->buildCacheKey($sql, $select, [
-            $bindParams,$paginatorParams,$currentPageNumber
-        ]);
-        if ($keys) {
-            $resultSet = $this->getCache($keys['key']);
-            if ($resultSet) {
-                return $resultSet;
-            }
-        }
         if (is_int($currentPageNumber)) {
-
             $adapter = self::initAdapter();
             $bindParams = is_array($bindParams) ? $bindParams : [];
             $paginatorAdapter = new DbSelect($select, $adapter);
@@ -284,9 +272,11 @@ class DB
                 'items' => (array)$paginator->getCurrentItems(),
                 'pages' => $paginator->getPages(),
             ];
+            /*
             if($keys) {
                 $this->setCache($keys['key'], $result);
             }
+            */
             $table = str_replace(AbstractTableGateway::$prefixTable, '', $select->getRawState('table'));
             if(self::$staticTablegateway instanceof \Laminas\Db\TableGateway\AbstractTableGateway) {
                 $tableGateway = self::$staticTablegateway;
@@ -312,13 +302,9 @@ class DB
             }
             return $result;
         } else {
-            //logger()->debug($sql->buildSqlString($select));
             $result = $sql->prepareStatementForSqlObject($select)->execute($bindParams);
             $resultSet = new ResultSet();
             $resultSet->initialize($result);
-            if($keys) {
-                $this->setCache($keys['key'], $resultSet);
-            }
             return $resultSet;
         }
     }

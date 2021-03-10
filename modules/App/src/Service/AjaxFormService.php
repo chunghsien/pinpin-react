@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Service;
 
 use Psr\Http\Message\ServerRequestInterface;
@@ -13,9 +12,7 @@ use Laminas\Db\RowGateway\RowGateway;
 use Laminas\Db\Sql\Sql;
 use Laminas\Db\ResultSet\ResultSetInterface;
 use Intervention\Image\ImageManagerStatic;
-use Chopin\Users\TableGateway\MemberTableGateway;
-use Chopin\Newsletter\TableGateway\ContactTableGateway;
-use Chopin\SystemSettings\TableGateway\SystemSettingsTableGateway;
+use Laminas\Db\Sql\Expression;
 
 class AjaxFormService
 {
@@ -33,31 +30,40 @@ class AjaxFormService
     {
         try {
             $queryParams = $request->getQueryParams();
+            //id重複指向應以method_or_id為主
+            if($request->getAttribute('method_or_id', null)) {
+                if(isset($queryParams['table_id'])) {
+                    unset($queryParams['table_id']);
+                }
+            }
             $colums = $tablegateway->getColumns();
             $releation_id = '';
-            if (isset($queryParams['table'])) {
+            if (isset($queryParams['table']) && empty($queryParams['table_id'])) {
                 $releation_id = $queryParams['table'] . '_id';
             }
+
             $resultSet = null;
             if (isset($queryParams['table']) && isset($queryParams['table_id']) && false !== array_search('table', $colums) && false !== array_search('table_id', $colums)) {
                 $where = [
                     new Like('table', '%' . $queryParams['table']),
-                    'table_id' => $queryParams['table_id'],
+                    'table_id' => $queryParams['table_id']
                 ];
                 $resultSet = $tablegateway->select($where);
-                
             } elseif (isset($colums[$releation_id])) {
                 $resultSet = $tablegateway->select([
                     $releation_id => $queryParams['table_id']
                 ]);
             }
+            if (isset($queryParams['table']) && $queryParams['table'] == 'fp_class') {
+                //debug($request->getRequestTarget());
+                //debug($request->getAttribute('method_or_id', ''));
+            }
             
             $id = $request->getAttribute('method_or_id', '');
-            if ($id) {
+            if ($id && empty($queryParams['table_id'])) {
                 $resultSet = $tablegateway->select([
                     'id' => $id
                 ])/*->current()*/;
-                
             }
             if ($resultSet && $resultSet->count() > 1) {
                 $data = $resultSet->toArray();
@@ -68,8 +74,8 @@ class AjaxFormService
                 $data = $row instanceof RowGateway ? $row->toArray() : $row;
                 if (isset($data['language_id']) && isset($data['locale_id'])) {
                     $data['language_has_locale'] = json_encode([
-                        'language_id' => $data['language_id'],
                         'locale_id' => $data['locale_id'],
+                        'language_id' => $data['language_id']
                     ]);
                 }
             }
@@ -77,7 +83,7 @@ class AjaxFormService
                 $PT = AbstractTableGateway::$prefixTable;
                 $data = [
                     'table' => $queryParams['table'],
-                    'table_id' => $queryParams['table_id'],
+                    'table_id' => $queryParams['table_id']
                 ];
                 if (false !== array_search('table', $colums) && false !== array_search('table_id', $colums)) {
                     $adapter = $tablegateway->adapter;
@@ -90,15 +96,15 @@ class AjaxFormService
                         ->current();
                     if (isset($result['language_id']) && isset($result['locale_id'])) {
                         $data['language_has_locale'] = json_encode([
-                            'language_id' => $result['language_id'],
                             'locale_id' => $result['locale_id'],
+                            'language_id' => $result['language_id']
                         ]);
                     }
                 }
             }
             
             if (isset($data)) {
-                if(isset($tablegateway->defaultEncryptionColumns)) {
+                if (isset($tablegateway->defaultEncryptionColumns)) {
                     $data = $tablegateway->deCryptData($data);
                 }
                 return new ApiSuccessResponse(0, $data, []);
@@ -126,31 +132,40 @@ class AjaxFormService
         try {
             $data = json_decode($request->getBody()->getContents());
             $primarys = $tablegateway->getConstraintsObject('PRIMARY KEY')[0]->getColumns();
-            foreach ($data as $row) {
-                $id = isset($row->id) ? $row->id : null;
-                $where = [];
-                if ($id) {
-                    if (preg_match('/^\d+\-\d+$/', $id)) {
-                        $ids = explode('-', $id);
-                        foreach ($primarys as $key => $col) {
-                            $where[$col] = $ids[$key];
+            $id = $request->getAttribute('method_or_id', null);
+            $message = [];
+            if($id && preg_match('/^\d+$/', $id) && count($primarys) == 1) {
+                $column = $primarys[0];
+                $tablegateway->delete([$column => $id]);
+                $message[] = 'delete success';
+            }else {
+                foreach ($data as $row) {
+                    $id = isset($row->id) ? $row->id : null;
+                    $where = [];
+                    if ($id) {
+                        if (preg_match('/^\d+\-\d+$/', $id)) {
+                            $ids = explode('-', $id);
+                            foreach ($primarys as $key => $col) {
+                                $where[$col] = $ids[$key];
+                            }
+                        } else {
+                            $where['id'] = $id;
                         }
+                        $tablegateway->softDelete($where);
                     } else {
-                        $where['id'] = $id;
-                    }
-                    $tablegateway->softDelete($where);
-                } else {
-                    foreach ($primarys as $key => $col) {
-                        $where[$col] = $data->{$col};
+                        foreach ($primarys as $key => $col) {
+                            $where[$col] = $data->{$col};
+                        }
                     }
                 }
             }
-            return new ApiSuccessResponse(0, [], []);
+            return new ApiSuccessResponse(0, [], $message);
         } catch (\Exception $e) {
+            loggerException($e);
             return new ApiErrorResponse(417, [
                 'trace' => $e->getTrace()
             ], [
-                $e->getMessage(),
+                $e->getMessage()
             ]);
         }
     }
@@ -165,10 +180,11 @@ class AjaxFormService
     public function postProcess(ServerRequestInterface $request, AbstractTableGateway $tablegateway)
     {
         $post = $request->getParsedBody();
-        //$connection = $tablegateway->getAdapter()->getDriver()->getConnection();
-        
+        if (! $post) {
+            $post = json_decode($request->getBody()->getContents(), true);
+        }
         try {
-            //$connection->beginTransaction();
+            // $connection->beginTransaction();
             if (isset($post['language_has_locale'])) {
                 $language_has_locale = json_decode($post['language_has_locale']);
                 unset($post['language_has_locale']);
@@ -250,12 +266,18 @@ class AjaxFormService
                     $row = (array) $row;
                 }
             }
-            if(isset($tablegateway->defaultEncryptionColumns)) {
+            if (isset($tablegateway->defaultEncryptionColumns)) {
                 $row = $tablegateway->deCryptData($row);
+            }
+            if (isset($row['language_id']) && isset($row['locale_id'])) {
+                $row['language_has_locale'] = [
+                    'locale_id' => $row['locale_id'],
+                    'language_id' => $row['language_id']
+                ];
+                ApiSuccessResponse::$is_json_numeric_check = false;
             }
             return new ApiSuccessResponse(0, $row, ['add success']);
         } catch (\Exception $e) {
-            //$connection->rollback();
             loggerException($e);
             return new ApiErrorResponse(1, isset($post) ? $post : [], [
                 'message' => $e->getMessage()
@@ -274,6 +296,10 @@ class AjaxFormService
     public function putProcess(ServerRequestInterface $request, AbstractTableGateway $tablegateway)
     {
         $set = $request->getParsedBody();
+        if (! $set) {
+            $tmp = $request->getBody()->getContents();
+            $set = json_decode($tmp, true);
+        }
         try {
             if ($this->gridPutVerify($request)) {
                 return $this->gridPutProcess($request, $tablegateway);
@@ -317,20 +343,41 @@ class AjaxFormService
                 }
                 // checkbox fixed
                 $columns = $tablegateway->getColumns();
+                /*
                 if (false !== array_search('sort', $columns) && empty($set['sort'])) {
                     $set['sort'] = 16777215;
                 }
+                */
                 foreach ($columns as $column) {
                     if (preg_match('/^is_/', $column) && empty($set[$column])) {
                         $set[$column] = 0;
                     }
-                    //bool to int
-                    if (preg_match('/^is_/', $column) && !empty($set[$column])) {
+                    // bool to int
+                    if (preg_match('/^is_/', $column) && ! empty($set[$column])) {
                         $set[$column] = intval($set[$column]);
                     }
                 }
-
-                $tablegateway->update($set, $where);
+                $isRemoveImageFields = [];
+                $setKeys = array_keys($set);
+                foreach ($setKeys as $col) {
+                    if (preg_match('/^is_remove/', $col)) {
+                        $matchCol = preg_replace('/^is_remove_/', '', $col);
+                        $isRemoveImageFields[] = $matchCol;
+                        unset($set[$col]);
+                        $set[$matchCol] = new Expression('null');
+                    }
+                }
+                if ($isRemoveImageFields) {
+                    $row = $tablegateway->select($where)->current();
+                    foreach ($isRemoveImageFields as $field) {
+                        $path = PROJECT_DIR . $row->{$field};
+                        if (is_file($path)) {
+                            unlink($path);
+                        }
+                    }
+                }
+                //debug([$set, $where]);
+                $updateCount = $tablegateway->update($set, $where);
                 $row = $tablegateway->select($where)->current();
                 if ($row instanceof RowGateway) {
                     $row = $row->toArray();
@@ -339,8 +386,8 @@ class AjaxFormService
                 }
                 if (isset($row['language_id']) && isset($row['locale_id'])) {
                     $row['language_has_locale'] = json_encode([
-                        'language_id' => $row['language_id'],
                         'locale_id' => $row['locale_id'],
+                        'language_id' => $row['language_id']
                     ]);
                     unset($row['language_id']);
                     unset($row['locale_id']);
@@ -348,9 +395,16 @@ class AjaxFormService
                 if($tablegateway->encryptionColumns) {
                     $row = $tablegateway->deCryptData($row);
                 }
-                return new ApiSuccessResponse(0, $row, [
-                    'update success'
-                ]);
+                if($tablegateway->getTailTableName() == 'system_settings') {
+                    if(isset($row['aes_value'])) {
+                        $row = $tablegateway->deCryptData($row);
+                    }
+                }
+                if($updateCount == 0) {
+                    ApiErrorResponse::$status = 200;
+                    return new ApiErrorResponse(1, [], ['no data updated']);
+                }
+                return new ApiSuccessResponse(0, $row, ['update success']);
             }
         } catch (\Exception $e) {
             loggerException($e);

@@ -1,8 +1,8 @@
-
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import {
-  CRow, CCol, CFormGroup, CLabel,CInputFile,
+  CRow, CCol, CFormGroup, CLabel, CInputFile,
   CCard,
   CSelect, CInput,
   CInputGroup, CInputGroupAppend, CInputGroupText,
@@ -26,7 +26,6 @@ const MainClassForm = (props) => {
   }
   const [remaining, setRemaining] = useState({});
   const [maxLength, setMaxLength] = useState({});
-  const [mediaState, setMediaState] = useState({});
   const [fileRequire, setFileRequire] = useState(false);
   const singleFileOnChange = (e) => {
     let reader = new FileReader();
@@ -37,19 +36,22 @@ const MainClassForm = (props) => {
     } else {
       dom = e;
     }
-    let name = dom.name;
     const file = e.target.files[0];
     reader.readAsDataURL(file);
     reader.onload = () => {
-      let obj = {};
-      obj[name] = {
-        path: reader.result,
-        mime: 'image/*',
-      };
-
-      setMediaState((mediaState) => {
-        return { ...mediaState, ...obj };
-      });
+      let imgEle = null;
+      if (dom.nextElementSibling.tagName.toLowerCase() == 'img') {
+        imgEle = dom.nextElementSibling;
+      }
+      if (!imgEle) {
+        if (dom.nextElementSibling.nextElementSibling.tagName.toLowerCase() == 'img') {
+          imgEle = dom.nextElementSibling.nextElementSibling;
+        }
+      }
+      if (imgEle) {
+        imgEle.src = reader.result;
+        imgEle.classList.remove('d-none');
+      }
     }
   }
 
@@ -70,6 +72,10 @@ const MainClassForm = (props) => {
     return remaining[name];
   }
   const count = 0;
+  const { formRows, table } = props;
+  const use_class = formRows ? formRows[table] : undefined;
+  const [formSelected, setFormSelected] = useState({});
+
   useEffect(() => {
     formRef.current.elements.forEach((dom) => {
       const name = dom.name;
@@ -80,10 +86,25 @@ const MainClassForm = (props) => {
         setMaxLength((maxLength) => ({ ...maxLength, ...obj }));
       }
     });
-    /*return function cleanup() {
-        
-    }*/
-  }, [count]);
+    
+    if (use_class) {
+      setFormSelected({
+        language_has_locale: use_class.language_has_locale
+      });
+
+    }
+  }, [use_class, count]);
+  const selectOnChange = (e) => {
+    var elm = e.currentTarget;
+    e.preventDefault();
+    setFormSelected((selectedState) => {
+      let responseState = selectedState;
+      let name = elm.name;
+      let value = elm.value;
+      responseState[name] = value;
+      return { ...selectedState, ...responseState };
+    });
+  }
 
   const formRef = useRef();
 
@@ -97,15 +118,20 @@ const MainClassForm = (props) => {
               href={href}
               griduse {...methods}
               remainderChange={remainderChange}
-              setMediaState={setMediaState}
               setFileRequire={setFileRequire}
+              table={table}
             >
-              <input type="hidden" name="id" ref={register()} />
+              <input type="hidden" name="id" ref={register()} defaultValue={use_class ? use_class.id : undefined} />
               <CRow className="mt-2">
                 <CCol md="4" sm="12">
                   <CFormGroup>
                     <CLabel>{t('columns-language_has_locale')}</CLabel>
-                    <CSelect name="language_has_locale" custom innerRef={register()}>
+                    <CSelect
+                      name="language_has_locale"
+                      custom innerRef={register()}
+                      value={formSelected.language_has_locale}
+                      onChange={selectOnChange}
+                    >
                       {
                         window.pageConfig.languageOptions.map((item, index) => {
                           return (<option key={index} value={item.value}>{item.label}</option>);
@@ -124,6 +150,7 @@ const MainClassForm = (props) => {
                         maxLength="128"
                         onChange={remainderChange}
                         innerRef={register({ required: true })}
+                        defaultValue={use_class ? use_class.name : undefined}
                       />
                       <CInputGroupAppend>
                         <CInputGroupText className="bg-light text-muted">{remaining.name ? remaining.name : 0}/{maxLength.name}</CInputGroupText>
@@ -132,6 +159,7 @@ const MainClassForm = (props) => {
                     <CInvalidFeedback>{(errors.name && errors.name.type == 'required') && t('The input is an empty string')}</CInvalidFeedback>
                   </CFormGroup>
                 </CCol>
+                {/*
                 <CCol md="4" sm="12">
                   <CFormGroup>
                     <CLabel>{t('columns-sort')}</CLabel>
@@ -139,8 +167,9 @@ const MainClassForm = (props) => {
                     <CInvalidFeedback>{errors.sort && t('The input is not between \'%min%\' and \'%max%\', inclusively', { min: 0, max: 16777215 })}</CInvalidFeedback>
                   </CFormGroup>
                 </CCol>
+                */}
 
-                <CCol md="12" sm="12">
+                <CCol md="4" sm="12">
                   <CFormGroup>
                     <CLabel>{t('columns-image')}</CLabel>
                     <CInputFile
@@ -151,10 +180,12 @@ const MainClassForm = (props) => {
                       accept="image/*"
                     />
                     <CInvalidFeedback>{(errors.image && errors.image.type == 'required') && t('The input is an empty string')}</CInvalidFeedback>
-                    <img id="assets-image-preview" className={'mt-2 img-fluid form-thumbnail ' + (mediaState.image ? '' : 'd-none')} src={mediaState.image && mediaState.image.path} />
+                    <img
+                      id="assets-image-preview"
+                      className={'mt-2 img-fluid form-thumbnail ' + (use_class && use_class.image.length > 0) ? '' : 'd-none'}
+                      src={use_class ? use_class.image : ''} />
                   </CFormGroup>
                 </CCol>
-
               </CRow>
             </Form>
           </CCard>
@@ -163,5 +194,10 @@ const MainClassForm = (props) => {
     </>
   );
 }
+const mapStateToProps = (state) => {
+  return {
+    formRows: state.formRows,
+  };
+};
 
-export default MainClassForm;
+export default connect(mapStateToProps)(MainClassForm);

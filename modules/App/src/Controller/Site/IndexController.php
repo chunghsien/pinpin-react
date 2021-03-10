@@ -7,7 +7,6 @@ use Laminas\Diactoros\Response\HtmlResponse;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Laminas\Diactoros\Response\RedirectResponse;
-use function ReCaptcha\RequestMethod\file_get_contents;
 
 class IndexController extends AbstractSiteController
 {

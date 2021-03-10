@@ -8,7 +8,7 @@ return [
         'from' => $PT . 'mp_class',
         'quantifier' => 'distinct',
         'columns' => [
-            ['id', 'language_id', 'locale_id', 'name', 'sort', 'created_at']
+            ['id', 'language_id', 'locale_id', 'name', 'viewed_count', 'sort', 'created_at']
         ],
         'join' => [
             [

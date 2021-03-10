@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "title": "Rainbow Passion",
+    "subtitle": "$111.00",
+    "image": "/assets/images/hero-slider/hero-slider-ten/1.png"
+  },
+  {
+    "id": "2",
+    "title": "Flowery Love",
+    "subtitle": "$111.00",
+    "image": "/assets/images/hero-slider/hero-slider-ten/2.png"
+  },
+  {
+    "id": "1",
+    "title": "Pinkie Pixie",
+    "subtitle": "$111.00",
+    "image": "/assets/images/hero-slider/hero-slider-ten/3.png"
+  },
+  {
+    "id": "1",
+    "title": "Colourful Hue",
+    "subtitle": "$111.00",
+    "image": "/assets/images/hero-slider/hero-slider-ten/4.png"
+  }
+]

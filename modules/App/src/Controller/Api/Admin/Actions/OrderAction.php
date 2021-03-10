@@ -22,11 +22,16 @@ class OrderAction extends AbstractAction
      */
     protected function get(ServerRequestInterface $request): ResponseInterface
     {
+        $orderTableGateway = new OrderTableGateway($this->adapter);
         $ajaxFormService = new AjaxFormService();
-        $response = $ajaxFormService->getProcess($request, new OrderTableGateway($this->adapter));
+        $response = $ajaxFormService->getProcess($request, $orderTableGateway);
         if($response->getStatusCode() == 200) {
             return $response;
         }else {
+            //$querys = $request->getQueryParams();
+            //debug($querys);
+            //$data = $orderTableGateway->getAdminOrderPage($request);
+            
             $apiQueryService = new ApiQueryService();
             return $apiQueryService->processPaginator(
                 $request,
@@ -43,6 +48,7 @@ class OrderAction extends AbstractAction
                     'logistics_name' => 'order_decrypt',
                 ]
             );
+            
         }
     }
     

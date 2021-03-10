@@ -29,6 +29,13 @@ const LogisticsGlobal = (/*props*/) => {
     const payment_columns = paymentColumns(t, 'name');
     const other_logistics_columns = otherLogisticsColumns(t, 'name');
     const free_shipping_columns = freeShippingColumns(t, 'name');
+    const basePath = window.pageConfig.basePath;
+    const commonPaginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/system_settings/logistics').replace(/^\/{2,}/, '/');
+    const shippingPaginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/shipping').replace(/^\/{2,}/, '/');
+    const paymentPaginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/payment').replace(/^\/{2,}/, '/');
+    const otherLogisticsPaginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/other_logistics').replace(/^\/{2,}/, '/');
+    const freeShippingPaginateUrl = (basePath+'/'+SYS_LANG+'/api/admin/free_shipping').replace(/^\/{2,}/, '/');
+    
     return (
         <CTabs id="tabs-root" activeTab="default-form">
             <CNav variant="tabs">
@@ -42,7 +49,7 @@ const LogisticsGlobal = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={logisticsGlobalClickClearFilter}
-                    paginateUrl={'/'+SYS_LANG+'/api/admin/system_settings/logistics'}
+                    paginateUrl={commonPaginateUrl}
                     columns={logistics_global_columns}
                     isFilterReset
                     translation={t}
@@ -53,7 +60,7 @@ const LogisticsGlobal = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={shippingClickClearFilter}
-                    paginateUrl={'/'+SYS_LANG+'/api/admin/shipping'}
+                    paginateUrl={shippingPaginateUrl}
                     columns={shipping_columns}
                     translation={t}
                     noOnDelBtn={true}
@@ -63,7 +70,7 @@ const LogisticsGlobal = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={paymentClickClearFilter}
-                    paginateUrl={'/'+SYS_LANG+'/api/admin/payment'}
+                    paginateUrl={paymentPaginateUrl}
                     columns={payment_columns}
                     translation={t}
                     noOnDelBtn={true}
@@ -73,7 +80,7 @@ const LogisticsGlobal = (/*props*/) => {
                 <AdminBootstrapTable
                     isFilterReset
                     clearFilterTrigger={otherLogisticsClickClearFilter}
-                    paginateUrl={'/'+SYS_LANG+'/api/admin/other_logistics'}
+                    paginateUrl={otherLogisticsPaginateUrl}
                     columns={other_logistics_columns}
                     translation={t}
                     noOnDelBtn={true}
@@ -81,7 +88,7 @@ const LogisticsGlobal = (/*props*/) => {
             </OtherLogisticsContent>
             <FreeShippingContent>
                 <AdminBootstrapTable
-                    paginateUrl={'/'+SYS_LANG+'/api/admin/free_shipping'}
+                    paginateUrl={freeShippingPaginateUrl}
                     columns={free_shipping_columns}
                     translation={t}
                     noOnDelBtn={true}

@@ -38,7 +38,11 @@ class DecimalRenderer extends React.Component {
         
         return (
             <>
-                <input onChange={this.onChange} className={className + " form-control editor edit-text"} key={'decimal'} ref={(node) => { this.decimal = node; }} type="text" {...rest} />
+                <input
+                  type="number"
+                  onChange={this.onChange}
+                  className={className + " form-control editor edit-text"} key={'decimal'}
+                  ref={(node) => { this.decimal = node; }} {...rest} />
             </>
         );
     }

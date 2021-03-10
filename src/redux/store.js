@@ -7,7 +7,6 @@ import rootReducer from "./reducers/rootReducer";
 
 const persistConfig = {
   key: "primary",
-  locale: null,
   storage
 };
 

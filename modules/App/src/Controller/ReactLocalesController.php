@@ -69,6 +69,7 @@ class ReactLocalesController implements RequestHandlerInterface
             }
             
         } catch (\Exception $e) {
+            echo $e->getMessage().PHP_EOL;
             debug($e->getTrace());
             exit();
         }

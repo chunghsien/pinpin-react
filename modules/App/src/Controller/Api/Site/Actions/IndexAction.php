@@ -7,13 +7,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Chopin\Middleware\AbstractAction;
 use Chopin\HttpMessage\Response\ApiSuccessResponse;
-use App\Service\StaticSiteGenerator\Site\FooterService;
-use App\Service\StaticSiteGenerator\Site\NavigationService;
-use App\Service\StaticSiteGenerator\Site\ProductsService;
-use App\Service\StaticSiteGenerator\Site\CategoriesService;
-use App\Service\StaticSiteGenerator\Site\SlidersService;
-use App\Service\StaticSiteGenerator\Site\BlogService;
-use App\Service\StaticSiteGenerator\Site\I18nService;
+use App\Service\Site\ProductsService;
+use App\Service\Site\BannerService;
 use Chopin\Documents\TableGateway\CallToActionTableGateway;
 
 class IndexAction extends AbstractAction
@@ -27,30 +22,42 @@ class IndexAction extends AbstractAction
      */
     protected function get(ServerRequestInterface $request): ResponseInterface
     {
-        $theme = $request->getAttribute('method_or_id', 'decor');
-        $categoriesService = new CategoriesService($this->adapter);
-        $productsService = new ProductsService($this->adapter);
-        $slidersService = new SlidersService($this->adapter);
-        $navigationService = new NavigationService($this->adapter);
-        $footerService = new FooterService($this->adapter);
-        $blogService = new BlogService($this->adapter);
-        $i18nService = new I18nService($this->adapter, ["site-navigation", "site-translation", "site-footer"]);
-        $callToActionTableGateway = new CallToActionTableGateway($this->adapter);
-        
-        $lang = $request->getAttribute('lang');
-        $vars = array_merge(
-            $categoriesService->result($request),
-            $productsService->result($request),
-            $footerService->result($request),
-            $navigationService->result($request),
-            $slidersService->result($request),
-            $blogService->result($request),
-            $i18nService->result($request),
-            [
-                "imageCtaData" => $callToActionTableGateway->getFromDocuments("/{$lang}"),
-            ]
-        );
-        $vars['theme'] = $theme;
+        $vars = $this->getStandByVars($request);
         return new ApiSuccessResponse(0, $vars);
+    }
+    
+    public function getStandByVars(ServerRequestInterface $request)
+    {
+        $productsService = new ProductsService($this->adapter, $request);
+        $bannerService = new BannerService($this->adapter, $request);
+        $lang = $request->getAttribute('lang');
+        $route = "/{$lang}";
+        $callToActionTableGateway = new CallToActionTableGateway($this->adapter);
+        $call_to_action = $callToActionTableGateway->getFromDocuments($route);
+        $category = null;
+        $queryParams = $request->getQueryParams();
+        $vars = [
+            "newProducts" => $productsService->getNewProducts($category),
+            "popularProducts" => $productsService->getPopularProducts($category),
+            "saleProducts" => $productsService->getSaleProducts($category),
+            "carousel" => $bannerService->getPageCarousel($route),
+            "s_carousel" => $bannerService->getPageCarousel($route, "s_carousel"),
+            "call_to_action" => $call_to_action,
+            'np_class' => $productsService->getNearCategories(true),
+        ];
+        if(isset($queryParams['category']))
+        {
+            $category = $queryParams['category'];
+            foreach($category as $key => $cat)
+            {
+                $index = "part".($key+1)."Products";
+                $vars[$index] = $productsService->getPopularProducts($cat);
+            }
+        }
+        $vars = array_merge(
+            $vars,
+            $this->getCommonVars($request)
+        );
+        return $vars;
     }
 }

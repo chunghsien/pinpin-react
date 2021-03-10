@@ -78,7 +78,8 @@ class AdminLoginController implements RequestHandlerInterface
             }
         }
         $token = $body['__csrf'];
-        $error_uri = $this->buildUri($routeResult, '/admin-login') ;
+        $basePath = $request->getAttribute('_base_path', '');
+        $error_uri = $this->buildUri($routeResult, '/admin-login', $basePath) ;
         if($guard->validateToken($token)) {
             $set = $this->usersTableGateway->buildData($body);
             $resultSet = $this->usersTableGateway->select(['account' => $set['account']]);
@@ -91,7 +92,7 @@ class AdminLoginController implements RequestHandlerInterface
                 $hash = $row->password;
                 $salt = $row->salt;
                 if(password_verify(isset($set['password']) ? trim($set['password']).$salt : ''.$salt, $hash)) {
-                    $success_uri = $this->buildUri($routeResult, '/dashboard');
+                    $success_uri = $this->buildUri($routeResult, '/dashboard', $basePath);
                     $user_data = $row->toArray();
                     if($request->hasHeader('content-type')) {
                         $content_type = implode('', $request->getHeader('content-type'));
@@ -141,12 +142,14 @@ class AdminLoginController implements RequestHandlerInterface
          */
         $csrfGuard = $request->getAttribute('csrf');
         $php_lang = str_replace('-', '_', $request->getAttribute('html_lang'));
+        $page_config = Registry::get('page_json_config');
+        $page_config['basePath'] = $request->getAttribute('_base_path', '');
         return new HtmlResponse($this->template->render('app::admin-default', [
             'layout' => false,
             '__csrf' => $csrfGuard->generateToken(),
             'html_lang' => $request->getAttribute('html_lang'),
             'site_name' => $request->getAttribute('system_settings')['site_info'][$php_lang]['children']['name']['value'],
-            'page_json_config' => Registry::get('page_json_config'),
+            'page_json_config' => $page_config,
         ]));
     }
 }

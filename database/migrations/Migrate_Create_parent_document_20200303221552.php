@@ -28,7 +28,7 @@ class Migrate_Create_parent_document_20200303221552 extends AbstractMigration
          */
         $ddl = $this->ddl;
         $ddl->addColumn(MySQLColumnFactory::buildColumn('id', 'int', ['unsigned' => true, 'auto_increment' => true]));
-        $ddl->addColumn(MySQLColumnFactory::buildColumn('table', 'varchar', ['length' => 64, 'nullable' => true]));
+        $ddl->addColumn(MySQLColumnFactory::buildColumn('table', 'varchar', ['length' => 48, 'nullable' => true]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('table_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('language_id', 'int', ['unsigned' => true, 'default' => 0]));
         $ddl->addColumn(MySQLColumnFactory::buildColumn('locale_id', 'int', ['unsigned' => true, 'default' => 0]));

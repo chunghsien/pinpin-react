@@ -44,7 +44,6 @@ class Migrate_Create_elfinder_file_20190523145000 extends AbstractMigration
         $ddl->addColumn(MySQLColumnFactory::buildColumn('height', 'int', ['unsigned' => true, 'default' => 0]));
 
         $ddl->addConstraint(new Constraint\PrimaryKey('id', $this->tailTable.'_id_PRIMARY'));
-        $ddl->addConstraint(new Constraint\UniqueKey(['parent_id', 'name'], $this->table.'_parent_name'));
         $ddl->addConstraint(new Index('parent_id', $this->tailTable.'_idx_locale'));
     }
 
